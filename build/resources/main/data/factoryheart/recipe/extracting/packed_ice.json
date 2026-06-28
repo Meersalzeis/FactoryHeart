@@ -1,0 +1,12 @@
+{
+  "type": "factoryheart:extracting",
+  "ingredient": {
+    "amount": 4,
+    "item": "minecraft:ice"
+  },
+  "requiredTier": 2,
+  "result": {
+    "id": "minecraft:packed_ice",
+    "count": 1
+  }
+}

@@ -1,0 +1,12 @@
+
+{
+  "type": "factoryheart:condensing",
+  "hue":"green",
+  "requiredTier": 2,
+  "requiredTicks": 60000,
+  "requiredFuelPerTick": 2,
+  "result": {
+    "id": "minecraft:emerald",
+    "count": 2
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "type": "factoryheart:extracting",
+  "ingredient": {
+    "amount": 4,
+    "item": "minecraft:charcoal"
+  },
+  "requiredTier": 1,
+  "result": {
+    "id": "minecraft:black_dye",
+    "count": 4
+  }
+}

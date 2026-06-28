@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "factoryheart:item/hard_part",
+    "layer1": "factoryheart:item/overlay_faulty"
+  }
+}

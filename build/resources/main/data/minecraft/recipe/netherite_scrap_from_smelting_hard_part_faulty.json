@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:smelting",
+  "category": "misc",
+  "cookingtime": 200,
+  "experience": 0.25,
+  "group": "Recipes",
+  "ingredient": {
+    "item": "factoryheart:hard_part_faulty"
+  },
+  "result": {
+    "count": 1,
+    "id": "minecraft:netherite_scrap"
+  }
+}

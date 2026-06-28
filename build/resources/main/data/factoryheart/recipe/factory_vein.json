@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "i": {
+      "item": "minecraft:iron_nugget"
+    },
+    "p": {
+      "item": "factoryheart:factory_paste"
+    }
+  },
+  "pattern": [
+    "iii",
+    "ppp",
+    "iii"
+  ],
+  "result": {
+    "count": 6,
+    "id": "factoryheart:factory_vein"
+  }
+}

@@ -1,0 +1,12 @@
+
+{
+  "type": "factoryheart:condensing",
+  "hue":"white",
+  "requiredTier": 4,
+  "requiredTicks": 60000,
+  "requiredFuelPerTick": 4,
+  "result": {
+    "id": "minecraft:redstone",
+    "count": 1
+  }
+}

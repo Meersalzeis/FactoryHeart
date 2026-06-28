@@ -1,0 +1,177 @@
+---- Minecraft Crash Report ----
+// Ouch. That hurt :(
+
+Time: 2026-06-22 13:56:17
+Description: Mod loading failures have occurred; consult the issue messages for more details
+
+net.neoforged.neoforge.logging.CrashReportExtender$ModLoadingCrashException: Mod loading has failed
+
+
+A detailed walkthrough of the error, its code path and all known details is as follows:
+---------------------------------------------------------------------------------------
+
+-- Head --
+Thread: Render thread
+Stacktrace:
+	at TRANSFORMER/minecraft@1.21.1/net.minecraft.world.level.block.state.StateHolder.setValue(StateHolder.java:109) ~[neoforge-21.1.233.jar%23184!/:?] {re:classloading}
+-- Mod loading issue for: factoryheart --
+Details:
+	Mod file: /home/kai/Minecraft/OwnMods/FactoryHeart/build/resources/main/
+	Failure message: Factory Heart (factoryheart) encountered an error while dispatching the net.neoforged.neoforge.registries.RegisterEvent event
+		java.lang.IllegalArgumentException: Cannot set property DirectionProperty{name=facing, clazz=class net.minecraft.core.Direction, values=[north, east, south, west, up, down]} as it does not exist in Block{[unregistered]}
+	Mod version: 1.0.0
+	Mod issues URL: <No issues URL found>
+	Exception message: java.lang.IllegalArgumentException: Cannot set property DirectionProperty{name=facing, clazz=class net.minecraft.core.Direction, values=[north, east, south, west, up, down]} as it does not exist in Block{[unregistered]}
+Stacktrace:
+	at TRANSFORMER/minecraft@1.21.1/net.minecraft.world.level.block.state.StateHolder.setValue(StateHolder.java:109) ~[neoforge-21.1.233.jar%23184!/:?] {re:classloading}
+	at TRANSFORMER/factoryheart@1.0.0/com.meersalzeis.factoryheart.block.custom.FactoryMawBlock.<init>(FactoryMawBlock.java:37) ~[%23187!/:?] {re:classloading}
+	at TRANSFORMER/factoryheart@1.0.0/com.meersalzeis.factoryheart.block.ModBlocks.lambda$static$5(ModBlocks.java:48) ~[%23187!/:?] {re:classloading}
+	at TRANSFORMER/neoforge@21.1.233/net.neoforged.neoforge.registries.DeferredRegister$Blocks.lambda$register$0(DeferredRegister.java:417) ~[neoforge-21.1.233.jar%23185!/:?] {re:classloading}
+	at TRANSFORMER/neoforge@21.1.233/net.neoforged.neoforge.registries.DeferredRegister.lambda$register$1(DeferredRegister.java:234) ~[neoforge-21.1.233.jar%23185!/:?] {re:classloading}
+	at TRANSFORMER/neoforge@21.1.233/net.neoforged.neoforge.registries.DeferredRegister.lambda$addEntries$2(DeferredRegister.java:375) ~[neoforge-21.1.233.jar%23185!/:?] {re:classloading}
+	at TRANSFORMER/neoforge@21.1.233/net.neoforged.neoforge.registries.RegisterEvent.register(RegisterEvent.java:48) ~[neoforge-21.1.233.jar%23185!/:?] {re:classloading}
+	at TRANSFORMER/neoforge@21.1.233/net.neoforged.neoforge.registries.DeferredRegister.addEntries(DeferredRegister.java:375) ~[neoforge-21.1.233.jar%23185!/:?] {re:classloading}
+	at MC-BOOTSTRAP/net.neoforged.bus/net.neoforged.bus.ConsumerEventHandler.invoke(ConsumerEventHandler.java:27) ~[bus-8.0.5.jar%23142!/:?] {}
+	at MC-BOOTSTRAP/net.neoforged.bus/net.neoforged.bus.EventBus.post(EventBus.java:360) ~[bus-8.0.5.jar%23142!/:?] {}
+	at MC-BOOTSTRAP/net.neoforged.bus/net.neoforged.bus.EventBus.post(EventBus.java:342) ~[bus-8.0.5.jar%23142!/:?] {}
+	at MC-BOOTSTRAP/fml_loader@4.0.42/net.neoforged.fml.ModContainer.acceptEvent(ModContainer.java:177) ~[loader-4.0.42.jar%23138!/:4.0] {}
+	at MC-BOOTSTRAP/fml_loader@4.0.42/net.neoforged.fml.ModLoader.lambda$postEventWithWrapInModOrder$16(ModLoader.java:379) ~[loader-4.0.42.jar%23138!/:4.0] {}
+	at java.base/java.lang.Iterable.forEach(Unknown Source) ~[?:?] {}
+	at MC-BOOTSTRAP/fml_loader@4.0.42/net.neoforged.fml.ModList.forEachModInOrder(ModList.java:174) ~[loader-4.0.42.jar%23138!/:4.0] {}
+	at MC-BOOTSTRAP/fml_loader@4.0.42/net.neoforged.fml.ModLoader.postEventWithWrapInModOrder(ModLoader.java:377) ~[loader-4.0.42.jar%23138!/:4.0] {}
+	at MC-BOOTSTRAP/fml_loader@4.0.42/net.neoforged.fml.ModLoader.postEventWrapContainerInModOrder(ModLoader.java:368) ~[loader-4.0.42.jar%23138!/:4.0] {}
+	at TRANSFORMER/neoforge@21.1.233/net.neoforged.neoforge.registries.GameData.postRegisterEvents(GameData.java:92) ~[neoforge-21.1.233.jar%23185!/:?] {re:classloading}
+	at TRANSFORMER/neoforge@21.1.233/net.neoforged.neoforge.internal.CommonModLoader.lambda$begin$0(CommonModLoader.java:54) ~[neoforge-21.1.233.jar%23185!/:?] {re:classloading}
+	at java.base/java.util.concurrent.CompletableFuture$AsyncRun.run(Unknown Source) ~[?:?] {}
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source) ~[?:?] {}
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source) ~[?:?] {}
+	at java.base/java.lang.Thread.run(Unknown Source) ~[?:?] {}
+
+
+-- Mod loading issue for: factoryheart --
+Details:
+	Mod file: /home/kai/Minecraft/OwnMods/FactoryHeart/build/resources/main/
+	Failure message: Factory Heart (factoryheart) encountered an error while dispatching the net.neoforged.neoforge.registries.RegisterEvent event
+		java.lang.NullPointerException: Trying to access unbound value: ResourceKey[minecraft:block / factoryheart:factory_maw]
+	Mod version: 1.0.0
+	Mod issues URL: <No issues URL found>
+	Exception message: java.lang.NullPointerException: Trying to access unbound value: ResourceKey[minecraft:block / factoryheart:factory_maw]
+Stacktrace:
+	at TRANSFORMER/neoforge@21.1.233/net.neoforged.neoforge.registries.DeferredHolder.value(DeferredHolder.java:103) ~[neoforge-21.1.233.jar%23185!/:?] {re:classloading}
+	at TRANSFORMER/neoforge@21.1.233/net.neoforged.neoforge.registries.DeferredHolder.get(DeferredHolder.java:117) ~[neoforge-21.1.233.jar%23185!/:?] {re:classloading}
+	at TRANSFORMER/factoryheart@1.0.0/com.meersalzeis.factoryheart.block.ModBlocks.lambda$registerBlockItem$9(ModBlocks.java:70) ~[%23187!/:?] {re:classloading}
+	at TRANSFORMER/neoforge@21.1.233/net.neoforged.neoforge.registries.DeferredRegister$Items.lambda$register$0(DeferredRegister.java:515) ~[neoforge-21.1.233.jar%23185!/:?] {re:classloading}
+	at TRANSFORMER/neoforge@21.1.233/net.neoforged.neoforge.registries.DeferredRegister.lambda$register$1(DeferredRegister.java:234) ~[neoforge-21.1.233.jar%23185!/:?] {re:classloading}
+	at TRANSFORMER/neoforge@21.1.233/net.neoforged.neoforge.registries.DeferredRegister.lambda$addEntries$2(DeferredRegister.java:375) ~[neoforge-21.1.233.jar%23185!/:?] {re:classloading}
+	at TRANSFORMER/neoforge@21.1.233/net.neoforged.neoforge.registries.RegisterEvent.register(RegisterEvent.java:48) ~[neoforge-21.1.233.jar%23185!/:?] {re:classloading}
+	at TRANSFORMER/neoforge@21.1.233/net.neoforged.neoforge.registries.DeferredRegister.addEntries(DeferredRegister.java:375) ~[neoforge-21.1.233.jar%23185!/:?] {re:classloading}
+	at MC-BOOTSTRAP/net.neoforged.bus/net.neoforged.bus.ConsumerEventHandler.invoke(ConsumerEventHandler.java:27) ~[bus-8.0.5.jar%23142!/:?] {}
+	at MC-BOOTSTRAP/net.neoforged.bus/net.neoforged.bus.EventBus.post(EventBus.java:360) ~[bus-8.0.5.jar%23142!/:?] {}
+	at MC-BOOTSTRAP/net.neoforged.bus/net.neoforged.bus.EventBus.post(EventBus.java:342) ~[bus-8.0.5.jar%23142!/:?] {}
+	at MC-BOOTSTRAP/fml_loader@4.0.42/net.neoforged.fml.ModContainer.acceptEvent(ModContainer.java:177) ~[loader-4.0.42.jar%23138!/:4.0] {}
+	at MC-BOOTSTRAP/fml_loader@4.0.42/net.neoforged.fml.ModLoader.lambda$postEventWithWrapInModOrder$16(ModLoader.java:379) ~[loader-4.0.42.jar%23138!/:4.0] {}
+	at java.base/java.lang.Iterable.forEach(Unknown Source) ~[?:?] {}
+	at MC-BOOTSTRAP/fml_loader@4.0.42/net.neoforged.fml.ModList.forEachModInOrder(ModList.java:174) ~[loader-4.0.42.jar%23138!/:4.0] {}
+	at MC-BOOTSTRAP/fml_loader@4.0.42/net.neoforged.fml.ModLoader.postEventWithWrapInModOrder(ModLoader.java:377) ~[loader-4.0.42.jar%23138!/:4.0] {}
+	at MC-BOOTSTRAP/fml_loader@4.0.42/net.neoforged.fml.ModLoader.postEventWrapContainerInModOrder(ModLoader.java:368) ~[loader-4.0.42.jar%23138!/:4.0] {}
+	at TRANSFORMER/neoforge@21.1.233/net.neoforged.neoforge.registries.GameData.postRegisterEvents(GameData.java:92) ~[neoforge-21.1.233.jar%23185!/:?] {re:classloading}
+	at TRANSFORMER/neoforge@21.1.233/net.neoforged.neoforge.internal.CommonModLoader.lambda$begin$0(CommonModLoader.java:54) ~[neoforge-21.1.233.jar%23185!/:?] {re:classloading}
+	at java.base/java.util.concurrent.CompletableFuture$AsyncRun.run(Unknown Source) ~[?:?] {}
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source) ~[?:?] {}
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source) ~[?:?] {}
+	at java.base/java.lang.Thread.run(Unknown Source) ~[?:?] {}
+
+
+-- Mod loading issue for: factoryheart --
+Details:
+	Mod file: /home/kai/Minecraft/OwnMods/FactoryHeart/build/resources/main/
+	Failure message: Factory Heart (factoryheart) encountered an error while dispatching the net.neoforged.neoforge.registries.RegisterEvent event
+		java.lang.NullPointerException: Trying to access unbound value: ResourceKey[minecraft:block / factoryheart:pedestal]
+	Mod version: 1.0.0
+	Mod issues URL: <No issues URL found>
+	Exception message: java.lang.NullPointerException: Trying to access unbound value: ResourceKey[minecraft:block / factoryheart:pedestal]
+Stacktrace:
+	at TRANSFORMER/neoforge@21.1.233/net.neoforged.neoforge.registries.DeferredHolder.value(DeferredHolder.java:103) ~[neoforge-21.1.233.jar%23185!/:?] {re:classloading}
+	at TRANSFORMER/neoforge@21.1.233/net.neoforged.neoforge.registries.DeferredHolder.get(DeferredHolder.java:117) ~[neoforge-21.1.233.jar%23185!/:?] {re:classloading}
+	at TRANSFORMER/factoryheart@1.0.0/com.meersalzeis.factoryheart.block.entity.ModBlockEntities.lambda$static$0(ModBlockEntities.java:24) ~[%23187!/:?] {re:classloading}
+	at TRANSFORMER/neoforge@21.1.233/net.neoforged.neoforge.registries.DeferredRegister.lambda$register$0(DeferredRegister.java:215) ~[neoforge-21.1.233.jar%23185!/:?] {re:classloading}
+	at TRANSFORMER/neoforge@21.1.233/net.neoforged.neoforge.registries.DeferredRegister.lambda$register$1(DeferredRegister.java:234) ~[neoforge-21.1.233.jar%23185!/:?] {re:classloading}
+	at TRANSFORMER/neoforge@21.1.233/net.neoforged.neoforge.registries.DeferredRegister.lambda$addEntries$2(DeferredRegister.java:375) ~[neoforge-21.1.233.jar%23185!/:?] {re:classloading}
+	at TRANSFORMER/neoforge@21.1.233/net.neoforged.neoforge.registries.RegisterEvent.register(RegisterEvent.java:48) ~[neoforge-21.1.233.jar%23185!/:?] {re:classloading}
+	at TRANSFORMER/neoforge@21.1.233/net.neoforged.neoforge.registries.DeferredRegister.addEntries(DeferredRegister.java:375) ~[neoforge-21.1.233.jar%23185!/:?] {re:classloading}
+	at MC-BOOTSTRAP/net.neoforged.bus/net.neoforged.bus.ConsumerEventHandler.invoke(ConsumerEventHandler.java:27) ~[bus-8.0.5.jar%23142!/:?] {}
+	at MC-BOOTSTRAP/net.neoforged.bus/net.neoforged.bus.EventBus.post(EventBus.java:360) ~[bus-8.0.5.jar%23142!/:?] {}
+	at MC-BOOTSTRAP/net.neoforged.bus/net.neoforged.bus.EventBus.post(EventBus.java:342) ~[bus-8.0.5.jar%23142!/:?] {}
+	at MC-BOOTSTRAP/fml_loader@4.0.42/net.neoforged.fml.ModContainer.acceptEvent(ModContainer.java:177) ~[loader-4.0.42.jar%23138!/:4.0] {}
+	at MC-BOOTSTRAP/fml_loader@4.0.42/net.neoforged.fml.ModLoader.lambda$postEventWithWrapInModOrder$16(ModLoader.java:379) ~[loader-4.0.42.jar%23138!/:4.0] {}
+	at java.base/java.lang.Iterable.forEach(Unknown Source) ~[?:?] {}
+	at MC-BOOTSTRAP/fml_loader@4.0.42/net.neoforged.fml.ModList.forEachModInOrder(ModList.java:174) ~[loader-4.0.42.jar%23138!/:4.0] {}
+	at MC-BOOTSTRAP/fml_loader@4.0.42/net.neoforged.fml.ModLoader.postEventWithWrapInModOrder(ModLoader.java:377) ~[loader-4.0.42.jar%23138!/:4.0] {}
+	at MC-BOOTSTRAP/fml_loader@4.0.42/net.neoforged.fml.ModLoader.postEventWrapContainerInModOrder(ModLoader.java:368) ~[loader-4.0.42.jar%23138!/:4.0] {}
+	at TRANSFORMER/neoforge@21.1.233/net.neoforged.neoforge.registries.GameData.postRegisterEvents(GameData.java:92) ~[neoforge-21.1.233.jar%23185!/:?] {re:classloading}
+	at TRANSFORMER/neoforge@21.1.233/net.neoforged.neoforge.internal.CommonModLoader.lambda$begin$0(CommonModLoader.java:54) ~[neoforge-21.1.233.jar%23185!/:?] {re:classloading}
+	at java.base/java.util.concurrent.CompletableFuture$AsyncRun.run(Unknown Source) ~[?:?] {}
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source) ~[?:?] {}
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source) ~[?:?] {}
+	at java.base/java.lang.Thread.run(Unknown Source) ~[?:?] {}
+
+
+-- System Details --
+Details:
+	Minecraft Version: 1.21.1
+	Minecraft Version ID: 1.21.1
+	Operating System: Linux (amd64) version 6.17.0-35-generic
+	Java Version: 21.0.10, Eclipse Adoptium
+	Java VM Version: OpenJDK 64-Bit Server VM (mixed mode, sharing), Eclipse Adoptium
+	Memory: 311469872 bytes (297 MiB) / 769654784 bytes (734 MiB) up to 4114612224 bytes (3924 MiB)
+	CPUs: 12
+	Processor Vendor: GenuineIntel
+	Processor Name: 13th Gen Intel(R) Core(TM) i7-13620H
+	Identifier: Intel64 Family 6 Model 186 Stepping 2
+	Microarchitecture: Raptor Lake
+	Frequency (GHz): 4.70
+	Number of physical packages: 1
+	Number of physical CPUs: 10
+	Number of logical CPUs: 16
+	Graphics card #0 name: Raptor Lake-P [UHD Graphics]
+	Graphics card #0 vendor: Intel Corporation (0x8086)
+	Graphics card #0 VRAM (MiB): 256.00
+	Graphics card #0 deviceId: 0xa7a8
+	Graphics card #0 versionInfo: unknown
+	Graphics card #1 name: AD107M [GeForce RTX 4060 Max-Q / Mobile]
+	Graphics card #1 vendor: NVIDIA Corporation (0x10de)
+	Graphics card #1 VRAM (MiB): 8224.00
+	Graphics card #1 deviceId: 0x28a0
+	Graphics card #1 versionInfo: unknown
+	Virtual memory max (MiB): 11942.96
+	Virtual memory used (MiB): 9172.09
+	Swap memory total (MiB): 4096.00
+	Swap memory used (MiB): 0.00
+	Space in storage for jna.tmpdir (MiB): <path not set>
+	Space in storage for org.lwjgl.system.SharedLibraryExtractPath (MiB): <path not set>
+	Space in storage for io.netty.native.workdir (MiB): <path not set>
+	Space in storage for java.io.tmpdir (MiB): available: 398175.63, total: 478562.97
+	Space in storage for workdir (MiB): available: 398175.63, total: 478562.97
+	JVM Flags: 0 total; 
+	ModLauncher: 11.0.5+main.901c6ea8
+	ModLauncher launch target: forgeclientdev
+	ModLauncher services: 
+		sponge-mixin-0.15.2+mixin.0.8.7.jar mixin PLUGINSERVICE 
+		loader-4.0.42.jar slf4jfixer PLUGINSERVICE 
+		loader-4.0.42.jar runtime_enum_extender PLUGINSERVICE 
+		at-modlauncher-10.0.1.jar accesstransformer PLUGINSERVICE 
+		loader-4.0.42.jar runtimedistcleaner PLUGINSERVICE 
+		modlauncher-11.0.5.jar mixin TRANSFORMATIONSERVICE 
+		modlauncher-11.0.5.jar fml TRANSFORMATIONSERVICE 
+	FML Language Providers: 
+		javafml@4.0
+		lowcodefml@4.0
+		minecraft@4.0
+	Mod List: 
+		main                                              |Factory Heart                 |factoryheart                  |1.0.0               |Manifest: NOSIGNATURE
+		jei-1.21.1-neoforge-19.27.0.336.jar               |Just Enough Items             |jei                           |19.27.0.336         |Manifest: NOSIGNATURE
+		neoforge-21.1.233.jar                             |Minecraft                     |minecraft                     |1.21.1              |Manifest: NOSIGNATURE
+		neoforge-21.1.233.jar                             |NeoForge                      |neoforge                      |21.1.233            |Manifest: NOSIGNATURE
+	Crash Report UUID: 1d7f7b8b-c26a-40f5-ac87-8e5cbb261e5b
+	FML: 4.0.42
+	NeoForge: 21.1.233

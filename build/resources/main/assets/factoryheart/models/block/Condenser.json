@@ -1,0 +1,43 @@
+{
+	"format_version": "1.21.6",
+	"credit": "Made with Blockbench",
+	"textures": {
+		"0": "factory_standard",
+		"1": "factory_condenser_side",
+		"2": "factory_condenser_opening",
+		"particle": "factory_standard"
+	},
+	"elements": [
+		{
+			"from": [0, 4, 0],
+			"to": [16, 16, 16],
+			"faces": {
+				"north": {"uv": [0, 4, 16, 16], "texture": "#1"},
+				"east": {"uv": [0, 4, 16, 16], "texture": "#1"},
+				"south": {"uv": [0, 4, 16, 16], "texture": "#1"},
+				"west": {"uv": [0, 4, 16, 16], "texture": "#1"},
+				"up": {"uv": [16, 16, 0, 0], "texture": "#0"},
+				"down": {"uv": [16, 0, 0, 16], "texture": "#2"}
+			}
+		}
+	],
+	"display": {
+		"thirdperson_righthand": {
+			"scale": [0.4, 0.4, 0.4]
+		},
+		"thirdperson_lefthand": {
+			"scale": [0.4, 0.4, 0.4]
+		},
+		"firstperson_righthand": {
+			"scale": [0.4, 0.4, 0.4]
+		},
+		"firstperson_lefthand": {
+			"scale": [0.4, 0.4, 0.4]
+		},
+		"gui": {
+			"rotation": [25, 45, 0],
+			"translation": [0, -1, 0],
+			"scale": [0.6, 0.6, 0.6]
+		}
+	}
+}

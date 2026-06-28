@@ -1,0 +1,9 @@
+{
+  "type": "factoryheart:crystallizing",
+  "ingredient": {
+    "item": "factoryheart:factory_tooth"
+  },
+  "result": {
+    "id": "factoryheart:factory_maw"
+  }
+}

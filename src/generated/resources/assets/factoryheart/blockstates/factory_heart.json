@@ -1,0 +1,94 @@
+{
+  "variants": {
+    "facing=down,tier=0": {
+      "model": "factoryheart:block/factory_heart_tier0"
+    },
+    "facing=down,tier=1": {
+      "model": "factoryheart:block/factory_heart_tier1"
+    },
+    "facing=down,tier=2": {
+      "model": "factoryheart:block/factory_heart_tier2"
+    },
+    "facing=down,tier=3": {
+      "model": "factoryheart:block/factory_heart_tier3"
+    },
+    "facing=down,tier=4": {
+      "model": "factoryheart:block/factory_heart_tier4"
+    },
+    "facing=east,tier=0": {
+      "model": "factoryheart:block/factory_heart_tier0"
+    },
+    "facing=east,tier=1": {
+      "model": "factoryheart:block/factory_heart_tier1"
+    },
+    "facing=east,tier=2": {
+      "model": "factoryheart:block/factory_heart_tier2"
+    },
+    "facing=east,tier=3": {
+      "model": "factoryheart:block/factory_heart_tier3"
+    },
+    "facing=east,tier=4": {
+      "model": "factoryheart:block/factory_heart_tier4"
+    },
+    "facing=north,tier=0": {
+      "model": "factoryheart:block/factory_heart_tier0"
+    },
+    "facing=north,tier=1": {
+      "model": "factoryheart:block/factory_heart_tier1"
+    },
+    "facing=north,tier=2": {
+      "model": "factoryheart:block/factory_heart_tier2"
+    },
+    "facing=north,tier=3": {
+      "model": "factoryheart:block/factory_heart_tier3"
+    },
+    "facing=north,tier=4": {
+      "model": "factoryheart:block/factory_heart_tier4"
+    },
+    "facing=south,tier=0": {
+      "model": "factoryheart:block/factory_heart_tier0"
+    },
+    "facing=south,tier=1": {
+      "model": "factoryheart:block/factory_heart_tier1"
+    },
+    "facing=south,tier=2": {
+      "model": "factoryheart:block/factory_heart_tier2"
+    },
+    "facing=south,tier=3": {
+      "model": "factoryheart:block/factory_heart_tier3"
+    },
+    "facing=south,tier=4": {
+      "model": "factoryheart:block/factory_heart_tier4"
+    },
+    "facing=up,tier=0": {
+      "model": "factoryheart:block/factory_heart_tier0"
+    },
+    "facing=up,tier=1": {
+      "model": "factoryheart:block/factory_heart_tier1"
+    },
+    "facing=up,tier=2": {
+      "model": "factoryheart:block/factory_heart_tier2"
+    },
+    "facing=up,tier=3": {
+      "model": "factoryheart:block/factory_heart_tier3"
+    },
+    "facing=up,tier=4": {
+      "model": "factoryheart:block/factory_heart_tier4"
+    },
+    "facing=west,tier=0": {
+      "model": "factoryheart:block/factory_heart_tier0"
+    },
+    "facing=west,tier=1": {
+      "model": "factoryheart:block/factory_heart_tier1"
+    },
+    "facing=west,tier=2": {
+      "model": "factoryheart:block/factory_heart_tier2"
+    },
+    "facing=west,tier=3": {
+      "model": "factoryheart:block/factory_heart_tier3"
+    },
+    "facing=west,tier=4": {
+      "model": "factoryheart:block/factory_heart_tier4"
+    }
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "variants": {
+    "facing=down": {
+      "model": "factoryheart:block/factory_maw",
+      "x": 90
+    },
+    "facing=east": {
+      "model": "factoryheart:block/factory_maw",
+      "y": 90
+    },
+    "facing=north": {
+      "model": "factoryheart:block/factory_maw"
+    },
+    "facing=south": {
+      "model": "factoryheart:block/factory_maw",
+      "y": 180
+    },
+    "facing=up": {
+      "model": "factoryheart:block/factory_maw",
+      "x": 270
+    },
+    "facing=west": {
+      "model": "factoryheart:block/factory_maw",
+      "y": 270
+    }
+  }
+}

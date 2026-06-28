@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_containment_spool": {
+      "conditions": {
+        "items": [
+          {
+            "items": "factoryheart:containment_spool"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "factoryheart:containment_field_projector"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_containment_spool"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "factoryheart:containment_field_projector"
+    ]
+  }
+}
