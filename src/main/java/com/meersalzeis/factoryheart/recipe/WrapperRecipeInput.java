@@ -3,7 +3,7 @@ package com.meersalzeis.factoryheart.recipe;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeInput;
 
-public record WrapperRecipeInput(ItemStack centerpiece, ItemStack wrapping) implements RecipeInput {
+public record WrapperRecipeInput(ItemStack centerpiece, ItemStack wrapping, int centerpieceCount, int wrappingsCount) implements RecipeInput {
     @Override
     public ItemStack getItem(int slot) {
         return switch (slot) {
@@ -16,5 +16,13 @@ public record WrapperRecipeInput(ItemStack centerpiece, ItemStack wrapping) impl
     @Override
     public int size() {
         return 2;
+    }
+
+    public int getCenterPieceCount() {
+        return centerpieceCount;
+    }
+
+    public int getWrappingsCount() {
+        return wrappingsCount;
     }
 }

@@ -2,9 +2,9 @@
 {
   "type": "factoryheart:extracting",
   "ingredient": {
-    "amount": 4,
     "item": "minecraft:nether_gold_ore"
   },
+  "ingredientCount":4,
   "requiredTier": 4,
   "result": {
     "id": "minecraft:gold_nugget",

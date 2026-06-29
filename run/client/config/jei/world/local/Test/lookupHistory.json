@@ -1,5 +1,8 @@
 [
   {"version":1},
+  {"ingredient":{"id":"minecraft:ice"},"type":"item_stack","bookmarkType":"INGREDIENT"},
+  {"ingredient":{"id":"minecraft:packed_ice"},"type":"item_stack","bookmarkType":"INGREDIENT"},
+  {"ingredient":{"id":"factoryheart:deepcool_crystal"},"type":"item_stack","bookmarkType":"INGREDIENT"},
   {"ingredient":{"id":"factoryheart:extractor"},"type":"item_stack","bookmarkType":"INGREDIENT"},
   {"ingredient":{"id":"minecraft:glow_ink_sac"},"type":"item_stack","bookmarkType":"INGREDIENT"},
   {"ingredient":{"id":"factoryheart:factory_paste"},"type":"item_stack","bookmarkType":"INGREDIENT"},
@@ -12,7 +15,6 @@
   {"ingredient":{"id":"factoryheart:hard_part_unidentified"},"type":"item_stack","bookmarkType":"INGREDIENT"},
   {"ingredient":{"id":"factoryheart:metal_disc"},"type":"item_stack","bookmarkType":"INGREDIENT"},
   {"ingredient":{"id":"factoryheart:metal_sheet"},"type":"item_stack","bookmarkType":"INGREDIENT"},
-  {"ingredient":{"id":"factoryheart:deepcool_crystal"},"type":"item_stack","bookmarkType":"INGREDIENT"},
   {"ingredient":{"id":"factoryheart:contained_deepcool_crystal"},"type":"item_stack","bookmarkType":"INGREDIENT"},
   {"ingredient":{"id":"factoryheart:energy_drink"},"type":"item_stack","bookmarkType":"INGREDIENT"},
   {"ingredient":{"id":"minecraft:birch_planks"},"type":"item_stack","bookmarkType":"INGREDIENT"},

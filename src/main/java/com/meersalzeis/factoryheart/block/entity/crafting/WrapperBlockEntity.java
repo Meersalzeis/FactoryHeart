@@ -1,284 +1,238 @@
 package com.meersalzeis.factoryheart.block.entity.crafting;
-// package com.meersalzeis.factoryheart.block.entity.custom;
 
-// import com.meersalzeis.factoryheart.FHModClient;
-// import com.meersalzeis.factoryheart.block.custom.BlazerBlock;
-// import com.meersalzeis.factoryheart.block.entity.ModBlockEntities;
-// import com.meersalzeis.factoryheart.block.entity.energy.ModEnergyStorage;
-// import com.meersalzeis.factoryheart.hearts.HeartBeating;
-// import com.meersalzeis.factoryheart.hearts.HeartFeeding;
-// import com.meersalzeis.factoryheart.item.ModItems;
-// import com.meersalzeis.factoryheart.recipe.BlazerRecipe;
-// import com.meersalzeis.factoryheart.recipe.BlazerRecipeInput;
-// import com.meersalzeis.factoryheart.recipe.ModRecipes;
-// import com.meersalzeis.factoryheart.screen.custom.BlazerMenu;
+import com.meersalzeis.factoryheart.FHModClient;
+import com.meersalzeis.factoryheart.block.custom.WrapperBlock;
+import com.meersalzeis.factoryheart.block.entity.ModBlockEntities;
+import com.meersalzeis.factoryheart.block.entity.energy.ModEnergyStorage;
+import com.meersalzeis.factoryheart.hearts.HeartBeating;
+import com.meersalzeis.factoryheart.hearts.HeartFeeding;
+import com.meersalzeis.factoryheart.item.ModItems;
+import com.meersalzeis.factoryheart.recipe.WrapperRecipe;
+import com.meersalzeis.factoryheart.recipe.WrapperRecipeInput;
+import com.meersalzeis.factoryheart.recipe.ModRecipes;
+import com.meersalzeis.factoryheart.gui.menus.WrapperMenu;
 
-// import net.minecraft.core.BlockPos;
-// import net.minecraft.core.Direction;
-// import net.minecraft.core.HolderLookup;
-// import net.minecraft.nbt.CompoundTag;
-// import net.minecraft.network.chat.Component;
-// import net.minecraft.network.protocol.Packet;
-// import net.minecraft.network.protocol.game.ClientGamePacketListener;
-// import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
-// import net.minecraft.world.Containers;
-// import net.minecraft.world.MenuProvider;
-// import net.minecraft.world.SimpleContainer;
-// import net.minecraft.world.entity.player.Inventory;
-// import net.minecraft.world.entity.player.Player;
-// import net.minecraft.world.inventory.AbstractContainerMenu;
-// import net.minecraft.world.inventory.ContainerData;
-// import net.minecraft.world.item.ItemStack;
-// import net.minecraft.world.item.crafting.RecipeHolder;
-// import net.minecraft.world.level.Level;
-// import net.minecraft.world.level.block.entity.BlockEntity;
-// import net.minecraft.world.level.block.state.BlockState;
-// import net.neoforged.neoforge.capabilities.Capabilities;
-// import net.neoforged.neoforge.energy.IEnergyStorage;
-// import net.neoforged.neoforge.fluids.FluidActionResult;
-// import net.neoforged.neoforge.fluids.FluidStack;
-// import net.neoforged.neoforge.fluids.FluidUtil;
-// import net.neoforged.neoforge.fluids.capability.IFluidHandler;
-// import net.neoforged.neoforge.fluids.capability.templates.FluidTank;
-// import net.neoforged.neoforge.items.IItemHandler;
-// import net.neoforged.neoforge.items.ItemStackHandler;
-// import org.jetbrains.annotations.Nullable;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.core.HolderLookup;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.protocol.Packet;
+import net.minecraft.network.protocol.game.ClientGamePacketListener;
+import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
+import net.minecraft.world.Containers;
+import net.minecraft.world.MenuProvider;
+import net.minecraft.world.SimpleContainer;
+import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraft.world.inventory.ContainerData;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.RecipeHolder;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.state.BlockState;
+import net.neoforged.neoforge.items.IItemHandler;
+import net.neoforged.neoforge.items.ItemStackHandler;
+import org.jetbrains.annotations.Nullable;
 
-// import java.util.Optional;
+import java.util.Optional;
 
-// public class WrapperBlockEntity extends BlockEntity implements MenuProvider {
+public class WrapperBlockEntity extends BlockEntity implements MenuProvider {
 
-//     public final ItemStackHandler itemHandler = new ItemStackHandler(2) {
-//         @Override
-//         protected void onContentsChanged(int slot) {
-//             setChanged();
-//             if(!level.isClientSide()) {
-//                 level.sendBlockUpdated(getBlockPos(), getBlockState(), getBlockState(), 3);
-//             }
-//         }
-//     };
+    public final ItemStackHandler itemHandler = new ItemStackHandler(3) {
+        @Override
+        protected void onContentsChanged(int slot) {
+            setChanged();
+            if(!level.isClientSide()) {
+                level.sendBlockUpdated(getBlockPos(), getBlockState(), getBlockState(), 3);
+            }
+        }
+    };
 
-//     private static final int INPUT_SLOT = 0;
-//     private static final int OUTPUT_SLOT = 1;
+    private static final int CENTERPIECE_SLOT = 0;
+    private static final int WRAPPINGS_SLOT = 1;
+    private static final int OUTPUT_SLOT = 2;
 
-//     private final ContainerData data;
-//     private int progress = 0;
-//     private int maxProgress = 100;
-//     private final int DEFAULT_MAX_PROGRESS = 100;
+    private final ContainerData data;
+    private int progress = 0;
+    private int maxProgress = 100;
+    private final int DEFAULT_MAX_PROGRESS = 100;
 
 
-//     public WrapperBlockEntity(BlockPos pPos, BlockState pBlockState) {
-//         super(ModBlockEntities.BLAZER_BE.get(), pPos, pBlockState);
-//         this.data = new ContainerData() {
-//             @Override
-//             public int get(int pIndex) {
-//                 return switch (pIndex) {
-//                     case 0 -> WrapperBlockEntity.this.progress;
-//                     case 1 -> WrapperBlockEntity.this.maxProgress;
-//                     default -> 0;
-//                 };
-//             }
+    public WrapperBlockEntity(BlockPos pPos, BlockState pBlockState) {
+        super(ModBlockEntities.WRAPPER_BE.get(), pPos, pBlockState);
 
-//             @Override
-//             public void set(int pIndex, int pValue) {
-//                 switch (pIndex) {
-//                     case 0: WrapperBlockEntity.this.progress = pValue;
-//                     case 1: WrapperBlockEntity.this.maxProgress = pValue;
-//                 }
-//             }
+        this.data = new ContainerData() {
+            @Override
+            public int get(int pIndex) {
+                return switch (pIndex) {
+                    case 0 -> WrapperBlockEntity.this.progress;
+                    case 1 -> WrapperBlockEntity.this.maxProgress;
+                    default -> 0;
+                };
+            }
 
-//             @Override
-//             public int getCount() {
-//                 return 2;
-//             }
-//         };
-//     }
+            @Override
+            public void set(int pIndex, int pValue) {
+                switch (pIndex) {
+                    case 0: WrapperBlockEntity.this.progress = pValue;
+                    case 1: WrapperBlockEntity.this.maxProgress = pValue;
+                }
+            }
 
-//     // public IEnergyStorage getEnergyStorage(@Nullable Direction direction) {
-//     //     return this.ENERGY_STORAGE;
-//     // }
+            @Override
+            public int getCount() {
+                return 2;
+            }
+        };
+    }
 
-//     // public IFluidHandler getFluidTank(@Nullable Direction direction) {
-//     //     return this.FLUID_TANK;
-//     // }
+    public IItemHandler getItemHandler(Direction direction) {
+        return this.itemHandler;
+    }
 
-//     // public FluidStack getFluid() {
-//     //     return FLUID_TANK.getFluid();
-//     // }
+    @Override
+    public Component getDisplayName() {
+        return Component.translatable("blockentity.factoryheart.y_Wrapper");
+    }
 
-//     public IItemHandler getItemHandler(Direction direction) {
-//         return this.itemHandler;
-//     }
+    @Nullable
+    @Override
+    public AbstractContainerMenu createMenu(int pContainerId, Inventory pPlayerInventory, Player pPlayer) {
+        return new WrapperMenu(pContainerId, pPlayerInventory, this, this.data);
+    }
 
-//     @Override
-//     public Component getDisplayName() {
-//         return Component.translatable("blockentity.factoryheart.y_blazer");
-//     }
+    @Override
+    protected void saveAdditional(CompoundTag pTag, HolderLookup.Provider pRegistries) {
+        pTag.put("inventory", itemHandler.serializeNBT(pRegistries));
+        pTag.putInt("Wrapper.progress", progress);
+        pTag.putInt("Wrapper.max_progress", maxProgress);
 
-//     @Nullable
-//     @Override
-//     public AbstractContainerMenu createMenu(int pContainerId, Inventory pPlayerInventory, Player pPlayer) {
-//         return new BlazerMenu(pContainerId, pPlayerInventory, this, this.data);
-//     }
+        super.saveAdditional(pTag, pRegistries);
+    }
 
-//     @Override
-//     protected void saveAdditional(CompoundTag pTag, HolderLookup.Provider pRegistries) {
-//         pTag.put("inventory", itemHandler.serializeNBT(pRegistries));
-//         pTag.putInt("blazer.progress", progress);
-//         pTag.putInt("blazer.max_progress", maxProgress);
+    @Override
+    protected void loadAdditional(CompoundTag pTag, HolderLookup.Provider pRegistries) {
+        super.loadAdditional(pTag, pRegistries);
+        itemHandler.deserializeNBT(pRegistries, pTag.getCompound("inventory"));
+        progress = pTag.getInt("Wrapper.progress");
+        maxProgress = pTag.getInt("Wrapper.max_progress");
+    }
 
-//         // pTag.putInt("factory_blazer.energy", ENERGY_STORAGE.getEnergyStored());
-//         // pTag = FLUID_TANK.writeToNBT(pRegistries, pTag);
+    public void drops() {
+        SimpleContainer inv = new SimpleContainer(itemHandler.getSlots());
+        for(int i = 0; i < itemHandler.getSlots(); i++) {
+            inv.setItem(i, itemHandler.getStackInSlot(i));
+        }
 
-//         super.saveAdditional(pTag, pRegistries);
-//     }
+        Containers.dropContents(this.level, this.worldPosition, inv);
+    }
 
-//     @Override
-//     protected void loadAdditional(CompoundTag pTag, HolderLookup.Provider pRegistries) {
-//         super.loadAdditional(pTag, pRegistries);
-//         itemHandler.deserializeNBT(pRegistries, pTag.getCompound("inventory"));
-//         progress = pTag.getInt("blazer.progress");
-//         maxProgress = pTag.getInt("blazer.max_progress");
+    public void tick(Level level, BlockPos pPos, BlockState pState) {
+        if(canCraft(level, pPos)) {
+            increaseCraftingProgress();
+            // useEnergyForCrafting();
+            level.setBlockAndUpdate(pPos, pState.setValue(WrapperBlock.LIT, true));
+            setChanged(level, pPos, pState);
 
-//         // ENERGY_STORAGE.setEnergy(pTag.getInt("blazer.energy"));
-//         // FLUID_TANK.readFromNBT(pRegistries, pTag);
-//     }
+            if (hasCraftingFinished()) {
+                craftItem();
+                // extractFluidForCrafting();
+                resetProgress();
+            }
 
-//     public void drops() {
-//         SimpleContainer inv = new SimpleContainer(itemHandler.getSlots());
-//         for(int i = 0; i < itemHandler.getSlots(); i++) {
-//             inv.setItem(i, itemHandler.getStackInSlot(i));
-//         }
+        } else {
+            resetProgress();
+            level.setBlockAndUpdate(pPos, pState.setValue(WrapperBlock.LIT, false));
+        }
+    }
 
-//         Containers.dropContents(this.level, this.worldPosition, inv);
-//     }
+    private void resetProgress() {
+        this.progress = 0;
+        this.maxProgress = DEFAULT_MAX_PROGRESS;
+    }
 
-//     public void tick(Level level, BlockPos pPos, BlockState pState) {
-//         if(canCraft(level, pPos) && isOutputSlotEmptyOrReceivable()) {
-//             increaseCraftingProgress();
-//             // useEnergyForCrafting();
-//             level.setBlockAndUpdate(pPos, pState.setValue(BlazerBlock.LIT, true));
-//             setChanged(level, pPos, pState);
+    private void craftItem() {
+        Optional<RecipeHolder<WrapperRecipe>> recipe = getCurrentRecipe();
+        int centerpieceConsumption = recipe.get().value().getCenterpieceCount();
+        int wrappingsConsumption = recipe.get().value().getWrappingsCount();
+        ItemStack output = recipe.get().value().output();
+        itemHandler.extractItem(CENTERPIECE_SLOT, centerpieceConsumption, false);
+        itemHandler.extractItem(WRAPPINGS_SLOT, wrappingsConsumption, false);
+        itemHandler.setStackInSlot(
+            OUTPUT_SLOT,
+            new ItemStack(
+                output.getItem(),
+                itemHandler.getStackInSlot(OUTPUT_SLOT).getCount() + output.getCount())
+        );
+    }
 
-//             if (hasCraftingFinished()) {
-//                 craftItem();
-//                 // extractFluidForCrafting();
-//                 resetProgress();
-//             }
+    private boolean hasCraftingFinished() {
+        return this.progress >= this.maxProgress;
+    }
 
-//         } else {
-//             resetProgress();
-//             level.setBlockAndUpdate(pPos, pState.setValue(BlazerBlock.LIT, false));
-//         }
+    private void increaseCraftingProgress() {
+        progress++;
+    }
 
-//         // if (hasFluidStackInSlot()) {
-//         //     transferFluidToTank();
-//         // }
-//     }
+    private boolean isOutputSlotEmptyOrReceivable() {
+        return this.itemHandler.getStackInSlot(OUTPUT_SLOT).isEmpty() ||
+                this.itemHandler.getStackInSlot(OUTPUT_SLOT).getCount() < this.itemHandler.getStackInSlot(OUTPUT_SLOT).getMaxStackSize();
+    }
 
-//     // private void extractFluidForCrafting() {
-//     //     this.FLUID_TANK.drain(FLUID_CRAFT_AMOUNT, IFluidHandler.FluidAction.EXECUTE);
-//     // }
+    private boolean canCraft(Level level, BlockPos pos) {
+        Optional<RecipeHolder<WrapperRecipe>> recipe = getCurrentRecipe();
+        if(recipe.isEmpty()) {
+            return false;
+        }
+        ItemStack output = recipe.get().value().getResultItem(null);
+        return 
+            canInsertAmountIntoOutputSlot(output.getCount()) 
+            && canInsertItemIntoOutputSlot(output) 
+            && isOutputSlotEmptyOrReceivable()
+            && hasSufficientMaterialForRecipe(recipe);
+    }
 
-//     // private void transferFluidToTank() {
-//     //     FluidActionResult result = FluidUtil.tryEmptyContainer(itemHandler.getStackInSlot(0), this.FLUID_TANK, Integer.MAX_VALUE, null, true);
-//     //     if(result.result != ItemStack.EMPTY) {
-//     //         itemHandler.setStackInSlot(FLUID_ITEM_SLOT, result.result);
-//     //     }
-//     // }
+    private boolean hasSufficientMaterialForRecipe(Optional<RecipeHolder<WrapperRecipe>> recipe) {
+        var recipeObj = recipe.get().value();
+        return recipeObj.getCenterpieceCount() <= itemHandler.getStackInSlot(CENTERPIECE_SLOT).getCount()
+            && recipeObj.getWrappingsCount() <= itemHandler.getStackInSlot(WRAPPINGS_SLOT).getCount();
+    }
 
-//     // private boolean hasFluidStackInSlot() {
-//     //     return !itemHandler.getStackInSlot(FLUID_ITEM_SLOT).isEmpty()
-//     //             && itemHandler.getStackInSlot(FLUID_ITEM_SLOT).getCapability(Capabilities.FluidHandler.ITEM, null) != null
-//     //             && !itemHandler.getStackInSlot(FLUID_ITEM_SLOT).getCapability(Capabilities.FluidHandler.ITEM, null).getFluidInTank(0).isEmpty();
-//     // }
+    private Optional<RecipeHolder<WrapperRecipe>> getCurrentRecipe() {
+        return this.level.getRecipeManager()
+            .getRecipeFor(
+                ModRecipes.WRAPPER_TYPE.get(),
+                new WrapperRecipeInput(
+                    itemHandler.getStackInSlot(CENTERPIECE_SLOT),
+                    itemHandler.getStackInSlot(WRAPPINGS_SLOT),
+                    itemHandler.getStackInSlot(CENTERPIECE_SLOT).getCount(),
+                    itemHandler.getStackInSlot(WRAPPINGS_SLOT).getCount()
+                ),
+                level);
+    }
 
-//     // private void useEnergyForCrafting() {
-//     //     this.ENERGY_STORAGE.extractEnergy(ENERGY_CRAFT_AMOUNT, false);
-//     // }
+    private boolean canInsertItemIntoOutputSlot(ItemStack output) {
+        return itemHandler.getStackInSlot(OUTPUT_SLOT).isEmpty() ||
+                itemHandler.getStackInSlot(OUTPUT_SLOT).getItem() == output.getItem();
+    }
 
-//     private void resetProgress() {
-//         this.progress = 0;
-//         this.maxProgress = DEFAULT_MAX_PROGRESS;
-//     }
+    private boolean canInsertAmountIntoOutputSlot(int count) {
+        int maxCount = itemHandler.getStackInSlot(OUTPUT_SLOT).isEmpty() ? 64 : itemHandler.getStackInSlot(OUTPUT_SLOT).getMaxStackSize();
+        int currentCount = itemHandler.getStackInSlot(OUTPUT_SLOT).getCount();
 
-//     private void craftItem() {
-//         Optional<RecipeHolder<BlazerRecipe>> recipe = getCurrentRecipe();
-//         ItemStack output = recipe.get().value().output();
+        return maxCount >= currentCount + count;
+    }
 
-//         itemHandler.extractItem(INPUT_SLOT, 1, false);
-//         itemHandler.setStackInSlot(
-//             OUTPUT_SLOT,
-//             new ItemStack(
-//                 output.getItem(),
-//                 itemHandler.getStackInSlot(OUTPUT_SLOT).getCount() + output.getCount())
-//         );
-//     }
+    @Nullable
+    @Override
+    public Packet<ClientGamePacketListener> getUpdatePacket() {
+        return ClientboundBlockEntityDataPacket.create(this);
+    }
 
-//     private boolean hasCraftingFinished() {
-//         return this.progress >= this.maxProgress;
-//     }
-
-//     private void increaseCraftingProgress() {
-//         progress++;
-//     }
-
-//     private boolean isOutputSlotEmptyOrReceivable() {
-//         return this.itemHandler.getStackInSlot(OUTPUT_SLOT).isEmpty() ||
-//                 this.itemHandler.getStackInSlot(OUTPUT_SLOT).getCount() < this.itemHandler.getStackInSlot(OUTPUT_SLOT).getMaxStackSize();
-//     }
-
-//     private boolean canCraft(Level level, BlockPos pos) {
-//         Optional<RecipeHolder<BlazerRecipe>> recipe = getCurrentRecipe();
-//         if(recipe.isEmpty()) {
-//             return false;
-//         }
-
-//         ItemStack output = recipe.get().value().getResultItem(null);
-//         return 
-//             canInsertAmountIntoOutputSlot(output.getCount()) 
-//             && canInsertItemIntoOutputSlot(output) 
-//             && hasSufficientTierToCraft(level, pos, recipe)
-//             && isOutputSlotEmptyOrReceivable();
-//     }
-
-//     private boolean hasSufficientTierToCraft(Level level, BlockPos pos, Optional<RecipeHolder<BlazerRecipe>> recipe) {
-//         return recipe.get().value().requiredTier() <= HeartBeating.GetTier(level, pos);
-//     }
-
-//     // private boolean hasEnoughFluidToCraft() {
-//     //     return FLUID_TANK.getFluidAmount() >= FLUID_CRAFT_AMOUNT;
-//     // }
-
-//     // private boolean hasEnoughEnergyToCraft() {
-//     //     return this.ENERGY_STORAGE.getEnergyStored() >= ENERGY_CRAFT_AMOUNT * maxProgress;
-//     // }
-
-//     private Optional<RecipeHolder<BlazerRecipe>> getCurrentRecipe() {
-//         return this.level.getRecipeManager()
-//                 .getRecipeFor(ModRecipes.BLAZER_TYPE.get(), new BlazerRecipeInput(itemHandler.getStackInSlot(INPUT_SLOT)), level);
-//     }
-
-//     private boolean canInsertItemIntoOutputSlot(ItemStack output) {
-//         return itemHandler.getStackInSlot(OUTPUT_SLOT).isEmpty() ||
-//                 itemHandler.getStackInSlot(OUTPUT_SLOT).getItem() == output.getItem();
-//     }
-
-//     private boolean canInsertAmountIntoOutputSlot(int count) {
-//         int maxCount = itemHandler.getStackInSlot(OUTPUT_SLOT).isEmpty() ? 64 : itemHandler.getStackInSlot(OUTPUT_SLOT).getMaxStackSize();
-//         int currentCount = itemHandler.getStackInSlot(OUTPUT_SLOT).getCount();
-
-//         return maxCount >= currentCount + count;
-//     }
-
-//     @Nullable
-//     @Override
-//     public Packet<ClientGamePacketListener> getUpdatePacket() {
-//         return ClientboundBlockEntityDataPacket.create(this);
-//     }
-
-//     @Override
-//     public CompoundTag getUpdateTag(HolderLookup.Provider pRegistries) {
-//         return saveWithoutMetadata(pRegistries);
-//     }
-// }
+    @Override
+    public CompoundTag getUpdateTag(HolderLookup.Provider pRegistries) {
+        return saveWithoutMetadata(pRegistries);
+    }
+}

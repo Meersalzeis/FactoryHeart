@@ -12,9 +12,11 @@ import java.util.function.Supplier;
 
 import com.meersalzeis.factoryheart.FHModMain;
 import com.meersalzeis.factoryheart.block.custom.CrystallizerBlock;
+import com.meersalzeis.factoryheart.block.custom.ExtractorBlock;
 import com.meersalzeis.factoryheart.block.custom.FactoryHeartBlock;
 import com.meersalzeis.factoryheart.block.custom.BlazerBlock;
 import com.meersalzeis.factoryheart.block.custom.FactoryMawBlock;
+import com.meersalzeis.factoryheart.block.custom.WrapperBlock;
 import com.meersalzeis.factoryheart.item.ModItems;
 
 public class ModBlocks {
@@ -25,12 +27,12 @@ public class ModBlocks {
     );
 
     public static final DeferredBlock<Block> WRAPPER = registerBlock("wrapper",
-        () -> new Block(BlockBehaviour.Properties.of().strength(3f))
+        () -> new WrapperBlock(BlockBehaviour.Properties.of().strength(3f))
     );
 
     // RotatedPillarBlock ?
     public static final DeferredBlock<Block> EXTRACTOR = registerBlock("extractor",
-        () -> new Block(BlockBehaviour.Properties.of().strength(3f))
+        () -> new ExtractorBlock(BlockBehaviour.Properties.of().strength(3f))
     );
 
     // RotatedPillarBlock ?

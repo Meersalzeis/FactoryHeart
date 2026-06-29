@@ -1,13 +1,11 @@
 package com.meersalzeis.factoryheart.block.custom;
 
+import com.meersalzeis.factoryheart.FHModClient;
 import com.meersalzeis.factoryheart.block.entity.ModBlockEntities;
 import com.meersalzeis.factoryheart.block.entity.crafting.ExtractorBlockEntity;
 import com.mojang.serialization.MapCodec;
 
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.Direction;
-import net.minecraft.core.particles.ItemParticleOption;
-import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
@@ -19,7 +17,6 @@ import net.minecraft.world.SimpleMenuProvider;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.BlockPlaceContext;
-import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.BaseEntityBlock;
 import net.minecraft.world.level.block.Block;
@@ -35,9 +32,6 @@ import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.properties.DirectionProperty;
 import net.minecraft.world.phys.BlockHitResult;
-import net.minecraft.world.phys.shapes.CollisionContext;
-import net.minecraft.world.phys.shapes.Shapes;
-import net.minecraft.world.phys.shapes.VoxelShape;
 
 import org.jetbrains.annotations.Nullable;
 
@@ -47,13 +41,8 @@ public class ExtractorBlock extends BaseEntityBlock {
     public static final MapCodec<ExtractorBlock> CODEC = simpleCodec(ExtractorBlock::new);
     public static final DirectionProperty FACING = BlockStateProperties.FACING;
 
-
     public ExtractorBlock(Properties properties) {
         super(properties);
-
-        registerDefaultState(this.stateDefinition.any()
-            .setValue(FACING, Direction.NORTH)
-            .setValue(LIT, false));
     }
 
     @Override
@@ -64,6 +53,7 @@ public class ExtractorBlock extends BaseEntityBlock {
     @Nullable
     @Override
     public BlockState getStateForPlacement(BlockPlaceContext pContext) {
+        FHModClient.debugMessageToAll("Creating new BlockState", false);
         return defaultBlockState()
         .setValue(FACING, pContext.getNearestLookingDirection().getOpposite())
         .setValue(LIT, false);

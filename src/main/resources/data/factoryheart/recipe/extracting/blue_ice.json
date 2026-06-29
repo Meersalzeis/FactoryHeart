@@ -1,9 +1,9 @@
 {
   "type": "factoryheart:extracting",
   "ingredient": {
-    "amount": 4,
     "item": "minecraft:packed_ice"
   },
+  "ingredientCount":4,
   "requiredTier": 3,
   "result": {
     "id": "minecraft:blue_ice",

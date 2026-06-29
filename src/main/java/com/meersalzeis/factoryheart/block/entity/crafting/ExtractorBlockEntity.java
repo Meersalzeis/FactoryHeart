@@ -28,6 +28,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.ContainerData;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -61,6 +62,7 @@ public class ExtractorBlockEntity extends BlockEntity implements MenuProvider {
 
     public ExtractorBlockEntity(BlockPos pPos, BlockState pBlockState) {
         super(ModBlockEntities.EXTRACTOR_BE.get(), pPos, pBlockState);
+
         this.data = new ContainerData() {
             @Override
             public int get(int pIndex) {
@@ -146,7 +148,7 @@ public class ExtractorBlockEntity extends BlockEntity implements MenuProvider {
     }
 
     public void tick(Level level, BlockPos pPos, BlockState pState) {
-        if(canCraft(level, pPos) && isOutputSlotEmptyOrReceivable()) {
+        if(canCraft(level, pPos)) {
             increaseCraftingProgress();
             // useEnergyForCrafting();
             level.setBlockAndUpdate(pPos, pState.setValue(ExtractorBlock.LIT, true));
@@ -162,32 +164,7 @@ public class ExtractorBlockEntity extends BlockEntity implements MenuProvider {
             resetProgress();
             level.setBlockAndUpdate(pPos, pState.setValue(ExtractorBlock.LIT, false));
         }
-
-        // if (hasFluidStackInSlot()) {
-        //     transferFluidToTank();
-        // }
     }
-
-    // private void extractFluidForCrafting() {
-    //     this.FLUID_TANK.drain(FLUID_CRAFT_AMOUNT, IFluidHandler.FluidAction.EXECUTE);
-    // }
-
-    // private void transferFluidToTank() {
-    //     FluidActionResult result = FluidUtil.tryEmptyContainer(itemHandler.getStackInSlot(0), this.FLUID_TANK, Integer.MAX_VALUE, null, true);
-    //     if(result.result != ItemStack.EMPTY) {
-    //         itemHandler.setStackInSlot(FLUID_ITEM_SLOT, result.result);
-    //     }
-    // }
-
-    // private boolean hasFluidStackInSlot() {
-    //     return !itemHandler.getStackInSlot(FLUID_ITEM_SLOT).isEmpty()
-    //             && itemHandler.getStackInSlot(FLUID_ITEM_SLOT).getCapability(Capabilities.FluidHandler.ITEM, null) != null
-    //             && !itemHandler.getStackInSlot(FLUID_ITEM_SLOT).getCapability(Capabilities.FluidHandler.ITEM, null).getFluidInTank(0).isEmpty();
-    // }
-
-    // private void useEnergyForCrafting() {
-    //     this.ENERGY_STORAGE.extractEnergy(ENERGY_CRAFT_AMOUNT, false);
-    // }
 
     private void resetProgress() {
         this.progress = 0;
@@ -196,9 +173,9 @@ public class ExtractorBlockEntity extends BlockEntity implements MenuProvider {
 
     private void craftItem() {
         Optional<RecipeHolder<ExtractorRecipe>> recipe = getCurrentRecipe();
+        int inputConsumption = recipe.get().value().getIngredientCount();
         ItemStack output = recipe.get().value().output();
-
-        itemHandler.extractItem(INPUT_SLOT, 1, false);
+        itemHandler.extractItem(INPUT_SLOT, inputConsumption, false);
         itemHandler.setStackInSlot(
             OUTPUT_SLOT,
             new ItemStack(
@@ -225,30 +202,30 @@ public class ExtractorBlockEntity extends BlockEntity implements MenuProvider {
         if(recipe.isEmpty()) {
             return false;
         }
-
         ItemStack output = recipe.get().value().getResultItem(null);
         return 
             canInsertAmountIntoOutputSlot(output.getCount()) 
             && canInsertItemIntoOutputSlot(output) 
             && hasSufficientTierToCraft(level, pos, recipe)
-            && isOutputSlotEmptyOrReceivable();
+            && isOutputSlotEmptyOrReceivable()
+            && hasSufficientMaterialForRecipe(recipe);
+    }
+
+    private boolean hasSufficientMaterialForRecipe(Optional<RecipeHolder<ExtractorRecipe>> recipe) {
+        return recipe.get().value().getIngredientCount() <= itemHandler.getStackInSlot(INPUT_SLOT).getCount();
     }
 
     private boolean hasSufficientTierToCraft(Level level, BlockPos pos, Optional<RecipeHolder<ExtractorRecipe>> recipe) {
-        return recipe.get().value().requiredTier() <= HeartBeating.GetTier(level, pos);
+        return recipe.get().value().requiredTier() <= 4;
     }
 
-    // private boolean hasEnoughFluidToCraft() {
-    //     return FLUID_TANK.getFluidAmount() >= FLUID_CRAFT_AMOUNT;
-    // }
-
-    // private boolean hasEnoughEnergyToCraft() {
-    //     return this.ENERGY_STORAGE.getEnergyStored() >= ENERGY_CRAFT_AMOUNT * maxProgress;
-    // }
-
     private Optional<RecipeHolder<ExtractorRecipe>> getCurrentRecipe() {
+        var inputSlot = itemHandler.getStackInSlot(INPUT_SLOT);
         return this.level.getRecipeManager()
-                .getRecipeFor(ModRecipes.EXTRACTOR_TYPE.get(), new ExtractorRecipeInput(itemHandler.getStackInSlot(INPUT_SLOT)), level);
+            .getRecipeFor(
+                ModRecipes.EXTRACTOR_TYPE.get(),
+                new ExtractorRecipeInput(inputSlot, inputSlot.getCount(), 4),
+                level);
     }
 
     private boolean canInsertItemIntoOutputSlot(ItemStack output) {

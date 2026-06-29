@@ -2,9 +2,9 @@
 {
   "type": "factoryheart:extracting",
   "ingredient": {
-    "amount": 4,
     "item": "minecraft:gilded_blackstone"
   },
+  "ingredientCount":4,
   "requiredTier": 3,
   "result": {
     "id": "minecraft:gold_ingot",

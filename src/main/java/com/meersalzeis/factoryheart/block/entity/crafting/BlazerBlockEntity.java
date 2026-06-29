@@ -152,7 +152,7 @@ public class BlazerBlockEntity extends BlockEntity implements MenuProvider {
     }
 
     public void tick(Level level, BlockPos pPos, BlockState pState) {
-        if(canCraft(level, pPos) && isOutputSlotEmptyOrReceivable()) {
+        if(canCraft(level, pPos)) {
             increaseCraftingProgress();
             // useEnergyForCrafting();
             level.setBlockAndUpdate(pPos, pState.setValue(BlazerBlock.LIT, true));

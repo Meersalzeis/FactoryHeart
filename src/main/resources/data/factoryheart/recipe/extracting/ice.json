@@ -1,9 +1,9 @@
 {
   "type": "factoryheart:extracting",
   "ingredient": {
-    "amount": 4,
     "item": "minecraft:snowball"
   },
+  "ingredientCount":4,
   "requiredTier": 1,
   "result": {
     "id": "minecraft:ice",

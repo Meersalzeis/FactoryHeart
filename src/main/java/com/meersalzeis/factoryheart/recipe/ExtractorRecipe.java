@@ -15,25 +15,26 @@ import net.minecraft.world.level.Level;
 import com.mojang.serialization.Codec;
 import net.minecraft.network.codec.ByteBufCodecs;
 
-public record ExtractorRecipe(Ingredient inputItem, int requiredTier, ItemStack output) implements Recipe<ExtractorRecipeInput> {
+public record ExtractorRecipe(Ingredient inputItem, int ingredientCount, int requiredTier, ItemStack output) implements Recipe<ExtractorRecipeInput> {
     
     public static final MapCodec<ExtractorRecipe> CODEC =
         RecordCodecBuilder.mapCodec(inst -> inst.group(
-                Ingredient.CODEC_NONEMPTY.fieldOf("ingredient")
-                        .forGetter(ExtractorRecipe::inputItem),
-                Codec.INT.fieldOf("requiredTier")
-                        .forGetter(ExtractorRecipe::requiredTier),
-                ItemStack.CODEC.fieldOf("result")
-                        .forGetter(ExtractorRecipe::output)
+            Ingredient.CODEC_NONEMPTY.fieldOf("ingredient").forGetter(ExtractorRecipe::inputItem),
+            Codec.INT.fieldOf("requiredTier").forGetter(ExtractorRecipe::requiredTier),
+            Codec.INT.fieldOf("ingredientCount").forGetter(ExtractorRecipe::ingredientCount),
+            ItemStack.CODEC.fieldOf("result").forGetter(ExtractorRecipe::output)
         ).apply(inst, ExtractorRecipe::new));
 
     public static final StreamCodec<RegistryFriendlyByteBuf, ExtractorRecipe> STREAM_CODEC =
         StreamCodec.composite(
-                Ingredient.CONTENTS_STREAM_CODEC, ExtractorRecipe::inputItem,
-                ByteBufCodecs.INT, ExtractorRecipe::requiredTier,
-                ItemStack.STREAM_CODEC, ExtractorRecipe::output,
-                ExtractorRecipe::new);
+            Ingredient.CONTENTS_STREAM_CODEC, ExtractorRecipe::inputItem,
+            ByteBufCodecs.INT, ExtractorRecipe::requiredTier,
+            ByteBufCodecs.INT, ExtractorRecipe::ingredientCount,
+            ItemStack.STREAM_CODEC, ExtractorRecipe::output,
+            ExtractorRecipe::new);
     
+    public int getIngredientCount() { return ingredientCount; }
+    public int getRequiredTier() { return requiredTier; }
     
     @Override
     public NonNullList<Ingredient> getIngredients() {
@@ -42,13 +43,16 @@ public record ExtractorRecipe(Ingredient inputItem, int requiredTier, ItemStack 
         return list;
     }
 
+    /** Checks wether or not an Extractor with these input parameters can craft this recipe. */
     @Override
     public boolean matches(ExtractorRecipeInput pInput, Level pLevel) {
         if(pLevel.isClientSide()) {
             return false;
         }
 
-        return inputItem.test(pInput.getItem(0));
+        return inputItem.test(pInput.getItem(0)) 
+            && pInput.getIngredientStock() >= this.ingredientCount
+            && pInput.getAvailableTier() >= this.requiredTier();
     }
 
     @Override
@@ -80,6 +84,7 @@ public record ExtractorRecipe(Ingredient inputItem, int requiredTier, ItemStack 
 
         public static final MapCodec<ExtractorRecipe> CODEC = RecordCodecBuilder.mapCodec(inst -> inst.group(
             Ingredient.CODEC_NONEMPTY.fieldOf("ingredient").forGetter(ExtractorRecipe::inputItem),
+            Codec.INT.fieldOf("ingredientCount").forGetter(ExtractorRecipe::ingredientCount),
             Codec.INT.fieldOf("requiredTier").forGetter(ExtractorRecipe::requiredTier),
             ItemStack.CODEC.fieldOf("result").forGetter(ExtractorRecipe::output)
         ).apply(inst, ExtractorRecipe::new));
@@ -87,6 +92,7 @@ public record ExtractorRecipe(Ingredient inputItem, int requiredTier, ItemStack 
         public static final StreamCodec<RegistryFriendlyByteBuf, ExtractorRecipe> STREAM_CODEC =
             StreamCodec.composite(
                 Ingredient.CONTENTS_STREAM_CODEC, ExtractorRecipe::inputItem,
+                ByteBufCodecs.INT, ExtractorRecipe::ingredientCount,
                 ByteBufCodecs.INT, ExtractorRecipe::requiredTier,
                 ItemStack.STREAM_CODEC, ExtractorRecipe::output,
                 ExtractorRecipe::new);

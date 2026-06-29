@@ -61,7 +61,9 @@ public class CrystallizerBlock extends BaseEntityBlock {
     @Nullable
     @Override
     public BlockState getStateForPlacement(BlockPlaceContext pContext) {
-        return this.defaultBlockState().setValue(FACING, pContext.getHorizontalDirection().getOpposite()).setValue(LIT, false);
+        return this.defaultBlockState()
+            .setValue(FACING, pContext.getHorizontalDirection().getOpposite())
+            .setValue(LIT, false);
     }
 
     @Override

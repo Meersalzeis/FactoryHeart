@@ -15,12 +15,14 @@ import net.minecraft.world.level.Level;
 import com.mojang.serialization.Codec;
 import net.minecraft.network.codec.ByteBufCodecs;
 
-public record WrapperRecipe(Ingredient centerpiece, Ingredient wrappings,  ItemStack output) implements Recipe<WrapperRecipeInput> {
+public record WrapperRecipe(Ingredient centerpiece, Ingredient wrappings, int centerpieceCount, int wrappingsCount, ItemStack output) implements Recipe<WrapperRecipeInput> {
     
     public static final MapCodec<WrapperRecipe> CODEC =
         RecordCodecBuilder.mapCodec(inst -> inst.group(
                 Ingredient.CODEC_NONEMPTY.fieldOf("centerpiece").forGetter(WrapperRecipe::centerpiece),
                 Ingredient.CODEC_NONEMPTY.fieldOf("wrappings").forGetter(WrapperRecipe::wrappings),
+                Codec.INT.fieldOf("centerpieceCount").forGetter(WrapperRecipe::centerpieceCount),
+                Codec.INT.fieldOf("wrappingsCount").forGetter(WrapperRecipe::wrappingsCount),
                 ItemStack.CODEC.fieldOf("result").forGetter(WrapperRecipe::output)
         ).apply(inst, WrapperRecipe::new));
 
@@ -28,9 +30,13 @@ public record WrapperRecipe(Ingredient centerpiece, Ingredient wrappings,  ItemS
         StreamCodec.composite(
                 Ingredient.CONTENTS_STREAM_CODEC, WrapperRecipe::centerpiece,
                 Ingredient.CONTENTS_STREAM_CODEC, WrapperRecipe::wrappings,
+                ByteBufCodecs.INT, WrapperRecipe::centerpieceCount,
+                ByteBufCodecs.INT, WrapperRecipe::wrappingsCount,
                 ItemStack.STREAM_CODEC, WrapperRecipe::output,
                 WrapperRecipe::new);
     
+    public int getCenterpieceCount() { return centerpieceCount; }
+    public int getWrappingsCount() { return wrappingsCount; }
     
     @Override
     public NonNullList<Ingredient> getIngredients() {
@@ -79,6 +85,8 @@ public record WrapperRecipe(Ingredient centerpiece, Ingredient wrappings,  ItemS
         public static final MapCodec<WrapperRecipe> CODEC = RecordCodecBuilder.mapCodec(inst -> inst.group(
             Ingredient.CODEC_NONEMPTY.fieldOf("centerpiece").forGetter(WrapperRecipe::centerpiece),
             Ingredient.CODEC_NONEMPTY.fieldOf("wrappings").forGetter(WrapperRecipe::centerpiece),
+            Codec.INT.fieldOf("centerpieceCount").forGetter(WrapperRecipe::centerpieceCount),
+            Codec.INT.fieldOf("wrappingsCount").forGetter(WrapperRecipe::wrappingsCount),
             ItemStack.CODEC.fieldOf("result").forGetter(WrapperRecipe::output)
         ).apply(inst, WrapperRecipe::new));
 
@@ -86,6 +94,8 @@ public record WrapperRecipe(Ingredient centerpiece, Ingredient wrappings,  ItemS
             StreamCodec.composite(
                 Ingredient.CONTENTS_STREAM_CODEC, WrapperRecipe::centerpiece,
                 Ingredient.CONTENTS_STREAM_CODEC, WrapperRecipe::wrappings,
+                ByteBufCodecs.INT, WrapperRecipe::centerpieceCount,
+                ByteBufCodecs.INT, WrapperRecipe::wrappingsCount,
                 ItemStack.STREAM_CODEC, WrapperRecipe::output,
                 WrapperRecipe::new);
 

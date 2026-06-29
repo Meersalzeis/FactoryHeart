@@ -15,6 +15,7 @@ import com.meersalzeis.factoryheart.gui.ModMenuTypes;
 import com.meersalzeis.factoryheart.gui.screens.CrystallizerScreen;
 import com.meersalzeis.factoryheart.gui.screens.ExtractorScreen;
 import com.meersalzeis.factoryheart.gui.screens.BlazerScreen;
+import com.meersalzeis.factoryheart.gui.screens.WrapperScreen;
 import com.mojang.logging.LogUtils;
 
 import net.neoforged.api.distmarker.Dist;
@@ -87,6 +88,7 @@ public class FHModMain {
         public static void registerScreens(RegisterMenuScreensEvent event) {
             event.register(ModMenuTypes.CRYSTALLIZER_MENU.get(), CrystallizerScreen::new);
             event.register(ModMenuTypes.BLAZER_MENU.get(), BlazerScreen::new);
+            event.register(ModMenuTypes.WRAPPER_MENU.get(), WrapperScreen::new);
             event.register(ModMenuTypes.EXTRACTOR_MENU.get(), ExtractorScreen::new);
 
             // event.register(ModMenuTypes.COAL_GENERATOR_MENU.get(), CoalGeneratorScreen::new);

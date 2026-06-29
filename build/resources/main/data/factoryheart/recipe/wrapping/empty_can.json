@@ -6,8 +6,10 @@
   "wrappings": {
     "item": "factoryheart:metal_sheet"
   },
+  "centerpieceCount": 2,
+  "wrappingsCount": 1,
   "result": {
     "id": "factoryheart:empty_can",
-    "count": 1
+    "count": 6
   }
 }

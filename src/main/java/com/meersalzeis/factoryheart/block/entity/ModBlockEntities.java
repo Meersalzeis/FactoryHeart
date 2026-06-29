@@ -5,6 +5,7 @@ import com.meersalzeis.factoryheart.block.ModBlocks;
 import com.meersalzeis.factoryheart.block.entity.crafting.BlazerBlockEntity;
 import com.meersalzeis.factoryheart.block.entity.crafting.CrystallizerBlockEntity;
 import com.meersalzeis.factoryheart.block.entity.crafting.ExtractorBlockEntity;
+import com.meersalzeis.factoryheart.block.entity.crafting.WrapperBlockEntity;
 
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.level.block.entity.BlockEntityType;
@@ -25,6 +26,9 @@ public class ModBlockEntities {
                 BLOCK_ENTITIES.register("blazer_be", () -> BlockEntityType.Builder.of(
                         BlazerBlockEntity::new, ModBlocks.BLAZER.get()).build(null));
 
+        public static final Supplier<BlockEntityType<WrapperBlockEntity>> WRAPPER_BE =
+                BLOCK_ENTITIES.register("wrapper_be", () -> BlockEntityType.Builder.of(
+                        WrapperBlockEntity::new, ModBlocks.WRAPPER.get()).build(null));
 
         public static final Supplier<BlockEntityType<ExtractorBlockEntity>> EXTRACTOR_BE =
                 BLOCK_ENTITIES.register("extractor_be", () -> BlockEntityType.Builder.of(
