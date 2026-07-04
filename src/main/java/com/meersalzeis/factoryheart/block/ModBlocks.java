@@ -1,6 +1,7 @@
 package com.meersalzeis.factoryheart.block;
 
 import net.minecraft.world.item.BlockItem;
+import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockBehaviour;
@@ -8,6 +9,8 @@ import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredBlock;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.function.Supplier;
 
 import com.meersalzeis.factoryheart.FHModMain;
@@ -15,8 +18,11 @@ import com.meersalzeis.factoryheart.block.custom.CrystallizerBlock;
 import com.meersalzeis.factoryheart.block.custom.ExtractorBlock;
 import com.meersalzeis.factoryheart.block.custom.FactoryHeartBlock;
 import com.meersalzeis.factoryheart.block.custom.BlazerBlock;
+import com.meersalzeis.factoryheart.block.custom.CondenserBlock;
 import com.meersalzeis.factoryheart.block.custom.FactoryMawBlock;
+import com.meersalzeis.factoryheart.block.custom.TesterBlock;
 import com.meersalzeis.factoryheart.block.custom.WrapperBlock;
+import com.meersalzeis.factoryheart.block.entity.custom.CondenserBlockEntity;
 import com.meersalzeis.factoryheart.item.ModItems;
 
 public class ModBlocks {
@@ -30,16 +36,13 @@ public class ModBlocks {
         () -> new WrapperBlock(BlockBehaviour.Properties.of().strength(3f))
     );
 
-    // RotatedPillarBlock ?
     public static final DeferredBlock<Block> EXTRACTOR = registerBlock("extractor",
         () -> new ExtractorBlock(BlockBehaviour.Properties.of().strength(3f))
     );
 
-    // RotatedPillarBlock ?
     public static final DeferredBlock<Block> TESTER = registerBlock("tester",
-        () -> new Block(BlockBehaviour.Properties.of().strength(3f))
+        () -> new TesterBlock(BlockBehaviour.Properties.of().strength(3f))
     );
-
 
     public static final DeferredBlock<Block> FACTORY_VEIN = registerBlock("factory_vein",
         () -> new Block(BlockBehaviour.Properties.of().strength(3f))
@@ -53,8 +56,15 @@ public class ModBlocks {
         () -> new FactoryHeartBlock(BlockBehaviour.Properties.of().strength(3f))
     );
 
+
+    public static final DeferredBlock<CondenserBlock> CONDENSER = registerBlock("condenser",
+        () -> new CondenserBlock(BlockBehaviour.Properties.of().strength(3f))
+    );
+
+
     public static final DeferredBlock<Block> CRYSTALLIZER = registerBlock("crystallizer",
-            () -> new CrystallizerBlock(BlockBehaviour.Properties.of().strength(3f).requiresCorrectToolForDrops()));
+        () -> new CrystallizerBlock(BlockBehaviour.Properties.of().strength(3f).requiresCorrectToolForDrops())
+    );
 
 
     private static <T extends Block> DeferredBlock<T> registerBlock(String name, Supplier<T> block) {

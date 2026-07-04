@@ -2,10 +2,12 @@ package com.meersalzeis.factoryheart.block.entity;
 
 import com.meersalzeis.factoryheart.FHModMain;
 import com.meersalzeis.factoryheart.block.ModBlocks;
-import com.meersalzeis.factoryheart.block.entity.crafting.BlazerBlockEntity;
 import com.meersalzeis.factoryheart.block.entity.crafting.CrystallizerBlockEntity;
 import com.meersalzeis.factoryheart.block.entity.crafting.ExtractorBlockEntity;
 import com.meersalzeis.factoryheart.block.entity.crafting.WrapperBlockEntity;
+import com.meersalzeis.factoryheart.block.entity.custom.CondenserBlockEntity;
+import com.meersalzeis.factoryheart.block.entity.crafting.TesterBlockEntity;
+import com.meersalzeis.factoryheart.block.entity.crafting.BlazerBlockEntity;
 
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.level.block.entity.BlockEntityType;
@@ -34,10 +36,16 @@ public class ModBlockEntities {
                 BLOCK_ENTITIES.register("extractor_be", () -> BlockEntityType.Builder.of(
                         ExtractorBlockEntity::new, ModBlocks.EXTRACTOR.get()).build(null));
 
+        public static final Supplier<BlockEntityType<TesterBlockEntity>> TESTER_BE =
+                BLOCK_ENTITIES.register("tester_be", () -> BlockEntityType.Builder.of(
+                        TesterBlockEntity::new, ModBlocks.TESTER.get()).build(null));
 
-
+        public static final Supplier<BlockEntityType<CondenserBlockEntity>> CONDENSER_BE =
+                BLOCK_ENTITIES.register("condenser_be", () -> BlockEntityType.Builder.of(
+                        CondenserBlockEntity::new, ModBlocks.CONDENSER.get()).build(null));
 
         public static void register(IEventBus eventBus) {
+
                 BLOCK_ENTITIES.register(eventBus);
         }
 }

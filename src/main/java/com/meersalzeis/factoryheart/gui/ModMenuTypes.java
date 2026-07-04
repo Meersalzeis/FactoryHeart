@@ -3,8 +3,11 @@ package com.meersalzeis.factoryheart.gui;
 import com.meersalzeis.factoryheart.FHModMain;
 import com.meersalzeis.factoryheart.gui.menus.CrystallizerMenu;
 import com.meersalzeis.factoryheart.gui.menus.ExtractorMenu;
+import com.meersalzeis.factoryheart.gui.menus.TesterMenu;
 import com.meersalzeis.factoryheart.gui.menus.WrapperMenu;
 import com.meersalzeis.factoryheart.gui.menus.BlazerMenu;
+import com.meersalzeis.factoryheart.gui.menus.CondenserMenu;
+
 // import com.meersalzeis.factoryheart.screen.CoalGeneratorMenu;
 // import com.meersalzeis.factoryheart.screen.CrystallizerMenu;
 import net.minecraft.core.registries.Registries;
@@ -32,8 +35,11 @@ public class ModMenuTypes {
         public static final DeferredHolder<MenuType<?>, MenuType<ExtractorMenu>> EXTRACTOR_MENU =
                 registerMenuType("extractor_menu", ExtractorMenu::new);
 
-//     public static final DeferredHolder<MenuType<?>, MenuType<CoalGeneratorMenu>> COAL_GENERATOR_MENU =
-//             registerMenuType("coal_generator_menu", CoalGeneratorMenu::new);
+        public static final DeferredHolder<MenuType<?>, MenuType<TesterMenu>> TESTER_MENU =
+                registerMenuType("tester_menu", TesterMenu::new);
+
+        public static final DeferredHolder<MenuType<?>, MenuType<CondenserMenu>> CONDENSER_MENU =
+                registerMenuType("condenser_menu", CondenserMenu::new);
 
 //     public static final DeferredHolder<MenuType<?>, MenuType<TankMenu>> TANK_MENU =
 //             registerMenuType("tank_menu", TankMenu::new);

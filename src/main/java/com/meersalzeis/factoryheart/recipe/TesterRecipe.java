@@ -15,26 +15,38 @@ import net.minecraft.world.level.Level;
 import com.mojang.serialization.Codec;
 import net.minecraft.network.codec.ByteBufCodecs;
 
-public record TesterRecipe(Ingredient inputItem, int requiredTier, ItemStack output) implements Recipe<TesterRecipeInput> {
+public record TesterRecipe(Ingredient inputItem, ItemStack successItem, ItemStack failedItem, float successChance, int requiredTier) implements Recipe<TesterRecipeInput> {
     
     public static final MapCodec<TesterRecipe> CODEC =
         RecordCodecBuilder.mapCodec(inst -> inst.group(
-                Ingredient.CODEC_NONEMPTY.fieldOf("ingredient")
-                        .forGetter(TesterRecipe::inputItem),
-                Codec.INT.fieldOf("requiredTier")
-                        .forGetter(TesterRecipe::requiredTier),
-                ItemStack.CODEC.fieldOf("result")
-                        .forGetter(TesterRecipe::output)
+                Ingredient.CODEC_NONEMPTY.fieldOf("ingredient").forGetter(TesterRecipe::inputItem),
+                ItemStack.CODEC.fieldOf("success").forGetter(TesterRecipe::successItem),
+                ItemStack.CODEC.fieldOf("result").forGetter(TesterRecipe::failedItem),
+                Codec.FLOAT.fieldOf("successChance").forGetter(TesterRecipe::successChance),
+                Codec.INT.fieldOf("requiredTier").forGetter(TesterRecipe::requiredTier)
         ).apply(inst, TesterRecipe::new));
 
     public static final StreamCodec<RegistryFriendlyByteBuf, TesterRecipe> STREAM_CODEC =
         StreamCodec.composite(
                 Ingredient.CONTENTS_STREAM_CODEC, TesterRecipe::inputItem,
+                ItemStack.STREAM_CODEC, TesterRecipe::successItem,
+                ItemStack.STREAM_CODEC, TesterRecipe::failedItem,
+                ByteBufCodecs.FLOAT, TesterRecipe::successChance,
                 ByteBufCodecs.INT, TesterRecipe::requiredTier,
-                ItemStack.STREAM_CODEC, TesterRecipe::output,
                 TesterRecipe::new);
     
-    
+    public ItemStack assembleFailed() {
+        return failedItem.copy();
+    }
+
+    public ItemStack assembleSuccess() {
+        return successItem.copy();
+    }
+
+    public float getSuccessChance() {
+        return successChance;
+    }
+
     @Override
     public NonNullList<Ingredient> getIngredients() {
         NonNullList<Ingredient> list = NonNullList.create();
@@ -53,7 +65,7 @@ public record TesterRecipe(Ingredient inputItem, int requiredTier, ItemStack out
 
     @Override
     public ItemStack assemble(TesterRecipeInput pInput, HolderLookup.Provider pRegistries) {
-        return output.copy();
+        return successItem.copy();
     }
 
     @Override
@@ -63,7 +75,7 @@ public record TesterRecipe(Ingredient inputItem, int requiredTier, ItemStack out
 
     @Override
     public ItemStack getResultItem(HolderLookup.Provider pRegistries) {
-        return output;
+        return successItem;
     }
 
     @Override
@@ -80,15 +92,19 @@ public record TesterRecipe(Ingredient inputItem, int requiredTier, ItemStack out
 
         public static final MapCodec<TesterRecipe> CODEC = RecordCodecBuilder.mapCodec(inst -> inst.group(
             Ingredient.CODEC_NONEMPTY.fieldOf("ingredient").forGetter(TesterRecipe::inputItem),
-            Codec.INT.fieldOf("requiredTier").forGetter(TesterRecipe::requiredTier),
-            ItemStack.CODEC.fieldOf("result").forGetter(TesterRecipe::output)
+                ItemStack.CODEC.fieldOf("success").forGetter(TesterRecipe::successItem),
+                ItemStack.CODEC.fieldOf("result").forGetter(TesterRecipe::failedItem),
+                Codec.FLOAT.fieldOf("successChance").forGetter(TesterRecipe::successChance),
+                Codec.INT.fieldOf("requiredTier").forGetter(TesterRecipe::requiredTier)
         ).apply(inst, TesterRecipe::new));
 
         public static final StreamCodec<RegistryFriendlyByteBuf, TesterRecipe> STREAM_CODEC =
             StreamCodec.composite(
                 Ingredient.CONTENTS_STREAM_CODEC, TesterRecipe::inputItem,
+                ItemStack.STREAM_CODEC, TesterRecipe::successItem,
+                ItemStack.STREAM_CODEC, TesterRecipe::failedItem,
+                ByteBufCodecs.FLOAT, TesterRecipe::successChance,
                 ByteBufCodecs.INT, TesterRecipe::requiredTier,
-                ItemStack.STREAM_CODEC, TesterRecipe::output,
                 TesterRecipe::new);
 
         @Override

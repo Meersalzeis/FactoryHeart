@@ -1,7 +1,7 @@
 
 {
   "type": "factoryheart:condensing",
-  "hue":"white",
+  "hue":"blue",
   "requiredTier": 3,
   "requiredTicks": 40000,
   "requiredFuelPerTick": 2,

@@ -21,7 +21,7 @@ public class BlazerScreen extends AbstractContainerScreen<BlazerMenu> {
     private static final ResourceLocation GUI_TEXTURE =
             ResourceLocation.fromNamespaceAndPath(FHModMain.MOD_ID,"textures/gui/blazer/blazer_gui.png");
     private static final ResourceLocation ARROW_TEXTURE =
-            ResourceLocation.fromNamespaceAndPath(FHModMain.MOD_ID,"textures/gui/blazer/arrow_progress.png");
+            ResourceLocation.fromNamespaceAndPath(FHModMain.MOD_ID,"textures/gui/arrow_progress.png");
     // private EnergyDisplayTooltipArea energyInfoArea;
     // private FluidTankRenderer fluidRenderer;
 

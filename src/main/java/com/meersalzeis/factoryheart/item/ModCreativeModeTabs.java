@@ -71,6 +71,8 @@ public class ModCreativeModeTabs {
                         pOutput.accept(ModItems.SMART_HEART_F);
                         pOutput.accept(ModItems.HARD_PART_F);
 
+                        pOutput.accept(ModBlocks.CONDENSER);
+
                     }).build());
 
 

@@ -14,7 +14,9 @@ import com.meersalzeis.factoryheart.recipe.ModRecipes;
 import com.meersalzeis.factoryheart.gui.ModMenuTypes;
 import com.meersalzeis.factoryheart.gui.screens.CrystallizerScreen;
 import com.meersalzeis.factoryheart.gui.screens.ExtractorScreen;
+import com.meersalzeis.factoryheart.gui.screens.TesterScreen;
 import com.meersalzeis.factoryheart.gui.screens.BlazerScreen;
+import com.meersalzeis.factoryheart.gui.screens.CondenserScreen;
 import com.meersalzeis.factoryheart.gui.screens.WrapperScreen;
 import com.mojang.logging.LogUtils;
 
@@ -90,6 +92,8 @@ public class FHModMain {
             event.register(ModMenuTypes.BLAZER_MENU.get(), BlazerScreen::new);
             event.register(ModMenuTypes.WRAPPER_MENU.get(), WrapperScreen::new);
             event.register(ModMenuTypes.EXTRACTOR_MENU.get(), ExtractorScreen::new);
+            event.register(ModMenuTypes.TESTER_MENU.get(), TesterScreen::new);
+            event.register(ModMenuTypes.CONDENSER_MENU.get(), CondenserScreen::new);
 
             // event.register(ModMenuTypes.COAL_GENERATOR_MENU.get(), CoalGeneratorScreen::new);
             // event.register(ModMenuTypes.TANK_MENU.get(), TankScreen::new);

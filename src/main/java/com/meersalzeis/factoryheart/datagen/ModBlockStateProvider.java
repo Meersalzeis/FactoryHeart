@@ -47,8 +47,8 @@ public class ModBlockStateProvider extends BlockStateProvider {
 
         blockItem(ModBlocks.CRYSTALLIZER);
 
-        generateBlazerModel();
-
+        generateFromBlockbenchModel("blazer", ModBlocks.BLAZER.get(), modLoc("block/blazer"));
+        generateFromBlockbenchModel("condenser", ModBlocks.CONDENSER.get(), modLoc("block/condenser"));
         //directionalBlock(ModBlocks.FACTORY_MAW.get());
     }
 
@@ -112,10 +112,10 @@ public class ModBlockStateProvider extends BlockStateProvider {
         });
     }
 
-    private void generateBlazerModel() {
-        ModelFile model = models().getExistingFile(modLoc("block/blazer"));
+    private void generateFromBlockbenchModel(String name, Block block, ResourceLocation modelLocation) {
+        ModelFile model = models().getExistingFile(modelLocation);
 
-        getVariantBuilder(ModBlocks.BLAZER.get())
+        getVariantBuilder(block)
             .forAllStates(state -> {
                 Direction facing = state.getValue(BlockStateProperties.FACING);
 
@@ -160,8 +160,8 @@ public class ModBlockStateProvider extends BlockStateProvider {
         // Item Model for Block in Inventories
         //blockItem(ModBlocks.FACTORY_HEART);
         itemModels().withExistingParent(
-            "blazer",
-        modLoc("block/blazer")
-    );
+            name,
+            modelLocation
+        );
     }
 }

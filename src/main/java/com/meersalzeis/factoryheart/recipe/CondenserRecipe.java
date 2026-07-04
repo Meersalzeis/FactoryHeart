@@ -13,6 +13,8 @@ import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.Level;
+
+import com.meersalzeis.factoryheart.FHModClient;
 import com.mojang.serialization.Codec;
 import net.minecraft.network.codec.ByteBufCodecs;
 
@@ -49,6 +51,7 @@ public record CondenserRecipe(DyeColor hue, int requiredTier, int requiredTicks,
             return false;
         }
 
+        FHModClient.debugMessageToAll("Comparing hues: this is"+hue+" against others "+pInput.getHue(), false);
         return hue.equals(pInput.getHue());
     }
 

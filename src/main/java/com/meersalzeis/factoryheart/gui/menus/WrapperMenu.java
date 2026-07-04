@@ -1,7 +1,5 @@
-
 package com.meersalzeis.factoryheart.gui.menus;
 
-import com.meersalzeis.factoryheart.FHModClient;
 import com.meersalzeis.factoryheart.block.ModBlocks;
 import com.meersalzeis.factoryheart.block.entity.crafting.WrapperBlockEntity;
 import com.meersalzeis.factoryheart.gui.ModMenuTypes;
@@ -14,7 +12,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.neoforged.neoforge.items.SlotItemHandler;
 
-public class WrapperMenu  extends AbstractContainerMenu {
+public class WrapperMenu extends AbstractContainerMenu {
     public final WrapperBlockEntity blockEntity;
     private final Level level;
     private final ContainerData data;
@@ -31,8 +29,6 @@ public class WrapperMenu  extends AbstractContainerMenu {
 
         addPlayerInventory(inv);
         addPlayerHotbar(inv);
-
-        System.out.println("MY DEBUG : SLOTS ARE: " + this.blockEntity.itemHandler.getSlots());
 
         this.addSlot(new SlotItemHandler(this.blockEntity.itemHandler, 0, 48, 34));
         this.addSlot(new SlotItemHandler(this.blockEntity.itemHandler, 1, 8, 34));
