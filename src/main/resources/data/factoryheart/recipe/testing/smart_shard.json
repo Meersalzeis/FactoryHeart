@@ -1,0 +1,14 @@
+{
+  "type": "factoryheart:testing",
+  "ingredient": {
+    "item": "factoryheart:smart_shard_unidentified"
+  },
+  "success": {
+    "id": "factoryheart:smart_shard"
+  },
+  "failed": {
+    "id": "factoryheart:smart_shard_faulty"
+  },
+  "successChance": 0.7,
+  "requiredTier": 4
+}

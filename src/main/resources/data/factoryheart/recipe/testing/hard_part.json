@@ -1,0 +1,14 @@
+{
+  "type": "factoryheart:testing",
+  "ingredient": {
+    "item": "factoryheart:hard_part_unidentified"
+  },
+  "success": {
+    "id": "factoryheart:hard_part"
+  },
+  "failed": {
+    "id": "factoryheart:hard_part_faulty"
+  },
+  "successChance": 0.9,
+  "requiredTier": 3
+}

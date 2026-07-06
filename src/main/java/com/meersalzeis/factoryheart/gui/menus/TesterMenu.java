@@ -31,10 +31,9 @@ public class TesterMenu  extends AbstractContainerMenu {
         addPlayerInventory(inv);
         addPlayerHotbar(inv);
 
-        //this.addSlot(new SlotItemHandler(this.blockEntity.itemHandler, 0, 8, 62));
         this.addSlot(new SlotItemHandler(this.blockEntity.itemHandler, 0, 54, 34));
         this.addSlot(new SlotItemHandler(this.blockEntity.itemHandler, 1, 104, 34));
-        //this.addSlot(new SlotItemHandler(this.blockEntity.itemHandler, 3, 152, 62));
+        this.addSlot(new SlotItemHandler(this.blockEntity.itemHandler, 2, 104, 54));
 
         addDataSlots(data);
     }

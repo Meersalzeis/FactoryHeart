@@ -94,7 +94,7 @@ public class WrapperBlockEntity extends BlockEntity implements MenuProvider {
 
     @Override
     public Component getDisplayName() {
-        return Component.translatable("blockentity.factoryheart.y_Wrapper");
+        return Component.translatable("blockentity.factoryheart.y_wrapper");
     }
 
     @Nullable
@@ -106,8 +106,8 @@ public class WrapperBlockEntity extends BlockEntity implements MenuProvider {
     @Override
     protected void saveAdditional(CompoundTag pTag, HolderLookup.Provider pRegistries) {
         pTag.put("inventory", itemHandler.serializeNBT(pRegistries));
-        pTag.putInt("Wrapper.progress", progress);
-        pTag.putInt("Wrapper.max_progress", maxProgress);
+        pTag.putInt("wrapper.progress", progress);
+        pTag.putInt("wrapper.max_progress", maxProgress);
 
         super.saveAdditional(pTag, pRegistries);
     }
@@ -116,8 +116,8 @@ public class WrapperBlockEntity extends BlockEntity implements MenuProvider {
     protected void loadAdditional(CompoundTag pTag, HolderLookup.Provider pRegistries) {
         super.loadAdditional(pTag, pRegistries);
         itemHandler.deserializeNBT(pRegistries, pTag.getCompound("inventory"));
-        progress = pTag.getInt("Wrapper.progress");
-        maxProgress = pTag.getInt("Wrapper.max_progress");
+        progress = pTag.getInt("wrapper.progress");
+        maxProgress = pTag.getInt("wrapper.max_progress");
     }
 
     public void drops() {
@@ -132,13 +132,11 @@ public class WrapperBlockEntity extends BlockEntity implements MenuProvider {
     public void tick(Level level, BlockPos pPos, BlockState pState) {
         if(canCraft(level, pPos)) {
             increaseCraftingProgress();
-            // useEnergyForCrafting();
             level.setBlockAndUpdate(pPos, pState.setValue(WrapperBlock.LIT, true));
             setChanged(level, pPos, pState);
 
             if (hasCraftingFinished()) {
                 craftItem();
-                // extractFluidForCrafting();
                 resetProgress();
             }
 

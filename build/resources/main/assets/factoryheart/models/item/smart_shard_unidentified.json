@@ -1,7 +1,0 @@
-{
-  "parent": "minecraft:item/generated",
-  "textures": {
-    "layer0": "factoryheart:item/smart_shard",
-    "layer1": "factoryheart:item/overlay_unidentified"
-  }
-}

@@ -21,7 +21,7 @@ public record TesterRecipe(Ingredient inputItem, ItemStack successItem, ItemStac
         RecordCodecBuilder.mapCodec(inst -> inst.group(
                 Ingredient.CODEC_NONEMPTY.fieldOf("ingredient").forGetter(TesterRecipe::inputItem),
                 ItemStack.CODEC.fieldOf("success").forGetter(TesterRecipe::successItem),
-                ItemStack.CODEC.fieldOf("result").forGetter(TesterRecipe::failedItem),
+                ItemStack.CODEC.fieldOf("failed").forGetter(TesterRecipe::failedItem),
                 Codec.FLOAT.fieldOf("successChance").forGetter(TesterRecipe::successChance),
                 Codec.INT.fieldOf("requiredTier").forGetter(TesterRecipe::requiredTier)
         ).apply(inst, TesterRecipe::new));
@@ -93,7 +93,7 @@ public record TesterRecipe(Ingredient inputItem, ItemStack successItem, ItemStac
         public static final MapCodec<TesterRecipe> CODEC = RecordCodecBuilder.mapCodec(inst -> inst.group(
             Ingredient.CODEC_NONEMPTY.fieldOf("ingredient").forGetter(TesterRecipe::inputItem),
                 ItemStack.CODEC.fieldOf("success").forGetter(TesterRecipe::successItem),
-                ItemStack.CODEC.fieldOf("result").forGetter(TesterRecipe::failedItem),
+                ItemStack.CODEC.fieldOf("failed").forGetter(TesterRecipe::failedItem),
                 Codec.FLOAT.fieldOf("successChance").forGetter(TesterRecipe::successChance),
                 Codec.INT.fieldOf("requiredTier").forGetter(TesterRecipe::requiredTier)
         ).apply(inst, TesterRecipe::new));
