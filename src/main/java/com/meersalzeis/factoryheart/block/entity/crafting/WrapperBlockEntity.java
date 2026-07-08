@@ -1,6 +1,7 @@
 package com.meersalzeis.factoryheart.block.entity.crafting;
 
 import com.meersalzeis.factoryheart.FHModClient;
+import com.meersalzeis.factoryheart.block.SingleSlotFilteredHandler;
 import com.meersalzeis.factoryheart.block.custom.WrapperBlock;
 import com.meersalzeis.factoryheart.block.entity.ModBlockEntities;
 import com.meersalzeis.factoryheart.block.entity.energy.ModEnergyStorage;
@@ -27,18 +28,28 @@ import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.ContainerData;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.RecipeHolder;
+import net.minecraft.world.item.crafting.RecipeManager;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.neoforge.items.IItemHandler;
 import net.neoforged.neoforge.items.ItemStackHandler;
+import net.neoforged.neoforge.items.wrapper.RangedWrapper;
+
 import org.jetbrains.annotations.Nullable;
 
+import java.util.List;
 import java.util.Optional;
 
 public class WrapperBlockEntity extends BlockEntity implements MenuProvider {
+
+    private static final int CENTERPIECE_SLOT = 0;
+    private static final int WRAPPINGS_SLOT = 1;
+    private static final int OUTPUT_SLOT = 2;
 
     public final ItemStackHandler itemHandler = new ItemStackHandler(3) {
         @Override
@@ -48,11 +59,22 @@ public class WrapperBlockEntity extends BlockEntity implements MenuProvider {
                 level.sendBlockUpdated(getBlockPos(), getBlockState(), getBlockState(), 3);
             }
         }
+
+        @Override
+        public boolean isItemValid(int slot, ItemStack stack) {
+            if (slot == CENTERPIECE_SLOT) return isViableCenterpiece(stack);
+            if (slot == WRAPPINGS_SLOT) return isViableWrapping(stack);
+            else return false;
+        }
     };
 
-    private static final int CENTERPIECE_SLOT = 0;
-    private static final int WRAPPINGS_SLOT = 1;
-    private static final int OUTPUT_SLOT = 2;
+    // Hopper Handling
+    public final IItemHandler topHandler = new SingleSlotFilteredHandler(itemHandler, CENTERPIECE_SLOT, x -> isViableCenterpiece(x), false);
+    public final IItemHandler sideHandler = new SingleSlotFilteredHandler(itemHandler, WRAPPINGS_SLOT, x -> isViableWrapping(x), false);
+    public final IItemHandler bottomHandler = new RangedWrapper(itemHandler, OUTPUT_SLOT, OUTPUT_SLOT + 1);
+
+    private static List<ItemStack> viableWrappings = null;
+    private static List<ItemStack> viableCenterpieces = null;
 
     private final ContainerData data;
     private int progress = 0;
@@ -87,6 +109,39 @@ public class WrapperBlockEntity extends BlockEntity implements MenuProvider {
             }
         };
     }
+
+    // Hopper handling region
+
+    @Override
+    public void onLoad() {
+        InitViableMaterials();
+    }
+
+    private void InitViableMaterials() {
+        if (viableCenterpieces != null) return;
+
+        RecipeManager recipeManager = getLevel().getRecipeManager();
+
+        List<RecipeHolder<WrapperRecipe>> recipes = recipeManager.getAllRecipesFor(ModRecipes.WRAPPER_TYPE.get());
+
+        viableCenterpieces = recipes.stream()
+            .map(holder -> holder.value().getIngredients().get(0).getItems()[0])
+            .toList();
+        
+        viableWrappings = recipes.stream()
+            .map(holder -> holder.value().getIngredients().get(1).getItems()[0])
+            .toList();
+    }
+
+    public static boolean isViableCenterpiece(ItemStack stack) {
+        return viableCenterpieces.stream().anyMatch(x -> ItemStack.isSameItem(x, stack));
+    }
+
+    public static boolean isViableWrapping(ItemStack stack) {
+        return viableWrappings.stream().anyMatch(x -> ItemStack.isSameItem(x, stack));
+    }
+
+    // End hopper handling
 
     public IItemHandler getItemHandler(Direction direction) {
         return this.itemHandler;

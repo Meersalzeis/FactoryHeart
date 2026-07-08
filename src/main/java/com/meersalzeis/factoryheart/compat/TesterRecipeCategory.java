@@ -3,6 +3,7 @@ package com.meersalzeis.factoryheart.compat;
 import mezz.jei.api.constants.VanillaTypes;
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
 import mezz.jei.api.gui.drawable.IDrawable;
+import mezz.jei.api.gui.ingredient.IRecipeSlotsView;
 import mezz.jei.api.helpers.IGuiHelper;
 import mezz.jei.api.recipe.IFocusGroup;
 import mezz.jei.api.recipe.RecipeIngredientRole;
@@ -11,7 +12,11 @@ import mezz.jei.api.recipe.category.IRecipeCategory;
 
 import com.meersalzeis.factoryheart.FHModMain;
 import com.meersalzeis.factoryheart.block.ModBlocks;
+import com.meersalzeis.factoryheart.recipe.CondenserRecipe;
 import com.meersalzeis.factoryheart.recipe.TesterRecipe;
+
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
@@ -22,7 +27,7 @@ public class TesterRecipeCategory implements IRecipeCategory<TesterRecipe> {
     public static final ResourceLocation TEXTURE = ResourceLocation.fromNamespaceAndPath(FHModMain.MOD_ID,
             "textures/gui/tester/tester_gui.png");
 
-    public static final RecipeType<TesterRecipe> TESTER_RECIPE_RECIPE_TYPE =
+    public static final RecipeType<TesterRecipe> TESTER_RECIPE_TYPE =
             new RecipeType<>(UID, TesterRecipe.class);
 
     private final IDrawable background;
@@ -35,7 +40,7 @@ public class TesterRecipeCategory implements IRecipeCategory<TesterRecipe> {
 
     @Override
     public RecipeType<TesterRecipe> getRecipeType() {
-        return TESTER_RECIPE_RECIPE_TYPE;
+        return TESTER_RECIPE_TYPE;
     }
 
     @Override
@@ -53,10 +58,29 @@ public class TesterRecipeCategory implements IRecipeCategory<TesterRecipe> {
         return icon;
     }
 
+    // Means which blocks/things are used as crafting station
+    public static ItemStack getRecipeCatalyst() {
+        return new ItemStack(ModBlocks.TESTER);
+    }
+
+    @Override
+    public void draw(TesterRecipe recipe, IRecipeSlotsView recipeSlotsView, GuiGraphics graphics, double mouseX, double mouseY) {
+        Minecraft mc = Minecraft.getInstance();
+
+        String chance = (recipe.getSuccessChance()*100) + "%";
+        graphics.drawString(
+            mc.font,
+            chance,
+            54, 20,
+            0x000000,
+            false
+        );
+    }
+
     @Override
     public void setRecipe(IRecipeLayoutBuilder builder, TesterRecipe recipe, IFocusGroup focuses) {
         builder.addSlot(RecipeIngredientRole.INPUT, 54, 34).addIngredients(recipe.getIngredients().get(0));
-
-        builder.addSlot(RecipeIngredientRole.OUTPUT, 104, 34).addItemStack(recipe.getResultItem(null));
+        builder.addSlot(RecipeIngredientRole.OUTPUT, 104, 20).addItemStack(recipe.assembleSuccess());
+        builder.addSlot(RecipeIngredientRole.OUTPUT, 104, 49).addItemStack(recipe.assembleFailed());
     }
 }

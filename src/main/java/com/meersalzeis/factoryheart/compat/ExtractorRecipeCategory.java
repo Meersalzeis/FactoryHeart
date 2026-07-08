@@ -22,7 +22,7 @@ public class ExtractorRecipeCategory implements IRecipeCategory<ExtractorRecipe>
     public static final ResourceLocation TEXTURE = ResourceLocation.fromNamespaceAndPath(FHModMain.MOD_ID,
             "textures/gui/extractor/extractor_gui.png");
 
-    public static final RecipeType<ExtractorRecipe> EXTRACTOR_RECIPE_RECIPE_TYPE =
+    public static final RecipeType<ExtractorRecipe> EXTRACTOR_RECIPE_TYPE =
             new RecipeType<>(UID, ExtractorRecipe.class);
 
     private final IDrawable background;
@@ -35,7 +35,7 @@ public class ExtractorRecipeCategory implements IRecipeCategory<ExtractorRecipe>
 
     @Override
     public RecipeType<ExtractorRecipe> getRecipeType() {
-        return EXTRACTOR_RECIPE_RECIPE_TYPE;
+        return EXTRACTOR_RECIPE_TYPE;
     }
 
     @Override
@@ -53,10 +53,17 @@ public class ExtractorRecipeCategory implements IRecipeCategory<ExtractorRecipe>
         return icon;
     }
 
+    // Means which blocks/things are used as crafting station
+    public static ItemStack getRecipeCatalyst() {
+        return new ItemStack(ModBlocks.EXTRACTOR);
+    }
+
     @Override
     public void setRecipe(IRecipeLayoutBuilder builder, ExtractorRecipe recipe, IFocusGroup focuses) {
-        builder.addSlot(RecipeIngredientRole.INPUT, 54, 34).addIngredients(recipe.getIngredients().get(0));
+        ItemStack input = recipe.getIngredients().get(0).getItems()[0];
+        input.setCount(recipe.getIngredientCount());
 
+        builder.addSlot(RecipeIngredientRole.INPUT, 54, 34).addItemStack(input);
         builder.addSlot(RecipeIngredientRole.OUTPUT, 104, 34).addItemStack(recipe.getResultItem(null));
     }
 }

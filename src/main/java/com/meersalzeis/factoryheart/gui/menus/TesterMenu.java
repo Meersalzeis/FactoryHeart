@@ -32,8 +32,8 @@ public class TesterMenu  extends AbstractContainerMenu {
         addPlayerHotbar(inv);
 
         this.addSlot(new SlotItemHandler(this.blockEntity.itemHandler, 0, 54, 34));
-        this.addSlot(new SlotItemHandler(this.blockEntity.itemHandler, 1, 104, 34));
-        this.addSlot(new SlotItemHandler(this.blockEntity.itemHandler, 2, 104, 54));
+        this.addSlot(new SlotItemHandler(this.blockEntity.itemHandler, 1, 104, 20));
+        this.addSlot(new SlotItemHandler(this.blockEntity.itemHandler, 2, 104, 49));
 
         addDataSlots(data);
     }
@@ -66,7 +66,7 @@ public class TesterMenu  extends AbstractContainerMenu {
     private static final int TE_INVENTORY_FIRST_SLOT_INDEX = VANILLA_FIRST_SLOT_INDEX + VANILLA_SLOT_COUNT;
 
 
-    private static final int TE_INVENTORY_SLOT_COUNT = 2;
+    private static final int TE_INVENTORY_SLOT_COUNT = 3;
 
     @Override
     public ItemStack quickMoveStack(Player playerIn, int pIndex) {

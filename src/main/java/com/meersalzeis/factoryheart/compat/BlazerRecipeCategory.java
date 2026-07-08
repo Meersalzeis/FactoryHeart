@@ -22,7 +22,7 @@ public class BlazerRecipeCategory implements IRecipeCategory<BlazerRecipe> {
     public static final ResourceLocation TEXTURE = ResourceLocation.fromNamespaceAndPath(FHModMain.MOD_ID,
             "textures/gui/blazer/blazer_gui.png");
 
-    public static final RecipeType<BlazerRecipe> BLAZER_RECIPE_RECIPE_TYPE =
+    public static final RecipeType<BlazerRecipe> BLAZER_RECIPE_TYPE =
             new RecipeType<>(UID, BlazerRecipe.class);
 
     private final IDrawable background;
@@ -35,7 +35,7 @@ public class BlazerRecipeCategory implements IRecipeCategory<BlazerRecipe> {
 
     @Override
     public RecipeType<BlazerRecipe> getRecipeType() {
-        return BLAZER_RECIPE_RECIPE_TYPE;
+        return BLAZER_RECIPE_TYPE;
     }
 
     @Override
@@ -51,6 +51,11 @@ public class BlazerRecipeCategory implements IRecipeCategory<BlazerRecipe> {
     @Override
     public @Nullable IDrawable getIcon() {
         return icon;
+    }
+
+    // Means which blocks/things are used as crafting station
+    public static ItemStack getRecipeCatalyst() {
+        return new ItemStack(ModBlocks.BLAZER);
     }
 
     @Override

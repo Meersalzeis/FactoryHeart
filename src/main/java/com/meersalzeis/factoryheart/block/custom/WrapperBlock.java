@@ -53,7 +53,6 @@ public class WrapperBlock extends BaseEntityBlock {
     @Nullable
     @Override
     public BlockState getStateForPlacement(BlockPlaceContext pContext) {
-        FHModClient.debugMessageToAll("Creating new BlockState", false);
         return defaultBlockState()
         .setValue(FACING, pContext.getNearestLookingDirection().getOpposite())
         .setValue(LIT, false);

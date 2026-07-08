@@ -22,7 +22,7 @@ public class CrystallizerRecipeCategory implements IRecipeCategory<CrystallizerR
     public static final ResourceLocation TEXTURE = ResourceLocation.fromNamespaceAndPath(FHModMain.MOD_ID,
             "textures/gui/crystallizer/crystallizer_gui.png");
 
-    public static final RecipeType<CrystallizerRecipe> CRYSTALLIZER_RECIPE_RECIPE_TYPE =
+    public static final RecipeType<CrystallizerRecipe> CRYSTALLIZER_RECIPE_TYPE =
             new RecipeType<>(UID, CrystallizerRecipe.class);
 
     private final IDrawable background;
@@ -35,7 +35,7 @@ public class CrystallizerRecipeCategory implements IRecipeCategory<CrystallizerR
 
     @Override
     public RecipeType<CrystallizerRecipe> getRecipeType() {
-        return CRYSTALLIZER_RECIPE_RECIPE_TYPE;
+        return CRYSTALLIZER_RECIPE_TYPE;
     }
 
     @Override
@@ -51,6 +51,11 @@ public class CrystallizerRecipeCategory implements IRecipeCategory<CrystallizerR
     @Override
     public @Nullable IDrawable getIcon() {
         return icon;
+    }
+
+    // Means which blocks/things are used as crafting station
+    public static ItemStack getRecipeCatalyst() {
+        return new ItemStack(ModBlocks.CRYSTALLIZER);
     }
 
     @Override

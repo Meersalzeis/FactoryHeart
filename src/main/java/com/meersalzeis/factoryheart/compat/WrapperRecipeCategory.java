@@ -22,7 +22,7 @@ public class WrapperRecipeCategory implements IRecipeCategory<WrapperRecipe> {
     public static final ResourceLocation TEXTURE = ResourceLocation.fromNamespaceAndPath(FHModMain.MOD_ID,
             "textures/gui/wrapper/wrapper_gui.png");
 
-    public static final RecipeType<WrapperRecipe> WRAPPER_RECIPE_RECIPE_TYPE =
+    public static final RecipeType<WrapperRecipe> WRAPPER_RECIPE_TYPE =
             new RecipeType<>(UID, WrapperRecipe.class);
 
     private final IDrawable background;
@@ -35,7 +35,7 @@ public class WrapperRecipeCategory implements IRecipeCategory<WrapperRecipe> {
 
     @Override
     public RecipeType<WrapperRecipe> getRecipeType() {
-        return WRAPPER_RECIPE_RECIPE_TYPE;
+        return WRAPPER_RECIPE_TYPE;
     }
 
     @Override
@@ -53,10 +53,21 @@ public class WrapperRecipeCategory implements IRecipeCategory<WrapperRecipe> {
         return icon;
     }
 
+    // Means which blocks/things are used as crafting station
+    public static ItemStack getRecipeCatalyst() {
+        return new ItemStack(ModBlocks.WRAPPER);
+    }
+
     @Override
     public void setRecipe(IRecipeLayoutBuilder builder, WrapperRecipe recipe, IFocusGroup focuses) {
-        builder.addSlot(RecipeIngredientRole.INPUT, 54, 34).addIngredients(recipe.getIngredients().get(0));
+        ItemStack centerpiece = recipe.getIngredients().get(0).getItems()[0];
+        centerpiece.setCount(recipe.getCenterpieceCount());
 
+        ItemStack wrappings = recipe.getIngredients().get(1).getItems()[0];
+        wrappings.setCount(recipe.getWrappingsCount());
+
+        builder.addSlot(RecipeIngredientRole.INPUT, 54, 34).addItemStack(centerpiece);
+        builder.addSlot(RecipeIngredientRole.INPUT, 8, 34).addItemStack(wrappings);
         builder.addSlot(RecipeIngredientRole.OUTPUT, 104, 34).addItemStack(recipe.getResultItem(null));
     }
 }

@@ -21,7 +21,7 @@ public class CondenserRecipeCategory implements IRecipeCategory<CondenserRecipe>
     public static final ResourceLocation UID = ResourceLocation.fromNamespaceAndPath(FHModMain.MOD_ID, "condensing");
     public static final ResourceLocation TEXTURE = ResourceLocation.fromNamespaceAndPath(FHModMain.MOD_ID, "textures/gui/condenser/condenser_gui.png");
 
-    public static final RecipeType<CondenserRecipe> CONDENSER_RECIPE_RECIPE_TYPE =
+    public static final RecipeType<CondenserRecipe> CONDENSER_RECIPE_TYPE =
             new RecipeType<>(UID, CondenserRecipe.class);
 
     private final IDrawable background;
@@ -34,7 +34,7 @@ public class CondenserRecipeCategory implements IRecipeCategory<CondenserRecipe>
 
     @Override
     public RecipeType<CondenserRecipe> getRecipeType() {
-        return CONDENSER_RECIPE_RECIPE_TYPE;
+        return CONDENSER_RECIPE_TYPE;
     }
 
     @Override
@@ -50,6 +50,11 @@ public class CondenserRecipeCategory implements IRecipeCategory<CondenserRecipe>
     @Override
     public @Nullable IDrawable getIcon() {
         return icon;
+    }
+
+    // Means which blocks/things are used as crafting station
+    public static ItemStack getRecipeCatalyst() {
+        return new ItemStack(ModBlocks.CONDENSER);
     }
 
     @Override

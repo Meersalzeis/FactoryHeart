@@ -154,19 +154,21 @@ public class TesterBlockEntity extends BlockEntity implements MenuProvider {
         float successChance = recipe.getSuccessChance();
 
         boolean didAssemblySucceed = FHModMain.rnd.nextFloat(0f, 1f) < successChance;
-        ItemStack output;
-        if (didAssemblySucceed) {
-            output = recipe.assembleSuccess();
-        } else {
-            output = recipe.assembleFailed();
-        }
 
         itemHandler.extractItem(INPUT_SLOT, 1, false);
+        if (didAssemblySucceed) {
+            insertIntoSlot(SUCCESS_SLOT, recipe.assembleSuccess());
+        } else {
+            insertIntoSlot(FAILED_SLOT, recipe.assembleFailed());
+        }
+    }
+
+    private void insertIntoSlot(int slotNr, ItemStack input) {
         itemHandler.setStackInSlot(
-            SUCCESS_SLOT,
+            slotNr,
             new ItemStack(
-                output.getItem(),
-                itemHandler.getStackInSlot(SUCCESS_SLOT).getCount() + output.getCount())
+                input.getItem(),
+                itemHandler.getStackInSlot(slotNr).getCount() + input.getCount())
         );
     }
 
