@@ -11,6 +11,7 @@ import com.meersalzeis.factoryheart.FHModClient;
 import com.meersalzeis.factoryheart.FHModMain;
 import com.meersalzeis.factoryheart.block.ModBlocks;
 import com.meersalzeis.factoryheart.block.hearting.FactoryHeartBlock;
+import com.meersalzeis.factoryheart.blockentity.FactoryHeartBlockEntity;
 import com.meersalzeis.factoryheart.util.ModTags;
 import com.mojang.logging.LogUtils;
 import org.slf4j.Logger;
@@ -28,7 +29,6 @@ import net.minecraft.world.level.block.state.BlockState;
 public class HeartNetwork {
 
     public BlockPos heart = null;
-    public Belly belly = null;
 
     public HashSet<BlockPos> blockPositions = new HashSet<BlockPos>();
 
@@ -41,14 +41,14 @@ public class HeartNetwork {
         return heart != null;
     }
 
-    public static int GetTierOf(Level level, BlockPos pos) {
+    public static FactoryHeartBlockEntity getHeartEntity(Level level, BlockPos pos) {
         var netw = HeartBeating.TryGetNetwork(level, pos);
-        return (netw == null) ? -1 : HeartFeeding.GetCurrentTier(netw);
-    }
-
-    public static boolean GetCraftableAtTier(BlockPos pos, Level level, int requiredTier) {
-        HeartNetwork netw = HeartBeating.GetNetworkOrNew(level, pos);
-        return netw.HasHeart() && HeartFeeding.GetCurrentTier(netw) >= requiredTier;
+        if (netw == null || netw.heart == null) return null;
+        
+        var res = level.getBlockEntity(netw.heart);
+        
+        if (res instanceof FactoryHeartBlockEntity correctRes) return correctRes;
+        else return null;
     }
 
     // =============== Network Management =============
@@ -60,8 +60,12 @@ public class HeartNetwork {
             allHearts.add(this.heart);
         }
         MergeWithNetworksSubroutine(level, pos, new AtomicReference<>(allHearts));
-        
-        if (allHearts.size() == 1) this.heart = allHearts.iterator().next();
+
+        // .iterator().next() because Hashmaps don't have a .single() or .get(0) function
+        if (allHearts.size() == 1) {
+            this.heart = allHearts.iterator().next();
+            return;
+        }
         HeartBeating.ResolveHeartConflict(level, allHearts);
     }
 
@@ -102,18 +106,4 @@ public class HeartNetwork {
             }
         }
     }
-
-    // =============== Heart Management =============
-
-    
-
-    public static void DoTickFor(Level level, BlockPos pos) {
-        HeartNetwork netw = HeartBeating.GetNetworkOrNew(level, pos);
-        if (netw.belly.fuelGauge > 0) netw.belly.fuelGauge -= 1;
-        if (netw.belly.coolantGauge > 0) netw.belly.coolantGauge -= 1;
-    }
-
-    // =============== Maw Management =============
-
-    
 }

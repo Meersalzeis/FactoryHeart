@@ -34,6 +34,7 @@ public class ModBlockLootTableProvider extends BlockLootSubProvider {
 
         dropSelf(ModBlocks.FACTORY_MAW.get());
         dropSelf(ModBlocks.FACTORY_VEIN.get());
+        dropSelf(ModBlocks.FACTORY_SKIN.get());
         dropSelf(ModBlocks.FACTORY_HEART.get());
         
         dropSelf(ModBlocks.CRYSTALLIZER.get());

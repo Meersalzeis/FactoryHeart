@@ -1,6 +1,8 @@
 package com.meersalzeis.factoryheart.block.hearting;
 
 import com.meersalzeis.factoryheart.FHModClient;
+import com.meersalzeis.factoryheart.blockentity.FactoryHeartBlockEntity;
+import com.meersalzeis.factoryheart.blockentity.ModBlockEntities;
 import com.meersalzeis.factoryheart.hearts.HeartBeating;
 import com.meersalzeis.factoryheart.hearts.HeartNetwork;
 import com.mojang.serialization.MapCodec;
@@ -13,8 +15,12 @@ import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.BaseEntityBlock;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.DirectionalBlock;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.entity.BlockEntityTicker;
+import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
@@ -25,9 +31,9 @@ import net.minecraft.world.phys.BlockHitResult;
 import org.jetbrains.annotations.Nullable;
 
 
-public class FactoryHeartBlock extends DirectionalBlock {
+public class FactoryHeartBlock extends BaseEntityBlock {
     
-    public static final MapCodec<FactoryMawBlock> CODEC = simpleCodec(FactoryMawBlock::new);
+    public static final MapCodec<FactoryHeartBlock> CODEC = simpleCodec(FactoryHeartBlock::new);
     public static final DirectionProperty FACING =  BlockStateProperties.FACING;
     public static final IntegerProperty TIER = IntegerProperty.create("tier", 0, 4);
 
@@ -44,19 +50,19 @@ public class FactoryHeartBlock extends DirectionalBlock {
         builder.add(FACING).add(TIER);
     }
 
-    // @Override
-    // protected void onPlace(BlockState state, Level level, BlockPos pos, BlockState oldState, boolean isMoving) {
-    //     if (level.isClientSide()) return;
-    //     // Be aware this call can cause heart conflicts and thus instantly break the heart again
-    //     HeartBeating.AddBlock(level, pos, true);
-    // }
+    @Override
+    protected void onPlace(BlockState state, Level level, BlockPos pos, BlockState oldState, boolean isMoving) {
+        if (level.isClientSide()) return;
+        // Be aware this call can cause heart conflicts and thus instantly break the heart again
+        HeartBeating.AddBlock(level, pos, true);
+    }
 
     public static int getTier(BlockState state) {
         return state.getValue(TIER);
     }
 
     @Override
-    protected MapCodec<? extends DirectionalBlock> codec() {
+    protected MapCodec<? extends BaseEntityBlock> codec() {
         return CODEC;
     }
 
@@ -66,30 +72,30 @@ public class FactoryHeartBlock extends DirectionalBlock {
         return defaultBlockState().setValue(FACING, pContext.getNearestLookingDirection().getOpposite());
     }
 
-    // @Override
-    // protected InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult hitResult) {
-    //     super.useWithoutItem(state, level, pos, player, hitResult);
+    @Override
+    protected InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult hitResult) {
         
-    //     if (level.isClientSide()) return InteractionResult.SUCCESS;
+        if (level.isClientSide()) return InteractionResult.SUCCESS;
 
-    //     HeartNetwork netw = HeartNetwork.GetNetworkOrNew(level, pos);
-    //     String message = "Tier:" + netw.GetCurrentTier() + ", fuel:" + netw.fuelGauge + ", coolant:" + netw.coolantGauge;
-    //     FHModClient.debugMessageToAll(message, false);
-    //     return InteractionResult.SUCCESS;
-    // }
+        BlockEntity be = level.getBlockEntity(pos);
+        String message = ((FactoryHeartBlockEntity) be).toString();
+        FHModClient.debugMessageToAll(message, false);
+        return InteractionResult.SUCCESS;
+    }
 
 
-    // @Override
-    // protected void tick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {
-    //     if (level.isClientSide()) return;
+    @Nullable
+    @Override
+    public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level pLevel, BlockState pState, BlockEntityType<T> pBlockEntityType) {
+        if(pLevel.isClientSide()) {
+            return null;
+        }
 
-    //     HeartNetwork.DoTickFor(level, pos);
-        
-    //     int curTier = HeartNetwork.GetTierOf(level, pos);
-    //     if (state.getValue(TIER) != curTier) {
-    //         level.setBlock(pos, state.setValue(TIER, curTier), 3);
-    //     }
-    // }
+        return createTickerHelper(
+            pBlockEntityType, ModBlockEntities.HEART_BE.get(),
+            (pLevel1, pPos, pState1, pBlockEntity) -> pBlockEntity.tick(pLevel1, pPos, pState1)
+        );
+    }
 
     @Override
     public void onRemove(BlockState state, Level level, BlockPos pos, BlockState newState, boolean isMoving) {
@@ -102,6 +108,11 @@ public class FactoryHeartBlock extends DirectionalBlock {
             return;
         }
 
-        HeartBeating.DeregisterBlock(level, pos, true);
+        HeartBeating.DeregisterBlock(level, pos);
+    }
+
+    @Override
+    public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
+        return new FactoryHeartBlockEntity(pos, state);
     }
 }

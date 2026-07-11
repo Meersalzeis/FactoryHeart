@@ -29,6 +29,7 @@ public class ModCreativeModeTabs {
                         
                         pOutput.accept(ModBlocks.FACTORY_MAW);
                         pOutput.accept(ModBlocks.FACTORY_VEIN);
+                        pOutput.accept(ModBlocks.FACTORY_SKIN);
                         pOutput.accept(ModBlocks.FACTORY_HEART);
 
                         pOutput.accept(ModBlocks.CRYSTALLIZER);

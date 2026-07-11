@@ -3,9 +3,10 @@ package com.meersalzeis.factoryheart.blockentity.crafting;
 import com.meersalzeis.factoryheart.FHModClient;
 import com.meersalzeis.factoryheart.block.SingleSlotFilteredHandler;
 import com.meersalzeis.factoryheart.block.crafting.BlazerBlock;
+import com.meersalzeis.factoryheart.blockentity.FactoryHeartBlockEntity;
 import com.meersalzeis.factoryheart.blockentity.ModBlockEntities;
 import com.meersalzeis.factoryheart.hearts.HeartBeating;
-import com.meersalzeis.factoryheart.hearts.HeartFeeding;
+import com.meersalzeis.factoryheart.hearts.HeartNetwork;
 import com.meersalzeis.factoryheart.item.ModItems;
 import com.meersalzeis.factoryheart.recipe.BlazerRecipe;
 import com.meersalzeis.factoryheart.recipe.BlazerRecipeInput;
@@ -74,6 +75,8 @@ public class BlazerBlockEntity extends BlockEntity implements MenuProvider {
     private int progress = 0;
     private int maxProgress = 100;
     private final int DEFAULT_MAX_PROGRESS = 100;
+
+    private FactoryHeartBlockEntity heartEntity = null;
 
     public final IItemHandler restHandler = new SingleSlotFilteredHandler(itemHandler, INPUT_SLOT, x -> isViableInput(x), false);
     public final IItemHandler bottomHandler = new RangedWrapper(itemHandler, OUTPUT_SLOT, OUTPUT_SLOT + 1);
@@ -149,9 +152,6 @@ public class BlazerBlockEntity extends BlockEntity implements MenuProvider {
         pTag.putInt("blazer.progress", progress);
         pTag.putInt("blazer.max_progress", maxProgress);
 
-        // pTag.putInt("factory_blazer.energy", ENERGY_STORAGE.getEnergyStored());
-        // pTag = FLUID_TANK.writeToNBT(pRegistries, pTag);
-
         super.saveAdditional(pTag, pRegistries);
     }
 
@@ -161,9 +161,6 @@ public class BlazerBlockEntity extends BlockEntity implements MenuProvider {
         itemHandler.deserializeNBT(pRegistries, pTag.getCompound("inventory"));
         progress = pTag.getInt("blazer.progress");
         maxProgress = pTag.getInt("blazer.max_progress");
-
-        // ENERGY_STORAGE.setEnergy(pTag.getInt("blazer.energy"));
-        // FLUID_TANK.readFromNBT(pRegistries, pTag);
     }
 
     public void drops() {
@@ -265,7 +262,9 @@ public class BlazerBlockEntity extends BlockEntity implements MenuProvider {
     }
 
     private boolean hasSufficientTierToCraft(Level level, BlockPos pos, Optional<RecipeHolder<BlazerRecipe>> recipe) {
-        return recipe.get().value().requiredTier() <= 4;//HeartBeating.GetTier(level, pos);
+        if (heartEntity == null) heartEntity = HeartNetwork.getHeartEntity(level, pos);
+        if (heartEntity == null) return false;
+        return recipe.get().value().requiredTier() <= heartEntity.GetCurrentTier();
     }
 
     // private boolean hasEnoughFluidToCraft() {

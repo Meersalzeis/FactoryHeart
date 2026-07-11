@@ -2,7 +2,6 @@ package com.meersalzeis.factoryheart.block.hearting;
 
 import com.mojang.serialization.MapCodec;
 import com.meersalzeis.factoryheart.block.ModBlocks;
-import com.meersalzeis.factoryheart.hearts.HeartFeeding;
 import com.meersalzeis.factoryheart.hearts.HeartBeating;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -75,19 +74,21 @@ public class FactoryMawBlock extends DirectionalBlock {
     // }
 
     @Override
-    public void stepOn(Level pLevel, BlockPos pPos, BlockState pState, Entity pEntity) {
-        super.stepOn(pLevel, pPos, pState, pEntity);
+    public void stepOn(Level level, BlockPos pos, BlockState state, Entity entity) {
+        super.stepOn(level, pos, state, entity);
 
-        if(pEntity instanceof ItemEntity itemEntity) {
-            HeartFeeding.MawGetsItemFed(pLevel, pPos, itemEntity);
+        if (level.isClientSide()) return;
+
+        if(entity instanceof ItemEntity itemEntity) {
+            HeartBeating.MawGetsItemFed(level, pos, itemEntity);
         }
     }
 
-    // @Override
-    // public void onPlace(BlockState state, Level level, BlockPos pos, BlockState oldState, boolean movedByPiston) {
-    //     if (level.isClientSide()) return;
-    //     HeartBeating.AddBlock(level, pos, false);
-    // }
+    @Override
+    public void onPlace(BlockState state, Level level, BlockPos pos, BlockState oldState, boolean movedByPiston) {
+        if (level.isClientSide()) return;
+        HeartBeating.AddBlock(level, pos, false);
+    }
 
     @Override
     public void onRemove(BlockState state, Level level, BlockPos pos, BlockState newState, boolean isMoving) {
@@ -100,6 +101,6 @@ public class FactoryMawBlock extends DirectionalBlock {
             return;
         }
 
-        HeartBeating.DeregisterBlock(level, pos, false);
+        HeartBeating.DeregisterBlock(level, pos);
     }
 }

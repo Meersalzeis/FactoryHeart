@@ -24,6 +24,7 @@ public class ModBlockStateProvider extends BlockStateProvider {
     @Override
     protected void registerStatesAndModels() {
         blockWithItem(ModBlocks.FACTORY_VEIN);
+        simpleBlockItem(ModBlocks.FACTORY_SKIN.get(), new ModelFile.UncheckedModelFile("factoryheart:block/factory_standard"));
         //blockItem(ModBlocks.FACTORY_HEART, "_t0");
 
         blockWithItem(ModBlocks.WRAPPER);

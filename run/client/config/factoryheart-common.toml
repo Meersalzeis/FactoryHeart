@@ -1,5 +1,13 @@
-#Whether to use the steampunk instead of the cyber textures
-steampunkLook = true
+#Whether to use the alternative cyber textures
+cyberLook = false
+#How long (in ticks) an item fed to a factorymaw lasts.
+# Default: 800
+# Range: > 0
+ticks_per_item = 800
+#How long (in ticks) the full tank of a factoryheart lasts.
+# Default: 1600
+# Range: > 0
+max_ticks = 1600
 #A list of items to use as  fuel at tier 1.
 fuels_t1 = ["minecraft:coal", "minecraft:charcoal", "minecraft:dried_kelp_block"]
 #A list of items to use as fuel at tier 2.
@@ -11,8 +19,8 @@ fuels_t4 = ["factoryheart:inferno_matter"]
 #A list of items to use as coolant at tier 1.
 coolants_t1 = []
 #A list of items to use as coolant at tier 2.
-coolants_t2 = ["minecraft:packed_ice"]
+coolants_t2 = ["minecraft:snowball"]
 #A list of items to use as coolant at tier 3.
-coolants_t3 = ["factoryheart:deepcool_crystal"]
+coolants_t3 = ["factoryheart:contained_deepcool_crystal"]
 #A list of items to use as coolant at tier 4.
 coolants_t4 = ["factoryheart:abzero_matter"]

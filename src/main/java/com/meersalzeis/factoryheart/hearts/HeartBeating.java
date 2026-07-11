@@ -36,41 +36,38 @@ public class HeartBeating {
     // =============== Block interaction =============== 
 
     public static void AddBlock(Level level, BlockPos pos, boolean isHeart) {
-        HeartNetwork netw = GetNetworkOrNew(level, pos);
-        netw.blockPositions.add(pos);
 
-        FHModClient.debugMessageToAll("AddBlock to netw w.H." + netw.HasHeart() , false);
+        // This already merges all connected networks, but does not resolve heart conflicts
+        HeartNetwork netw = GetNetworkOrNew(level, pos, isHeart);
 
-        if (!isHeart) {
-            FHModClient.debugMessageToAll("netw tier is" + HeartFeeding.GetCurrentTier(netw), false);
-            return;
-        }
+        // if (!isHeart) {
+        //     return;
+        // }
 
-        if (!netw.HasHeart()) {
-            netw.heart = pos;
-            return;
-        }
-        
-        if (!netw.heart.equals(pos)) {
-            var relevantHearts = new HashSet<BlockPos>();
-            relevantHearts.add(pos);
-            relevantHearts.add(netw.heart);
+        // if (!netw.HasHeart()) {
+        //     netw.heart = pos;
+        //     return;
+        // }
 
-            var allConnectedHearts = GetCrowdedHearts(level, relevantHearts);
-            ResolveHeartConflict(level, allConnectedHearts);
-        } else {
-            FHModClient.debugMessageToAll("illegal state/argumetns for HeartBeating!", false);
-        }
+        // var relevantHearts = new HashSet<BlockPos>();
+        // relevantHearts.add(pos);
+        // relevantHearts.add(netw.heart);
+        // var allConnectedHearts = GetCrowdedHearts(level, relevantHearts);
+
+        // ResolveHeartConflict(level, allConnectedHearts);
     }
 
     /** Has to be called after removing the block! */
-    public static void DeregisterBlock(Level level, BlockPos pos, boolean deregisterHeart) {
+    public static void DeregisterBlock(Level level, BlockPos pos) {
         HeartNetwork netw = TryGetNetwork(level, pos);
 
         // is null when blocks are loaded but no interaction happened
         if (netw == null) {
-            FHModClient.debugMessageToAll("ERR deregister block - cannot find old block!", false);
             return;
+        }
+
+        if (netw.HasHeart() && netw.heart.equals(pos)) {
+            netw.heart = null;
         }
 
         BlockPos blockPosToRemove = netw.blockPositions.stream()
@@ -80,20 +77,10 @@ public class HeartBeating {
 
         if (netw.blockPositions.isEmpty()) {
             allNetworks.remove(netw);
-            FHModClient.debugMessageToAll("Remove Network bc empty!", false);
             return;
         }
 
-        if (deregisterHeart) {
-            FHModClient.debugMessageToAll("deregister heart!", false);
-            netw.heart = null;
-        }
-
         RedrawNetworksAfterRemoval(level, pos);
-    }
-
-    public static int GetTier(Level level, BlockPos pos) {
-        return HeartFeeding.GetCurrentTier(GetNetworkOrNew(level, pos));
     }
 
     // =============== Network Getter / Util =============== 
@@ -120,6 +107,24 @@ public class HeartBeating {
 
         HeartNetwork newNet = new HeartNetwork();
         newNet.blockPositions.add(pos);
+        AddToAll(newNet, level);
+        
+        newNet.MergeWithNetworksAt(level, pos);
+        return newNet;
+    }
+
+    static HeartNetwork GetNetworkOrNew(Level level, BlockPos pos, boolean isHeart) {
+        for (HeartNetwork network : GetAllNetworks(level)) {
+            for (BlockPos lookAtPos : network.blockPositions) {
+                if (lookAtPos.equals(pos)) {
+                    return network;
+                }
+            }
+        }
+
+        HeartNetwork newNet = new HeartNetwork();
+        newNet.blockPositions.add(pos);
+        if (isHeart) newNet.heart = pos;
         AddToAll(newNet, level);
         
         newNet.MergeWithNetworksAt(level, pos);
@@ -162,25 +167,26 @@ public class HeartBeating {
             }
         }
 
-        if (looseEnds.size() < 2) return;
+        if (looseEnds.size() < 2) {
+            FHModClient.debugMessageToAll("Only one (or no) loose ends - stop early", false);
+            return;
+        }
         
         DimensionType dimType = level.dimensionType();
         HeartNetwork oldNetw = TryGetNetwork(level, looseEnds.get(0));
         allNetworks.get(dimType).remove(oldNetw);
 
-        FHModClient.debugMessageToAll("Checking loose ends", false);
-        for (BlockPos looseEndPos : looseEnds) {
-            // 100% new
-            var looseEndNetw = GetNetworkOrNew(level, looseEndPos);
+        // for (BlockPos looseEndPos : looseEnds) {
+        //     // 100% new
+        //     var looseEndNetw = GetNetworkOrNew(level, looseEndPos);
 
-            // If this end has heart, preserve old fuel stats and references
-            if (looseEndNetw.HasHeart()) {
-                oldNetw.blockPositions = looseEndNetw.blockPositions;
-                allNetworks.get(dimType).remove(looseEndNetw);
-                AddToAll(oldNetw, level);
-            }
-            FHModClient.debugMessageToAll("Check loose end at "+looseEndPos.toShortString() + "assigned to netw with size " + GetNetworkOrNew(level, looseEndPos).blockPositions.size(), false);
-        }
+        //     // If this end has heart, preserve old fuel stats and references
+        //     if (looseEndNetw.HasHeart()) {
+        //         oldNetw.blockPositions = looseEndNetw.blockPositions;
+        //         allNetworks.get(dimType).remove(looseEndNetw);
+        //         AddToAll(oldNetw, level);
+        //     }
+        // }
     }
 
     //=============== Heart interaction =============== 
@@ -191,16 +197,12 @@ public class HeartBeating {
         if (allHearts.size() == 1) {
             BlockPos onlyOne = allHearts.iterator().next();
 
-            GetNetworkOrNew(level, onlyOne).heart = onlyOne;
-            FHModClient.debugMessageToAll("Only 1 heart found", false);
+            GetNetworkOrNew(level, onlyOne, true).heart = onlyOne;
             return;
         }
-
-        FHModClient.debugMessageToAll("HeartConflict! ", false);
         
         HashSet<BlockPos> relevantHearts = allHearts;
-        while (!relevantHearts.isEmpty()) {
-            FHModClient.debugMessageToAll("HeartConflict new loop", false);
+        while (! (relevantHearts.size() <= 1)) {
 
             // Decision
             int randomIndex = FHModMain.rnd.nextInt(relevantHearts.size());
@@ -210,21 +212,25 @@ public class HeartBeating {
                 heartToRemove = iterator.next();
             }
 
-            FHModClient.debugMessageToAll("Removing one heart at " + heartToRemove.toShortString(), false);
-
+            HeartBeating.DeregisterBlock(level, heartToRemove);
             level.destroyBlock(heartToRemove, true);
-            DeregisterBlock(level, heartToRemove, false);
+
+            allHearts.remove(heartToRemove);
 
             // Check which hearts are fixed
             relevantHearts = GetCrowdedHearts(level, relevantHearts);
         }
+
+        // At this point only 1 heart remains
+        BlockPos onlyOne = allHearts.iterator().next();
+        GetNetworkOrNew(level, onlyOne, true).heart = onlyOne;
     }
 
     private static HashSet<BlockPos> GetCrowdedHearts(Level level, HashSet<BlockPos> allHearts) {
         HashSet<BlockPos> crowded = new HashSet<BlockPos>();
 
         for (BlockPos curHeart : allHearts) {
-            HeartNetwork curNetw = GetNetworkOrNew(level, curHeart);
+            HeartNetwork curNetw = GetNetworkOrNew(level, curHeart, true);
             boolean stillLonely = true;
 
             for (var curBlock : curNetw.blockPositions) {
@@ -244,5 +250,10 @@ public class HeartBeating {
             if (stillLonely) curNetw.heart = curHeart;
         }  
         return crowded;
+    }
+
+    public static void MawGetsItemFed(Level level, BlockPos pos, ItemEntity itemFed) {
+        var netw = GetNetworkOrNew(level, pos, false);
+        if (netw.HasHeart()) netw.getHeartEntity(level, pos).MawGetsItemFed(itemFed);
     }
 }

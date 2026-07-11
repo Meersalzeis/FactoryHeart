@@ -17,9 +17,19 @@ import net.neoforged.neoforge.common.ModConfigSpec;
 public class Config {
     private static final ModConfigSpec.Builder BUILDER = new ModConfigSpec.Builder();
 
-    public static final ModConfigSpec.BooleanValue STEAMPUNK_LOOK = BUILDER
-        .comment("Whether to use the steampunk instead of the cyber textures")
-        .define("steampunkLook", true);
+    public static final ModConfigSpec.BooleanValue ALT_TEXTURES = BUILDER
+        .comment("Whether to use the alternative cyber textures")
+        .define("cyberLook", false);
+
+    // =============== MAW BASICS ===============
+
+    public static final ModConfigSpec.IntValue RESOURCE_PER_ITEM = BUILDER
+        .comment("How long (in ticks) an item fed to a factorymaw lasts.")
+        .defineInRange("ticks_per_item", 800, 0, Integer.MAX_VALUE);
+    
+    public static final ModConfigSpec.IntValue MAX_RESOURCE = BUILDER
+        .comment("How long (in ticks) the full tank of a factoryheart lasts.")
+        .defineInRange("max_ticks", 1600, 0, Integer.MAX_VALUE);
 
     // =============== FUELS ===============
 
@@ -53,12 +63,12 @@ public class Config {
     public static final ModConfigSpec.ConfigValue<List<? extends String>> TIER_2_COOLANT_ITEMS = BUILDER
         .worldRestart()    
         .comment("A list of items to use as coolant at tier 2.")
-        .defineList("coolants_t2", List.of("minecraft:packed_ice"), () -> "", Config::validateItemName);
+        .defineList("coolants_t2", List.of("minecraft:snowball"), () -> "", Config::validateItemName);
 
     public static final ModConfigSpec.ConfigValue<List<? extends String>> TIER_3_COOLANT_ITEMS = BUILDER
         .worldRestart()    
         .comment("A list of items to use as coolant at tier 3.")
-        .defineList("coolants_t3", List.of("factoryheart:deepcool_crystal"), () -> "", Config::validateItemName);
+        .defineList("coolants_t3", List.of("factoryheart:contained_deepcool_crystal"), () -> "", Config::validateItemName);
     
     public static final ModConfigSpec.ConfigValue<List<? extends String>> TIER_4_COOLANT_ITEMS = BUILDER
         .worldRestart()    

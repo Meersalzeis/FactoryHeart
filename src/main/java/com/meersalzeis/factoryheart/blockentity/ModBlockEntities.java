@@ -20,10 +20,14 @@ public class ModBlockEntities {
         public static final DeferredRegister<BlockEntityType<?>> BLOCK_ENTITIES =
                 DeferredRegister.create(BuiltInRegistries.BLOCK_ENTITY_TYPE, FHModMain.MOD_ID);
 
+        public static void register(IEventBus eventBus) { BLOCK_ENTITIES.register(eventBus); }
+
+
         public static final Supplier<BlockEntityType<CrystallizerBlockEntity>> CRYSTALLIZER_BE =
                 BLOCK_ENTITIES.register("crystallizer_be", () -> BlockEntityType.Builder.of(
                         CrystallizerBlockEntity::new, ModBlocks.CRYSTALLIZER.get()).build(null));
 
+                        
         public static final Supplier<BlockEntityType<BlazerBlockEntity>> BLAZER_BE =
                 BLOCK_ENTITIES.register("blazer_be", () -> BlockEntityType.Builder.of(
                         BlazerBlockEntity::new, ModBlocks.BLAZER.get()).build(null));
@@ -44,7 +48,8 @@ public class ModBlockEntities {
                 BLOCK_ENTITIES.register("condenser_be", () -> BlockEntityType.Builder.of(
                         CondenserBlockEntity::new, ModBlocks.CONDENSER.get()).build(null));
 
-        public static void register(IEventBus eventBus) {
-                BLOCK_ENTITIES.register(eventBus);
-        }
+
+        public static final Supplier<BlockEntityType<FactoryHeartBlockEntity>> HEART_BE =
+                BLOCK_ENTITIES.register("heart_be", () -> BlockEntityType.Builder.of(
+                        FactoryHeartBlockEntity::new, ModBlocks.FACTORY_HEART.get()).build(null));
 }

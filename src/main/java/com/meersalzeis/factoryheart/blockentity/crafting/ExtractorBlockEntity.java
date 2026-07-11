@@ -6,7 +6,6 @@ import com.meersalzeis.factoryheart.block.crafting.ExtractorBlock;
 import com.meersalzeis.factoryheart.blockentity.ModBlockEntities;
 import com.meersalzeis.factoryheart.blockentity.energy.ModEnergyStorage;
 import com.meersalzeis.factoryheart.hearts.HeartBeating;
-import com.meersalzeis.factoryheart.hearts.HeartFeeding;
 import com.meersalzeis.factoryheart.item.ModItems;
 import com.meersalzeis.factoryheart.recipe.BlazerRecipe;
 import com.meersalzeis.factoryheart.recipe.ExtractorRecipe;

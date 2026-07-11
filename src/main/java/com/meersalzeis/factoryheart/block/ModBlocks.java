@@ -48,6 +48,10 @@ public class ModBlocks {
         () -> new Block(BlockBehaviour.Properties.of().strength(3f))
     );
 
+    public static final DeferredBlock<Block> FACTORY_SKIN = registerBlock("factory_skin",
+        () -> new Block(BlockBehaviour.Properties.of().strength(3f))
+    );
+
     public static final DeferredBlock<Block> FACTORY_MAW = registerBlock("factory_maw",
         () -> new FactoryMawBlock(BlockBehaviour.Properties.of().strength(3f))
     );

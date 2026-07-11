@@ -5,9 +5,9 @@ import java.util.Random;
 import org.slf4j.Logger;
 
 import com.meersalzeis.factoryheart.block.ModBlocks;
+import com.meersalzeis.factoryheart.blockentity.FactoryHeartBlockEntity;
 import com.meersalzeis.factoryheart.blockentity.ModBECapabilities;
 import com.meersalzeis.factoryheart.blockentity.ModBlockEntities;
-import com.meersalzeis.factoryheart.hearts.HeartFeeding;
 import com.meersalzeis.factoryheart.item.ModCreativeModeTabs;
 import com.meersalzeis.factoryheart.item.ModItems;
 import com.meersalzeis.factoryheart.recipe.ModRecipes;
@@ -75,7 +75,7 @@ public class FHModMain {
 
     @SubscribeEvent
     public void onServerStarting(ServerStartingEvent event) {
-        HeartFeeding.RegisterFuelsAndCoolants();
+        FactoryHeartBlockEntity.InitStaticVariables();
     }
 
     // You can use EventBusSubscriber to automatically register all static methods in the class annotated with @SubscribeEvent
