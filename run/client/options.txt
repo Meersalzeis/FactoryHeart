@@ -12,7 +12,7 @@ darknessEffectScale:1.0
 glintSpeed:0.5
 glintStrength:0.75
 prioritizeChunkUpdates:0
-fullscreen:false
+fullscreen:true
 gamma:0.5
 graphicsMode:1
 guiScale:0
@@ -35,7 +35,7 @@ chatLinksPrompt:true
 discrete_mouse_scroll:false
 invertYMouse:false
 realmsNotifications:true
-showSubtitles:false
+showSubtitles:true
 directionalAudio:false
 touchscreen:false
 bobView:false
@@ -152,7 +152,7 @@ key_key.jei.previousCategory:key.keyboard.page.up:SHIFT
 key_key.jei.nextCategory:key.keyboard.page.down:SHIFT
 key_key.jei.closeRecipeGui:key.keyboard.escape
 key_key.jei.copy.recipe.id:key.keyboard.unknown
-soundCategory_master:0.0
+soundCategory_master:1.0
 soundCategory_music:1.0
 soundCategory_record:1.0
 soundCategory_weather:1.0

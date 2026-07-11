@@ -1,0 +1,12 @@
+
+{
+  "type": "factoryheart:blazing",
+  "ingredient": {
+    "item": "minecraft:sugar"
+  },
+  "requiredTier": 1,
+  "result": {
+    "id": "minecraft:gunpowder",
+    "count": 1
+  }
+}

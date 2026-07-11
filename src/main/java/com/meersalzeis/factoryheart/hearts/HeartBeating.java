@@ -14,7 +14,7 @@ import com.meersalzeis.factoryheart.Config;
 import com.meersalzeis.factoryheart.FHModClient;
 import com.meersalzeis.factoryheart.FHModMain;
 import com.meersalzeis.factoryheart.block.ModBlocks;
-import com.meersalzeis.factoryheart.block.custom.FactoryHeartBlock;
+import com.meersalzeis.factoryheart.block.hearting.FactoryHeartBlock;
 import com.meersalzeis.factoryheart.util.ModTags;
 import com.mojang.logging.LogUtils;
 
@@ -36,10 +36,15 @@ public class HeartBeating {
     // =============== Block interaction =============== 
 
     public static void AddBlock(Level level, BlockPos pos, boolean isHeart) {
-        FHModClient.debugMessageToAll("AddBlock", false);
         HeartNetwork netw = GetNetworkOrNew(level, pos);
+        netw.blockPositions.add(pos);
 
-        if (!isHeart) return;
+        FHModClient.debugMessageToAll("AddBlock to netw w.H." + netw.HasHeart() , false);
+
+        if (!isHeart) {
+            FHModClient.debugMessageToAll("netw tier is" + HeartFeeding.GetCurrentTier(netw), false);
+            return;
+        }
 
         if (!netw.HasHeart()) {
             netw.heart = pos;
@@ -54,10 +59,7 @@ public class HeartBeating {
             var allConnectedHearts = GetCrowdedHearts(level, relevantHearts);
             ResolveHeartConflict(level, allConnectedHearts);
         } else {
-            FHModClient.debugMessageToAll(
-                "After AddBlock: Netw.heart:"+((netw.heart == null) ? "null" : netw.heart.toShortString())
-                +"and size"+netw.blockPositions.size()
-                , false);
+            FHModClient.debugMessageToAll("illegal state/argumetns for HeartBeating!", false);
         }
     }
 

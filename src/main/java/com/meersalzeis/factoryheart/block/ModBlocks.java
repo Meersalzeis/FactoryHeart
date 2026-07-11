@@ -14,15 +14,15 @@ import java.util.Arrays;
 import java.util.function.Supplier;
 
 import com.meersalzeis.factoryheart.FHModMain;
-import com.meersalzeis.factoryheart.block.custom.CrystallizerBlock;
-import com.meersalzeis.factoryheart.block.custom.ExtractorBlock;
-import com.meersalzeis.factoryheart.block.custom.FactoryHeartBlock;
-import com.meersalzeis.factoryheart.block.custom.BlazerBlock;
-import com.meersalzeis.factoryheart.block.custom.CondenserBlock;
-import com.meersalzeis.factoryheart.block.custom.FactoryMawBlock;
-import com.meersalzeis.factoryheart.block.custom.TesterBlock;
-import com.meersalzeis.factoryheart.block.custom.WrapperBlock;
-import com.meersalzeis.factoryheart.block.entity.custom.CondenserBlockEntity;
+import com.meersalzeis.factoryheart.block.crafting.BlazerBlock;
+import com.meersalzeis.factoryheart.block.crafting.CondenserBlock;
+import com.meersalzeis.factoryheart.block.crafting.CrystallizerBlock;
+import com.meersalzeis.factoryheart.block.crafting.ExtractorBlock;
+import com.meersalzeis.factoryheart.block.crafting.TesterBlock;
+import com.meersalzeis.factoryheart.block.crafting.WrapperBlock;
+import com.meersalzeis.factoryheart.block.hearting.FactoryHeartBlock;
+import com.meersalzeis.factoryheart.block.hearting.FactoryMawBlock;
+import com.meersalzeis.factoryheart.blockentity.crafting.CondenserBlockEntity;
 import com.meersalzeis.factoryheart.item.ModItems;
 
 public class ModBlocks {

@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "n": {
+      "tag": "c:nuggets"
+    }
+  },
+  "pattern": [
+    " n ",
+    "nnn",
+    " n "
+  ],
+  "result": {
+    "count": 1,
+    "id": "factoryheart:metal_disc"
+  }
+}

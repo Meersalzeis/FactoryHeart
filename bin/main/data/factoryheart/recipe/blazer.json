@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "b": {
+      "item": "minecraft:barrel"
+    },
+    "p": {
+      "item": "factoryheart:factory_paste"
+    },
+    "r": {
+      "item": "minecraft:blaze_rod"
+    }
+  },
+  "pattern": [
+    "prp",
+    "rbr",
+    "prp"
+  ],
+  "result": {
+    "count": 1,
+    "id": "factoryheart:blazer"
+  }
+}

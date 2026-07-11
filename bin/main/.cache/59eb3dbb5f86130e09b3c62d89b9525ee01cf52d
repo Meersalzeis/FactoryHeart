@@ -1,0 +1,10 @@
+// 1.21.1	2026-06-29T16:01:52.581270323	Loot Tables
+d57c03e86916c71382ca5b5c111d5204c2ced611 data/factoryheart/loot_table/blocks/blazer.json
+3a9784d66d7f070a671a7886204ee104b81af822 data/factoryheart/loot_table/blocks/condenser.json
+1abd10d1880cc7e843835a641921e43f14c4103f data/factoryheart/loot_table/blocks/crystallizer.json
+c2426ad159e3a751b2d0f4e88bbea2e99cbb6dde data/factoryheart/loot_table/blocks/extractor.json
+aeb596839908c953f0c02979fb6cfecf24f81f55 data/factoryheart/loot_table/blocks/factory_heart.json
+c862a99d076f1208149a772294dbbca4034d9242 data/factoryheart/loot_table/blocks/factory_maw.json
+b4251fea4a0cd9f6bb2dff1aac7f022131ce810b data/factoryheart/loot_table/blocks/factory_vein.json
+7eb60f556ebfbf12a5917caf90eada48b9630b4e data/factoryheart/loot_table/blocks/tester.json
+898c258ac86e38bd6b47b56d1b680d7fdab015f6 data/factoryheart/loot_table/blocks/wrapper.json

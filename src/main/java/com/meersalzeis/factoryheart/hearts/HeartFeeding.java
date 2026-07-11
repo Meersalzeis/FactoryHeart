@@ -14,6 +14,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 
 public class HeartFeeding {
+
     private static ArrayList<Item> fuel_T1 = new ArrayList<Item>();
     private static ArrayList<Item> fuel_T2 = new ArrayList<Item>();
     private static ArrayList<Item> fuel_T3 = new ArrayList<Item>();
@@ -47,15 +48,15 @@ public class HeartFeeding {
 
     static int GetCurrentTier(HeartNetwork netw) {
         if (!netw.HasHeart()) return 0;
-        if (netw.fuelGauge <= 0 ) return 0;
+        if (netw.belly.fuelGauge <= 0 ) return 0;
 
-        int supplyTier = Math.min(netw.lastUsedCoolantTier, netw.lastUsedFuelTier);
+        int supplyTier = Math.min(netw.belly.lastUsedCoolantTier, netw.belly.lastUsedFuelTier);
         switch (supplyTier) {
             case 0: return 0;
-            case 1: return (coolant_T1.isEmpty() || netw.coolantGauge > 0) ? 1 : 0;
-            case 2: return (coolant_T2.isEmpty() || netw.coolantGauge > 0) ? 2 : 0;
-            case 3: return (coolant_T3.isEmpty() || netw.coolantGauge > 0) ? 3 : 0;
-            case 4: return (coolant_T4.isEmpty() || netw.coolantGauge > 0) ? 4 : 0;
+            case 1: return (coolant_T1.isEmpty() || netw.belly.coolantGauge > 0) ? 1 : 0;
+            case 2: return (coolant_T2.isEmpty() || netw.belly.coolantGauge > 0) ? 2 : 0;
+            case 3: return (coolant_T3.isEmpty() || netw.belly.coolantGauge > 0) ? 3 : 0;
+            case 4: return (coolant_T4.isEmpty() || netw.belly.coolantGauge > 0) ? 4 : 0;
         }
         // should be dead code
         return -1;
@@ -95,13 +96,15 @@ public class HeartFeeding {
 
     private static void FeedOn(Level level, BlockPos pos, ItemEntity itemEntity, int tier, boolean isFuel) {
         HeartNetwork netw = HeartBeating.GetNetworkOrNew(level, pos);
-        int gaugeVal = isFuel ? netw.fuelGauge : netw.coolantGauge;
+        Belly belly = netw.belly;
+
+        int gaugeVal = isFuel ? belly.fuelGauge : belly.coolantGauge;
 
         if (gaugeVal + FUEL_PER_ITEM <= MAX_GAUGE) {
             if (isFuel) {
-                netw.fuelGauge += FUEL_PER_ITEM;
+                belly.fuelGauge += FUEL_PER_ITEM;
             } else {
-                netw.coolantGauge+= FUEL_PER_ITEM;
+                belly.coolantGauge+= FUEL_PER_ITEM;
             }
 
             ItemStack oldStack = itemEntity.getItem();
@@ -113,8 +116,8 @@ public class HeartFeeding {
             itemEntity.setItem( new ItemStack(oldStack.getItem(), oldStack.getCount()-1));
 
             if (GetCurrentTier(netw) < tier) {
-                if (isFuel) netw.lastUsedFuelTier = tier;
-                else netw.lastUsedCoolantTier = tier;
+                if (isFuel) belly.lastUsedFuelTier = tier;
+                else belly.lastUsedCoolantTier = tier;
             }
         }
     }

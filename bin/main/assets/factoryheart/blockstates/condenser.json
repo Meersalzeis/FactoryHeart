@@ -1,0 +1,740 @@
+{
+  "variants": {
+    "color=black,facing=down,lit=false": {
+      "model": "factoryheart:block/condenser",
+      "x": 90
+    },
+    "color=black,facing=down,lit=true": {
+      "model": "factoryheart:block/condenser",
+      "x": 90
+    },
+    "color=black,facing=east,lit=false": {
+      "model": "factoryheart:block/condenser",
+      "y": 90
+    },
+    "color=black,facing=east,lit=true": {
+      "model": "factoryheart:block/condenser",
+      "y": 90
+    },
+    "color=black,facing=north,lit=false": {
+      "model": "factoryheart:block/condenser"
+    },
+    "color=black,facing=north,lit=true": {
+      "model": "factoryheart:block/condenser"
+    },
+    "color=black,facing=south,lit=false": {
+      "model": "factoryheart:block/condenser",
+      "y": 180
+    },
+    "color=black,facing=south,lit=true": {
+      "model": "factoryheart:block/condenser",
+      "y": 180
+    },
+    "color=black,facing=up,lit=false": {
+      "model": "factoryheart:block/condenser",
+      "x": 270
+    },
+    "color=black,facing=up,lit=true": {
+      "model": "factoryheart:block/condenser",
+      "x": 270
+    },
+    "color=black,facing=west,lit=false": {
+      "model": "factoryheart:block/condenser",
+      "y": 270
+    },
+    "color=black,facing=west,lit=true": {
+      "model": "factoryheart:block/condenser",
+      "y": 270
+    },
+    "color=blue,facing=down,lit=false": {
+      "model": "factoryheart:block/condenser",
+      "x": 90
+    },
+    "color=blue,facing=down,lit=true": {
+      "model": "factoryheart:block/condenser",
+      "x": 90
+    },
+    "color=blue,facing=east,lit=false": {
+      "model": "factoryheart:block/condenser",
+      "y": 90
+    },
+    "color=blue,facing=east,lit=true": {
+      "model": "factoryheart:block/condenser",
+      "y": 90
+    },
+    "color=blue,facing=north,lit=false": {
+      "model": "factoryheart:block/condenser"
+    },
+    "color=blue,facing=north,lit=true": {
+      "model": "factoryheart:block/condenser"
+    },
+    "color=blue,facing=south,lit=false": {
+      "model": "factoryheart:block/condenser",
+      "y": 180
+    },
+    "color=blue,facing=south,lit=true": {
+      "model": "factoryheart:block/condenser",
+      "y": 180
+    },
+    "color=blue,facing=up,lit=false": {
+      "model": "factoryheart:block/condenser",
+      "x": 270
+    },
+    "color=blue,facing=up,lit=true": {
+      "model": "factoryheart:block/condenser",
+      "x": 270
+    },
+    "color=blue,facing=west,lit=false": {
+      "model": "factoryheart:block/condenser",
+      "y": 270
+    },
+    "color=blue,facing=west,lit=true": {
+      "model": "factoryheart:block/condenser",
+      "y": 270
+    },
+    "color=brown,facing=down,lit=false": {
+      "model": "factoryheart:block/condenser",
+      "x": 90
+    },
+    "color=brown,facing=down,lit=true": {
+      "model": "factoryheart:block/condenser",
+      "x": 90
+    },
+    "color=brown,facing=east,lit=false": {
+      "model": "factoryheart:block/condenser",
+      "y": 90
+    },
+    "color=brown,facing=east,lit=true": {
+      "model": "factoryheart:block/condenser",
+      "y": 90
+    },
+    "color=brown,facing=north,lit=false": {
+      "model": "factoryheart:block/condenser"
+    },
+    "color=brown,facing=north,lit=true": {
+      "model": "factoryheart:block/condenser"
+    },
+    "color=brown,facing=south,lit=false": {
+      "model": "factoryheart:block/condenser",
+      "y": 180
+    },
+    "color=brown,facing=south,lit=true": {
+      "model": "factoryheart:block/condenser",
+      "y": 180
+    },
+    "color=brown,facing=up,lit=false": {
+      "model": "factoryheart:block/condenser",
+      "x": 270
+    },
+    "color=brown,facing=up,lit=true": {
+      "model": "factoryheart:block/condenser",
+      "x": 270
+    },
+    "color=brown,facing=west,lit=false": {
+      "model": "factoryheart:block/condenser",
+      "y": 270
+    },
+    "color=brown,facing=west,lit=true": {
+      "model": "factoryheart:block/condenser",
+      "y": 270
+    },
+    "color=cyan,facing=down,lit=false": {
+      "model": "factoryheart:block/condenser",
+      "x": 90
+    },
+    "color=cyan,facing=down,lit=true": {
+      "model": "factoryheart:block/condenser",
+      "x": 90
+    },
+    "color=cyan,facing=east,lit=false": {
+      "model": "factoryheart:block/condenser",
+      "y": 90
+    },
+    "color=cyan,facing=east,lit=true": {
+      "model": "factoryheart:block/condenser",
+      "y": 90
+    },
+    "color=cyan,facing=north,lit=false": {
+      "model": "factoryheart:block/condenser"
+    },
+    "color=cyan,facing=north,lit=true": {
+      "model": "factoryheart:block/condenser"
+    },
+    "color=cyan,facing=south,lit=false": {
+      "model": "factoryheart:block/condenser",
+      "y": 180
+    },
+    "color=cyan,facing=south,lit=true": {
+      "model": "factoryheart:block/condenser",
+      "y": 180
+    },
+    "color=cyan,facing=up,lit=false": {
+      "model": "factoryheart:block/condenser",
+      "x": 270
+    },
+    "color=cyan,facing=up,lit=true": {
+      "model": "factoryheart:block/condenser",
+      "x": 270
+    },
+    "color=cyan,facing=west,lit=false": {
+      "model": "factoryheart:block/condenser",
+      "y": 270
+    },
+    "color=cyan,facing=west,lit=true": {
+      "model": "factoryheart:block/condenser",
+      "y": 270
+    },
+    "color=gray,facing=down,lit=false": {
+      "model": "factoryheart:block/condenser",
+      "x": 90
+    },
+    "color=gray,facing=down,lit=true": {
+      "model": "factoryheart:block/condenser",
+      "x": 90
+    },
+    "color=gray,facing=east,lit=false": {
+      "model": "factoryheart:block/condenser",
+      "y": 90
+    },
+    "color=gray,facing=east,lit=true": {
+      "model": "factoryheart:block/condenser",
+      "y": 90
+    },
+    "color=gray,facing=north,lit=false": {
+      "model": "factoryheart:block/condenser"
+    },
+    "color=gray,facing=north,lit=true": {
+      "model": "factoryheart:block/condenser"
+    },
+    "color=gray,facing=south,lit=false": {
+      "model": "factoryheart:block/condenser",
+      "y": 180
+    },
+    "color=gray,facing=south,lit=true": {
+      "model": "factoryheart:block/condenser",
+      "y": 180
+    },
+    "color=gray,facing=up,lit=false": {
+      "model": "factoryheart:block/condenser",
+      "x": 270
+    },
+    "color=gray,facing=up,lit=true": {
+      "model": "factoryheart:block/condenser",
+      "x": 270
+    },
+    "color=gray,facing=west,lit=false": {
+      "model": "factoryheart:block/condenser",
+      "y": 270
+    },
+    "color=gray,facing=west,lit=true": {
+      "model": "factoryheart:block/condenser",
+      "y": 270
+    },
+    "color=green,facing=down,lit=false": {
+      "model": "factoryheart:block/condenser",
+      "x": 90
+    },
+    "color=green,facing=down,lit=true": {
+      "model": "factoryheart:block/condenser",
+      "x": 90
+    },
+    "color=green,facing=east,lit=false": {
+      "model": "factoryheart:block/condenser",
+      "y": 90
+    },
+    "color=green,facing=east,lit=true": {
+      "model": "factoryheart:block/condenser",
+      "y": 90
+    },
+    "color=green,facing=north,lit=false": {
+      "model": "factoryheart:block/condenser"
+    },
+    "color=green,facing=north,lit=true": {
+      "model": "factoryheart:block/condenser"
+    },
+    "color=green,facing=south,lit=false": {
+      "model": "factoryheart:block/condenser",
+      "y": 180
+    },
+    "color=green,facing=south,lit=true": {
+      "model": "factoryheart:block/condenser",
+      "y": 180
+    },
+    "color=green,facing=up,lit=false": {
+      "model": "factoryheart:block/condenser",
+      "x": 270
+    },
+    "color=green,facing=up,lit=true": {
+      "model": "factoryheart:block/condenser",
+      "x": 270
+    },
+    "color=green,facing=west,lit=false": {
+      "model": "factoryheart:block/condenser",
+      "y": 270
+    },
+    "color=green,facing=west,lit=true": {
+      "model": "factoryheart:block/condenser",
+      "y": 270
+    },
+    "color=light_blue,facing=down,lit=false": {
+      "model": "factoryheart:block/condenser",
+      "x": 90
+    },
+    "color=light_blue,facing=down,lit=true": {
+      "model": "factoryheart:block/condenser",
+      "x": 90
+    },
+    "color=light_blue,facing=east,lit=false": {
+      "model": "factoryheart:block/condenser",
+      "y": 90
+    },
+    "color=light_blue,facing=east,lit=true": {
+      "model": "factoryheart:block/condenser",
+      "y": 90
+    },
+    "color=light_blue,facing=north,lit=false": {
+      "model": "factoryheart:block/condenser"
+    },
+    "color=light_blue,facing=north,lit=true": {
+      "model": "factoryheart:block/condenser"
+    },
+    "color=light_blue,facing=south,lit=false": {
+      "model": "factoryheart:block/condenser",
+      "y": 180
+    },
+    "color=light_blue,facing=south,lit=true": {
+      "model": "factoryheart:block/condenser",
+      "y": 180
+    },
+    "color=light_blue,facing=up,lit=false": {
+      "model": "factoryheart:block/condenser",
+      "x": 270
+    },
+    "color=light_blue,facing=up,lit=true": {
+      "model": "factoryheart:block/condenser",
+      "x": 270
+    },
+    "color=light_blue,facing=west,lit=false": {
+      "model": "factoryheart:block/condenser",
+      "y": 270
+    },
+    "color=light_blue,facing=west,lit=true": {
+      "model": "factoryheart:block/condenser",
+      "y": 270
+    },
+    "color=light_gray,facing=down,lit=false": {
+      "model": "factoryheart:block/condenser",
+      "x": 90
+    },
+    "color=light_gray,facing=down,lit=true": {
+      "model": "factoryheart:block/condenser",
+      "x": 90
+    },
+    "color=light_gray,facing=east,lit=false": {
+      "model": "factoryheart:block/condenser",
+      "y": 90
+    },
+    "color=light_gray,facing=east,lit=true": {
+      "model": "factoryheart:block/condenser",
+      "y": 90
+    },
+    "color=light_gray,facing=north,lit=false": {
+      "model": "factoryheart:block/condenser"
+    },
+    "color=light_gray,facing=north,lit=true": {
+      "model": "factoryheart:block/condenser"
+    },
+    "color=light_gray,facing=south,lit=false": {
+      "model": "factoryheart:block/condenser",
+      "y": 180
+    },
+    "color=light_gray,facing=south,lit=true": {
+      "model": "factoryheart:block/condenser",
+      "y": 180
+    },
+    "color=light_gray,facing=up,lit=false": {
+      "model": "factoryheart:block/condenser",
+      "x": 270
+    },
+    "color=light_gray,facing=up,lit=true": {
+      "model": "factoryheart:block/condenser",
+      "x": 270
+    },
+    "color=light_gray,facing=west,lit=false": {
+      "model": "factoryheart:block/condenser",
+      "y": 270
+    },
+    "color=light_gray,facing=west,lit=true": {
+      "model": "factoryheart:block/condenser",
+      "y": 270
+    },
+    "color=lime,facing=down,lit=false": {
+      "model": "factoryheart:block/condenser",
+      "x": 90
+    },
+    "color=lime,facing=down,lit=true": {
+      "model": "factoryheart:block/condenser",
+      "x": 90
+    },
+    "color=lime,facing=east,lit=false": {
+      "model": "factoryheart:block/condenser",
+      "y": 90
+    },
+    "color=lime,facing=east,lit=true": {
+      "model": "factoryheart:block/condenser",
+      "y": 90
+    },
+    "color=lime,facing=north,lit=false": {
+      "model": "factoryheart:block/condenser"
+    },
+    "color=lime,facing=north,lit=true": {
+      "model": "factoryheart:block/condenser"
+    },
+    "color=lime,facing=south,lit=false": {
+      "model": "factoryheart:block/condenser",
+      "y": 180
+    },
+    "color=lime,facing=south,lit=true": {
+      "model": "factoryheart:block/condenser",
+      "y": 180
+    },
+    "color=lime,facing=up,lit=false": {
+      "model": "factoryheart:block/condenser",
+      "x": 270
+    },
+    "color=lime,facing=up,lit=true": {
+      "model": "factoryheart:block/condenser",
+      "x": 270
+    },
+    "color=lime,facing=west,lit=false": {
+      "model": "factoryheart:block/condenser",
+      "y": 270
+    },
+    "color=lime,facing=west,lit=true": {
+      "model": "factoryheart:block/condenser",
+      "y": 270
+    },
+    "color=magenta,facing=down,lit=false": {
+      "model": "factoryheart:block/condenser",
+      "x": 90
+    },
+    "color=magenta,facing=down,lit=true": {
+      "model": "factoryheart:block/condenser",
+      "x": 90
+    },
+    "color=magenta,facing=east,lit=false": {
+      "model": "factoryheart:block/condenser",
+      "y": 90
+    },
+    "color=magenta,facing=east,lit=true": {
+      "model": "factoryheart:block/condenser",
+      "y": 90
+    },
+    "color=magenta,facing=north,lit=false": {
+      "model": "factoryheart:block/condenser"
+    },
+    "color=magenta,facing=north,lit=true": {
+      "model": "factoryheart:block/condenser"
+    },
+    "color=magenta,facing=south,lit=false": {
+      "model": "factoryheart:block/condenser",
+      "y": 180
+    },
+    "color=magenta,facing=south,lit=true": {
+      "model": "factoryheart:block/condenser",
+      "y": 180
+    },
+    "color=magenta,facing=up,lit=false": {
+      "model": "factoryheart:block/condenser",
+      "x": 270
+    },
+    "color=magenta,facing=up,lit=true": {
+      "model": "factoryheart:block/condenser",
+      "x": 270
+    },
+    "color=magenta,facing=west,lit=false": {
+      "model": "factoryheart:block/condenser",
+      "y": 270
+    },
+    "color=magenta,facing=west,lit=true": {
+      "model": "factoryheart:block/condenser",
+      "y": 270
+    },
+    "color=orange,facing=down,lit=false": {
+      "model": "factoryheart:block/condenser",
+      "x": 90
+    },
+    "color=orange,facing=down,lit=true": {
+      "model": "factoryheart:block/condenser",
+      "x": 90
+    },
+    "color=orange,facing=east,lit=false": {
+      "model": "factoryheart:block/condenser",
+      "y": 90
+    },
+    "color=orange,facing=east,lit=true": {
+      "model": "factoryheart:block/condenser",
+      "y": 90
+    },
+    "color=orange,facing=north,lit=false": {
+      "model": "factoryheart:block/condenser"
+    },
+    "color=orange,facing=north,lit=true": {
+      "model": "factoryheart:block/condenser"
+    },
+    "color=orange,facing=south,lit=false": {
+      "model": "factoryheart:block/condenser",
+      "y": 180
+    },
+    "color=orange,facing=south,lit=true": {
+      "model": "factoryheart:block/condenser",
+      "y": 180
+    },
+    "color=orange,facing=up,lit=false": {
+      "model": "factoryheart:block/condenser",
+      "x": 270
+    },
+    "color=orange,facing=up,lit=true": {
+      "model": "factoryheart:block/condenser",
+      "x": 270
+    },
+    "color=orange,facing=west,lit=false": {
+      "model": "factoryheart:block/condenser",
+      "y": 270
+    },
+    "color=orange,facing=west,lit=true": {
+      "model": "factoryheart:block/condenser",
+      "y": 270
+    },
+    "color=pink,facing=down,lit=false": {
+      "model": "factoryheart:block/condenser",
+      "x": 90
+    },
+    "color=pink,facing=down,lit=true": {
+      "model": "factoryheart:block/condenser",
+      "x": 90
+    },
+    "color=pink,facing=east,lit=false": {
+      "model": "factoryheart:block/condenser",
+      "y": 90
+    },
+    "color=pink,facing=east,lit=true": {
+      "model": "factoryheart:block/condenser",
+      "y": 90
+    },
+    "color=pink,facing=north,lit=false": {
+      "model": "factoryheart:block/condenser"
+    },
+    "color=pink,facing=north,lit=true": {
+      "model": "factoryheart:block/condenser"
+    },
+    "color=pink,facing=south,lit=false": {
+      "model": "factoryheart:block/condenser",
+      "y": 180
+    },
+    "color=pink,facing=south,lit=true": {
+      "model": "factoryheart:block/condenser",
+      "y": 180
+    },
+    "color=pink,facing=up,lit=false": {
+      "model": "factoryheart:block/condenser",
+      "x": 270
+    },
+    "color=pink,facing=up,lit=true": {
+      "model": "factoryheart:block/condenser",
+      "x": 270
+    },
+    "color=pink,facing=west,lit=false": {
+      "model": "factoryheart:block/condenser",
+      "y": 270
+    },
+    "color=pink,facing=west,lit=true": {
+      "model": "factoryheart:block/condenser",
+      "y": 270
+    },
+    "color=purple,facing=down,lit=false": {
+      "model": "factoryheart:block/condenser",
+      "x": 90
+    },
+    "color=purple,facing=down,lit=true": {
+      "model": "factoryheart:block/condenser",
+      "x": 90
+    },
+    "color=purple,facing=east,lit=false": {
+      "model": "factoryheart:block/condenser",
+      "y": 90
+    },
+    "color=purple,facing=east,lit=true": {
+      "model": "factoryheart:block/condenser",
+      "y": 90
+    },
+    "color=purple,facing=north,lit=false": {
+      "model": "factoryheart:block/condenser"
+    },
+    "color=purple,facing=north,lit=true": {
+      "model": "factoryheart:block/condenser"
+    },
+    "color=purple,facing=south,lit=false": {
+      "model": "factoryheart:block/condenser",
+      "y": 180
+    },
+    "color=purple,facing=south,lit=true": {
+      "model": "factoryheart:block/condenser",
+      "y": 180
+    },
+    "color=purple,facing=up,lit=false": {
+      "model": "factoryheart:block/condenser",
+      "x": 270
+    },
+    "color=purple,facing=up,lit=true": {
+      "model": "factoryheart:block/condenser",
+      "x": 270
+    },
+    "color=purple,facing=west,lit=false": {
+      "model": "factoryheart:block/condenser",
+      "y": 270
+    },
+    "color=purple,facing=west,lit=true": {
+      "model": "factoryheart:block/condenser",
+      "y": 270
+    },
+    "color=red,facing=down,lit=false": {
+      "model": "factoryheart:block/condenser",
+      "x": 90
+    },
+    "color=red,facing=down,lit=true": {
+      "model": "factoryheart:block/condenser",
+      "x": 90
+    },
+    "color=red,facing=east,lit=false": {
+      "model": "factoryheart:block/condenser",
+      "y": 90
+    },
+    "color=red,facing=east,lit=true": {
+      "model": "factoryheart:block/condenser",
+      "y": 90
+    },
+    "color=red,facing=north,lit=false": {
+      "model": "factoryheart:block/condenser"
+    },
+    "color=red,facing=north,lit=true": {
+      "model": "factoryheart:block/condenser"
+    },
+    "color=red,facing=south,lit=false": {
+      "model": "factoryheart:block/condenser",
+      "y": 180
+    },
+    "color=red,facing=south,lit=true": {
+      "model": "factoryheart:block/condenser",
+      "y": 180
+    },
+    "color=red,facing=up,lit=false": {
+      "model": "factoryheart:block/condenser",
+      "x": 270
+    },
+    "color=red,facing=up,lit=true": {
+      "model": "factoryheart:block/condenser",
+      "x": 270
+    },
+    "color=red,facing=west,lit=false": {
+      "model": "factoryheart:block/condenser",
+      "y": 270
+    },
+    "color=red,facing=west,lit=true": {
+      "model": "factoryheart:block/condenser",
+      "y": 270
+    },
+    "color=white,facing=down,lit=false": {
+      "model": "factoryheart:block/condenser",
+      "x": 90
+    },
+    "color=white,facing=down,lit=true": {
+      "model": "factoryheart:block/condenser",
+      "x": 90
+    },
+    "color=white,facing=east,lit=false": {
+      "model": "factoryheart:block/condenser",
+      "y": 90
+    },
+    "color=white,facing=east,lit=true": {
+      "model": "factoryheart:block/condenser",
+      "y": 90
+    },
+    "color=white,facing=north,lit=false": {
+      "model": "factoryheart:block/condenser"
+    },
+    "color=white,facing=north,lit=true": {
+      "model": "factoryheart:block/condenser"
+    },
+    "color=white,facing=south,lit=false": {
+      "model": "factoryheart:block/condenser",
+      "y": 180
+    },
+    "color=white,facing=south,lit=true": {
+      "model": "factoryheart:block/condenser",
+      "y": 180
+    },
+    "color=white,facing=up,lit=false": {
+      "model": "factoryheart:block/condenser",
+      "x": 270
+    },
+    "color=white,facing=up,lit=true": {
+      "model": "factoryheart:block/condenser",
+      "x": 270
+    },
+    "color=white,facing=west,lit=false": {
+      "model": "factoryheart:block/condenser",
+      "y": 270
+    },
+    "color=white,facing=west,lit=true": {
+      "model": "factoryheart:block/condenser",
+      "y": 270
+    },
+    "color=yellow,facing=down,lit=false": {
+      "model": "factoryheart:block/condenser",
+      "x": 90
+    },
+    "color=yellow,facing=down,lit=true": {
+      "model": "factoryheart:block/condenser",
+      "x": 90
+    },
+    "color=yellow,facing=east,lit=false": {
+      "model": "factoryheart:block/condenser",
+      "y": 90
+    },
+    "color=yellow,facing=east,lit=true": {
+      "model": "factoryheart:block/condenser",
+      "y": 90
+    },
+    "color=yellow,facing=north,lit=false": {
+      "model": "factoryheart:block/condenser"
+    },
+    "color=yellow,facing=north,lit=true": {
+      "model": "factoryheart:block/condenser"
+    },
+    "color=yellow,facing=south,lit=false": {
+      "model": "factoryheart:block/condenser",
+      "y": 180
+    },
+    "color=yellow,facing=south,lit=true": {
+      "model": "factoryheart:block/condenser",
+      "y": 180
+    },
+    "color=yellow,facing=up,lit=false": {
+      "model": "factoryheart:block/condenser",
+      "x": 270
+    },
+    "color=yellow,facing=up,lit=true": {
+      "model": "factoryheart:block/condenser",
+      "x": 270
+    },
+    "color=yellow,facing=west,lit=false": {
+      "model": "factoryheart:block/condenser",
+      "y": 270
+    },
+    "color=yellow,facing=west,lit=true": {
+      "model": "factoryheart:block/condenser",
+      "y": 270
+    }
+  }
+}

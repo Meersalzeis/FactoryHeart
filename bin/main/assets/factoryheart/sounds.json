@@ -1,0 +1,14 @@
+{
+  "extractor_wirr": {
+    "subtitle": "sounds.factoryheart.extractor_wirr",
+    "sounds": [
+      "factoryheart:extractor_wirr"
+    ]
+  },
+  "heart_wirr": {
+    "subtitle": "sounds.factoryheart.heart_wirr",
+    "sounds": [
+      "factoryheart:heart_wirr"
+    ]
+  }
+}

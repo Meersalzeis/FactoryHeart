@@ -7,6 +7,7 @@ import net.minecraft.core.NonNullList;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.world.item.DyeColor;
+import net.minecraft.world.item.DyeItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.Recipe;
@@ -42,6 +43,7 @@ public record CondenserRecipe(DyeColor hue, int requiredTier, int requiredTicks,
     @Override
     public NonNullList<Ingredient> getIngredients() {
         NonNullList<Ingredient> list = NonNullList.create();
+        list.add(Ingredient.of(DyeItem.byColor(hue))); 
         return list;
     }
 
@@ -50,8 +52,6 @@ public record CondenserRecipe(DyeColor hue, int requiredTier, int requiredTicks,
         if(pLevel.isClientSide()) {
             return false;
         }
-
-        FHModClient.debugMessageToAll("Comparing hues: this is"+hue+" against others "+pInput.getHue(), false);
         return hue.equals(pInput.getHue());
     }
 

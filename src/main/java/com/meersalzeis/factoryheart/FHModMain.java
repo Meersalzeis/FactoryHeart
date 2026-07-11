@@ -5,12 +5,13 @@ import java.util.Random;
 import org.slf4j.Logger;
 
 import com.meersalzeis.factoryheart.block.ModBlocks;
-import com.meersalzeis.factoryheart.block.entity.ModBECapabilities;
-import com.meersalzeis.factoryheart.block.entity.ModBlockEntities;
+import com.meersalzeis.factoryheart.blockentity.ModBECapabilities;
+import com.meersalzeis.factoryheart.blockentity.ModBlockEntities;
 import com.meersalzeis.factoryheart.hearts.HeartFeeding;
 import com.meersalzeis.factoryheart.item.ModCreativeModeTabs;
 import com.meersalzeis.factoryheart.item.ModItems;
 import com.meersalzeis.factoryheart.recipe.ModRecipes;
+import com.meersalzeis.factoryheart.sound.ModSounds;
 import com.meersalzeis.factoryheart.gui.ModMenuTypes;
 import com.meersalzeis.factoryheart.gui.screens.CrystallizerScreen;
 import com.meersalzeis.factoryheart.gui.screens.ExtractorScreen;
@@ -55,7 +56,9 @@ public class FHModMain {
         ModCreativeModeTabs.register(modEventBus);
         
         ModBlockEntities.register(modEventBus);
-        modEventBus.addListener(ModBECapabilities::registerCapabilities);
+        modEventBus.addListener(ModBECapabilities::register);
+        
+        ModSounds.register(modEventBus);
 
         ModMenuTypes.register(modEventBus);
 

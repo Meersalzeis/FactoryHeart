@@ -1,0 +1,15 @@
+{
+  "type": "factoryheart:wrapping",
+  "centerpiece": {
+    "item": "factoryheart:metal_disc"
+  },
+  "wrappings": {
+    "item": "factoryheart:metal_sheet"
+  },
+  "centerpieceCount": 2,
+  "wrappingsCount": 1,
+  "result": {
+    "id": "factoryheart:empty_can",
+    "count": 6
+  }
+}

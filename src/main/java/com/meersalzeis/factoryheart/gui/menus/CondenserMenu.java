@@ -2,7 +2,7 @@
 package com.meersalzeis.factoryheart.gui.menus;
 
 import com.meersalzeis.factoryheart.block.ModBlocks;
-import com.meersalzeis.factoryheart.block.entity.custom.CondenserBlockEntity;
+import com.meersalzeis.factoryheart.blockentity.crafting.CondenserBlockEntity;
 import com.meersalzeis.factoryheart.gui.ModMenuTypes;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.entity.player.Inventory;

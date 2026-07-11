@@ -2,8 +2,8 @@ package com.meersalzeis.factoryheart.datagen;
 
 import com.meersalzeis.factoryheart.FHModMain;
 import com.meersalzeis.factoryheart.block.ModBlocks;
-import com.meersalzeis.factoryheart.block.custom.FactoryHeartBlock;
-import com.meersalzeis.factoryheart.block.custom.FactoryMawBlock;
+import com.meersalzeis.factoryheart.block.hearting.FactoryHeartBlock;
+import com.meersalzeis.factoryheart.block.hearting.FactoryMawBlock;
 
 import net.minecraft.core.Direction;
 import net.minecraft.data.PackOutput;

@@ -10,7 +10,7 @@ import com.meersalzeis.factoryheart.Config;
 import com.meersalzeis.factoryheart.FHModClient;
 import com.meersalzeis.factoryheart.FHModMain;
 import com.meersalzeis.factoryheart.block.ModBlocks;
-import com.meersalzeis.factoryheart.block.custom.FactoryHeartBlock;
+import com.meersalzeis.factoryheart.block.hearting.FactoryHeartBlock;
 import com.meersalzeis.factoryheart.util.ModTags;
 import com.mojang.logging.LogUtils;
 import org.slf4j.Logger;
@@ -28,12 +28,9 @@ import net.minecraft.world.level.block.state.BlockState;
 public class HeartNetwork {
 
     public BlockPos heart = null;
-    public HashSet<BlockPos> blockPositions = new HashSet<BlockPos>();
+    public Belly belly = null;
 
-    public int fuelGauge = 0;
-    public int coolantGauge = 0;
-    public int lastUsedFuelTier = 0;
-    public int lastUsedCoolantTier = 0;
+    public HashSet<BlockPos> blockPositions = new HashSet<BlockPos>();
 
 
     // =============== Object Management =============
@@ -112,8 +109,8 @@ public class HeartNetwork {
 
     public static void DoTickFor(Level level, BlockPos pos) {
         HeartNetwork netw = HeartBeating.GetNetworkOrNew(level, pos);
-        if (netw.fuelGauge > 0) netw.fuelGauge -= 1;
-        if (netw.coolantGauge > 0) netw.coolantGauge -= 1;
+        if (netw.belly.fuelGauge > 0) netw.belly.fuelGauge -= 1;
+        if (netw.belly.coolantGauge > 0) netw.belly.coolantGauge -= 1;
     }
 
     // =============== Maw Management =============

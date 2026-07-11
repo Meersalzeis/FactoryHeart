@@ -1,0 +1,15 @@
+{
+  "type": "factoryheart:wrapping",
+  "centerpiece": {
+    "item": "minecraft:amethyst_shard"
+  },
+  "wrappings": {
+    "item": "factoryheart:copper_wire"
+  },
+  "centerpieceCount": 1,
+  "wrappingsCount": 2,
+  "result": {
+    "id": "factoryheart:containment_spool",
+    "count": 1
+  }
+}
