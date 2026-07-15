@@ -57,7 +57,7 @@ public class ModBlocks {
     );
 
     public static final DeferredBlock<FactoryHeartBlock> FACTORY_HEART = registerBlock("factory_heart",
-        () -> new FactoryHeartBlock(BlockBehaviour.Properties.of().strength(3f))
+        () -> new FactoryHeartBlock(BlockBehaviour.Properties.of().strength(3f).lightLevel(state -> FactoryHeartBlock.getLightLevel(state)))
     );
 
 

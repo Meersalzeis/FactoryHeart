@@ -1,6 +1,7 @@
 package com.meersalzeis.factoryheart.block.crafting;
 
 import com.meersalzeis.factoryheart.blockentity.ModBlockEntities;
+import com.meersalzeis.factoryheart.blockentity.crafting.ExtractorBlockEntity;
 import com.meersalzeis.factoryheart.blockentity.crafting.TesterBlockEntity;
 import com.mojang.serialization.MapCodec;
 
@@ -148,4 +149,15 @@ public class TesterBlock extends BaseEntityBlock {
         return ItemInteractionResult.sidedSuccess(pLevel.isClientSide());
     }
 
+    @Override
+    public void onRemove(BlockState pState, Level pLevel, BlockPos pPos, BlockState pNewState, boolean pIsMoving) {
+        if (pState.getBlock() != pNewState.getBlock()) {
+            BlockEntity blockEntity = pLevel.getBlockEntity(pPos);
+            if (blockEntity instanceof TesterBlockEntity testerBlockEntity) {
+                testerBlockEntity.drops();
+            }
+        }
+
+        super.onRemove(pState, pLevel, pPos, pNewState, pIsMoving);
+    }
 }

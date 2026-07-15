@@ -1,14 +1,16 @@
 package com.meersalzeis.factoryheart.blockentity.crafting;
 
 import com.meersalzeis.factoryheart.FHModMain;
-import com.meersalzeis.factoryheart.block.SingleSlotFilteredHandler;
 import com.meersalzeis.factoryheart.block.crafting.TesterBlock;
+import com.meersalzeis.factoryheart.blockentity.FactoryHeartBlockEntity;
 import com.meersalzeis.factoryheart.blockentity.ModBlockEntities;
+import com.meersalzeis.factoryheart.blockentity.SingleSlotFilteredHandler;
 import com.meersalzeis.factoryheart.recipe.TesterRecipe;
 import com.meersalzeis.factoryheart.recipe.TesterRecipeInput;
 import com.meersalzeis.factoryheart.recipe.BlazerRecipe;
 import com.meersalzeis.factoryheart.recipe.ModRecipes;
 import com.meersalzeis.factoryheart.gui.menus.TesterMenu;
+import com.meersalzeis.factoryheart.hearts.HeartNetwork;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -66,6 +68,8 @@ public class TesterBlockEntity extends BlockEntity implements MenuProvider {
     private int progress = 0;
     private int maxProgress = 100;
     private final int DEFAULT_MAX_PROGRESS = 100;
+
+    private FactoryHeartBlockEntity heartEntity = null;
 
     public final IItemHandler restHandler = new SingleSlotFilteredHandler(itemHandler, INPUT_SLOT, x -> isViableInput(x), false);
     public final IItemHandler bottomHandler = new RangedWrapper(itemHandler, SUCCESS_SLOT, FAILED_SLOT + 1);
@@ -231,7 +235,9 @@ public class TesterBlockEntity extends BlockEntity implements MenuProvider {
     }
 
     private boolean hasSufficientTierToCraft(Level level, BlockPos pos, Optional<RecipeHolder<TesterRecipe>> recipe) {
-        return recipe.get().value().requiredTier() <= 4;
+        if (heartEntity == null) heartEntity = HeartNetwork.getHeartEntity(level, pos);
+        if (heartEntity == null) return false;
+        return recipe.get().value().requiredTier() <= heartEntity.calculateCurrentTier();
     }
 
     private Optional<RecipeHolder<TesterRecipe>> getCurrentRecipe() {

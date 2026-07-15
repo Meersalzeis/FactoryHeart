@@ -87,7 +87,12 @@ public class FactoryMawBlock extends DirectionalBlock {
     @Override
     public void onPlace(BlockState state, Level level, BlockPos pos, BlockState oldState, boolean movedByPiston) {
         if (level.isClientSide()) return;
-        HeartBeating.AddBlock(level, pos, false);
+
+        if (oldState.is(state.getBlock())) {
+            return;
+        }
+
+        HeartBeating.TryAddBlock(level, pos, false);
     }
 
     @Override

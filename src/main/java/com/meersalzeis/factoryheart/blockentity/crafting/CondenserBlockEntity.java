@@ -1,9 +1,12 @@
 package com.meersalzeis.factoryheart.blockentity.crafting;
 
 import com.meersalzeis.factoryheart.block.crafting.CondenserBlock;
+import com.meersalzeis.factoryheart.blockentity.FactoryHeartBlockEntity;
 import com.meersalzeis.factoryheart.blockentity.ModBlockEntities;
 import com.meersalzeis.factoryheart.hearts.HeartBeating;
+import com.meersalzeis.factoryheart.hearts.HeartNetwork;
 import com.meersalzeis.factoryheart.item.ModItems;
+import com.meersalzeis.factoryheart.recipe.BlazerRecipe;
 import com.meersalzeis.factoryheart.recipe.CondenserRecipe;
 import com.meersalzeis.factoryheart.recipe.CondenserRecipeInput;
 import com.meersalzeis.factoryheart.recipe.ModRecipes;
@@ -37,6 +40,8 @@ public class CondenserBlockEntity extends BlockEntity {
     private final int DEFAULT_MAX_PROGRESS = 100;
 
     private DyeColor color;
+
+    private FactoryHeartBlockEntity heartEntity = null;
 
     public CondenserBlockEntity(BlockPos pos, BlockState blockState) {
         super(ModBlockEntities.CONDENSER_BE.get(), pos, blockState);
@@ -137,7 +142,9 @@ public class CondenserBlockEntity extends BlockEntity {
     }
 
     private boolean hasSufficientTierToCraft(Level level, BlockPos pos, Optional<RecipeHolder<CondenserRecipe>> recipe) {
-        return recipe.get().value().requiredTier() <= 4;//HeartBeating.GetTier(level, pos);
+        if (heartEntity == null) heartEntity = HeartNetwork.getHeartEntity(level, pos);
+        if (heartEntity == null) return false;
+        return recipe.get().value().requiredTier() <= heartEntity.calculateCurrentTier();
     }
 
     private Optional<RecipeHolder<CondenserRecipe>> getRecipeForThis() {

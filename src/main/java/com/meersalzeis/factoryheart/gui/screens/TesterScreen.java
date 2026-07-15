@@ -6,6 +6,8 @@ import com.meersalzeis.factoryheart.gui.menus.TesterMenu;
 import com.meersalzeis.factoryheart.gui.renderer.EnergyDisplayTooltipArea;
 import com.meersalzeis.factoryheart.gui.renderer.FluidTankRenderer;
 import com.meersalzeis.factoryheart.util.MouseUtil;
+
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.client.renderer.GameRenderer;
@@ -34,7 +36,8 @@ public class TesterScreen extends AbstractContainerScreen<TesterMenu> {
         super.init();
 
         this.inventoryLabelY = 10000;
-        this.titleLabelY = 10000;
+        this.titleLabelX = 68;
+        this.titleLabelY = 8;
 
         // assignEnergyInfoArea();
         // assignFluidRenderer();
@@ -86,7 +89,7 @@ public class TesterScreen extends AbstractContainerScreen<TesterMenu> {
         // energyInfoArea.render(pGuiGraphics);
         // fluidRenderer.render(pGuiGraphics, x + 8, y + 7, menu.blockEntity.getFluid());
 
-        renderProgressArrow(pGuiGraphics, x, y);;
+        renderProgressArrow(pGuiGraphics, x, y);
     }
 
     private void renderProgressArrow(GuiGraphics guiGraphics, int x, int y) {

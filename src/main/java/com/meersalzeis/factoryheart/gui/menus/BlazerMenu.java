@@ -4,6 +4,7 @@ package com.meersalzeis.factoryheart.gui.menus;
 import com.meersalzeis.factoryheart.block.ModBlocks;
 import com.meersalzeis.factoryheart.blockentity.crafting.BlazerBlockEntity;
 import com.meersalzeis.factoryheart.gui.ModMenuTypes;
+
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
@@ -37,6 +38,10 @@ public class BlazerMenu  extends AbstractContainerMenu {
         //this.addSlot(new SlotItemHandler(this.blockEntity.itemHandler, 3, 152, 62));
 
         addDataSlots(data);
+    }
+
+    public int getTier() {
+        return blockEntity.getTier();
     }
 
     public boolean isCrafting() {

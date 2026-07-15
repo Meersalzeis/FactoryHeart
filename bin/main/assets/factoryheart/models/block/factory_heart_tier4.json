@@ -1,7 +1,7 @@
 {
   "parent": "minecraft:block/cube_column",
   "textures": {
-    "end": "factoryheart:block/factory_standard",
+    "end": "factoryheart:block/factory_skin",
     "side": "factoryheart:block/factory_heart_t4"
   }
 }

@@ -1,12 +1,14 @@
 package com.meersalzeis.factoryheart.blockentity.crafting;
 
-import com.meersalzeis.factoryheart.block.SingleSlotFilteredHandler;
 import com.meersalzeis.factoryheart.block.crafting.WrapperBlock;
+import com.meersalzeis.factoryheart.blockentity.FactoryHeartBlockEntity;
 import com.meersalzeis.factoryheart.blockentity.ModBlockEntities;
+import com.meersalzeis.factoryheart.blockentity.SingleSlotFilteredHandler;
 import com.meersalzeis.factoryheart.recipe.WrapperRecipe;
 import com.meersalzeis.factoryheart.recipe.WrapperRecipeInput;
 import com.meersalzeis.factoryheart.recipe.ModRecipes;
 import com.meersalzeis.factoryheart.gui.menus.WrapperMenu;
+import com.meersalzeis.factoryheart.hearts.HeartNetwork;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -75,6 +77,7 @@ public class WrapperBlockEntity extends BlockEntity implements MenuProvider {
     private int maxProgress = 100;
     private final int DEFAULT_MAX_PROGRESS = 100;
 
+    private FactoryHeartBlockEntity heartEntity = null;
 
     public WrapperBlockEntity(BlockPos pPos, BlockState pBlockState) {
         super(ModBlockEntities.WRAPPER_BE.get(), pPos, pBlockState);
@@ -245,7 +248,14 @@ public class WrapperBlockEntity extends BlockEntity implements MenuProvider {
             canInsertAmountIntoOutputSlot(output.getCount()) 
             && canInsertItemIntoOutputSlot(output) 
             && isOutputSlotEmptyOrReceivable()
+            && hasSufficientTier(level, pos)
             && hasSufficientMaterialForRecipe(recipe);
+    }
+
+    private boolean hasSufficientTier(Level level, BlockPos pos) {
+        if (heartEntity == null) heartEntity = HeartNetwork.getHeartEntity(level, pos);
+        if (heartEntity == null) return false;
+        return heartEntity.calculateCurrentTier() >= 1;
     }
 
     private boolean hasSufficientMaterialForRecipe(Optional<RecipeHolder<WrapperRecipe>> recipe) {

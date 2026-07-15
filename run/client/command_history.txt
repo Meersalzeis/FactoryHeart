@@ -4,3 +4,4 @@
 /locate biome minecraft:sparse_jungle
 /tp @s 92 84 353
 /weather clear
+/time set night

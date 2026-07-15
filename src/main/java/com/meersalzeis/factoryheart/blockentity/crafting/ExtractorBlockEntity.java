@@ -1,11 +1,13 @@
 package com.meersalzeis.factoryheart.blockentity.crafting;
 
 import com.meersalzeis.factoryheart.FHModClient;
-import com.meersalzeis.factoryheart.block.SingleSlotFilteredHandler;
 import com.meersalzeis.factoryheart.block.crafting.ExtractorBlock;
+import com.meersalzeis.factoryheart.blockentity.FactoryHeartBlockEntity;
 import com.meersalzeis.factoryheart.blockentity.ModBlockEntities;
+import com.meersalzeis.factoryheart.blockentity.SingleSlotFilteredHandler;
 import com.meersalzeis.factoryheart.blockentity.energy.ModEnergyStorage;
 import com.meersalzeis.factoryheart.hearts.HeartBeating;
+import com.meersalzeis.factoryheart.hearts.HeartNetwork;
 import com.meersalzeis.factoryheart.item.ModItems;
 import com.meersalzeis.factoryheart.recipe.BlazerRecipe;
 import com.meersalzeis.factoryheart.recipe.ExtractorRecipe;
@@ -69,6 +71,8 @@ public class ExtractorBlockEntity extends BlockEntity implements MenuProvider {
     private int progress = 0;
     private int maxProgress = 100;
     private final int DEFAULT_MAX_PROGRESS = 100;
+
+    private FactoryHeartBlockEntity heartEntity = null;
 
     public final IItemHandler restHandler = new SingleSlotFilteredHandler(itemHandler, INPUT_SLOT, x -> isViableInput(x), false);
     public final IItemHandler bottomHandler = new RangedWrapper(itemHandler, OUTPUT_SLOT, OUTPUT_SLOT + 1);
@@ -251,7 +255,9 @@ public class ExtractorBlockEntity extends BlockEntity implements MenuProvider {
     }
 
     private boolean hasSufficientTierToCraft(Level level, BlockPos pos, Optional<RecipeHolder<ExtractorRecipe>> recipe) {
-        return recipe.get().value().requiredTier() <= 4;
+        if (heartEntity == null) heartEntity = HeartNetwork.getHeartEntity(level, pos);
+        if (heartEntity == null) return false;
+        return recipe.get().value().requiredTier() <= heartEntity.calculateCurrentTier();
     }
 
     private Optional<RecipeHolder<ExtractorRecipe>> getCurrentRecipe() {

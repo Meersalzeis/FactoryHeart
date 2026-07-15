@@ -1,6 +1,7 @@
 package com.meersalzeis.factoryheart.block.crafting;
 
 import com.meersalzeis.factoryheart.blockentity.ModBlockEntities;
+import com.meersalzeis.factoryheart.blockentity.crafting.ExtractorBlockEntity;
 import com.meersalzeis.factoryheart.blockentity.crafting.WrapperBlockEntity;
 import com.mojang.serialization.MapCodec;
 
@@ -115,13 +116,22 @@ public class WrapperBlock extends BaseEntityBlock {
             BlockEntity entity = pLevel.getBlockEntity(pPos);
             if(entity instanceof WrapperBlockEntity wrapperBlockEntity) {
                 ((ServerPlayer) pPlayer).openMenu(new SimpleMenuProvider(wrapperBlockEntity, Component.literal("Wrapper")), pPos);
-            } else {
-                throw new IllegalStateException("Our Container provider is missing!");
             }
         }
 
         return ItemInteractionResult.sidedSuccess(pLevel.isClientSide());
     }
 
+    @Override
+    public void onRemove(BlockState pState, Level pLevel, BlockPos pPos, BlockState pNewState, boolean pIsMoving) {
+        if (pState.getBlock() != pNewState.getBlock()) {
+            BlockEntity blockEntity = pLevel.getBlockEntity(pPos);
+            if (blockEntity instanceof WrapperBlockEntity wrapperBlockEntity) {
+                wrapperBlockEntity.drops();
+            }
+        }
+
+        super.onRemove(pState, pLevel, pPos, pNewState, pIsMoving);
+    }
 }
 

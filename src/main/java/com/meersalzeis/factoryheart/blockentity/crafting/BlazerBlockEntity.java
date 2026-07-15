@@ -1,10 +1,11 @@
 package com.meersalzeis.factoryheart.blockentity.crafting;
 
 import com.meersalzeis.factoryheart.FHModClient;
-import com.meersalzeis.factoryheart.block.SingleSlotFilteredHandler;
 import com.meersalzeis.factoryheart.block.crafting.BlazerBlock;
 import com.meersalzeis.factoryheart.blockentity.FactoryHeartBlockEntity;
 import com.meersalzeis.factoryheart.blockentity.ModBlockEntities;
+import com.meersalzeis.factoryheart.blockentity.SingleSlotFilteredHandler;
+import com.meersalzeis.factoryheart.hearts.FHCraftingStation;
 import com.meersalzeis.factoryheart.hearts.HeartBeating;
 import com.meersalzeis.factoryheart.hearts.HeartNetwork;
 import com.meersalzeis.factoryheart.item.ModItems;
@@ -50,7 +51,9 @@ import org.jetbrains.annotations.Nullable;
 import java.util.List;
 import java.util.Optional;
 
-public class BlazerBlockEntity extends BlockEntity implements MenuProvider {
+import javax.swing.plaf.basic.BasicComboBoxUI.ItemHandler;
+
+public class BlazerBlockEntity extends FHCraftingStation<BlazerBlockEntity> implements MenuProvider {
 
     public final ItemStackHandler itemHandler = new ItemStackHandler(2) {
         @Override
@@ -71,42 +74,12 @@ public class BlazerBlockEntity extends BlockEntity implements MenuProvider {
     private static final int INPUT_SLOT = 0;
     private static final int OUTPUT_SLOT = 1;
 
-    private final ContainerData data;
-    private int progress = 0;
-    private int maxProgress = 100;
-    private final int DEFAULT_MAX_PROGRESS = 100;
-
-    private FactoryHeartBlockEntity heartEntity = null;
-
     public final IItemHandler restHandler = new SingleSlotFilteredHandler(itemHandler, INPUT_SLOT, x -> isViableInput(x), false);
     public final IItemHandler bottomHandler = new RangedWrapper(itemHandler, OUTPUT_SLOT, OUTPUT_SLOT + 1);
 
 
     public BlazerBlockEntity(BlockPos pPos, BlockState pBlockState) {
         super(ModBlockEntities.BLAZER_BE.get(), pPos, pBlockState);
-        this.data = new ContainerData() {
-            @Override
-            public int get(int pIndex) {
-                return switch (pIndex) {
-                    case 0 -> BlazerBlockEntity.this.progress;
-                    case 1 -> BlazerBlockEntity.this.maxProgress;
-                    default -> 0;
-                };
-            }
-
-            @Override
-            public void set(int pIndex, int pValue) {
-                switch (pIndex) {
-                    case 0: BlazerBlockEntity.this.progress = pValue;
-                    case 1: BlazerBlockEntity.this.maxProgress = pValue;
-                }
-            }
-
-            @Override
-            public int getCount() {
-                return 2;
-            }
-        };
     }
 
     private static List<ItemStack> viableInputs = null;
@@ -147,29 +120,8 @@ public class BlazerBlockEntity extends BlockEntity implements MenuProvider {
     }
 
     @Override
-    protected void saveAdditional(CompoundTag pTag, HolderLookup.Provider pRegistries) {
-        pTag.put("inventory", itemHandler.serializeNBT(pRegistries));
-        pTag.putInt("blazer.progress", progress);
-        pTag.putInt("blazer.max_progress", maxProgress);
-
-        super.saveAdditional(pTag, pRegistries);
-    }
-
-    @Override
-    protected void loadAdditional(CompoundTag pTag, HolderLookup.Provider pRegistries) {
-        super.loadAdditional(pTag, pRegistries);
-        itemHandler.deserializeNBT(pRegistries, pTag.getCompound("inventory"));
-        progress = pTag.getInt("blazer.progress");
-        maxProgress = pTag.getInt("blazer.max_progress");
-    }
-
-    public void drops() {
-        SimpleContainer inv = new SimpleContainer(itemHandler.getSlots());
-        for(int i = 0; i < itemHandler.getSlots(); i++) {
-            inv.setItem(i, itemHandler.getStackInSlot(i));
-        }
-
-        Containers.dropContents(this.level, this.worldPosition, inv);
+    protected ItemStackHandler getInventory() {
+        return itemHandler;
     }
 
     public void tick(Level level, BlockPos pPos, BlockState pState) {
@@ -262,9 +214,7 @@ public class BlazerBlockEntity extends BlockEntity implements MenuProvider {
     }
 
     private boolean hasSufficientTierToCraft(Level level, BlockPos pos, Optional<RecipeHolder<BlazerRecipe>> recipe) {
-        if (heartEntity == null) heartEntity = HeartNetwork.getHeartEntity(level, pos);
-        if (heartEntity == null) return false;
-        return recipe.get().value().requiredTier() <= heartEntity.GetCurrentTier();
+        return recipe.get().value().requiredTier() <= currentTier;
     }
 
     // private boolean hasEnoughFluidToCraft() {

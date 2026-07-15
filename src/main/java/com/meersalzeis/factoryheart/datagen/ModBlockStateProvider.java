@@ -24,8 +24,7 @@ public class ModBlockStateProvider extends BlockStateProvider {
     @Override
     protected void registerStatesAndModels() {
         blockWithItem(ModBlocks.FACTORY_VEIN);
-        simpleBlockItem(ModBlocks.FACTORY_SKIN.get(), new ModelFile.UncheckedModelFile("factoryheart:block/factory_standard"));
-        //blockItem(ModBlocks.FACTORY_HEART, "_t0");
+        blockWithItem(ModBlocks.FACTORY_SKIN);
 
         blockWithItem(ModBlocks.WRAPPER);
         blockWithItem(ModBlocks.EXTRACTOR);
@@ -72,7 +71,7 @@ public class ModBlockStateProvider extends BlockStateProvider {
             ModelFile factoryHeartModel = models().cubeColumn(
                 "factory_heart_tier" + tier,
                 modLoc("block/factory_heart_t"+tier),
-                modLoc("block/factory_standard")
+                modLoc("block/factory_skin")
             );
             return new ConfiguredModel[]{new ConfiguredModel(factoryHeartModel)};
         });
@@ -81,7 +80,7 @@ public class ModBlockStateProvider extends BlockStateProvider {
         simpleBlockItem(ModBlocks.FACTORY_HEART.get(), models().cubeColumn(
                 "factory_heart_t0",
                 modLoc("block/factory_heart_t0"),
-                modLoc("block/factory_standard"))
+                modLoc("block/factory_skin"))
         );
     }
 

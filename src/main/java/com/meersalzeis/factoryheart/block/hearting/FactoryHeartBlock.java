@@ -1,6 +1,7 @@
 package com.meersalzeis.factoryheart.block.hearting;
 
 import com.meersalzeis.factoryheart.FHModClient;
+import com.meersalzeis.factoryheart.block.ModBlocks;
 import com.meersalzeis.factoryheart.blockentity.FactoryHeartBlockEntity;
 import com.meersalzeis.factoryheart.blockentity.ModBlockEntities;
 import com.meersalzeis.factoryheart.hearts.HeartBeating;
@@ -9,6 +10,8 @@ import com.mojang.serialization.MapCodec;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.particles.BlockParticleOption;
+import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionResult;
@@ -18,6 +21,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.BaseEntityBlock;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.DirectionalBlock;
+import net.minecraft.world.level.block.RenderShape;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityTicker;
 import net.minecraft.world.level.block.entity.BlockEntityType;
@@ -46,19 +50,25 @@ public class FactoryHeartBlock extends BaseEntityBlock {
     }
 
     @Override
+    public RenderShape getRenderShape(BlockState state) {
+        return RenderShape.MODEL;
+    }
+
+    @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
-        builder.add(FACING).add(TIER);
+        builder.add(TIER).add(FACING);
     }
 
     @Override
     protected void onPlace(BlockState state, Level level, BlockPos pos, BlockState oldState, boolean isMoving) {
         if (level.isClientSide()) return;
-        // Be aware this call can cause heart conflicts and thus instantly break the heart again
-        HeartBeating.AddBlock(level, pos, true);
-    }
 
-    public static int getTier(BlockState state) {
-        return state.getValue(TIER);
+        if (oldState.is(state.getBlock())) {
+            return;
+        }
+
+        // Be aware this call can cause heart conflicts and thus instantly break the heart again
+        HeartBeating.TryAddBlock(level, pos, true);
     }
 
     @Override
@@ -79,6 +89,7 @@ public class FactoryHeartBlock extends BaseEntityBlock {
 
         BlockEntity be = level.getBlockEntity(pos);
         String message = ((FactoryHeartBlockEntity) be).toString();
+        message += " BlockProperty Tier is " + state.getValue(FactoryHeartBlock.TIER);
         FHModClient.debugMessageToAll(message, false);
         return InteractionResult.SUCCESS;
     }
@@ -93,8 +104,33 @@ public class FactoryHeartBlock extends BaseEntityBlock {
 
         return createTickerHelper(
             pBlockEntityType, ModBlockEntities.HEART_BE.get(),
-            (pLevel1, pPos, pState1, pBlockEntity) -> pBlockEntity.tick(pLevel1, pPos, pState1)
+            (pLevel1, pPos, pState1, pBlockEntity) -> pBlockEntity.tick(pPos, pState1)
         );
+    }
+
+    @Override
+    public void animateTick(BlockState state, Level pLevel, BlockPos pPos, RandomSource pRandom) {
+        // THIS METHOD IS !CLIENT ONLY!
+        double xPos = pPos.getX() + 0.5f;
+        double yPos = pPos.getY() + 1.0f;
+        double zPos = pPos.getZ() + 0.5f;
+        double offset = pRandom.nextDouble() * 0.8 - 0.6;
+
+        int tier = state.getValue(TIER);
+        
+        if (tier == 1 || tier == 3 || tier == 4) {
+            pLevel.addParticle(ParticleTypes.SMOKE, xPos + offset, yPos, zPos + offset, 0.0, 0.0, 0.0);
+        }
+        if (tier == 2 || tier == 3) {
+            pLevel.addParticle(ParticleTypes.FLAME, xPos + offset, yPos, zPos + offset, 0.0, 0.0, 0.0);
+        }
+        if (tier == 4) {
+            pLevel.addParticle(ParticleTypes.SOUL_FIRE_FLAME, xPos + offset, yPos, zPos + offset, 0.0, 0.0, 0.0);
+        }
+    }
+
+    public static int getLightLevel(BlockState state) {
+        return state.getValue(TIER) * 2;
     }
 
     @Override

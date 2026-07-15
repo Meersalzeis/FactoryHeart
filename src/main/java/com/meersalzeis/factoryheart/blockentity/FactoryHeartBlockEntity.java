@@ -4,6 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.meersalzeis.factoryheart.Config;
+import com.meersalzeis.factoryheart.FHModClient;
+import com.meersalzeis.factoryheart.block.crafting.BlazerBlock;
+import com.meersalzeis.factoryheart.block.hearting.FactoryHeartBlock;
+import com.meersalzeis.factoryheart.hearts.HeartBeating;
+import com.meersalzeis.factoryheart.hearts.HeartNetwork;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
@@ -11,7 +16,6 @@ import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.item.ItemEntity;
-import net.minecraft.world.inventory.ContainerData;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
@@ -42,6 +46,13 @@ public class FactoryHeartBlockEntity extends BlockEntity {
     }
 
     @Override
+    public void onLoad() {
+        if (level.isClientSide) return;
+
+        HeartBeating.changeTierOfHeart(level, worldPosition, calculateCurrentTier());
+    }
+
+    @Override
     protected void saveAdditional(CompoundTag pTag, HolderLookup.Provider pRegistries) {
         pTag.putInt("heart.fuel", fuel_left);
         pTag.putInt("heart.cool", coolant_left);
@@ -61,37 +72,43 @@ public class FactoryHeartBlockEntity extends BlockEntity {
         lastUsedCoolantTier  = pTag.getInt("heart.l_cool");
     }
 
-    public void tick(Level level, BlockPos pos, BlockState state) {
-        drainBy(1);
+    public void tick(BlockPos pos, BlockState state) {
+        drainBy(pos, state, 1);
     }
 
-    public boolean drainBy(int amount) {
-        boolean result = true;
+    public boolean drainBy(BlockPos pos, BlockState state, int amount) {
+        boolean hadCap = true;
 
         fuel_left -= amount;
         if (fuel_left < 0) {
             fuel_left = 0;
-            result = false;
+            hadCap = false;
         }
 
         coolant_left -= amount;
-        if (fuel_left < 0) {
-            fuel_left = 0;
-            result = false;
+        if (coolant_left < 0) {
+            coolant_left = 0;
+            hadCap = false;
         }
 
-        return result;
+        if ((!hadCap) && state.getValue(FactoryHeartBlock.TIER) != 0) {
+            level.setBlockAndUpdate(pos, state.setValue(FactoryHeartBlock.TIER, 0));
+        }
+
+        return hadCap;
     }
 
-    public int GetCurrentTier() {
+    public int calculateCurrentTier() {
         if (fuel_left <= 0 ) return 0;
-
+        
         int supplyTier = Math.max(1, Math.min(lastUsedCoolantTier, lastUsedFuelTier));
+        if (coolant_left > 0) return supplyTier;
+
         switch (supplyTier) {
-            case 1: return (coolant_T1.isEmpty() || coolant_left > 0) ? 1 : 0;
-            case 2: return (coolant_T2.isEmpty() || coolant_left > 0) ? 2 : 0;
-            case 3: return (coolant_T3.isEmpty() || coolant_left > 0) ? 3 : 0;
-            case 4: return (coolant_T4.isEmpty() || coolant_left > 0) ? 4 : 0;
+            case 1: return coolant_T1.isEmpty() ? 1 : 0;
+            case 2: return coolant_T2.isEmpty() ? 2 : 0;
+            case 3: return coolant_T3.isEmpty() ? 3 : 0;
+            case 4: return coolant_T4.isEmpty() ? 4 : 0;
         }
         // should be dead code
         return -1;
@@ -120,38 +137,46 @@ public class FactoryHeartBlockEntity extends BlockEntity {
         return res;
     }
 
-    public void MawGetsItemFed(ItemEntity itemEntity) {
+    public void netwGetsItemFed(Level level, BlockPos heartPos, ItemEntity itemEntity) {
 
         if (fuel_T4.contains(itemEntity.getItem().getItem())) {
-            FeedOn(itemEntity, 4, true);
+            feedOn(itemEntity, 4, true);
+            recheckTier(level, heartPos);
         }
         if (fuel_T3.contains(itemEntity.getItem().getItem())) {
-            FeedOn(itemEntity, 3, true);
+            feedOn(itemEntity, 3, true);
+            recheckTier(level, heartPos);
         }
         if (fuel_T2.contains(itemEntity.getItem().getItem())) {
-            FeedOn(itemEntity, 2, true);
+            feedOn(itemEntity, 2, true);
+            recheckTier(level, heartPos);
         }
         if (fuel_T1.contains(itemEntity.getItem().getItem())) {
-            FeedOn(itemEntity, 1, true);
+            feedOn(itemEntity, 1, true);
+            recheckTier(level, heartPos);
         }
 
         if (coolant_T4.contains(itemEntity.getItem().getItem())) {
-            FeedOn(itemEntity, 4, false);
+            feedOn(itemEntity, 4, false);
+            recheckTier(level, heartPos);
         }
         if (coolant_T3.contains(itemEntity.getItem().getItem())) {
-            FeedOn(itemEntity, 3, false);
+            feedOn(itemEntity, 3, false);
+            recheckTier(level, heartPos);
         }
         if (coolant_T2.contains(itemEntity.getItem().getItem())) {
-            FeedOn(itemEntity, 2, false);
+            feedOn(itemEntity, 2, false);
+            recheckTier(level, heartPos);
         }
         if (coolant_T1.contains(itemEntity.getItem().getItem())) {
-            FeedOn(itemEntity, 1, false);
+            feedOn(itemEntity, 1, false);
+            recheckTier(level, heartPos);
         }
 
         // else nothing happens
     }
 
-    private void FeedOn(ItemEntity itemEntity, int tier, boolean isFuel) {
+    private void feedOn(ItemEntity itemEntity, int tier, boolean isFuel) {
         int gaugeVal = isFuel ? fuel_left : coolant_left;
 
         if (gaugeVal + resource_per_item > max_resource) return;
@@ -163,16 +188,23 @@ public class FactoryHeartBlockEntity extends BlockEntity {
             coolant_left += resource_per_item;
             lastUsedCoolantTier = tier;
         }
+
         ItemStack oldStack = itemEntity.getItem();
         oldStack.shrink(1);
-        if (oldStack.getCount() == 1) {
+        if (oldStack.getCount() == 0) {
             itemEntity.discard();
-            return;
         }
+    }
+
+    private void recheckTier(Level level, BlockPos heartPos) {
+        int newTier = calculateCurrentTier();
+        BlockState state = level.getBlockState(heartPos);
+        level.setBlockAndUpdate(heartPos, state.setValue(FactoryHeartBlock.TIER, newTier));
+        HeartBeating.changeTierOfHeart(level, heartPos, newTier);
     }
 
     @Override
     public String toString() {
-        return "FHeart curTier: " + GetCurrentTier() + ", fuelTier " + lastUsedFuelTier + ", coolantTier " + lastUsedCoolantTier + " with " +fuel_left + " fuel left and " + coolant_left + " coolant left.";
+        return "FHeart curTier: " + calculateCurrentTier() + ", fuelTier " + lastUsedFuelTier + ", coolantTier " + lastUsedCoolantTier + " with " +fuel_left + " fuel left and " + coolant_left + " coolant left.";
     }
 }

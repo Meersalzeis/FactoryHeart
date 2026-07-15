@@ -1,11 +1,13 @@
 {
   "values": [
     "factoryheart:factory_vein",
+    "factoryheart:factory_skin",
     "factoryheart:factory_maw",
     "factoryheart:factory_heart",
     "factoryheart:blazer",
     "factoryheart:wrapper",
     "factoryheart:extractor",
-    "factoryheart:tester"
+    "factoryheart:tester",
+    "factoryheart:condenser"
   ]
 }

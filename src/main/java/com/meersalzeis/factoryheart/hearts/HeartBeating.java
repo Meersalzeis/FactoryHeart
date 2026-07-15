@@ -25,7 +25,9 @@ import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.dimension.DimensionType;
 
@@ -35,10 +37,11 @@ public class HeartBeating {
 
     // =============== Block interaction =============== 
 
-    public static void AddBlock(Level level, BlockPos pos, boolean isHeart) {
+    public static void TryAddBlock(Level level, BlockPos pos, boolean isHeart) {
 
         // This already merges all connected networks, but does not resolve heart conflicts
         HeartNetwork netw = GetNetworkOrNew(level, pos, isHeart);
+        FHModClient.debugMessageToAll("AllBlockSize in new Netw:"+netw.blockPositions.size()+ " , hasHeart:" + netw.HasHeart(), false);
 
         // if (!isHeart) {
         //     return;
@@ -81,6 +84,21 @@ public class HeartBeating {
         }
 
         RedrawNetworksAfterRemoval(level, pos);
+    }
+
+    public static void changeTierOfHeart(Level level, BlockPos pos, int newTier) {
+        HeartNetwork netw = GetNetworkOrNew(level, pos, true);
+        for (var curBlockPos : netw.blockPositions) {
+            
+            BlockEntity bEntity = level.getBlockEntity(curBlockPos);
+            if (bEntity instanceof FHCraftingStation station) {
+                station.data.set(2, newTier);
+                station.setChanged();
+                station.initiateSync();
+
+                FHModClient.debugMessageToAll("Found FHCraftingStation, set to" + newTier, false);
+            }
+        }
     }
 
     // =============== Network Getter / Util =============== 
@@ -252,8 +270,8 @@ public class HeartBeating {
         return crowded;
     }
 
-    public static void MawGetsItemFed(Level level, BlockPos pos, ItemEntity itemFed) {
-        var netw = GetNetworkOrNew(level, pos, false);
-        if (netw.HasHeart()) netw.getHeartEntity(level, pos).MawGetsItemFed(itemFed);
+    public static void MawGetsItemFed(Level level, BlockPos mawPos, ItemEntity itemFed) {
+        var netw = GetNetworkOrNew(level, mawPos, false);
+        if (netw.HasHeart()) netw.getHeartEntity(level, mawPos).netwGetsItemFed(level, netw.heart, itemFed);
     }
 }

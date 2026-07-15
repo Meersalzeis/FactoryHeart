@@ -4,7 +4,7 @@
 	"textures": {
 		"0": "factoryheart:block/condenser_side",
 		"1": "factoryheart:block/condenser_opening",
-		"2": "factoryheart:block/factory_standard",
+		"2": "factoryheart:block/factory_skin",
 		"particle": "#0"
 	},
 	"elements": [
