@@ -20,7 +20,7 @@ public class BlazerMenu  extends AbstractContainerMenu {
     private final ContainerData data;
 
     public BlazerMenu(int pContainerId, Inventory inv, FriendlyByteBuf extraData) {
-        this(pContainerId, inv, inv.player.level().getBlockEntity(extraData.readBlockPos()), new SimpleContainerData(2));
+        this(pContainerId, inv, inv.player.level().getBlockEntity(extraData.readBlockPos()), new SimpleContainerData(3));
     }
 
     public BlazerMenu(int pContainerId, Inventory inv, BlockEntity entity, ContainerData data) {

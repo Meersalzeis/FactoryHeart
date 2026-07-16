@@ -32,8 +32,6 @@ public class ModCreativeModeTabs {
                         pOutput.accept(ModBlocks.FACTORY_SKIN);
                         pOutput.accept(ModBlocks.FACTORY_HEART);
 
-                        pOutput.accept(ModBlocks.CRYSTALLIZER);
-
                         pOutput.accept(ModItems.ABZERO_MATTER);
                         pOutput.accept(ModItems.ACTIVATED_BLAZE_ROD);
                         pOutput.accept(ModItems.BLAZEAR_FUEL_ROD);

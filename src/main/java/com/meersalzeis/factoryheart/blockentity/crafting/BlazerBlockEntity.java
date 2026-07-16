@@ -2,10 +2,10 @@ package com.meersalzeis.factoryheart.blockentity.crafting;
 
 import com.meersalzeis.factoryheart.FHModClient;
 import com.meersalzeis.factoryheart.block.crafting.BlazerBlock;
+import com.meersalzeis.factoryheart.blockentity.FHCraftingStation;
 import com.meersalzeis.factoryheart.blockentity.FactoryHeartBlockEntity;
 import com.meersalzeis.factoryheart.blockentity.ModBlockEntities;
 import com.meersalzeis.factoryheart.blockentity.SingleSlotFilteredHandler;
-import com.meersalzeis.factoryheart.hearts.FHCraftingStation;
 import com.meersalzeis.factoryheart.hearts.HeartBeating;
 import com.meersalzeis.factoryheart.hearts.HeartNetwork;
 import com.meersalzeis.factoryheart.item.ModItems;
@@ -104,10 +104,6 @@ public class BlazerBlockEntity extends FHCraftingStation<BlazerBlockEntity> impl
         return viableInputs.stream().anyMatch(x -> ItemStack.isSameItem(x, stack));
     }
 
-    public IItemHandler getItemHandler(Direction direction) {
-        return this.itemHandler;
-    }
-
     @Override
     public Component getDisplayName() {
         return Component.translatable("blockentity.factoryheart.y_blazer");
@@ -141,36 +137,6 @@ public class BlazerBlockEntity extends FHCraftingStation<BlazerBlockEntity> impl
             resetProgress();
             level.setBlockAndUpdate(pPos, pState.setValue(BlazerBlock.LIT, false));
         }
-
-        // if (hasFluidStackInSlot()) {
-        //     transferFluidToTank();
-        // }
-    }
-
-    // private void extractFluidForCrafting() {
-    //     this.FLUID_TANK.drain(FLUID_CRAFT_AMOUNT, IFluidHandler.FluidAction.EXECUTE);
-    // }
-
-    // private void transferFluidToTank() {
-    //     FluidActionResult result = FluidUtil.tryEmptyContainer(itemHandler.getStackInSlot(0), this.FLUID_TANK, Integer.MAX_VALUE, null, true);
-    //     if(result.result != ItemStack.EMPTY) {
-    //         itemHandler.setStackInSlot(FLUID_ITEM_SLOT, result.result);
-    //     }
-    // }
-
-    // private boolean hasFluidStackInSlot() {
-    //     return !itemHandler.getStackInSlot(FLUID_ITEM_SLOT).isEmpty()
-    //             && itemHandler.getStackInSlot(FLUID_ITEM_SLOT).getCapability(Capabilities.FluidHandler.ITEM, null) != null
-    //             && !itemHandler.getStackInSlot(FLUID_ITEM_SLOT).getCapability(Capabilities.FluidHandler.ITEM, null).getFluidInTank(0).isEmpty();
-    // }
-
-    // private void useEnergyForCrafting() {
-    //     this.ENERGY_STORAGE.extractEnergy(ENERGY_CRAFT_AMOUNT, false);
-    // }
-
-    private void resetProgress() {
-        this.progress = 0;
-        this.maxProgress = DEFAULT_MAX_PROGRESS;
     }
 
     private void craftItem() {
@@ -184,14 +150,6 @@ public class BlazerBlockEntity extends FHCraftingStation<BlazerBlockEntity> impl
                 output.getItem(),
                 itemHandler.getStackInSlot(OUTPUT_SLOT).getCount() + output.getCount())
         );
-    }
-
-    private boolean hasCraftingFinished() {
-        return this.progress >= this.maxProgress;
-    }
-
-    private void increaseCraftingProgress() {
-        progress++;
     }
 
     private boolean isOutputSlotEmptyOrReceivable() {
@@ -217,14 +175,6 @@ public class BlazerBlockEntity extends FHCraftingStation<BlazerBlockEntity> impl
         return recipe.get().value().requiredTier() <= currentTier;
     }
 
-    // private boolean hasEnoughFluidToCraft() {
-    //     return FLUID_TANK.getFluidAmount() >= FLUID_CRAFT_AMOUNT;
-    // }
-
-    // private boolean hasEnoughEnergyToCraft() {
-    //     return this.ENERGY_STORAGE.getEnergyStored() >= ENERGY_CRAFT_AMOUNT * maxProgress;
-    // }
-
     private Optional<RecipeHolder<BlazerRecipe>> getCurrentRecipe() {
         return this.level.getRecipeManager()
                 .getRecipeFor(ModRecipes.BLAZER_TYPE.get(), new BlazerRecipeInput(itemHandler.getStackInSlot(INPUT_SLOT)), level);
@@ -240,16 +190,5 @@ public class BlazerBlockEntity extends FHCraftingStation<BlazerBlockEntity> impl
         int currentCount = itemHandler.getStackInSlot(OUTPUT_SLOT).getCount();
 
         return maxCount >= currentCount + count;
-    }
-
-    @Nullable
-    @Override
-    public Packet<ClientGamePacketListener> getUpdatePacket() {
-        return ClientboundBlockEntityDataPacket.create(this);
-    }
-
-    @Override
-    public CompoundTag getUpdateTag(HolderLookup.Provider pRegistries) {
-        return saveWithoutMetadata(pRegistries);
     }
 }

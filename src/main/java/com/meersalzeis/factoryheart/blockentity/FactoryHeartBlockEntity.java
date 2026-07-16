@@ -92,7 +92,7 @@ public class FactoryHeartBlockEntity extends BlockEntity {
         }
 
         if ((!hadCap) && state.getValue(FactoryHeartBlock.TIER) != 0) {
-            level.setBlockAndUpdate(pos, state.setValue(FactoryHeartBlock.TIER, 0));
+            setTier(level, pos, 0);
         }
 
         return hadCap;
@@ -198,6 +198,10 @@ public class FactoryHeartBlockEntity extends BlockEntity {
 
     private void recheckTier(Level level, BlockPos heartPos) {
         int newTier = calculateCurrentTier();
+        setTier(level, heartPos, newTier);
+    }
+
+    private void setTier(Level level, BlockPos heartPos, int newTier) {
         BlockState state = level.getBlockState(heartPos);
         level.setBlockAndUpdate(heartPos, state.setValue(FactoryHeartBlock.TIER, newTier));
         HeartBeating.changeTierOfHeart(level, heartPos, newTier);

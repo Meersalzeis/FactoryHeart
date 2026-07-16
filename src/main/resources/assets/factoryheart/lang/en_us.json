@@ -1,21 +1,24 @@
 {
-"itemGroup.factoryheart.factoryheart_all_tab": "Factory Heart",
+  "itemGroup.factoryheart.factoryheart_all_tab": "Factory Heart",
+
+  "sounds.factoryheart.heart_wirr":"Factory Heart Wirr",
+  "sounds.factoryheart.extractor_wirr":"Extractor Wirr",
   
   "block.factoryheart.blazer":"Blazer",
   "blockentity.factoryheart.blazer": "Blazer",
   "block.factoryheart.wrapper":"Wrapper",
+  "blockentity.factoryheart.wrapper": "Wrapper",
   "block.factoryheart.extractor":"Extractor",
+  "blockentity.factoryheart.extractor": "Extractor",
   "block.factoryheart.tester":"Tester",
+  "blockentity.factoryheart.tester": "Tester",
+  "block.factoryheart.condenser":"Condenser",
+  "blockentity.factoryheart.condenser": "Condenser",
 
   "block.factoryheart.factory_maw":"Factory Maw",
   "block.factoryheart.factory_vein":"Factory Vein",
+  "block.factoryheart.factory_skin":"Factory Skin",
   "block.factoryheart.factory_heart":"Factory Heart",
-
-  "block.factoryheart.pedestal":"Pedestal",
-
-  "block.factoryheart.crystallizer":"Crystallizer",
-  "blockentity.factoryheart.crystallizer": "Crystallizer",
-
 
   "item.factoryheart.abzero_matter":"Abzero Matter",
   "item.factoryheart.activated_blaze_rod":"Activated Blaze Rod",
@@ -33,5 +36,21 @@
   "item.factoryheart.metal_disc":"Metal Disc",
   "item.factoryheart.metal_sheet":"Metal Sheet",
   "item.factoryheart.soda_powder":"Soda Powder",
-  "item.factoryheart.volatile_blaze_rod":"Volatile Blaze Rod"
+  "item.factoryheart.volatile_blaze_rod":"Volatile Blaze Rod",
+  "item.factoryheart.containment_casing":"Containment Casing",
+  "item.factoryheart.containment_field_projector":"Containment Field Projector",
+  "item.factoryheart.containment_spool":"Containment Spool",
+
+  "item.factoryheart.smart_shard":"Smart Shard",
+  "item.factoryheart.smart_shard_untested":"Untested Smart Shard",
+  "item.factoryheart.smart_shard_faulty":"Faulty Smart Shard",
+  "item.factoryheart.smart_part":"Smart Part",
+  "item.factoryheart.smart_part_untested":"Untested Smart Part",
+  "item.factoryheart.smart_part_faulty":"Faulty Smart Part",
+  "item.factoryheart.smart_heart":"Smart Heart",
+  "item.factoryheart.smart_heart_untested":"Untested Smart Heart",
+  "item.factoryheart.smart_heart_faulty":"Faulty Smart Heart",
+  "item.factoryheart.hard_part":"Hard Part",
+  "item.factoryheart.hard_part_untested":"Untested Hard Part",
+  "item.factoryheart.hard_part_faulty":"Faulty Hard Part"
 }

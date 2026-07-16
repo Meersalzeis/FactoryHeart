@@ -4,7 +4,6 @@ import com.meersalzeis.factoryheart.FHModMain;
 import com.meersalzeis.factoryheart.block.ModBlocks;
 import com.meersalzeis.factoryheart.blockentity.crafting.BlazerBlockEntity;
 import com.meersalzeis.factoryheart.blockentity.crafting.CondenserBlockEntity;
-import com.meersalzeis.factoryheart.blockentity.crafting.CrystallizerBlockEntity;
 import com.meersalzeis.factoryheart.blockentity.crafting.ExtractorBlockEntity;
 import com.meersalzeis.factoryheart.blockentity.crafting.TesterBlockEntity;
 import com.meersalzeis.factoryheart.blockentity.crafting.WrapperBlockEntity;
@@ -21,11 +20,6 @@ public class ModBlockEntities {
                 DeferredRegister.create(BuiltInRegistries.BLOCK_ENTITY_TYPE, FHModMain.MOD_ID);
 
         public static void register(IEventBus eventBus) { BLOCK_ENTITIES.register(eventBus); }
-
-
-        public static final Supplier<BlockEntityType<CrystallizerBlockEntity>> CRYSTALLIZER_BE =
-                BLOCK_ENTITIES.register("crystallizer_be", () -> BlockEntityType.Builder.of(
-                        CrystallizerBlockEntity::new, ModBlocks.CRYSTALLIZER.get()).build(null));
 
                         
         public static final Supplier<BlockEntityType<BlazerBlockEntity>> BLAZER_BE =

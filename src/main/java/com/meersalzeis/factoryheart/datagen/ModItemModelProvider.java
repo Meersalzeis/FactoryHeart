@@ -79,7 +79,7 @@ public class ModItemModelProvider extends ItemModelProvider {
     private void customItemTriple(String name, ResourceLocation baseTexture) {
         generateLayeredItem(name, baseTexture);
         generateLayeredItem(name + "_faulty", baseTexture, modLoc("item/overlay_faulty"));
-        generateLayeredItem(name + "_unidentified", baseTexture, modLoc("item/overlay_unidentified"));
+        generateLayeredItem(name + "_untested", baseTexture, modLoc("item/overlay_untested"));
     }
 
     private ItemModelBuilder generateLayeredItem(String name, ResourceLocation... textures) {

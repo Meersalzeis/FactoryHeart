@@ -1,35 +1,20 @@
 package com.meersalzeis.factoryheart.gui.screens;
 
-import com.mojang.blaze3d.systems.RenderSystem;
-import com.meersalzeis.factoryheart.FHModClient;
 import com.meersalzeis.factoryheart.FHModMain;
 import com.meersalzeis.factoryheart.gui.menus.BlazerMenu;
-import com.meersalzeis.factoryheart.gui.renderer.EnergyDisplayTooltipArea;
-import com.meersalzeis.factoryheart.gui.renderer.FluidTankRenderer;
-import com.meersalzeis.factoryheart.util.MouseUtil;
+import com.meersalzeis.factoryheart.gui.renderer.FHScreens;
+import com.meersalzeis.factoryheart.gui.renderer.TierDisplay;
 
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
-import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
-import net.minecraft.world.item.TooltipFlag;
-import net.neoforged.neoforge.fluids.FluidStack;
 
-import java.util.Optional;
 
 public class BlazerScreen extends AbstractContainerScreen<BlazerMenu> {
     private static final ResourceLocation GUI_TEXTURE =
         ResourceLocation.fromNamespaceAndPath(FHModMain.MOD_ID,"textures/gui/blazer/blazer_gui.png");
-    private static final ResourceLocation ARROW_TEXTURE =
-        ResourceLocation.fromNamespaceAndPath(FHModMain.MOD_ID,"textures/gui/arrow_progress.png");
-
-    private static final ResourceLocation TIER_SCALE_TEXTURE =
-        ResourceLocation.fromNamespaceAndPath(FHModMain.MOD_ID,"textures/gui/tier_scale.png");
-    private static final ResourceLocation TIER_4_TEXTURE =
-        ResourceLocation.fromNamespaceAndPath(FHModMain.MOD_ID,"textures/gui/tier_4.png");
 
     public BlazerScreen(BlazerMenu pMenu, Inventory pPlayerInventory, Component pTitle) {
         super(pMenu, pPlayerInventory, pTitle);
@@ -42,87 +27,25 @@ public class BlazerScreen extends AbstractContainerScreen<BlazerMenu> {
         this.inventoryLabelY = 10000;
         this.titleLabelX = 70;
         this.titleLabelY = 8;
-
-        // assignEnergyInfoArea();
-        // assignFluidRenderer();
     }
-
-    // private void assignFluidRenderer() {
-    //     fluidRenderer = new FluidTankRenderer(16000, true, 16, 50);
-    // }
-
-    // private void assignEnergyInfoArea() {
-    //     energyInfoArea = new EnergyDisplayTooltipArea(((width - imageWidth) / 2) + 156,
-    //             ((height - imageHeight) / 2 ) + 9, menu.blockEntity.getEnergyStorage(null), 8, 48);
-    // }
-
-    // private void renderEnergyAreaTooltip(GuiGraphics guiGraphics, int pMouseX, int pMouseY, int x, int y) {
-    //     if(isMouseAboveArea(pMouseX, pMouseY, x, y, 156, 11, 8, 48)) {
-    //         guiGraphics.renderTooltip(this.font, energyInfoArea.getTooltips(),
-    //                 Optional.empty(), pMouseX - x, pMouseY - y);
-    //     }
-    // }
-
-    // private void renderFluidTooltipArea(GuiGraphics guiGraphics, int pMouseX, int pMouseY, int x, int y,
-    //                                     FluidStack stack, int offsetX, int offsetY, FluidTankRenderer renderer) {
-    //     if(isMouseAboveArea(pMouseX, pMouseY, x, y, offsetX, offsetY, renderer)) {
-    //         guiGraphics.renderTooltip(this.font, renderer.getTooltip(stack, TooltipFlag.Default.NORMAL),
-    //                 Optional.empty(), pMouseX - x, pMouseY - y);
-    //     }
-    // }
-
-    // @Override
-    // protected void renderLabels(GuiGraphics guiGraphics, int pMouseX, int pMouseY) {
-    //     int x = (width - imageWidth) / 2;
-    //     int y = (height - imageHeight) / 2;
-
-    //     renderEnergyAreaTooltip(guiGraphics, pMouseX, pMouseY, x, y);
-    //     renderFluidTooltipArea(guiGraphics, pMouseX, pMouseY, x, y, menu.blockEntity.getFluid(), 8, 7, fluidRenderer);
-    // }
 
     @Override
     protected void renderBg(GuiGraphics pGuiGraphics, float pPartialTick, int pMouseX, int pMouseY) {
-        RenderSystem.setShader(GameRenderer::getPositionTexShader);
-        RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
-        RenderSystem.setShaderTexture(0, GUI_TEXTURE);
         int x = (width - imageWidth) / 2;
         int y = (height - imageHeight) / 2;
 
+        FHScreens.setRenderSystem(GUI_TEXTURE);
         pGuiGraphics.blit(GUI_TEXTURE, x, y, 0, 0, imageWidth, imageHeight);
-
-        // energyInfoArea.render(pGuiGraphics);
-        // fluidRenderer.render(pGuiGraphics, x + 8, y + 7, menu.blockEntity.getFluid());
-
         renderProgressArrow(pGuiGraphics, x, y);
-        renderTierDisplay(pGuiGraphics, x, y);
+
+        int tier = menu.getTier();
+        TierDisplay.renderTierDisplay(pGuiGraphics, tier, x, y);
+        TierDisplay.renderTierTooltip(pGuiGraphics, pMouseX, pMouseY, x, y, this.font, tier);
     }
 
     private void renderProgressArrow(GuiGraphics guiGraphics, int x, int y) {
         if(menu.isCrafting()) {
-            guiGraphics.blit(ARROW_TEXTURE,x + 73, y + 35, 0, 0, menu.getScaledArrowProgress(), 16, 24, 16);
-        }
-    }
-
-    private void renderTierDisplay(GuiGraphics guiGraphics, int x, int y) {
-        int tier = menu.getTier();
-        FHModClient.debugMessageToAll("renderTier"+tier, false);
-        if(tier == 4) {
-            FHModClient.debugMessageToAll("Render tier 4", false);
-            guiGraphics.blit(TIER_4_TEXTURE, x+127,  y+64, 0, 0, 16, 32, 16, 32);
-        } else {
-            //FHModClient.debugMessageToAll("Render other tier(s) with scaleVisible" + getScaleVisibleSize(tier), false);
-            guiGraphics.blit(TIER_SCALE_TEXTURE, x+134,  y + 41 + 16 - getScaleVisibleSize(tier), 0,
-                    32 - getScaleVisibleSize(tier), 16, getScaleVisibleSize(tier),16, 32);
-        }
-    }
-
-    public int getScaleVisibleSize(int curTier) {
-        // Only handles tiers from 0-3 not 4
-        switch(curTier) {
-            case 0: return 0;
-            case 1: return 11;
-            case 2: return 22;
-            default: return 32;
+            guiGraphics.blit(FHScreens.ARROW_TEXTURE, x + 73, y + 35, 0, 0, menu.getScaledArrowProgress(), 16, 24, 16);
         }
     }
 
@@ -131,13 +54,5 @@ public class BlazerScreen extends AbstractContainerScreen<BlazerMenu> {
         renderBackground(guiGraphics, mouseX, mouseY, delta);
         super.render(guiGraphics, mouseX, mouseY, delta);
         renderTooltip(guiGraphics, mouseX, mouseY);
-    }
-
-    public static boolean isMouseAboveArea(int pMouseX, int pMouseY, int x, int y, int offsetX, int offsetY, FluidTankRenderer renderer) {
-        return MouseUtil.isMouseOver(pMouseX, pMouseY, x + offsetX, y + offsetY, renderer.getWidth(), renderer.getHeight());
-    }
-
-    public static boolean isMouseAboveArea(int pMouseX, int pMouseY, int x, int y, int offsetX, int offsetY, int width, int height) {
-        return MouseUtil.isMouseOver(pMouseX, pMouseY, x + offsetX, y + offsetY, width, height);
     }
 }

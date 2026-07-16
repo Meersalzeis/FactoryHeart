@@ -1,6 +1,7 @@
 package com.meersalzeis.factoryheart.blockentity.crafting;
 
 import com.meersalzeis.factoryheart.block.crafting.WrapperBlock;
+import com.meersalzeis.factoryheart.blockentity.FHCraftingStation;
 import com.meersalzeis.factoryheart.blockentity.FactoryHeartBlockEntity;
 import com.meersalzeis.factoryheart.blockentity.ModBlockEntities;
 import com.meersalzeis.factoryheart.blockentity.SingleSlotFilteredHandler;
@@ -41,7 +42,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.List;
 import java.util.Optional;
 
-public class WrapperBlockEntity extends BlockEntity implements MenuProvider {
+public class WrapperBlockEntity extends FHCraftingStation<WrapperBlockEntity> implements MenuProvider {
 
     private static final int CENTERPIECE_SLOT = 0;
     private static final int WRAPPINGS_SLOT = 1;
@@ -72,39 +73,13 @@ public class WrapperBlockEntity extends BlockEntity implements MenuProvider {
     private static List<Item> viableWrappings = null;
     private static List<Item> viableCenterpieces = null;
 
-    private final ContainerData data;
-    private int progress = 0;
-    private int maxProgress = 100;
-    private final int DEFAULT_MAX_PROGRESS = 100;
-
-    private FactoryHeartBlockEntity heartEntity = null;
-
     public WrapperBlockEntity(BlockPos pPos, BlockState pBlockState) {
         super(ModBlockEntities.WRAPPER_BE.get(), pPos, pBlockState);
+    }
 
-        this.data = new ContainerData() {
-            @Override
-            public int get(int pIndex) {
-                return switch (pIndex) {
-                    case 0 -> WrapperBlockEntity.this.progress;
-                    case 1 -> WrapperBlockEntity.this.maxProgress;
-                    default -> 0;
-                };
-            }
-
-            @Override
-            public void set(int pIndex, int pValue) {
-                switch (pIndex) {
-                    case 0: WrapperBlockEntity.this.progress = pValue;
-                    case 1: WrapperBlockEntity.this.maxProgress = pValue;
-                }
-            }
-
-            @Override
-            public int getCount() {
-                return 2;
-            }
-        };
+    @Override
+    protected ItemStackHandler getInventory() {
+        return itemHandler;
     }
 
     // Hopper handling region
@@ -130,11 +105,6 @@ public class WrapperBlockEntity extends BlockEntity implements MenuProvider {
             .toList();
     }
 
-    // public static boolean isViableCenterpiece(ItemStack stack) {
-    //     var item = stack.getItem();
-    //     return viableCenterpieces.stream().anyMatch(x -> ItemStack.isSameItem(x, stack));
-    // }
-
     public static boolean isViableCenterpiece(ItemStack stack) {
         var item = stack.getItem();
         return viableCenterpieces.contains(item);
@@ -147,10 +117,6 @@ public class WrapperBlockEntity extends BlockEntity implements MenuProvider {
 
     // End hopper handling
 
-    public IItemHandler getItemHandler(Direction direction) {
-        return this.itemHandler;
-    }
-
     @Override
     public Component getDisplayName() {
         return Component.translatable("blockentity.factoryheart.y_wrapper");
@@ -160,32 +126,6 @@ public class WrapperBlockEntity extends BlockEntity implements MenuProvider {
     @Override
     public AbstractContainerMenu createMenu(int pContainerId, Inventory pPlayerInventory, Player pPlayer) {
         return new WrapperMenu(pContainerId, pPlayerInventory, this, this.data);
-    }
-
-    @Override
-    protected void saveAdditional(CompoundTag pTag, HolderLookup.Provider pRegistries) {
-        pTag.put("inventory", itemHandler.serializeNBT(pRegistries));
-        pTag.putInt("wrapper.progress", progress);
-        pTag.putInt("wrapper.max_progress", maxProgress);
-
-        super.saveAdditional(pTag, pRegistries);
-    }
-
-    @Override
-    protected void loadAdditional(CompoundTag pTag, HolderLookup.Provider pRegistries) {
-        super.loadAdditional(pTag, pRegistries);
-        itemHandler.deserializeNBT(pRegistries, pTag.getCompound("inventory"));
-        progress = pTag.getInt("wrapper.progress");
-        maxProgress = pTag.getInt("wrapper.max_progress");
-    }
-
-    public void drops() {
-        SimpleContainer inv = new SimpleContainer(itemHandler.getSlots());
-        for(int i = 0; i < itemHandler.getSlots(); i++) {
-            inv.setItem(i, itemHandler.getStackInSlot(i));
-        }
-
-        Containers.dropContents(this.level, this.worldPosition, inv);
     }
 
     public void tick(Level level, BlockPos pPos, BlockState pState) {
@@ -205,11 +145,6 @@ public class WrapperBlockEntity extends BlockEntity implements MenuProvider {
         }
     }
 
-    private void resetProgress() {
-        this.progress = 0;
-        this.maxProgress = DEFAULT_MAX_PROGRESS;
-    }
-
     private void craftItem() {
         Optional<RecipeHolder<WrapperRecipe>> recipe = getCurrentRecipe();
         int centerpieceConsumption = recipe.get().value().getCenterpieceCount();
@@ -223,14 +158,6 @@ public class WrapperBlockEntity extends BlockEntity implements MenuProvider {
                 output.getItem(),
                 itemHandler.getStackInSlot(OUTPUT_SLOT).getCount() + output.getCount())
         );
-    }
-
-    private boolean hasCraftingFinished() {
-        return this.progress >= this.maxProgress;
-    }
-
-    private void increaseCraftingProgress() {
-        progress++;
     }
 
     private boolean isOutputSlotEmptyOrReceivable() {
@@ -253,9 +180,7 @@ public class WrapperBlockEntity extends BlockEntity implements MenuProvider {
     }
 
     private boolean hasSufficientTier(Level level, BlockPos pos) {
-        if (heartEntity == null) heartEntity = HeartNetwork.getHeartEntity(level, pos);
-        if (heartEntity == null) return false;
-        return heartEntity.calculateCurrentTier() >= 1;
+        return getTier() >= 1;
     }
 
     private boolean hasSufficientMaterialForRecipe(Optional<RecipeHolder<WrapperRecipe>> recipe) {
@@ -287,16 +212,5 @@ public class WrapperBlockEntity extends BlockEntity implements MenuProvider {
         int currentCount = itemHandler.getStackInSlot(OUTPUT_SLOT).getCount();
 
         return maxCount >= currentCount + count;
-    }
-
-    @Nullable
-    @Override
-    public Packet<ClientGamePacketListener> getUpdatePacket() {
-        return ClientboundBlockEntityDataPacket.create(this);
-    }
-
-    @Override
-    public CompoundTag getUpdateTag(HolderLookup.Provider pRegistries) {
-        return saveWithoutMetadata(pRegistries);
     }
 }

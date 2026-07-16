@@ -22,6 +22,10 @@ public class ExtractorMenu  extends AbstractContainerMenu {
         this(pContainerId, inv, inv.player.level().getBlockEntity(extraData.readBlockPos()), new SimpleContainerData(2));
     }
 
+    public int getTier() {
+        return blockEntity.getTier();
+    }
+
     public ExtractorMenu(int pContainerId, Inventory inv, BlockEntity entity, ContainerData data) {
         super(ModMenuTypes.EXTRACTOR_MENU.get(), pContainerId);
         blockEntity = ((ExtractorBlockEntity) entity);

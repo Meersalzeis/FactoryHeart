@@ -1,7 +1,7 @@
 {
   "type": "factoryheart:testing",
   "ingredient": {
-    "item": "factoryheart:smart_shard_unidentified"
+    "item": "factoryheart:smart_shard_untested"
   },
   "success": {
     "id": "factoryheart:smart_shard"

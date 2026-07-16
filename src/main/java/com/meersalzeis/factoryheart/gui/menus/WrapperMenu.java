@@ -99,6 +99,10 @@ public class WrapperMenu extends AbstractContainerMenu {
         return copyOfSourceStack;
     }
 
+    public int getTier() {
+        return blockEntity.getTier();
+    }
+
     @Override
     public boolean stillValid(Player pPlayer) {
         return stillValid(ContainerLevelAccess.create(level, blockEntity.getBlockPos()),

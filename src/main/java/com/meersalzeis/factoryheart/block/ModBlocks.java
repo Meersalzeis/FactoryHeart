@@ -16,7 +16,6 @@ import java.util.function.Supplier;
 import com.meersalzeis.factoryheart.FHModMain;
 import com.meersalzeis.factoryheart.block.crafting.BlazerBlock;
 import com.meersalzeis.factoryheart.block.crafting.CondenserBlock;
-import com.meersalzeis.factoryheart.block.crafting.CrystallizerBlock;
 import com.meersalzeis.factoryheart.block.crafting.ExtractorBlock;
 import com.meersalzeis.factoryheart.block.crafting.TesterBlock;
 import com.meersalzeis.factoryheart.block.crafting.WrapperBlock;
@@ -63,11 +62,6 @@ public class ModBlocks {
 
     public static final DeferredBlock<CondenserBlock> CONDENSER = registerBlock("condenser",
         () -> new CondenserBlock(BlockBehaviour.Properties.of().strength(3f))
-    );
-
-
-    public static final DeferredBlock<Block> CRYSTALLIZER = registerBlock("crystallizer",
-        () -> new CrystallizerBlock(BlockBehaviour.Properties.of().strength(3f).requiresCorrectToolForDrops())
     );
 
 

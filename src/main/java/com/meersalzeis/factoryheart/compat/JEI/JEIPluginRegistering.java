@@ -11,7 +11,6 @@ import com.meersalzeis.factoryheart.FHModMain;
 import com.meersalzeis.factoryheart.block.ModBlocks;
 import com.meersalzeis.factoryheart.compat.JEI.Categories.BlazerRecipeCategory;
 import com.meersalzeis.factoryheart.compat.JEI.Categories.CondenserRecipeCategory;
-import com.meersalzeis.factoryheart.compat.JEI.Categories.CrystallizerRecipeCategory;
 import com.meersalzeis.factoryheart.compat.JEI.Categories.ExtractorRecipeCategory;
 import com.meersalzeis.factoryheart.compat.JEI.Categories.TesterRecipeCategory;
 import com.meersalzeis.factoryheart.compat.JEI.Categories.WrapperRecipeCategory;
@@ -24,7 +23,6 @@ import com.meersalzeis.factoryheart.recipe.TesterRecipe;
 import com.meersalzeis.factoryheart.recipe.WrapperRecipe;
 import com.meersalzeis.factoryheart.gui.screens.BlazerScreen;
 import com.meersalzeis.factoryheart.gui.screens.CondenserScreen;
-import com.meersalzeis.factoryheart.gui.screens.CrystallizerScreen;
 import com.meersalzeis.factoryheart.gui.screens.ExtractorScreen;
 import com.meersalzeis.factoryheart.gui.screens.TesterScreen;
 import com.meersalzeis.factoryheart.gui.screens.WrapperScreen;
@@ -47,7 +45,6 @@ public class JEIPluginRegistering implements IModPlugin {
 
     @Override
     public void registerCategories(IRecipeCategoryRegistration registration) {
-        registration.addRecipeCategories(new CrystallizerRecipeCategory( registration.getJeiHelpers().getGuiHelper()));
         registration.addRecipeCategories(new BlazerRecipeCategory(    registration.getJeiHelpers().getGuiHelper()));
         registration.addRecipeCategories(new WrapperRecipeCategory( registration.getJeiHelpers().getGuiHelper()));
         registration.addRecipeCategories(new ExtractorRecipeCategory( registration.getJeiHelpers().getGuiHelper()));
@@ -58,9 +55,6 @@ public class JEIPluginRegistering implements IModPlugin {
     @Override
     public void registerRecipes(IRecipeRegistration registration) {
         RecipeManager recipeManager = Minecraft.getInstance().level.getRecipeManager();
-
-        List<CrystallizerRecipe> crystallizerRecipes = recipeManager.getAllRecipesFor(ModRecipes.CRYSTALLIZER_TYPE.get()).stream().map(RecipeHolder::value).toList();
-        registration.addRecipes(CrystallizerRecipeCategory.CRYSTALLIZER_RECIPE_TYPE, crystallizerRecipes);
 
         List<BlazerRecipe> blazerRecipes = recipeManager.getAllRecipesFor(ModRecipes.BLAZER_TYPE.get()).stream().map(RecipeHolder::value).toList();
         registration.addRecipes(BlazerRecipeCategory.BLAZER_RECIPE_TYPE, blazerRecipes);
@@ -80,10 +74,6 @@ public class JEIPluginRegistering implements IModPlugin {
 
     @Override
     public void registerGuiHandlers(IGuiHandlerRegistration registration) {
-        registration.addRecipeClickArea(
-            CrystallizerScreen.class,
-             70, 30, 25, 20,
-            CrystallizerRecipeCategory.CRYSTALLIZER_RECIPE_TYPE);
 
         registration.addRecipeClickArea(
             BlazerScreen.class,
@@ -113,8 +103,6 @@ public class JEIPluginRegistering implements IModPlugin {
 
     @Override
     public void registerRecipeCatalysts(IRecipeCatalystRegistration registration) {
-        registration.addRecipeCatalyst(CrystallizerRecipeCategory.getRecipeCatalyst(), CrystallizerRecipeCategory.CRYSTALLIZER_RECIPE_TYPE);
-    
         registration.addRecipeCatalyst(BlazerRecipeCategory.getRecipeCatalyst(), BlazerRecipeCategory.BLAZER_RECIPE_TYPE);
         registration.addRecipeCatalyst(WrapperRecipeCategory.getRecipeCatalyst(), WrapperRecipeCategory.WRAPPER_RECIPE_TYPE);
         registration.addRecipeCatalyst(ExtractorRecipeCategory.getRecipeCatalyst(), ExtractorRecipeCategory.EXTRACTOR_RECIPE_TYPE);

@@ -13,7 +13,6 @@ import com.meersalzeis.factoryheart.item.ModItems;
 import com.meersalzeis.factoryheart.recipe.ModRecipes;
 import com.meersalzeis.factoryheart.sound.ModSounds;
 import com.meersalzeis.factoryheart.gui.ModMenuTypes;
-import com.meersalzeis.factoryheart.gui.screens.CrystallizerScreen;
 import com.meersalzeis.factoryheart.gui.screens.ExtractorScreen;
 import com.meersalzeis.factoryheart.gui.screens.TesterScreen;
 import com.meersalzeis.factoryheart.gui.screens.BlazerScreen;
@@ -94,7 +93,6 @@ public class FHModMain {
 
         @SubscribeEvent
         public static void registerScreens(RegisterMenuScreensEvent event) {
-            event.register(ModMenuTypes.CRYSTALLIZER_MENU.get(), CrystallizerScreen::new);
             event.register(ModMenuTypes.BLAZER_MENU.get(), BlazerScreen::new);
             event.register(ModMenuTypes.WRAPPER_MENU.get(), WrapperScreen::new);
             event.register(ModMenuTypes.EXTRACTOR_MENU.get(), ExtractorScreen::new);

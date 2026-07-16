@@ -15,6 +15,7 @@ import com.meersalzeis.factoryheart.FHModClient;
 import com.meersalzeis.factoryheart.FHModMain;
 import com.meersalzeis.factoryheart.block.ModBlocks;
 import com.meersalzeis.factoryheart.block.hearting.FactoryHeartBlock;
+import com.meersalzeis.factoryheart.blockentity.FHCraftingStation;
 import com.meersalzeis.factoryheart.util.ModTags;
 import com.mojang.logging.LogUtils;
 
@@ -41,7 +42,6 @@ public class HeartBeating {
 
         // This already merges all connected networks, but does not resolve heart conflicts
         HeartNetwork netw = GetNetworkOrNew(level, pos, isHeart);
-        FHModClient.debugMessageToAll("AllBlockSize in new Netw:"+netw.blockPositions.size()+ " , hasHeart:" + netw.HasHeart(), false);
 
         // if (!isHeart) {
         //     return;
@@ -95,8 +95,6 @@ public class HeartBeating {
                 station.data.set(2, newTier);
                 station.setChanged();
                 station.initiateSync();
-
-                FHModClient.debugMessageToAll("Found FHCraftingStation, set to" + newTier, false);
             }
         }
     }

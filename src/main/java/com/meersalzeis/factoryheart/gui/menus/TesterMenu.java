@@ -1,6 +1,7 @@
 
 package com.meersalzeis.factoryheart.gui.menus;
 
+import com.meersalzeis.factoryheart.FHModClient;
 import com.meersalzeis.factoryheart.block.ModBlocks;
 import com.meersalzeis.factoryheart.blockentity.crafting.TesterBlockEntity;
 import com.meersalzeis.factoryheart.gui.ModMenuTypes;
@@ -47,7 +48,9 @@ public class TesterMenu  extends AbstractContainerMenu {
         int maxProgress = this.data.get(1);
         int arrowPixelSize = 24;
 
-        return maxProgress != 0 && progress != 0 ? progress * arrowPixelSize / maxProgress : 0;
+        int res = maxProgress != 0 && progress != 0 ? progress * arrowPixelSize / maxProgress : 0;
+        FHModClient.debugMessageToAll(""+res, false);
+        return res;
     }
 
     // CREDIT GOES TO: diesieben07 | https://github.com/diesieben07/SevenCommons
@@ -99,6 +102,10 @@ public class TesterMenu  extends AbstractContainerMenu {
         }
         sourceSlot.onTake(playerIn, sourceStack);
         return copyOfSourceStack;
+    }
+
+    public int getTier() {
+        return blockEntity.getTier();
     }
 
     @Override

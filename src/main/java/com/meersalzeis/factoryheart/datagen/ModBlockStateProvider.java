@@ -45,8 +45,6 @@ public class ModBlockStateProvider extends BlockStateProvider {
 
         AddFactoryHeart();
 
-        blockItem(ModBlocks.CRYSTALLIZER);
-
         generateFromBlockbenchModel("blazer", ModBlocks.BLAZER.get(), modLoc("block/blazer"));
         generateFromBlockbenchModel("condenser", ModBlocks.CONDENSER.get(), modLoc("block/condenser"));
         //directionalBlock(ModBlocks.FACTORY_MAW.get());

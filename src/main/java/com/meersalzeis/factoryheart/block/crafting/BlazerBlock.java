@@ -2,7 +2,6 @@ package com.meersalzeis.factoryheart.block.crafting;
 
 import com.meersalzeis.factoryheart.blockentity.ModBlockEntities;
 import com.meersalzeis.factoryheart.blockentity.crafting.BlazerBlockEntity;
-import com.meersalzeis.factoryheart.blockentity.crafting.CrystallizerBlockEntity;
 import com.mojang.serialization.MapCodec;
 
 import net.minecraft.core.BlockPos;

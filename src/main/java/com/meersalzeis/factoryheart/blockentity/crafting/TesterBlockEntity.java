@@ -2,6 +2,7 @@ package com.meersalzeis.factoryheart.blockentity.crafting;
 
 import com.meersalzeis.factoryheart.FHModMain;
 import com.meersalzeis.factoryheart.block.crafting.TesterBlock;
+import com.meersalzeis.factoryheart.blockentity.FHCraftingStation;
 import com.meersalzeis.factoryheart.blockentity.FactoryHeartBlockEntity;
 import com.meersalzeis.factoryheart.blockentity.ModBlockEntities;
 import com.meersalzeis.factoryheart.blockentity.SingleSlotFilteredHandler;
@@ -42,7 +43,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.List;
 import java.util.Optional;
 
-public class TesterBlockEntity extends BlockEntity implements MenuProvider {
+public class TesterBlockEntity extends FHCraftingStation implements MenuProvider {
 
     public final ItemStackHandler itemHandler = new ItemStackHandler(3) {
         @Override
@@ -67,9 +68,6 @@ public class TesterBlockEntity extends BlockEntity implements MenuProvider {
     private final ContainerData data;
     private int progress = 0;
     private int maxProgress = 100;
-    private final int DEFAULT_MAX_PROGRESS = 100;
-
-    private FactoryHeartBlockEntity heartEntity = null;
 
     public final IItemHandler restHandler = new SingleSlotFilteredHandler(itemHandler, INPUT_SLOT, x -> isViableInput(x), false);
     public final IItemHandler bottomHandler = new RangedWrapper(itemHandler, SUCCESS_SLOT, FAILED_SLOT + 1);
@@ -101,6 +99,11 @@ public class TesterBlockEntity extends BlockEntity implements MenuProvider {
         };
     }
 
+    @Override
+    protected ItemStackHandler getInventory() {
+        return itemHandler;
+    }
+
     private static List<ItemStack> viableInputs = null;
     @Override
     public void onLoad() {
@@ -123,10 +126,6 @@ public class TesterBlockEntity extends BlockEntity implements MenuProvider {
         return viableInputs.stream().anyMatch(x -> ItemStack.isSameItem(x, stack));
     }
 
-    public IItemHandler getItemHandler(Direction direction) {
-        return this.itemHandler;
-    }
-
     @Override
     public Component getDisplayName() {
         return Component.translatable("blockentity.factoryheart.y_tester");
@@ -136,32 +135,6 @@ public class TesterBlockEntity extends BlockEntity implements MenuProvider {
     @Override
     public AbstractContainerMenu createMenu(int pContainerId, Inventory pPlayerInventory, Player pPlayer) {
         return new TesterMenu(pContainerId, pPlayerInventory, this, this.data);
-    }
-
-    @Override
-    protected void saveAdditional(CompoundTag pTag, HolderLookup.Provider pRegistries) {
-        pTag.put("inventory", itemHandler.serializeNBT(pRegistries));
-        pTag.putInt("tester.progress", progress);
-        pTag.putInt("tester.max_progress", maxProgress);
-
-        super.saveAdditional(pTag, pRegistries);
-    }
-
-    @Override
-    protected void loadAdditional(CompoundTag pTag, HolderLookup.Provider pRegistries) {
-        super.loadAdditional(pTag, pRegistries);
-        itemHandler.deserializeNBT(pRegistries, pTag.getCompound("inventory"));
-        progress = pTag.getInt("tester.progress");
-        maxProgress = pTag.getInt("tester.max_progress");
-    }
-
-    public void drops() {
-        SimpleContainer inv = new SimpleContainer(itemHandler.getSlots());
-        for(int i = 0; i < itemHandler.getSlots(); i++) {
-            inv.setItem(i, itemHandler.getStackInSlot(i));
-        }
-
-        Containers.dropContents(this.level, this.worldPosition, inv);
     }
 
     public void tick(Level level, BlockPos pPos, BlockState pState) {
@@ -182,11 +155,6 @@ public class TesterBlockEntity extends BlockEntity implements MenuProvider {
                 level.setBlockAndUpdate(pPos, pState.setValue(TesterBlock.LIT, false));
             }
         }
-    }
-
-    private void resetProgress() {
-        this.progress = 0;
-        this.maxProgress = DEFAULT_MAX_PROGRESS;
     }
 
     private void craftItem() {
@@ -212,14 +180,6 @@ public class TesterBlockEntity extends BlockEntity implements MenuProvider {
         );
     }
 
-    private boolean hasCraftingFinished() {
-        return this.progress >= this.maxProgress;
-    }
-
-    private void increaseCraftingProgress() {
-        progress++;
-    }
-
     private boolean canCraft(Level level, BlockPos pos) {
         Optional<RecipeHolder<TesterRecipe>> recipe = getCurrentRecipe();
         if(recipe.isEmpty()) {
@@ -235,9 +195,7 @@ public class TesterBlockEntity extends BlockEntity implements MenuProvider {
     }
 
     private boolean hasSufficientTierToCraft(Level level, BlockPos pos, Optional<RecipeHolder<TesterRecipe>> recipe) {
-        if (heartEntity == null) heartEntity = HeartNetwork.getHeartEntity(level, pos);
-        if (heartEntity == null) return false;
-        return recipe.get().value().requiredTier() <= heartEntity.calculateCurrentTier();
+        return recipe.get().value().requiredTier() <= getTier();
     }
 
     private Optional<RecipeHolder<TesterRecipe>> getCurrentRecipe() {
@@ -250,16 +208,5 @@ public class TesterBlockEntity extends BlockEntity implements MenuProvider {
         if (slot.isEmpty()) return true;
         if (slot.getItem() != output.getItem()) return false;
         return slot.getMaxStackSize() >= slot.getCount() + output.getCount();
-    }
-
-    @Nullable
-    @Override
-    public Packet<ClientGamePacketListener> getUpdatePacket() {
-        return ClientboundBlockEntityDataPacket.create(this);
-    }
-
-    @Override
-    public CompoundTag getUpdateTag(HolderLookup.Provider pRegistries) {
-        return saveWithoutMetadata(pRegistries);
     }
 }

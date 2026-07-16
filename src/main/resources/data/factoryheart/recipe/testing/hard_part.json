@@ -1,7 +1,7 @@
 {
   "type": "factoryheart:testing",
   "ingredient": {
-    "item": "factoryheart:hard_part_unidentified"
+    "item": "factoryheart:hard_part_untested"
   },
   "success": {
     "id": "factoryheart:hard_part"

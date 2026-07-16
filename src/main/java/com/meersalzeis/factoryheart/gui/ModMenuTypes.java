@@ -1,7 +1,6 @@
 package com.meersalzeis.factoryheart.gui;
 
 import com.meersalzeis.factoryheart.FHModMain;
-import com.meersalzeis.factoryheart.gui.menus.CrystallizerMenu;
 import com.meersalzeis.factoryheart.gui.menus.ExtractorMenu;
 import com.meersalzeis.factoryheart.gui.menus.TesterMenu;
 import com.meersalzeis.factoryheart.gui.menus.WrapperMenu;
@@ -22,9 +21,6 @@ import net.neoforged.neoforge.registries.DeferredRegister;
 public class ModMenuTypes {
         public static final DeferredRegister<MenuType<?>> MENUS =
                 DeferredRegister.create(Registries.MENU, FHModMain.MOD_ID);
-
-        public static final DeferredHolder<MenuType<?>, MenuType<CrystallizerMenu>> CRYSTALLIZER_MENU =
-                registerMenuType("crystallizer_menu", CrystallizerMenu::new);
 
         public static final DeferredHolder<MenuType<?>, MenuType<BlazerMenu>> BLAZER_MENU =
                 registerMenuType("blazer_menu", BlazerMenu::new);
