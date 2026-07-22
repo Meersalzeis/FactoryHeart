@@ -10,13 +10,17 @@ import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.item.context.BlockPlaceContext;
+import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.DirectionalBlock;
+import net.minecraft.world.level.block.RenderShape;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.DirectionProperty;
+import net.minecraft.world.phys.shapes.CollisionContext;
+import net.minecraft.world.phys.shapes.VoxelShape;
 
 import org.jetbrains.annotations.Nullable;
 import net.minecraft.world.entity.Entity;
@@ -25,6 +29,13 @@ public class FactoryMawBlock extends DirectionalBlock {
     
     public static final MapCodec<FactoryMawBlock> CODEC = simpleCodec(FactoryMawBlock::new);
     public static final DirectionProperty FACING =  BlockStateProperties.FACING;
+
+    public static final VoxelShape SHAPE_DOWN = Block.box(0.0, 4.0, 0.0, 16.0, 16.0, 16.0);
+    public static final VoxelShape SHAPE_UP = Block.box(0.0, 0.0, 0.0, 16.0, 12.0, 16.0);
+    public static final VoxelShape SHAPE_NORTH = Block.box(0.0, 0.0, 4.0, 16.0, 16.0, 16.0);
+    public static final VoxelShape SHAPE_WEST = Block.box(4.0, 0.0, 0.0, 16.0, 16.0, 16.0);
+    public static final VoxelShape SHAPE_SOUTH = Block.box(0.0, 0.0, 0.0, 16.0, 16.0, 12.0);
+    public static final VoxelShape SHAPE_EAST = Block.box(0.0, 0.0, 0.0, 12.0, 16.0, 16.0);
 
     public FactoryMawBlock(Properties pProperties) {
         super(pProperties);
@@ -49,36 +60,44 @@ public class FactoryMawBlock extends DirectionalBlock {
     }
 
     @Override
-    public void animateTick(BlockState pState, Level pLevel, BlockPos pPos, RandomSource pRandom) {
-        // THIS METHOD IS !CLIENT ONLY!
-        double xPos = pPos.getX() + 0.5f;
-        double yPos = pPos.getY() + 1.25f;
-        double zPos = pPos.getZ() + 0.5f;
-        double offset = pRandom.nextDouble() * 0.6 - 0.3;
+    protected VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
+        switch (state.getValue(FACING)) {
+            case Direction.UP:
+                return SHAPE_UP;
+            case Direction.DOWN:
+                return SHAPE_DOWN;
+            case Direction.NORTH:
+                return SHAPE_NORTH;
+            case Direction.WEST:
+                return SHAPE_WEST;
+            case Direction.SOUTH:
+                return SHAPE_SOUTH;
+            default: return SHAPE_EAST; 
+        }
+    }
 
-        pLevel.addParticle(ParticleTypes.SMOKE, xPos + offset, yPos, zPos + offset, 0.0, 0.0, 0.0);
-        pLevel.addParticle(new BlockParticleOption(ParticleTypes.BLOCK, ModBlocks.FACTORY_MAW.get().defaultBlockState()),
-                xPos + offset, yPos, zPos + offset, 0.0, 0.0, 0.0);
+    @Override
+    protected RenderShape getRenderShape(BlockState pState) {
+        return RenderShape.MODEL;
     }
 
     // @Override
-    // protected void entityInside(BlockState state, Level level, BlockPos pos, Entity entity) {
-    //     FHModClient.debugMessageToAll("Registered Entity inside!");
+    // public void animateTick(BlockState pState, Level pLevel, BlockPos pPos, RandomSource pRandom) {
+    //     // THIS METHOD IS !CLIENT ONLY!
+    //     double xPos = pPos.getX() + 0.5f;
+    //     double yPos = pPos.getY() + 1.25f;
+    //     double zPos = pPos.getZ() + 0.5f;
+    //     double offset = pRandom.nextDouble() * 0.6 - 0.3;
 
-    //     if(entity instanceof ItemEntity itemEntity) {
-    //         FHModClient.debugMessageToAll("Maw found ItemEntity of " + itemEntity.getItem().getItem());
-    //         HeartNetwork.MawGetsItemFed(level, pos, itemEntity);
-    //     }
-
-    //     super.entityInside(state, level, pos, entity);
+    //     pLevel.addParticle(ParticleTypes.SMOKE, xPos + offset, yPos, zPos + offset, 0.0, 0.0, 0.0);
+    //     pLevel.addParticle(new BlockParticleOption(ParticleTypes.BLOCK, ModBlocks.FACTORY_MAW.get().defaultBlockState()),
+    //             xPos + offset, yPos, zPos + offset, 0.0, 0.0, 0.0);
     // }
 
     @Override
-    public void stepOn(Level level, BlockPos pos, BlockState state, Entity entity) {
-        super.stepOn(level, pos, state, entity);
-
+    protected void entityInside(BlockState state, Level level, BlockPos pos, Entity entity) {
+        super.entityInside(state, level, pos, entity);
         if (level.isClientSide()) return;
-
         if(entity instanceof ItemEntity itemEntity) {
             HeartBeating.MawGetsItemFed(level, pos, itemEntity);
         }

@@ -21,7 +21,7 @@ public class TierDisplay {
     
     public static void renderTierDisplay(GuiGraphics guiGraphics, int tier, int x, int y) {
         if(tier == 4) {
-            guiGraphics.blit(TIER_4_TEXTURE, x+127,  y+64, 0, 0, 16, 32, 16, 32);
+            guiGraphics.blit(TIER_4_TEXTURE, x+134,  y+25, 0, 0, 16, 32, 16, 32);
         } else {
             guiGraphics.blit(TIER_SCALE_TEXTURE, x+134,  y + 41 + 16 - getScaleVisibleSize(tier), 0,
                     32 - getScaleVisibleSize(tier), 16, getScaleVisibleSize(tier),16, 32);

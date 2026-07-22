@@ -1,0 +1,15 @@
+{
+  "type": "factoryheart:wrapping",
+  "centerpiece": {
+    "item": "minecraft:stick"
+  },
+  "wrappings": {
+    "tag": "minecraft:wool"
+  },
+  "centerpieceCount": 1,
+  "wrappingsCount": 1,
+  "result": {
+    "id": "minecraft:torch",
+    "count": 4
+  }
+}

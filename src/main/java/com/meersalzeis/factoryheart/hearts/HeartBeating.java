@@ -15,7 +15,7 @@ import com.meersalzeis.factoryheart.FHModClient;
 import com.meersalzeis.factoryheart.FHModMain;
 import com.meersalzeis.factoryheart.block.ModBlocks;
 import com.meersalzeis.factoryheart.block.hearting.FactoryHeartBlock;
-import com.meersalzeis.factoryheart.blockentity.FHCraftingStation;
+import com.meersalzeis.factoryheart.blockentity.FHCraftStationEntity;
 import com.meersalzeis.factoryheart.util.ModTags;
 import com.mojang.logging.LogUtils;
 
@@ -86,12 +86,12 @@ public class HeartBeating {
         RedrawNetworksAfterRemoval(level, pos);
     }
 
-    public static void changeTierOfHeart(Level level, BlockPos pos, int newTier) {
+    public static void changeTierOfNetw(Level level, BlockPos pos, int newTier) {
         HeartNetwork netw = GetNetworkOrNew(level, pos, true);
         for (var curBlockPos : netw.blockPositions) {
             
             BlockEntity bEntity = level.getBlockEntity(curBlockPos);
-            if (bEntity instanceof FHCraftingStation station) {
+            if (bEntity instanceof FHCraftStationEntity station) {
                 station.data.set(2, newTier);
                 station.setChanged();
                 station.initiateSync();

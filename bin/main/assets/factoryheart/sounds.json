@@ -5,10 +5,16 @@
       "factoryheart:extractor_wirr"
     ]
   },
-  "heart_wirr": {
-    "subtitle": "sounds.factoryheart.heart_wirr",
+  "condenser_wirr": {
+    "subtitle": "sounds.factoryheart.condenser_wirr",
     "sounds": [
       "factoryheart:heart_wirr"
+    ]
+  },
+  "heart_beat": {
+    "subtitle": "sounds.factoryheart.heart_beat",
+    "sounds": [
+      "factoryheart:heart_beat"
     ]
   }
 }

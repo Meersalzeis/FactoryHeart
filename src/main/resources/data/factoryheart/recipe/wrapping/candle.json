@@ -1,0 +1,15 @@
+{
+  "type": "factoryheart:wrapping",
+  "centerpiece": {
+    "item": "minecraft:string"
+  },
+  "wrappings": {
+    "item": "minecraft:honeycomb"
+  },
+  "centerpieceCount": 1,
+  "wrappingsCount": 1,
+  "result": {
+    "id": "minecraft:candle",
+    "count": 2
+  }
+}

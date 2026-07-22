@@ -15,8 +15,8 @@ import net.neoforged.neoforge.items.SlotItemHandler;
 
 public class CondenserMenu  extends AbstractContainerMenu {
     public final CondenserBlockEntity blockEntity;
-    private final Level level;
-    private final ContainerData data;
+    // private final Level level;
+    // private final ContainerData data;
 
     public CondenserMenu(int pContainerId, Inventory inv, FriendlyByteBuf extraData) {
         this(pContainerId, inv, inv.player.level().getBlockEntity(extraData.readBlockPos()), new SimpleContainerData(2));
@@ -25,8 +25,8 @@ public class CondenserMenu  extends AbstractContainerMenu {
     public CondenserMenu(int pContainerId, Inventory inv, BlockEntity entity, ContainerData data) {
         super(ModMenuTypes.CONDENSER_MENU.get(), pContainerId);
         blockEntity = ((CondenserBlockEntity) entity);
-        this.level = inv.player.level();
-        this.data = data;
+        // this.level = inv.player.level();
+        // this.data = data;
 
         addDataSlots(data);
     }

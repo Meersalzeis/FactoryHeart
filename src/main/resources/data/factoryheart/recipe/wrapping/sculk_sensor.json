@@ -1,0 +1,14 @@
+{
+  "type": "factoryheart:wrapping",
+  "centerpiece": {
+    "item": "minecraft:observer"
+  },
+  "wrappings": {
+    "item": "minecraft:sculk"
+  },
+  "centerpieceCount": 1,
+  "wrappingsCount": 8,
+  "result": {
+    "id": "minecraft:sculk_sensor"
+  }
+}

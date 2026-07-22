@@ -1,12 +1,12 @@
 #Whether to use the alternative cyber textures
 cyberLook = false
 #How long (in ticks) an item fed to a factorymaw lasts.
-# Default: 800
-# Range: > 0
+# Default: 600
+# Range: > 1
 ticks_per_item = 800
 #How long (in ticks) the full tank of a factoryheart lasts.
-# Default: 1600
-# Range: > 0
+# Default: 1800
+# Range: > 1
 max_ticks = 1600
 #A list of items to use as  fuel at tier 1.
 fuels_t1 = ["minecraft:coal", "minecraft:charcoal", "minecraft:dried_kelp_block"]

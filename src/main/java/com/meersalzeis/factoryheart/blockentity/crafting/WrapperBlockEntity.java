@@ -1,7 +1,7 @@
 package com.meersalzeis.factoryheart.blockentity.crafting;
 
 import com.meersalzeis.factoryheart.block.crafting.WrapperBlock;
-import com.meersalzeis.factoryheart.blockentity.FHCraftingStation;
+import com.meersalzeis.factoryheart.blockentity.FHCraftStationEntity;
 import com.meersalzeis.factoryheart.blockentity.FactoryHeartBlockEntity;
 import com.meersalzeis.factoryheart.blockentity.ModBlockEntities;
 import com.meersalzeis.factoryheart.blockentity.SingleSlotFilteredHandler;
@@ -42,7 +42,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.List;
 import java.util.Optional;
 
-public class WrapperBlockEntity extends FHCraftingStation<WrapperBlockEntity> implements MenuProvider {
+public class WrapperBlockEntity extends FHCraftStationEntity<WrapperBlockEntity> implements MenuProvider {
 
     private static final int CENTERPIECE_SLOT = 0;
     private static final int WRAPPINGS_SLOT = 1;
@@ -82,14 +82,7 @@ public class WrapperBlockEntity extends FHCraftingStation<WrapperBlockEntity> im
         return itemHandler;
     }
 
-    // Hopper handling region
-
-    @Override
-    public void onLoad() {
-        InitViableMaterials();
-    }
-
-    private void InitViableMaterials() {
+    protected void InitViableMaterials() {
         if (viableCenterpieces != null) return;
 
         RecipeManager recipeManager = getLevel().getRecipeManager();
@@ -114,8 +107,6 @@ public class WrapperBlockEntity extends FHCraftingStation<WrapperBlockEntity> im
         var item = stack.getItem();
         return viableWrappings.contains(item);
     }
-
-    // End hopper handling
 
     @Override
     public Component getDisplayName() {

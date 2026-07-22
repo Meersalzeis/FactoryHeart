@@ -5,6 +5,7 @@ import java.util.Random;
 import org.slf4j.Logger;
 
 import com.meersalzeis.factoryheart.block.ModBlocks;
+import com.meersalzeis.factoryheart.block.crafting.CondenserBlock;
 import com.meersalzeis.factoryheart.blockentity.FactoryHeartBlockEntity;
 import com.meersalzeis.factoryheart.blockentity.ModBECapabilities;
 import com.meersalzeis.factoryheart.blockentity.ModBlockEntities;
@@ -20,6 +21,7 @@ import com.meersalzeis.factoryheart.gui.screens.CondenserScreen;
 import com.meersalzeis.factoryheart.gui.screens.WrapperScreen;
 import com.mojang.logging.LogUtils;
 
+import net.minecraft.world.item.DyeColor;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.bus.api.SubscribeEvent;
@@ -29,6 +31,7 @@ import net.neoforged.fml.config.ModConfig;
 import net.neoforged.fml.ModContainer;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import net.neoforged.neoforge.client.event.EntityRenderersEvent;
+import net.neoforged.neoforge.client.event.RegisterColorHandlersEvent;
 import net.neoforged.neoforge.client.event.RegisterMenuScreensEvent;
 import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.event.server.ServerStartingEvent;
@@ -83,6 +86,17 @@ public class FHModMain {
         @SubscribeEvent
         public static void onClientSetup(FMLClientSetupEvent event) {
 
+        }
+
+        @SubscribeEvent
+        public static void registerBlockColors(RegisterColorHandlersEvent.Block event) {
+            event.register(
+                (state, level, pos, tintIndex) -> {
+                    DyeColor color = state.getValue(CondenserBlock.COLOR);
+                    return color.getTextureDiffuseColor();
+                },
+                ModBlocks.CONDENSER.get()
+            );
         }
 
         @SubscribeEvent

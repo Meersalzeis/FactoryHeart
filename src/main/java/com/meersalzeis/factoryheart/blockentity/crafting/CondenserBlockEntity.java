@@ -1,7 +1,8 @@
 package com.meersalzeis.factoryheart.blockentity.crafting;
 
+import com.meersalzeis.factoryheart.FHModClient;
 import com.meersalzeis.factoryheart.block.crafting.CondenserBlock;
-import com.meersalzeis.factoryheart.blockentity.FHCraftingStation;
+import com.meersalzeis.factoryheart.blockentity.FHCraftStationEntity;
 import com.meersalzeis.factoryheart.blockentity.ModBlockEntities;
 import com.meersalzeis.factoryheart.recipe.CondenserRecipe;
 import com.meersalzeis.factoryheart.recipe.CondenserRecipeInput;
@@ -20,18 +21,22 @@ import net.neoforged.neoforge.items.ItemStackHandler;
 
 import java.util.Optional;
 
-public class CondenserBlockEntity extends FHCraftingStation<CondenserBlockEntity> {
+public class CondenserBlockEntity extends FHCraftStationEntity<CondenserBlockEntity> {
 
     private DyeColor color;
 
     public CondenserBlockEntity(BlockPos pos, BlockState blockState) {
         super(ModBlockEntities.CONDENSER_BE.get(), pos, blockState);
         color = blockState.getValue(CondenserBlock.COLOR);
+        FHModClient.debugMessageToAll("Condenser BlockEntity color property starts with " + color);
     }
 
     public void setColor(DyeColor newColor) {
         this.color = newColor;
     }
+
+    // Not needed here
+    protected void InitViableMaterials() {}
 
     public void tick(Level level, BlockPos pos, BlockState pState) {
         if(canCraft(level, pos)) {

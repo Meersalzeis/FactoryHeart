@@ -26,28 +26,29 @@ public class ModBlockStateProvider extends BlockStateProvider {
         blockWithItem(ModBlocks.FACTORY_VEIN);
         blockWithItem(ModBlocks.FACTORY_SKIN);
 
-        blockWithItem(ModBlocks.WRAPPER);
+        //blockWithItem(ModBlocks.WRAPPER);
         blockWithItem(ModBlocks.EXTRACTOR);
         blockWithItem(ModBlocks.TESTER);
 
-        ModelFile factoryMawModel = models().cube(
-            "factory_maw",
-            mcLoc("block/blast_furnace_top"),
-            mcLoc("block/blast_furnace_top"),
-            modLoc("block/factory_maw_front"),
-            mcLoc("block/blast_furnace_side"),
-            mcLoc("block/blast_furnace_side"),
-            mcLoc("block/blast_furnace_side")
+        // ModelFile factoryMawModel = models().cube(
+        //     "factory_maw",
+        //     mcLoc("block/blast_furnace_top"),
+        //     mcLoc("block/blast_furnace_top"),
+        //     modLoc("block/factory_maw_front"),
+        //     mcLoc("block/blast_furnace_side"),
+        //     mcLoc("block/blast_furnace_side"),
+        //     mcLoc("block/blast_furnace_side")
             
-        );
+        // );
 
-        directionalBlockCustomSides(factoryMawModel);
+        // directionalBlockCustomSides(factoryMawModel);
 
-        AddFactoryHeart();
+        addFactoryHeart();
+        addWrapperBlock();
 
         generateFromBlockbenchModel("blazer", ModBlocks.BLAZER.get(), modLoc("block/blazer"));
         generateFromBlockbenchModel("condenser", ModBlocks.CONDENSER.get(), modLoc("block/condenser"));
-        //directionalBlock(ModBlocks.FACTORY_MAW.get());
+        generateFromBlockbenchModel("factory_maw", ModBlocks.FACTORY_MAW.get(), modLoc("block/factory_maw"));
     }
 
     private void blockWithItem(DeferredBlock<Block> deferredBlock) {
@@ -63,7 +64,7 @@ public class ModBlockStateProvider extends BlockStateProvider {
     }
 
 
-    private void AddFactoryHeart() {
+    private void addFactoryHeart() {
         getVariantBuilder(ModBlocks.FACTORY_HEART.get()).forAllStates(state -> {
             int tier = state.getValue(FactoryHeartBlock.TIER);
             ModelFile factoryHeartModel = models().cubeColumn(
@@ -161,5 +162,17 @@ public class ModBlockStateProvider extends BlockStateProvider {
             name,
             modelLocation
         );
+    }
+
+    private void addWrapperBlock() {
+        ModelFile model = models().cubeBottomTop(
+            "wrapper",
+            modLoc("block/wrapper_side"),
+            modLoc("block/wrapper_bottom"),
+            modLoc("block/wrapper_top")
+        );
+
+        simpleBlock(ModBlocks.WRAPPER.get(), model);
+        simpleBlockItem(ModBlocks.WRAPPER.get(), model);
     }
 }

@@ -2,6 +2,7 @@ package com.meersalzeis.factoryheart.block.crafting;
 
 import com.meersalzeis.factoryheart.blockentity.ModBlockEntities;
 import com.meersalzeis.factoryheart.blockentity.crafting.BlazerBlockEntity;
+import com.meersalzeis.factoryheart.hearts.HeartBeating;
 import com.mojang.serialization.MapCodec;
 
 import net.minecraft.core.BlockPos;
@@ -171,5 +172,29 @@ public class BlazerBlock extends BaseEntityBlock {
         }
 
         super.onRemove(pState, pLevel, pPos, pNewState, pIsMoving);
+        checkDeregister(pState, pLevel, pPos, pNewState);
+    }
+
+    @Override
+    public void onPlace(BlockState state, Level level, BlockPos pos, BlockState oldState, boolean movedByPiston) {
+        if (level.isClientSide()) return;
+
+        if (oldState.is(state.getBlock())) {
+            return;
+        }
+
+        HeartBeating.TryAddBlock(level, pos, false);
+    }
+
+    private void checkDeregister(BlockState state, Level level, BlockPos pos, BlockState newState) {
+
+        if (level.isClientSide()) return;
+
+        if (state.is(newState.getBlock())) {
+            // Only state change, no "actual" removal
+            return;
+        }
+
+        HeartBeating.DeregisterBlock(level, pos);
     }
 }

@@ -1,8 +1,12 @@
 package com.meersalzeis.factoryheart.block.crafting;
 
 import com.meersalzeis.factoryheart.FHModClient;
+import com.meersalzeis.factoryheart.block.ModBlocks;
+import com.meersalzeis.factoryheart.block.hearting.FactoryMawBlock;
 import com.meersalzeis.factoryheart.blockentity.ModBlockEntities;
+import com.meersalzeis.factoryheart.blockentity.crafting.BlazerBlockEntity;
 import com.meersalzeis.factoryheart.blockentity.crafting.CondenserBlockEntity;
+import com.meersalzeis.factoryheart.hearts.HeartBeating;
 import com.meersalzeis.factoryheart.sound.ModSounds;
 //import com.meersalzeis.factoryheart.block.entity.custom.CondenserBlockEntity;
 import com.mojang.serialization.MapCodec;
@@ -43,6 +47,8 @@ import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
+import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.neoforge.client.event.RegisterColorHandlersEvent;
 
 import org.jetbrains.annotations.Nullable;
 
@@ -53,12 +59,7 @@ public class CondenserBlock extends BaseEntityBlock {
     public static final DirectionProperty FACING = BlockStateProperties.FACING;
     public static final EnumProperty<DyeColor> COLOR = EnumProperty.create("color", DyeColor.class);
 
-    public static final VoxelShape SHAPE_DOWN = Block.box(0.0, 4.0, 0.0, 16.0, 16.0, 16.0);
-    public static final VoxelShape SHAPE_UP = Block.box(0.0, 0.0, 0.0, 16.0, 12.0, 16.0);
-    public static final VoxelShape SHAPE_NORTH = Block.box(0.0, 0.0, 4.0, 16.0, 16.0, 16.0);
-    public static final VoxelShape SHAPE_WEST = Block.box(4.0, 0.0, 0.0, 16.0, 16.0, 16.0);
-    public static final VoxelShape SHAPE_SOUTH = Block.box(0.0, 0.0, 0.0, 16.0, 16.0, 12.0);
-    public static final VoxelShape SHAPE_EAST = Block.box(0.0, 0.0, 0.0, 12.0, 16.0, 16.0);
+    
 
     public CondenserBlock(Properties properties) {
         super(properties);
@@ -85,16 +86,16 @@ public class CondenserBlock extends BaseEntityBlock {
     protected VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
         switch (state.getValue(FACING)) {
             case Direction.UP:
-                return SHAPE_UP;
+                return FactoryMawBlock.SHAPE_UP;
             case Direction.DOWN:
-                return SHAPE_DOWN;
+                return FactoryMawBlock.SHAPE_DOWN;
             case Direction.NORTH:
-                return SHAPE_NORTH;
+                return FactoryMawBlock.SHAPE_NORTH;
             case Direction.WEST:
-                return SHAPE_WEST;
+                return FactoryMawBlock.SHAPE_WEST;
             case Direction.SOUTH:
-                return SHAPE_SOUTH;
-            default: return SHAPE_EAST; 
+                return FactoryMawBlock.SHAPE_SOUTH;
+            default: return FactoryMawBlock.SHAPE_EAST; 
         }
     }
 
@@ -143,7 +144,7 @@ public class CondenserBlock extends BaseEntityBlock {
         double yPos = pos.getY();
         double zPos = (double)pos.getZ() + 0.5;
         if (random.nextDouble() < 0.15) {
-            level.playLocalSound(xPos, yPos, zPos, ModSounds.HEART_WIRR.get(), SoundSource.BLOCKS, 0.333f, 1.0f, false);
+            level.playLocalSound(xPos, yPos, zPos, ModSounds.CONDENSER_WIRR.get(), SoundSource.BLOCKS, 0.333f, 1.0f, false);
         }
         Direction direction = state.getValue(FACING);
         Direction.Axis axis = direction.getAxis();
@@ -173,7 +174,6 @@ public class CondenserBlock extends BaseEntityBlock {
         if (state.getValue(COLOR) != newColor && !level.isClientSide) {
 
             BlockEntity be = level.getBlockEntity(pos);
-
             if (! (be instanceof CondenserBlockEntity)) {
                 return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
             }
@@ -188,4 +188,39 @@ public class CondenserBlock extends BaseEntityBlock {
         return ItemInteractionResult.sidedSuccess(level.isClientSide);
     }
 
+    @Override
+    public void onRemove(BlockState pState, Level pLevel, BlockPos pPos, BlockState pNewState, boolean pIsMoving) {
+        if (pState.getBlock() != pNewState.getBlock()) {
+            BlockEntity blockEntity = pLevel.getBlockEntity(pPos);
+            if (blockEntity instanceof CondenserBlockEntity condenserBlockEntity) {
+                condenserBlockEntity.drops();
+            }
+        }
+
+        super.onRemove(pState, pLevel, pPos, pNewState, pIsMoving);
+        checkDeregister(pState, pLevel, pPos, pNewState);
+    }
+
+    @Override
+    public void onPlace(BlockState state, Level level, BlockPos pos, BlockState oldState, boolean movedByPiston) {
+        if (level.isClientSide()) return;
+
+        if (oldState.is(state.getBlock())) {
+            return;
+        }
+
+        HeartBeating.TryAddBlock(level, pos, false);
+    }
+
+    private void checkDeregister(BlockState state, Level level, BlockPos pos, BlockState newState) {
+
+        if (level.isClientSide()) return;
+
+        if (state.is(newState.getBlock())) {
+            // Only state change, no "actual" removal
+            return;
+        }
+
+        HeartBeating.DeregisterBlock(level, pos);
+    }
 }

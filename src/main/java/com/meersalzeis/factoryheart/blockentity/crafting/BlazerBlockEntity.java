@@ -2,7 +2,7 @@ package com.meersalzeis.factoryheart.blockentity.crafting;
 
 import com.meersalzeis.factoryheart.FHModClient;
 import com.meersalzeis.factoryheart.block.crafting.BlazerBlock;
-import com.meersalzeis.factoryheart.blockentity.FHCraftingStation;
+import com.meersalzeis.factoryheart.blockentity.FHCraftStationEntity;
 import com.meersalzeis.factoryheart.blockentity.FactoryHeartBlockEntity;
 import com.meersalzeis.factoryheart.blockentity.ModBlockEntities;
 import com.meersalzeis.factoryheart.blockentity.SingleSlotFilteredHandler;
@@ -53,7 +53,7 @@ import java.util.Optional;
 
 import javax.swing.plaf.basic.BasicComboBoxUI.ItemHandler;
 
-public class BlazerBlockEntity extends FHCraftingStation<BlazerBlockEntity> implements MenuProvider {
+public class BlazerBlockEntity extends FHCraftStationEntity<BlazerBlockEntity> implements MenuProvider {
 
     public final ItemStackHandler itemHandler = new ItemStackHandler(2) {
         @Override
@@ -71,6 +71,8 @@ public class BlazerBlockEntity extends FHCraftingStation<BlazerBlockEntity> impl
         }
     };
 
+    private static List<ItemStack> viableInputs = null;
+
     private static final int INPUT_SLOT = 0;
     private static final int OUTPUT_SLOT = 1;
 
@@ -82,13 +84,7 @@ public class BlazerBlockEntity extends FHCraftingStation<BlazerBlockEntity> impl
         super(ModBlockEntities.BLAZER_BE.get(), pPos, pBlockState);
     }
 
-    private static List<ItemStack> viableInputs = null;
-    @Override
-    public void onLoad() {
-        InitViableMaterials();
-    }
-
-    private void InitViableMaterials() {
+    protected void InitViableMaterials() {
         if (viableInputs != null) return;
 
         RecipeManager recipeManager = getLevel().getRecipeManager();

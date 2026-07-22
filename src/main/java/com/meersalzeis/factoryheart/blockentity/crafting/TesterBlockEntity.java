@@ -2,7 +2,7 @@ package com.meersalzeis.factoryheart.blockentity.crafting;
 
 import com.meersalzeis.factoryheart.FHModMain;
 import com.meersalzeis.factoryheart.block.crafting.TesterBlock;
-import com.meersalzeis.factoryheart.blockentity.FHCraftingStation;
+import com.meersalzeis.factoryheart.blockentity.FHCraftStationEntity;
 import com.meersalzeis.factoryheart.blockentity.FactoryHeartBlockEntity;
 import com.meersalzeis.factoryheart.blockentity.ModBlockEntities;
 import com.meersalzeis.factoryheart.blockentity.SingleSlotFilteredHandler;
@@ -43,7 +43,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.List;
 import java.util.Optional;
 
-public class TesterBlockEntity extends FHCraftingStation implements MenuProvider {
+public class TesterBlockEntity extends FHCraftStationEntity implements MenuProvider {
 
     public final ItemStackHandler itemHandler = new ItemStackHandler(3) {
         @Override
@@ -61,42 +61,17 @@ public class TesterBlockEntity extends FHCraftingStation implements MenuProvider
         }
     };
 
+    private static List<ItemStack> viableInputs = null;
+
     private static final int INPUT_SLOT = 0;
     private static final int SUCCESS_SLOT = 1;
     private static final int FAILED_SLOT = 2;
-
-    private final ContainerData data;
-    private int progress = 0;
-    private int maxProgress = 100;
 
     public final IItemHandler restHandler = new SingleSlotFilteredHandler(itemHandler, INPUT_SLOT, x -> isViableInput(x), false);
     public final IItemHandler bottomHandler = new RangedWrapper(itemHandler, SUCCESS_SLOT, FAILED_SLOT + 1);
 
     public TesterBlockEntity(BlockPos pPos, BlockState pBlockState) {
         super(ModBlockEntities.TESTER_BE.get(), pPos, pBlockState);
-        this.data = new ContainerData() {
-            @Override
-            public int get(int pIndex) {
-                return switch (pIndex) {
-                    case 0 -> TesterBlockEntity.this.progress;
-                    case 1 -> TesterBlockEntity.this.maxProgress;
-                    default -> 0;
-                };
-            }
-
-            @Override
-            public void set(int pIndex, int pValue) {
-                switch (pIndex) {
-                    case 0: TesterBlockEntity.this.progress = pValue;
-                    case 1: TesterBlockEntity.this.maxProgress = pValue;
-                }
-            }
-
-            @Override
-            public int getCount() {
-                return 2;
-            }
-        };
     }
 
     @Override
@@ -104,13 +79,7 @@ public class TesterBlockEntity extends FHCraftingStation implements MenuProvider
         return itemHandler;
     }
 
-    private static List<ItemStack> viableInputs = null;
-    @Override
-    public void onLoad() {
-        InitViableMaterials();
-    }
-
-    private void InitViableMaterials() {
+    protected void InitViableMaterials() {
         if (viableInputs != null) return;
 
         RecipeManager recipeManager = getLevel().getRecipeManager();

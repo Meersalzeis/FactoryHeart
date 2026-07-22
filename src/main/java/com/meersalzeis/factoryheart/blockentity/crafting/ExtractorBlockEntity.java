@@ -2,7 +2,7 @@ package com.meersalzeis.factoryheart.blockentity.crafting;
 
 import com.meersalzeis.factoryheart.FHModClient;
 import com.meersalzeis.factoryheart.block.crafting.ExtractorBlock;
-import com.meersalzeis.factoryheart.blockentity.FHCraftingStation;
+import com.meersalzeis.factoryheart.blockentity.FHCraftStationEntity;
 import com.meersalzeis.factoryheart.blockentity.FactoryHeartBlockEntity;
 import com.meersalzeis.factoryheart.blockentity.ModBlockEntities;
 import com.meersalzeis.factoryheart.blockentity.SingleSlotFilteredHandler;
@@ -35,7 +35,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.List;
 import java.util.Optional;
 
-public class ExtractorBlockEntity extends FHCraftingStation<ExtractorBlockEntity> implements MenuProvider {
+public class ExtractorBlockEntity extends FHCraftStationEntity<ExtractorBlockEntity> implements MenuProvider {
 
     public final ItemStackHandler itemHandler = new ItemStackHandler(2) {
         @Override
@@ -53,6 +53,8 @@ public class ExtractorBlockEntity extends FHCraftingStation<ExtractorBlockEntity
         }
     };
 
+    private static List<ItemStack> viableInputs = null;
+
     private static final int INPUT_SLOT = 0;
     private static final int OUTPUT_SLOT = 1;
 
@@ -68,13 +70,7 @@ public class ExtractorBlockEntity extends FHCraftingStation<ExtractorBlockEntity
         return itemHandler;
     }
 
-    private static List<ItemStack> viableInputs = null;
-    @Override
-    public void onLoad() {
-        InitViableMaterials();
-    }
-
-    private void InitViableMaterials() {
+    protected void InitViableMaterials() {
         if (viableInputs != null) return;
 
         RecipeManager recipeManager = getLevel().getRecipeManager();
@@ -89,18 +85,6 @@ public class ExtractorBlockEntity extends FHCraftingStation<ExtractorBlockEntity
     public static boolean isViableInput(ItemStack stack) {
         return viableInputs.stream().anyMatch(x -> ItemStack.isSameItem(x, stack));
     }
-
-    // public IEnergyStorage getEnergyStorage(@Nullable Direction direction) {
-    //     return this.ENERGY_STORAGE;
-    // }
-
-    // public IFluidHandler getFluidTank(@Nullable Direction direction) {
-    //     return this.FLUID_TANK;
-    // }
-
-    // public FluidStack getFluid() {
-    //     return FLUID_TANK.getFluid();
-    // }
 
     @Override
     public Component getDisplayName() {

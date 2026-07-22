@@ -13,7 +13,8 @@ public class ModSounds {
     public static final DeferredRegister<SoundEvent> SOUND_EVENTS =
             DeferredRegister.create(BuiltInRegistries.SOUND_EVENT, FHModMain.MOD_ID);
 
-    public static final Supplier<SoundEvent> HEART_WIRR = registerSoundEvent("heart_wirr");
+    public static final Supplier<SoundEvent> HEART_BEATWIRR = registerSoundEvent("heart_beat");
+    public static final Supplier<SoundEvent> CONDENSER_WIRR = registerSoundEvent("condenser_wirr");
     public static final Supplier<SoundEvent> EXTRACTOR_WIRR = registerSoundEvent("extractor_wirr");
 
 

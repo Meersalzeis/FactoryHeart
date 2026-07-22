@@ -1,18 +1,14 @@
 package com.meersalzeis.factoryheart.block.hearting;
 
 import com.meersalzeis.factoryheart.FHModClient;
-import com.meersalzeis.factoryheart.block.ModBlocks;
 import com.meersalzeis.factoryheart.blockentity.FactoryHeartBlockEntity;
 import com.meersalzeis.factoryheart.blockentity.ModBlockEntities;
 import com.meersalzeis.factoryheart.hearts.HeartBeating;
-import com.meersalzeis.factoryheart.hearts.HeartNetwork;
 import com.mojang.serialization.MapCodec;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.core.particles.BlockParticleOption;
 import net.minecraft.core.particles.ParticleTypes;
-import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
@@ -20,7 +16,6 @@ import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.BaseEntityBlock;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.DirectionalBlock;
 import net.minecraft.world.level.block.RenderShape;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityTicker;
@@ -48,6 +43,8 @@ public class FactoryHeartBlock extends BaseEntityBlock {
             .setValue(TIER, 0)
             .setValue(FACING, Direction.NORTH));
     }
+
+    
 
     @Override
     public RenderShape getRenderShape(BlockState state) {
@@ -131,6 +128,22 @@ public class FactoryHeartBlock extends BaseEntityBlock {
 
     public static int getLightLevel(BlockState state) {
         return state.getValue(TIER) * 2;
+    }
+
+    // Comparator interaction
+    @Override
+    protected boolean hasAnalogOutputSignal(BlockState state) {
+        return true;
+    }
+
+    // Comparator interaction
+    @Override
+    protected int getAnalogOutputSignal(BlockState state, Level level, BlockPos pos) {
+        BlockEntity be = level.getBlockEntity(pos);
+        if (be instanceof FactoryHeartBlockEntity myBE) {
+            return myBE.getComparatorOutput();
+        }
+        return 0;
     }
 
     @Override

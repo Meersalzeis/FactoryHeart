@@ -1,7 +1,8 @@
 {
   "itemGroup.factoryheart.factoryheart_all_tab": "Factory Heart",
 
-  "sounds.factoryheart.heart_wirr":"Factory Heart Wirr",
+  "sounds.factoryheart.heart_beat":"Factory Heart Wirr",
+  "sounds.factoryheart.condenser_wirr":"Condenser Wirr",
   "sounds.factoryheart.extractor_wirr":"Extractor Wirr",
   
   "block.factoryheart.blazer":"Blazer",

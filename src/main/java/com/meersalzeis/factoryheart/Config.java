@@ -25,11 +25,11 @@ public class Config {
 
     public static final ModConfigSpec.IntValue RESOURCE_PER_ITEM = BUILDER
         .comment("How long (in ticks) an item fed to a factorymaw lasts.")
-        .defineInRange("ticks_per_item", 800, 0, Integer.MAX_VALUE);
+        .defineInRange("ticks_per_item", 600, 1, Integer.MAX_VALUE);
     
     public static final ModConfigSpec.IntValue MAX_RESOURCE = BUILDER
         .comment("How long (in ticks) the full tank of a factoryheart lasts.")
-        .defineInRange("max_ticks", 1600, 0, Integer.MAX_VALUE);
+        .defineInRange("max_ticks", 1800, 1, Integer.MAX_VALUE);
 
     // =============== FUELS ===============
 

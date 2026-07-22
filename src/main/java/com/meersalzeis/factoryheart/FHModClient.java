@@ -30,6 +30,8 @@ public class FHModClient {
         FHModMain.LOGGER.info("MINECRAFT NAME >> {}", Minecraft.getInstance().getUser().getName());
     }
 
+    public static void debugMessageToAll(String message) { debugMessageToAll(message, false);}
+    
     public static void debugMessageToAll(String message, boolean actionBar) {
         LocalPlayer player = Minecraft.getInstance().player;
         if (player == null) return;

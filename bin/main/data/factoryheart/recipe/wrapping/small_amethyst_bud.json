@@ -1,0 +1,14 @@
+{
+  "type": "factoryheart:wrapping",
+  "centerpiece": {
+    "item": "minecraft:amethyst_shard"
+  },
+  "wrappings": {
+    "item": "minecraft:amethyst_shard"
+  },
+  "centerpieceCount": 1,
+  "wrappingsCount": 1,
+  "result": {
+    "id": "minecraft:small_amethyst_bud"
+  }
+}
