@@ -7,3 +7,4 @@
 /time set night
 /gamemode survival
 /gamemode creative
+/time set day

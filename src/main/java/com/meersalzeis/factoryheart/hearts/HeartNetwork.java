@@ -42,7 +42,7 @@ public class HeartNetwork {
     }
 
     public static FactoryHeartBlockEntity getHeartEntity(Level level, BlockPos pos) {
-        var netw = HeartBeating.TryGetNetwork(level, pos);
+        var netw = HeartBeating.tryGetNetwork(level, pos);
         if (netw == null || netw.heart == null) return null;
         
         var res = level.getBlockEntity(netw.heart);
@@ -87,7 +87,7 @@ public class HeartNetwork {
                 boolean isHeart = blockState.getBlock().equals(ModBlocks.FACTORY_HEART.get());
                 if (isHeart) allHearts.get().add(curBlockPos);
 
-                HeartNetwork otherBlockNetw = HeartBeating.TryGetNetwork(level, curBlockPos);
+                HeartNetwork otherBlockNetw = HeartBeating.tryGetNetwork(level, curBlockPos);
                 
                 if (otherBlockNetw == null) {
                     blockPositions.add(curBlockPos);

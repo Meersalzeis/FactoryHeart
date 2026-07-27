@@ -1,6 +1,8 @@
 {
   "itemGroup.factoryheart.factoryheart_all_tab": "Factory Heart",
 
+  "config.jade.plugin_factoryheart.jade_plugin": "Factory Heart",
+
   "sounds.factoryheart.heart_beat":"Factory Heart Wirr",
   "sounds.factoryheart.condenser_wirr":"Condenser Wirr",
   "sounds.factoryheart.extractor_wirr":"Extractor Wirr",
@@ -53,5 +55,7 @@
   "item.factoryheart.smart_heart_faulty":"Faulty Smart Heart",
   "item.factoryheart.hard_part":"Hard Part",
   "item.factoryheart.hard_part_untested":"Untested Hard Part",
-  "item.factoryheart.hard_part_faulty":"Faulty Hard Part"
+  "item.factoryheart.hard_part_faulty":"Faulty Hard Part",
+
+  "factoryheart.tier": "Running on Tier"
 }

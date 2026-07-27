@@ -63,9 +63,9 @@ public class TesterBlockEntity extends FHCraftStationEntity implements MenuProvi
 
     private static List<ItemStack> viableInputs = null;
 
-    private static final int INPUT_SLOT = 0;
-    private static final int SUCCESS_SLOT = 1;
-    private static final int FAILED_SLOT = 2;
+    public static final int INPUT_SLOT = 0;
+    public static final int SUCCESS_SLOT = 1;
+    public static final int FAILED_SLOT = 2;
 
     public final IItemHandler restHandler = new SingleSlotFilteredHandler(itemHandler, INPUT_SLOT, x -> isViableInput(x), false);
     public final IItemHandler bottomHandler = new RangedWrapper(itemHandler, SUCCESS_SLOT, FAILED_SLOT + 1);
@@ -79,7 +79,7 @@ public class TesterBlockEntity extends FHCraftStationEntity implements MenuProvi
         return itemHandler;
     }
 
-    protected void InitViableMaterials() {
+    protected void InitViableInputs() {
         if (viableInputs != null) return;
 
         RecipeManager recipeManager = getLevel().getRecipeManager();

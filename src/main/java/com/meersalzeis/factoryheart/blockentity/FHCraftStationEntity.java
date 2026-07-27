@@ -55,10 +55,10 @@ public abstract class FHCraftStationEntity<T extends BlockEntity> extends BlockE
     
     @Override
     public void onLoad() {
-        InitViableMaterials();
+        InitViableInputs();
     }
 
-    protected abstract void InitViableMaterials();
+    protected abstract void InitViableInputs();
 
     public int getTier() {
         return currentTier;
@@ -135,4 +135,10 @@ public abstract class FHCraftStationEntity<T extends BlockEntity> extends BlockE
     public CompoundTag getUpdateTag(HolderLookup.Provider pRegistries) {
         return saveWithoutMetadata(pRegistries);
     }
+
+    // =============== Jade access ==============
+
+    public int getProgress() { return progress; }
+
+    public int getMaxProgress() { return maxProgress; }
 }

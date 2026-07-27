@@ -36,7 +36,7 @@ public class CondenserBlockEntity extends FHCraftStationEntity<CondenserBlockEnt
     }
 
     // Not needed here
-    protected void InitViableMaterials() {}
+    protected void InitViableInputs() {}
 
     public void tick(Level level, BlockPos pos, BlockState pState) {
         if(canCraft(level, pos)) {

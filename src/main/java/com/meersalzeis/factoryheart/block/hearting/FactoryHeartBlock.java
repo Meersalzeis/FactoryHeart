@@ -79,18 +79,6 @@ public class FactoryHeartBlock extends BaseEntityBlock {
         return defaultBlockState().setValue(FACING, pContext.getNearestLookingDirection().getOpposite());
     }
 
-    @Override
-    protected InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult hitResult) {
-        
-        if (level.isClientSide()) return InteractionResult.SUCCESS;
-
-        BlockEntity be = level.getBlockEntity(pos);
-        String message = ((FactoryHeartBlockEntity) be).toString();
-        message += " BlockProperty Tier is " + state.getValue(FactoryHeartBlock.TIER);
-        FHModClient.debugMessageToAll(message, false);
-        return InteractionResult.SUCCESS;
-    }
-
 
     @Nullable
     @Override
@@ -107,7 +95,6 @@ public class FactoryHeartBlock extends BaseEntityBlock {
 
     @Override
     public void animateTick(BlockState state, Level pLevel, BlockPos pPos, RandomSource pRandom) {
-        // THIS METHOD IS !CLIENT ONLY!
         double xPos = pPos.getX() + 0.5f;
         double yPos = pPos.getY() + 1.0f;
         double zPos = pPos.getZ() + 0.5f;

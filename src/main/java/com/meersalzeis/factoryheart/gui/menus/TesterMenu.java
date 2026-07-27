@@ -45,7 +45,6 @@ public class TesterMenu extends FHCraftingMenu<TesterBlockEntity> {
         int arrowPixelSize = 24;
 
         int res = maxProgress != 0 && progress != 0 ? progress * arrowPixelSize / maxProgress : 0;
-        FHModClient.debugMessageToAll(""+res, false);
         return res;
     }
 }

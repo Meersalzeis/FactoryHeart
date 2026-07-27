@@ -12,7 +12,6 @@ import mezz.jei.api.recipe.category.IRecipeCategory;
 
 import com.meersalzeis.factoryheart.FHModMain;
 import com.meersalzeis.factoryheart.block.ModBlocks;
-import com.meersalzeis.factoryheart.recipe.CondenserRecipe;
 import com.meersalzeis.factoryheart.recipe.TesterRecipe;
 
 import net.minecraft.client.Minecraft;

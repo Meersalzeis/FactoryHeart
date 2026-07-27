@@ -55,8 +55,8 @@ public class ExtractorBlockEntity extends FHCraftStationEntity<ExtractorBlockEnt
 
     private static List<ItemStack> viableInputs = null;
 
-    private static final int INPUT_SLOT = 0;
-    private static final int OUTPUT_SLOT = 1;
+    public static final int INPUT_SLOT = 0;
+    public static final int OUTPUT_SLOT = 1;
 
     public final IItemHandler restHandler = new SingleSlotFilteredHandler(itemHandler, INPUT_SLOT, x -> isViableInput(x), false);
     public final IItemHandler bottomHandler = new RangedWrapper(itemHandler, OUTPUT_SLOT, OUTPUT_SLOT + 1);
@@ -70,7 +70,7 @@ public class ExtractorBlockEntity extends FHCraftStationEntity<ExtractorBlockEnt
         return itemHandler;
     }
 
-    protected void InitViableMaterials() {
+    protected void InitViableInputs() {
         if (viableInputs != null) return;
 
         RecipeManager recipeManager = getLevel().getRecipeManager();

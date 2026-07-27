@@ -8,7 +8,6 @@ import mezz.jei.api.registration.IRecipeCategoryRegistration;
 import mezz.jei.api.registration.IRecipeRegistration;
 
 import com.meersalzeis.factoryheart.FHModMain;
-import com.meersalzeis.factoryheart.block.ModBlocks;
 import com.meersalzeis.factoryheart.compat.JEI.Categories.BlazerRecipeCategory;
 import com.meersalzeis.factoryheart.compat.JEI.Categories.CondenserRecipeCategory;
 import com.meersalzeis.factoryheart.compat.JEI.Categories.ExtractorRecipeCategory;
@@ -16,7 +15,6 @@ import com.meersalzeis.factoryheart.compat.JEI.Categories.TesterRecipeCategory;
 import com.meersalzeis.factoryheart.compat.JEI.Categories.WrapperRecipeCategory;
 import com.meersalzeis.factoryheart.recipe.BlazerRecipe;
 import com.meersalzeis.factoryheart.recipe.CondenserRecipe;
-import com.meersalzeis.factoryheart.recipe.CrystallizerRecipe;
 import com.meersalzeis.factoryheart.recipe.ExtractorRecipe;
 import com.meersalzeis.factoryheart.recipe.ModRecipes;
 import com.meersalzeis.factoryheart.recipe.TesterRecipe;
@@ -29,7 +27,6 @@ import com.meersalzeis.factoryheart.gui.screens.WrapperScreen;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.item.crafting.RecipeManager;
 

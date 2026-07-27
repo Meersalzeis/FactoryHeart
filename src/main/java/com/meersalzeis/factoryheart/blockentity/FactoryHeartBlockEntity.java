@@ -56,6 +56,7 @@ public class FactoryHeartBlockEntity extends BlockEntity {
     }
 
     public void onLoad() {
+        if (level.isClientSide()) return;
         recheckTier(level, worldPosition);
     }
 
@@ -216,6 +217,12 @@ public class FactoryHeartBlockEntity extends BlockEntity {
 
         if (gaugeVal + resource_per_item > max_resource && tier <= lastUsedTier) return;
 
+        if (lastUsedTier < tier) {
+            // gets topped up by new 
+            if (isFuel) {fuel_left = 0;}
+            else {coolant_left = 0;}
+        }
+
         if (isFuel) {
             fuel_left += resource_per_item;
             last_fuel_tier = tier;
@@ -235,7 +242,6 @@ public class FactoryHeartBlockEntity extends BlockEntity {
     }
 
     public void InitNetwork() {
-        FHModClient.debugMessageToAll("Init triggered");
         recheckTier(level, worldPosition);
     }
 
@@ -248,7 +254,7 @@ public class FactoryHeartBlockEntity extends BlockEntity {
         BlockState state = level.getBlockState(heartPos);
         level.setBlockAndUpdate(heartPos, state.setValue(FactoryHeartBlock.TIER, newTier));
         last_comp_output = getComparatorOutput();
-        HeartBeating.changeTierOfNetw(level, heartPos, newTier);
+        HeartBeating.setTierOfNetw(level, heartPos, newTier);
     }
 
     @Override
@@ -276,5 +282,20 @@ public class FactoryHeartBlockEntity extends BlockEntity {
     @Override
     public CompoundTag getUpdateTag(HolderLookup.Provider pRegistries) {
         return saveWithoutMetadata(pRegistries);
+    }
+
+    // =============== Jade access ==============
+
+    public int getFuelLeft() { return fuel_left; }
+    public int getCoolantLeft() { return coolant_left; }
+
+    public boolean usesCoolant(int currentTier) {
+        switch (currentTier) {
+            case 1: return !coolant_T1.isEmpty();
+            case 2: return !coolant_T2.isEmpty();
+            case 3: return !coolant_T3.isEmpty();
+            case 4: return !coolant_T4.isEmpty();
+            default: return false;
+        }
     }
 }

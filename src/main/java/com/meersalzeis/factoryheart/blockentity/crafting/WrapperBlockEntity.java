@@ -44,9 +44,9 @@ import java.util.Optional;
 
 public class WrapperBlockEntity extends FHCraftStationEntity<WrapperBlockEntity> implements MenuProvider {
 
-    private static final int CENTERPIECE_SLOT = 0;
-    private static final int WRAPPINGS_SLOT = 1;
-    private static final int OUTPUT_SLOT = 2;
+    public static final int CENTERPIECE_SLOT = 0;
+    public static final int WRAPPINGS_SLOT = 1;
+    public static final int OUTPUT_SLOT = 2;
 
     public final ItemStackHandler itemHandler = new ItemStackHandler(3) {
         @Override
@@ -82,7 +82,7 @@ public class WrapperBlockEntity extends FHCraftStationEntity<WrapperBlockEntity>
         return itemHandler;
     }
 
-    protected void InitViableMaterials() {
+    protected void InitViableInputs() {
         if (viableCenterpieces != null) return;
 
         RecipeManager recipeManager = getLevel().getRecipeManager();
