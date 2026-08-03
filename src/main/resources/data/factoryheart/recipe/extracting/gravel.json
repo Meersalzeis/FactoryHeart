@@ -1,0 +1,12 @@
+{
+  "type": "factoryheart:extracting",
+  "ingredient": {
+    "item": "minecraft:cobblestone"
+  },
+  "ingredientCount":4,
+  "requiredTier": 1,
+  "result": {
+    "id": "minecraft:gravel",
+    "count": 4
+  }
+}

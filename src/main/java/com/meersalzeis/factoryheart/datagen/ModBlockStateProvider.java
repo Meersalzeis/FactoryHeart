@@ -27,7 +27,7 @@ public class ModBlockStateProvider extends BlockStateProvider {
         blockWithItem(ModBlocks.FACTORY_SKIN);
 
         //blockWithItem(ModBlocks.WRAPPER);
-        blockWithItem(ModBlocks.EXTRACTOR);
+        //blockWithItem(ModBlocks.EXTRACTOR);
         blockWithItem(ModBlocks.TESTER);
 
         // ModelFile factoryMawModel = models().cube(
@@ -47,6 +47,7 @@ public class ModBlockStateProvider extends BlockStateProvider {
         addWrapperBlock();
 
         generateFromBlockbenchModel("blazer", ModBlocks.BLAZER.get(), modLoc("block/blazer"));
+        generateFromBlockbenchModel("extractor", ModBlocks.EXTRACTOR.get(), modLoc("block/extractor"));
         generateFromBlockbenchModel("condenser", ModBlocks.CONDENSER.get(), modLoc("block/condenser"));
         generateFromBlockbenchModel("factory_maw", ModBlocks.FACTORY_MAW.get(), modLoc("block/factory_maw"));
     }

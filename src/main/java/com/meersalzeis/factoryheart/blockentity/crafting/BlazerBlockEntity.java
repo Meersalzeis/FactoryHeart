@@ -1,6 +1,7 @@
 package com.meersalzeis.factoryheart.blockentity.crafting;
 
 import com.meersalzeis.factoryheart.block.crafting.BlazerBlock;
+import com.meersalzeis.factoryheart.block.crafting.CondenserBlock;
 import com.meersalzeis.factoryheart.blockentity.FHCraftStationEntity;
 import com.meersalzeis.factoryheart.blockentity.ModBlockEntities;
 import com.meersalzeis.factoryheart.blockentity.SingleSlotFilteredHandler;
@@ -92,12 +93,12 @@ public class BlazerBlockEntity extends FHCraftStationEntity<BlazerBlockEntity> i
         return itemHandler;
     }
 
-    public void tick(Level level, BlockPos pPos, BlockState pState) {
-        if(canCraft(level, pPos)) {
+    public void tick(Level level, BlockPos pos, BlockState bState) {
+        if(canCraft(level, pos)) {
             increaseCraftingProgress();
             // useEnergyForCrafting();
-            level.setBlockAndUpdate(pPos, pState.setValue(BlazerBlock.LIT, true));
-            setChanged(level, pPos, pState);
+            level.setBlockAndUpdate(pos, bState.setValue(BlazerBlock.LIT, true));
+            setChanged(level, pos, bState);
 
             if (hasCraftingFinished()) {
                 craftItem();
@@ -106,8 +107,10 @@ public class BlazerBlockEntity extends FHCraftStationEntity<BlazerBlockEntity> i
             }
 
         } else {
-            resetProgress();
-            level.setBlockAndUpdate(pPos, pState.setValue(BlazerBlock.LIT, false));
+            if (bState.getValue(CondenserBlock.LIT)) {
+                resetProgress();
+                level.setBlockAndUpdate(pos, bState.setValue(CondenserBlock.LIT, false));
+            }
         }
     }
 

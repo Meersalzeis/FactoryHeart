@@ -1,5 +1,6 @@
 package com.meersalzeis.factoryheart.blockentity.crafting;
 
+import com.meersalzeis.factoryheart.block.crafting.CondenserBlock;
 import com.meersalzeis.factoryheart.block.crafting.WrapperBlock;
 import com.meersalzeis.factoryheart.blockentity.FHCraftStationEntity;
 import com.meersalzeis.factoryheart.blockentity.FactoryHeartBlockEntity;
@@ -119,11 +120,11 @@ public class WrapperBlockEntity extends FHCraftStationEntity<WrapperBlockEntity>
         return new WrapperMenu(pContainerId, pPlayerInventory, this, this.data);
     }
 
-    public void tick(Level level, BlockPos pPos, BlockState pState) {
-        if(canCraft(level, pPos)) {
+    public void tick(Level level, BlockPos pos, BlockState bState) {
+        if(canCraft(level, pos)) {
             increaseCraftingProgress();
-            level.setBlockAndUpdate(pPos, pState.setValue(WrapperBlock.LIT, true));
-            setChanged(level, pPos, pState);
+            level.setBlockAndUpdate(pos, bState.setValue(WrapperBlock.LIT, true));
+            setChanged(level, pos, bState);
 
             if (hasCraftingFinished()) {
                 craftItem();
@@ -131,8 +132,10 @@ public class WrapperBlockEntity extends FHCraftStationEntity<WrapperBlockEntity>
             }
 
         } else {
-            resetProgress();
-            level.setBlockAndUpdate(pPos, pState.setValue(WrapperBlock.LIT, false));
+            if (bState.getValue(CondenserBlock.LIT)) {
+                resetProgress();
+                level.setBlockAndUpdate(pos, bState.setValue(CondenserBlock.LIT, false));
+            }
         }
     }
 

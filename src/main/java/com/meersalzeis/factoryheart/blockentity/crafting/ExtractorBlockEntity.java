@@ -1,6 +1,7 @@
 package com.meersalzeis.factoryheart.blockentity.crafting;
 
 import com.meersalzeis.factoryheart.FHModClient;
+import com.meersalzeis.factoryheart.block.crafting.CondenserBlock;
 import com.meersalzeis.factoryheart.block.crafting.ExtractorBlock;
 import com.meersalzeis.factoryheart.blockentity.FHCraftStationEntity;
 import com.meersalzeis.factoryheart.blockentity.FactoryHeartBlockEntity;
@@ -53,6 +54,8 @@ public class ExtractorBlockEntity extends FHCraftStationEntity<ExtractorBlockEnt
         }
     };
 
+    private int animationProgress = 0;
+
     private static List<ItemStack> viableInputs = null;
 
     public static final int INPUT_SLOT = 0;
@@ -98,12 +101,12 @@ public class ExtractorBlockEntity extends FHCraftStationEntity<ExtractorBlockEnt
     }
 
 
-    public void tick(Level level, BlockPos pPos, BlockState pState) {
-        if(canCraft(level, pPos)) {
+    public void tick(Level level, BlockPos pos, BlockState bState) {
+        if(canCraft(level, pos)) {
             increaseCraftingProgress();
             // useEnergyForCrafting();
-            level.setBlockAndUpdate(pPos, pState.setValue(ExtractorBlock.LIT, true));
-            setChanged(level, pPos, pState);
+            level.setBlockAndUpdate(pos, bState.setValue(ExtractorBlock.LIT, true));
+            setChanged(level, pos, bState);
 
             if (hasCraftingFinished()) {
                 craftItem();
@@ -112,8 +115,10 @@ public class ExtractorBlockEntity extends FHCraftStationEntity<ExtractorBlockEnt
             }
 
         } else {
-            resetProgress();
-            level.setBlockAndUpdate(pPos, pState.setValue(ExtractorBlock.LIT, false));
+            if (bState.getValue(CondenserBlock.LIT)) {
+                resetProgress();
+                level.setBlockAndUpdate(pos, bState.setValue(CondenserBlock.LIT, false));
+            }
         }
     }
 

@@ -1,10 +1,9 @@
-package com.meersalzeis.factoryheart.gui.screens;
+package com.meersalzeis.factoryheart.gui.recipeDisplays;
 
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.meersalzeis.factoryheart.FHModMain;
 import com.meersalzeis.factoryheart.gui.menus.CondenserMenu;
 import com.meersalzeis.factoryheart.gui.renderer.EnergyDisplayTooltipArea;
-import com.meersalzeis.factoryheart.gui.renderer.FluidTankRenderer;
 import com.meersalzeis.factoryheart.util.MouseUtil;
 
 import net.minecraft.client.Minecraft;
@@ -21,7 +20,7 @@ import java.util.Optional;
 
 public class CondenserScreen extends AbstractContainerScreen<CondenserMenu> {
     private static final ResourceLocation GUI_TEXTURE =
-            ResourceLocation.fromNamespaceAndPath(FHModMain.MOD_ID,"textures/gui/condenser/condenser_gui.png");
+            ResourceLocation.fromNamespaceAndPath(FHModMain.MOD_ID,"textures/gui/basic_jei_gui.png");
     private static final ResourceLocation ARROW_TEXTURE =
             ResourceLocation.fromNamespaceAndPath(FHModMain.MOD_ID,"textures/gui/arrow_progress.png");
     // private EnergyDisplayTooltipArea energyInfoArea;
@@ -64,10 +63,6 @@ public class CondenserScreen extends AbstractContainerScreen<CondenserMenu> {
         renderBackground(guiGraphics, mouseX, mouseY, delta);
         super.render(guiGraphics, mouseX, mouseY, delta);
         renderTooltip(guiGraphics, mouseX, mouseY);
-    }
-
-    public static boolean isMouseAboveArea(int pMouseX, int pMouseY, int x, int y, int offsetX, int offsetY, FluidTankRenderer renderer) {
-        return MouseUtil.isMouseOver(pMouseX, pMouseY, x + offsetX, y + offsetY, renderer.getWidth(), renderer.getHeight());
     }
 
     public static boolean isMouseAboveArea(int pMouseX, int pMouseY, int x, int y, int offsetX, int offsetY, int width, int height) {

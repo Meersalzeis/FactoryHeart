@@ -20,11 +20,8 @@ import snownee.jade.api.BlockAccessor;
 import snownee.jade.api.IBlockComponentProvider;
 import snownee.jade.api.ITooltip;
 import snownee.jade.api.config.IPluginConfig;
-import snownee.jade.api.ui.BoxStyle;
 import snownee.jade.api.ui.IElement;
 import snownee.jade.api.ui.IElementHelper;
-import snownee.jade.impl.ui.ProgressElement;
-import snownee.jade.impl.ui.SimpleProgressStyle;
 
 
 public enum FHJadeComponentProvider implements IBlockComponentProvider {
@@ -77,12 +74,13 @@ public enum FHJadeComponentProvider implements IBlockComponentProvider {
   }
 
   ArrayList<IElement> createCraftingStationTooltips(@SuppressWarnings("rawtypes") FHCraftStationEntity bEntity, ItemStack input, ItemStack output) {
+    bEntity.syncProgress = true;
     int progress = bEntity.getProgress();
     int maxProgress = bEntity.getMaxProgress();
 
     ArrayList<IElement> craftProcess = new ArrayList<IElement>();
     craftProcess.add(helper.item(input));
-    craftProcess.add(helper.progress(((float)progress) / maxProgress));
+    craftProcess.add(helper.progress(((float)progress+1) / maxProgress));
     craftProcess.add(helper.item(output));
     return craftProcess;
   }
@@ -155,18 +153,11 @@ public enum FHJadeComponentProvider implements IBlockComponentProvider {
 
     appendTierTooltip(tooltip, bEntity);
 
+    bEntity.syncProgress = true;
     int progress = bEntity.getProgress();
     int maxProgress = bEntity.getMaxProgress();
 
     // Progress bar / arrow
-    tooltip.add(
-      new ProgressElement(
-        ((float)progress) / maxProgress,
-        null,
-        new SimpleProgressStyle(),
-        BoxStyle.getNestedBox(),
-        false
-      )
-    );
+    tooltip.add(helper.progress(((float)progress+1) / maxProgress));
   }
 }

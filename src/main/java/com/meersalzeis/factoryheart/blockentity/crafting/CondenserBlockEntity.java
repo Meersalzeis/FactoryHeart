@@ -28,7 +28,6 @@ public class CondenserBlockEntity extends FHCraftStationEntity<CondenserBlockEnt
     public CondenserBlockEntity(BlockPos pos, BlockState blockState) {
         super(ModBlockEntities.CONDENSER_BE.get(), pos, blockState);
         color = blockState.getValue(CondenserBlock.COLOR);
-        FHModClient.debugMessageToAll("Condenser BlockEntity color property starts with " + color);
     }
 
     public void setColor(DyeColor newColor) {
@@ -38,11 +37,11 @@ public class CondenserBlockEntity extends FHCraftStationEntity<CondenserBlockEnt
     // Not needed here
     protected void InitViableInputs() {}
 
-    public void tick(Level level, BlockPos pos, BlockState pState) {
+    public void tick(Level level, BlockPos pos, BlockState bState) {
         if(canCraft(level, pos)) {
             increaseCraftingProgress();
-            level.setBlockAndUpdate(pos, pState.setValue(CondenserBlock.LIT, true));
-            setChanged(level, pos, pState);
+            level.setBlockAndUpdate(pos, bState.setValue(CondenserBlock.LIT, true));
+            setChanged(level, pos, bState);
 
             if (hasCraftingFinished()) {
                 craftItem(level, pos);
@@ -50,8 +49,10 @@ public class CondenserBlockEntity extends FHCraftStationEntity<CondenserBlockEnt
             }
 
         } else {
-            resetProgress();
-            level.setBlockAndUpdate(pos, pState.setValue(CondenserBlock.LIT, false));
+            if (bState.getValue(CondenserBlock.LIT)) {
+                resetProgress();
+                level.setBlockAndUpdate(pos, bState.setValue(CondenserBlock.LIT, false));
+            }
         }
     }
 

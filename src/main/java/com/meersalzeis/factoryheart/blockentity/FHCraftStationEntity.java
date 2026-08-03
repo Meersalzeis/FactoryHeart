@@ -24,6 +24,8 @@ public abstract class FHCraftStationEntity<T extends BlockEntity> extends BlockE
     protected int maxProgress = 100;
     protected int currentTier;
 
+    public boolean syncProgress = false;
+
     public FHCraftStationEntity(BlockEntityType<T> bEntityType, BlockPos pPos, BlockState pBlockState) {
         super(bEntityType, pPos, pBlockState);
         this.data = new ContainerData() {
@@ -70,10 +72,16 @@ public abstract class FHCraftStationEntity<T extends BlockEntity> extends BlockE
 
     protected void increaseCraftingProgress() {
         progress++;
+        if (syncProgress) initiateSync();
     }
 
     protected void resetProgress() {
         this.progress = 0;
+        if (syncProgress) {
+            initiateSync();
+            // will be reactivated if needed
+            syncProgress = false;
+        }
     }
 
     // =============== Handle Inventory ==============

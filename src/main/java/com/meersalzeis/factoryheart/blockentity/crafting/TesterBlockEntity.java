@@ -106,22 +106,22 @@ public class TesterBlockEntity extends FHCraftStationEntity implements MenuProvi
         return new TesterMenu(pContainerId, pPlayerInventory, this, this.data);
     }
 
-    public void tick(Level level, BlockPos pPos, BlockState pState) {
-        if(canCraft(level, pPos)) {
+    public void tick(Level level, BlockPos pos, BlockState bState) {
+        if(canCraft(level, pos)) {
             increaseCraftingProgress();
-            level.setBlockAndUpdate(pPos, pState.setValue(TesterBlock.LIT, true));
+            level.setBlockAndUpdate(pos, bState.setValue(TesterBlock.LIT, true));
 
             if (hasCraftingFinished()) {
-                setChanged(level, pPos, pState);
+                //setChanged(level, pPos, pState);
                 craftItem();
                 resetProgress();
             }
 
         } else {
-            if (pState.getValue(TesterBlock.LIT)) {
-                setChanged(level, pPos, pState);
+            if (bState.getValue(TesterBlock.LIT)) {
+                //setChanged(level, pPos, pState);
                 resetProgress();
-                level.setBlockAndUpdate(pPos, pState.setValue(TesterBlock.LIT, false));
+                level.setBlockAndUpdate(pos, bState.setValue(TesterBlock.LIT, false));
             }
         }
     }

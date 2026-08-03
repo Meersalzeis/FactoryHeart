@@ -2,8 +2,8 @@
 	"format_version": "1.9.0",
 	"credit": "Witchhat, Made with Blockbench",
 	"textures": {
-		"0": "minecraft:block/barrel_side",
-		"1": "minecraft:block/barrel_top",
+		"0": "factoryheart:block/extractor_side",
+		"1": "factoryheart:block/extractor_top",
 		"particle": "#0"
 	},
 	"elements": [

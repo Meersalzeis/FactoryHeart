@@ -1,0 +1,12 @@
+{
+  "type": "factoryheart:extracting",
+  "ingredient": {
+    "item": "minecraft:gravel"
+  },
+  "ingredientCount":4,
+  "requiredTier": 1,
+  "result": {
+    "id": "minecraft:sand",
+    "count": 4
+  }
+}

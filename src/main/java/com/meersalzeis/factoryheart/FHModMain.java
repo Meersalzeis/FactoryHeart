@@ -14,10 +14,10 @@ import com.meersalzeis.factoryheart.item.ModItems;
 import com.meersalzeis.factoryheart.recipe.ModRecipes;
 import com.meersalzeis.factoryheart.sound.ModSounds;
 import com.meersalzeis.factoryheart.gui.ModMenuTypes;
+import com.meersalzeis.factoryheart.gui.recipeDisplays.CondenserScreen;
 import com.meersalzeis.factoryheart.gui.screens.ExtractorScreen;
 import com.meersalzeis.factoryheart.gui.screens.TesterScreen;
 import com.meersalzeis.factoryheart.gui.screens.BlazerScreen;
-import com.meersalzeis.factoryheart.gui.screens.CondenserScreen;
 import com.meersalzeis.factoryheart.gui.screens.WrapperScreen;
 import com.mojang.logging.LogUtils;
 

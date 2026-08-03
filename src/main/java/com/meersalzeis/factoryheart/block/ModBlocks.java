@@ -1,7 +1,6 @@
 package com.meersalzeis.factoryheart.block;
 
 import net.minecraft.world.item.BlockItem;
-import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockBehaviour;
@@ -9,8 +8,6 @@ import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredBlock;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.function.Supplier;
 
 import com.meersalzeis.factoryheart.FHModMain;
@@ -21,18 +18,17 @@ import com.meersalzeis.factoryheart.block.crafting.TesterBlock;
 import com.meersalzeis.factoryheart.block.crafting.WrapperBlock;
 import com.meersalzeis.factoryheart.block.hearting.FactoryHeartBlock;
 import com.meersalzeis.factoryheart.block.hearting.FactoryMawBlock;
-import com.meersalzeis.factoryheart.blockentity.crafting.CondenserBlockEntity;
 import com.meersalzeis.factoryheart.item.ModItems;
 
 public class ModBlocks {
     public static final DeferredRegister.Blocks BLOCKS =  DeferredRegister.createBlocks(FHModMain.MOD_ID);
 
     public static final DeferredBlock<Block> BLAZER = registerBlock("blazer",
-        () -> new BlazerBlock(BlockBehaviour.Properties.of().noOcclusion())
+        () -> new BlazerBlock(BlockBehaviour.Properties.of().strength(3f).noOcclusion())
     );
 
     public static final DeferredBlock<Block> WRAPPER = registerBlock("wrapper",
-        () -> new WrapperBlock(BlockBehaviour.Properties.of().strength(3f))
+        () -> new WrapperBlock(BlockBehaviour.Properties.of().strength(3f).noOcclusion())
     );
 
     public static final DeferredBlock<Block> EXTRACTOR = registerBlock("extractor",
