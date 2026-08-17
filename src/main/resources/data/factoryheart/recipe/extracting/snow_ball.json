@@ -1,0 +1,13 @@
+{
+  "type": "factoryheart:extracting",
+  "consumesInput": false,
+  "ingredient": {
+    "item": "minecraft:powder_snow_bucket"
+  },
+  "ingredientCount":1,
+  "requiredTier": 3,
+  "result": {
+    "id": "minecraft:snowball",
+    "count": 1
+  }
+}

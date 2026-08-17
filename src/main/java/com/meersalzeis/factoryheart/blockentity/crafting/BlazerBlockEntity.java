@@ -1,7 +1,6 @@
 package com.meersalzeis.factoryheart.blockentity.crafting;
 
 import com.meersalzeis.factoryheart.block.crafting.BlazerBlock;
-import com.meersalzeis.factoryheart.block.crafting.CondenserBlock;
 import com.meersalzeis.factoryheart.blockentity.FHCraftStationEntity;
 import com.meersalzeis.factoryheart.blockentity.ModBlockEntities;
 import com.meersalzeis.factoryheart.blockentity.SingleSlotFilteredHandler;
@@ -11,6 +10,7 @@ import com.meersalzeis.factoryheart.recipe.ModRecipes;
 import com.meersalzeis.factoryheart.gui.menus.BlazerMenu;
 
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.MenuProvider;
 import net.minecraft.world.entity.player.Inventory;
@@ -49,6 +49,9 @@ public class BlazerBlockEntity extends FHCraftStationEntity<BlazerBlockEntity> i
     };
 
     private static List<ItemStack> viableInputs = null;
+
+    private static final float ROD_ANIMATION_SPEED = 0.01f;
+    private float rodAnimationProgress = 0.0f;
 
     public static final int INPUT_SLOT = 0;
     public static final int OUTPUT_SLOT = 1;
@@ -107,9 +110,9 @@ public class BlazerBlockEntity extends FHCraftStationEntity<BlazerBlockEntity> i
             }
 
         } else {
-            if (bState.getValue(CondenserBlock.LIT)) {
+            if (bState.getValue(BlazerBlock.LIT)) {
                 resetProgress();
-                level.setBlockAndUpdate(pos, bState.setValue(CondenserBlock.LIT, false));
+                level.setBlockAndUpdate(pos, bState.setValue(BlazerBlock.LIT, false));
             }
         }
     }
@@ -165,5 +168,20 @@ public class BlazerBlockEntity extends FHCraftStationEntity<BlazerBlockEntity> i
         int currentCount = itemHandler.getStackInSlot(OUTPUT_SLOT).getCount();
 
         return maxCount >= currentCount + count;
+    }
+
+    public boolean isVertical() {
+        var facing = getBlockState().getValue(BlazerBlock.FACING);
+        return facing == Direction.DOWN || facing == Direction.UP;
+    }
+
+    public boolean pointsToPole() {
+        var facing = getBlockState().getValue(BlazerBlock.FACING);
+        return facing == Direction.NORTH || facing == Direction.SOUTH;
+    }
+
+    public float getRodAnimationProgress() {
+        rodAnimationProgress += ROD_ANIMATION_SPEED * (progress == 0 ? 1 : 2);
+        return rodAnimationProgress;
     }
 }

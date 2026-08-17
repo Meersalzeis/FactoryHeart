@@ -39,7 +39,7 @@ public class ExtractorScreen extends AbstractContainerScreen<ExtractorMenu> {
 
         int tier = menu.getTier();
         TierDisplay.renderTierDisplay(pGuiGraphics, tier, x, y);
-        TierDisplay.renderTierTooltip(pGuiGraphics, pMouseX, pMouseY, x, y, this.font, tier);
+        TierDisplay.renderTierTooltip(pGuiGraphics, pMouseX, pMouseY, x, y, this.font, tier, true);
     }
 
     private void renderProgressArrow(GuiGraphics guiGraphics, int x, int y) {

@@ -13,13 +13,13 @@ import com.meersalzeis.factoryheart.compat.JEI.Categories.CondenserRecipeCategor
 import com.meersalzeis.factoryheart.compat.JEI.Categories.ExtractorRecipeCategory;
 import com.meersalzeis.factoryheart.compat.JEI.Categories.TesterRecipeCategory;
 import com.meersalzeis.factoryheart.compat.JEI.Categories.WrapperRecipeCategory;
+import com.meersalzeis.factoryheart.compat.JEI.recipeDisplays.CondenserRecipeScreen;
 import com.meersalzeis.factoryheart.recipe.BlazerRecipe;
 import com.meersalzeis.factoryheart.recipe.CondenserRecipe;
 import com.meersalzeis.factoryheart.recipe.ExtractorRecipe;
 import com.meersalzeis.factoryheart.recipe.ModRecipes;
 import com.meersalzeis.factoryheart.recipe.TesterRecipe;
 import com.meersalzeis.factoryheart.recipe.WrapperRecipe;
-import com.meersalzeis.factoryheart.gui.recipeDisplays.CondenserScreen;
 import com.meersalzeis.factoryheart.gui.screens.BlazerScreen;
 import com.meersalzeis.factoryheart.gui.screens.ExtractorScreen;
 import com.meersalzeis.factoryheart.gui.screens.TesterScreen;
@@ -42,11 +42,11 @@ public class JEIPluginRegistering implements IModPlugin {
 
     @Override
     public void registerCategories(IRecipeCategoryRegistration registration) {
-        registration.addRecipeCategories(new BlazerRecipeCategory(    registration.getJeiHelpers().getGuiHelper()));
-        registration.addRecipeCategories(new WrapperRecipeCategory( registration.getJeiHelpers().getGuiHelper()));
-        registration.addRecipeCategories(new ExtractorRecipeCategory( registration.getJeiHelpers().getGuiHelper()));
-        registration.addRecipeCategories(new TesterRecipeCategory( registration.getJeiHelpers().getGuiHelper()));
-        registration.addRecipeCategories(new CondenserRecipeCategory( registration.getJeiHelpers().getGuiHelper()));
+        registration.addRecipeCategories(new BlazerRecipeCategory(registration.getJeiHelpers().getGuiHelper()));
+        registration.addRecipeCategories(new WrapperRecipeCategory(registration.getJeiHelpers().getGuiHelper()));
+        registration.addRecipeCategories(new ExtractorRecipeCategory(registration.getJeiHelpers().getGuiHelper()));
+        registration.addRecipeCategories(new TesterRecipeCategory(registration.getJeiHelpers().getGuiHelper()));
+        registration.addRecipeCategories(new CondenserRecipeCategory(registration.getJeiHelpers().getGuiHelper()));
     }
 
     @Override
@@ -93,7 +93,7 @@ public class JEIPluginRegistering implements IModPlugin {
             TesterRecipeCategory.TESTER_RECIPE_TYPE);
 
         registration.addRecipeClickArea(
-            CondenserScreen.class,
+            CondenserRecipeScreen.class,
              70, 30, 25, 20,
             CondenserRecipeCategory.CONDENSER_RECIPE_TYPE);
     }

@@ -1,0 +1,31 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "factoryheart:blazear_fuel_rod"
+    },
+    {
+      "item": "factoryheart:blazear_fuel_rod"
+    },
+    {
+      "item": "factoryheart:blaze_candy"
+    },
+    {
+      "item": "factoryheart:blaze_candy"
+    },
+    {
+      "item": "factoryheart:blaze_candy"
+    },
+    {
+      "item": "factoryheart:blaze_candy"
+    },
+    {
+      "item": "minecraft:fire_charge"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "factoryheart:inferno_shard"
+  }
+}

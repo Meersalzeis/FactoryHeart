@@ -1,0 +1,30 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "c": {
+      "item": "factoryheart:combustion_core"
+    },
+    "h": {
+      "item": "minecraft:honey_bottle"
+    },
+    "m": {
+      "item": "minecraft:melon"
+    },
+    "p": {
+      "item": "minecraft:pumpkin_pie"
+    },
+    "s": {
+      "item": "minecraft:sugar"
+    }
+  },
+  "pattern": [
+    "shs",
+    "pcm",
+    "shs"
+  ],
+  "result": {
+    "count": 1,
+    "id": "factoryheart:raw_blaze_candy"
+  }
+}

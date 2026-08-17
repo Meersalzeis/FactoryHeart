@@ -1,0 +1,14 @@
+{
+  "type": "factoryheart:wrapping",
+  "centerpiece": {
+    "item": "factoryheart:unwrapped_blaze_candy"
+  },
+  "wrappings": {
+    "item": "minecraft:paper"
+  },
+  "centerpieceCount": 1,
+  "wrappingsCount": 1,
+  "result": {
+    "id": "factoryheart:blaze_candy"
+  }
+}

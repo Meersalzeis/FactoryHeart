@@ -20,7 +20,7 @@ import org.jetbrains.annotations.Nullable;
 public class WrapperRecipeCategory implements IRecipeCategory<WrapperRecipe> {
     public static final ResourceLocation UID = ResourceLocation.fromNamespaceAndPath(FHModMain.MOD_ID, "wrapping");
     public static final ResourceLocation TEXTURE = ResourceLocation.fromNamespaceAndPath(FHModMain.MOD_ID,
-            "textures/gui/wrapper/wrapper_gui.png");
+            "textures/gui/wrapper/smol_wrapper_gui.png");
 
     public static final RecipeType<WrapperRecipe> WRAPPER_RECIPE_TYPE =
             new RecipeType<>(UID, WrapperRecipe.class);
@@ -29,7 +29,7 @@ public class WrapperRecipeCategory implements IRecipeCategory<WrapperRecipe> {
     private final IDrawable icon;
 
     public WrapperRecipeCategory(IGuiHelper helper) {
-        this.background = helper.createDrawable(TEXTURE, 0, 0, 176, 85);
+        this.background = helper.createDrawable(TEXTURE, 0, 0, 140, 50);
         this.icon = helper.createDrawableIngredient(VanillaTypes.ITEM_STACK, new ItemStack(ModBlocks.WRAPPER.get()));
     }
 
@@ -66,8 +66,8 @@ public class WrapperRecipeCategory implements IRecipeCategory<WrapperRecipe> {
         ItemStack wrappings = recipe.getIngredients().get(1).getItems()[0];
         wrappings.setCount(recipe.getWrappingsCount());
 
-        builder.addSlot(RecipeIngredientRole.INPUT, 54, 34).addItemStack(centerpiece);
-        builder.addSlot(RecipeIngredientRole.INPUT, 8, 34).addItemStack(wrappings);
-        builder.addSlot(RecipeIngredientRole.OUTPUT, 104, 34).addItemStack(recipe.getResultItem(null));
+        builder.addSlot(RecipeIngredientRole.INPUT, 35, 18).addItemStack(centerpiece);
+        builder.addSlot(RecipeIngredientRole.INPUT, 9, 18).addItemStack(wrappings);
+        builder.addSlot(RecipeIngredientRole.OUTPUT, 85, 18).addItemStack(recipe.getResultItem(null));
     }
 }

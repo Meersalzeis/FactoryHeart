@@ -11,21 +11,21 @@
       },
       "trigger": "minecraft:inventory_changed"
     },
-    "has_heart_of_the_sea": {
+    "has_factory_skin": {
       "conditions": {
         "items": [
           {
-            "items": "minecraft:heart_of_the_sea"
+            "items": "factoryheart:factory_skin"
           }
         ]
       },
       "trigger": "minecraft:inventory_changed"
     },
-    "has_iron_nugget": {
+    "has_heart_of_the_sea": {
       "conditions": {
         "items": [
           {
-            "items": "minecraft:iron_nugget"
+            "items": "minecraft:heart_of_the_sea"
           }
         ]
       },
@@ -41,7 +41,7 @@
   "requirements": [
     [
       "has_the_recipe",
-      "has_iron_nugget",
+      "has_factory_skin",
       "has_factory_paste",
       "has_heart_of_the_sea"
     ]

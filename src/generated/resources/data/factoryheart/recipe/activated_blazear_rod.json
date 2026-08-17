@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "b": {
+      "item": "factoryheart:blazear_pellet"
+    },
+    "e": {
+      "item": "factoryheart:energy_powder"
+    },
+    "p": {
+      "item": "factoryheart:factory_paste"
+    }
+  },
+  "pattern": [
+    "ebe",
+    "pbp",
+    "ebe"
+  ],
+  "result": {
+    "count": 1,
+    "id": "factoryheart:activated_blazear_rod"
+  }
+}

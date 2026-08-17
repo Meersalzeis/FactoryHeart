@@ -1,0 +1,12 @@
+
+{
+  "type": "factoryheart:condensing",
+  "hue":"white",
+  "requiredTier": 1,
+  "requiredTicks": 20000,
+  "requiredFuelPerTick": 1,
+  "result": {
+    "id": "minecraft:calcite",
+    "count": 1
+  }
+}

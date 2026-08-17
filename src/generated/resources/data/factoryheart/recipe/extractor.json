@@ -5,16 +5,20 @@
     "d": {
       "item": "minecraft:dispenser"
     },
-    "f": {
-      "item": "factoryheart:factory_paste"
+    "m": {
+      "item": "minecraft:piston"
     },
     "p": {
-      "item": "minecraft:piston"
+      "item": "factoryheart:plunger"
+    },
+    "s": {
+      "item": "factoryheart:factory_skin"
     }
   },
   "pattern": [
-    "d d",
-    "fpf"
+    "sss",
+    " pm",
+    "sds"
   ],
   "result": {
     "count": 1,

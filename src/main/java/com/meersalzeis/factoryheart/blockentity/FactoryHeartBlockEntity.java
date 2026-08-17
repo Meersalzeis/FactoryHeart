@@ -7,12 +7,9 @@ import javax.annotation.Nullable;
 
 import com.meersalzeis.factoryheart.Config;
 import com.meersalzeis.factoryheart.FHModClient;
-import com.meersalzeis.factoryheart.FHModMain;
 import com.meersalzeis.factoryheart.block.ModBlocks;
-import com.meersalzeis.factoryheart.block.crafting.BlazerBlock;
 import com.meersalzeis.factoryheart.block.hearting.FactoryHeartBlock;
 import com.meersalzeis.factoryheart.hearts.HeartBeating;
-import com.meersalzeis.factoryheart.hearts.HeartNetwork;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;

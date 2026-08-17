@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_leathery_rotten_flesh": {
+      "conditions": {
+        "items": [
+          {
+            "items": "factoryheart:leathery_rotten_flesh"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "minecraft:leather_from_blasting_leathery_rotten_flesh"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_leathery_rotten_flesh"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "minecraft:leather_from_blasting_leathery_rotten_flesh"
+    ]
+  }
+}

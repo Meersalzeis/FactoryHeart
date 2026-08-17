@@ -4,13 +4,8 @@ import com.meersalzeis.factoryheart.FHModClient;
 import com.meersalzeis.factoryheart.block.crafting.CondenserBlock;
 import com.meersalzeis.factoryheart.block.crafting.ExtractorBlock;
 import com.meersalzeis.factoryheart.blockentity.FHCraftStationEntity;
-import com.meersalzeis.factoryheart.blockentity.FactoryHeartBlockEntity;
 import com.meersalzeis.factoryheart.blockentity.ModBlockEntities;
 import com.meersalzeis.factoryheart.blockentity.SingleSlotFilteredHandler;
-import com.meersalzeis.factoryheart.hearts.HeartBeating;
-import com.meersalzeis.factoryheart.hearts.HeartNetwork;
-import com.meersalzeis.factoryheart.item.ModItems;
-import com.meersalzeis.factoryheart.recipe.BlazerRecipe;
 import com.meersalzeis.factoryheart.recipe.ExtractorRecipe;
 import com.meersalzeis.factoryheart.recipe.ExtractorRecipeInput;
 import com.meersalzeis.factoryheart.recipe.ModRecipes;
@@ -53,8 +48,6 @@ public class ExtractorBlockEntity extends FHCraftStationEntity<ExtractorBlockEnt
             else return false;
         }
     };
-
-    private int animationProgress = 0;
 
     private static List<ItemStack> viableInputs = null;
 
@@ -123,16 +116,21 @@ public class ExtractorBlockEntity extends FHCraftStationEntity<ExtractorBlockEnt
     }
 
     private void craftItem() {
-        Optional<RecipeHolder<ExtractorRecipe>> recipe = getCurrentRecipe();
-        int inputConsumption = recipe.get().value().getIngredientCount();
-        ItemStack output = recipe.get().value().output();
-        itemHandler.extractItem(INPUT_SLOT, inputConsumption, false);
+        ExtractorRecipe recipe = getCurrentRecipe().get().value();
+        int inputConsumption = recipe.getIngredientCount();
+        ItemStack output = recipe.output();
+
         itemHandler.setStackInSlot(
             OUTPUT_SLOT,
             new ItemStack(
                 output.getItem(),
                 itemHandler.getStackInSlot(OUTPUT_SLOT).getCount() + output.getCount())
         );
+
+        FHModClient.debugMessageToAll("Does consuem input? " + recipe.doesConsumeInput());
+        if (!recipe.doesConsumeInput()) return;
+
+        itemHandler.extractItem(INPUT_SLOT, inputConsumption, false);
     }
 
     private boolean isOutputSlotEmptyOrReceivable() {
@@ -162,7 +160,7 @@ public class ExtractorBlockEntity extends FHCraftStationEntity<ExtractorBlockEnt
         return recipe.get().value().requiredTier() <= getTier();
     }
 
-    private Optional<RecipeHolder<ExtractorRecipe>> getCurrentRecipe() {
+    public Optional<RecipeHolder<ExtractorRecipe>> getCurrentRecipe() {
         var inputSlot = itemHandler.getStackInSlot(INPUT_SLOT);
         return this.level.getRecipeManager()
             .getRecipeFor(

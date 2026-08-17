@@ -22,10 +22,8 @@ public class ModItemTagProvider extends ItemTagsProvider {
 
     @Override
     protected void addTags(HolderLookup.Provider pProvider) {
-        // tag(ModTags.Items.TRANSFORMABLE_ITEMS)
-        //         .add(ModItems.CURSED_SCRAP.get())
-        //         .add(Items.COAL)
-        //         .add(Items.DANDELION)
-        //         .add(Items.COMPASS);
+        tag(ModTags.Items.HEART_ITEMS)
+            .add(ModItems.SMART_HEART.get())
+            .add(Items.HEART_OF_THE_SEA);
     }
 }

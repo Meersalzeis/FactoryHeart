@@ -1,7 +1,7 @@
 package com.meersalzeis.factoryheart.block.crafting;
 
 import com.meersalzeis.factoryheart.blockentity.ModBlockEntities;
-import com.meersalzeis.factoryheart.blockentity.crafting.ExtractorBlockEntity;
+
 import com.meersalzeis.factoryheart.blockentity.crafting.TesterBlockEntity;
 import com.meersalzeis.factoryheart.hearts.HeartBeating;
 import com.mojang.serialization.MapCodec;

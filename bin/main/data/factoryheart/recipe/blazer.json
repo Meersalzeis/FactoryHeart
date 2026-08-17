@@ -5,17 +5,17 @@
     "b": {
       "item": "minecraft:barrel"
     },
-    "p": {
-      "item": "factoryheart:factory_paste"
-    },
     "r": {
       "item": "minecraft:blaze_rod"
+    },
+    "s": {
+      "item": "factoryheart:factory_skin"
     }
   },
   "pattern": [
-    "prp",
+    "srs",
     "rbr",
-    "prp"
+    "srs"
   ],
   "result": {
     "count": 1,

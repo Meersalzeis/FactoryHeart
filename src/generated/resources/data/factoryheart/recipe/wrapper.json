@@ -2,23 +2,20 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "f": {
-      "item": "factoryheart:factory_paste"
-    },
     "h": {
       "item": "minecraft:tripwire_hook"
     },
-    "i": {
-      "item": "minecraft:iron_ingot"
-    },
     "p": {
       "item": "minecraft:piston"
+    },
+    "s": {
+      "item": "factoryheart:factory_skin"
     }
   },
   "pattern": [
-    "fif",
+    "s s",
     "h h",
-    "fpf"
+    "sps"
   ],
   "result": {
     "count": 1,

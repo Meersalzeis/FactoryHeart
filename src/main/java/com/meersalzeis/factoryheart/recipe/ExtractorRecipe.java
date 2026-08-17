@@ -12,17 +12,20 @@ import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.Level;
+
+import com.meersalzeis.factoryheart.FHModClient;
 import com.mojang.serialization.Codec;
 import net.minecraft.network.codec.ByteBufCodecs;
 
-public record ExtractorRecipe(Ingredient inputItem, int ingredientCount, int requiredTier, ItemStack output) implements Recipe<ExtractorRecipeInput> {
+public record ExtractorRecipe(Ingredient inputItem, int ingredientCount, int requiredTier, ItemStack output, boolean consumesInput) implements Recipe<ExtractorRecipeInput> {
     
     public static final MapCodec<ExtractorRecipe> CODEC =
         RecordCodecBuilder.mapCodec(inst -> inst.group(
             Ingredient.CODEC_NONEMPTY.fieldOf("ingredient").forGetter(ExtractorRecipe::inputItem),
             Codec.INT.fieldOf("requiredTier").forGetter(ExtractorRecipe::requiredTier),
             Codec.INT.fieldOf("ingredientCount").forGetter(ExtractorRecipe::ingredientCount),
-            ItemStack.CODEC.fieldOf("result").forGetter(ExtractorRecipe::output)
+            ItemStack.CODEC.fieldOf("result").forGetter(ExtractorRecipe::output),
+            Codec.BOOL.optionalFieldOf("consumesInput", true).forGetter(ExtractorRecipe::consumesInput)
         ).apply(inst, ExtractorRecipe::new));
 
     public static final StreamCodec<RegistryFriendlyByteBuf, ExtractorRecipe> STREAM_CODEC =
@@ -31,6 +34,7 @@ public record ExtractorRecipe(Ingredient inputItem, int ingredientCount, int req
             ByteBufCodecs.INT, ExtractorRecipe::requiredTier,
             ByteBufCodecs.INT, ExtractorRecipe::ingredientCount,
             ItemStack.STREAM_CODEC, ExtractorRecipe::output,
+            ByteBufCodecs.BOOL, ExtractorRecipe::consumesInput,
             ExtractorRecipe::new);
     
     public int getIngredientCount() { return ingredientCount; }
@@ -75,6 +79,10 @@ public record ExtractorRecipe(Ingredient inputItem, int ingredientCount, int req
         return ModRecipes.EXTRACTOR_SERIALIZER.get();
     }
 
+    public boolean doesConsumeInput() {
+        return consumesInput;
+    }
+
     @Override
     public RecipeType<?> getType() {
         return ModRecipes.EXTRACTOR_TYPE.get();
@@ -86,7 +94,8 @@ public record ExtractorRecipe(Ingredient inputItem, int ingredientCount, int req
             Ingredient.CODEC_NONEMPTY.fieldOf("ingredient").forGetter(ExtractorRecipe::inputItem),
             Codec.INT.fieldOf("ingredientCount").forGetter(ExtractorRecipe::ingredientCount),
             Codec.INT.fieldOf("requiredTier").forGetter(ExtractorRecipe::requiredTier),
-            ItemStack.CODEC.fieldOf("result").forGetter(ExtractorRecipe::output)
+            ItemStack.CODEC.fieldOf("result").forGetter(ExtractorRecipe::output),
+            Codec.BOOL.optionalFieldOf("consumes_input", true).forGetter(ExtractorRecipe::consumesInput)
         ).apply(inst, ExtractorRecipe::new));
 
         public static final StreamCodec<RegistryFriendlyByteBuf, ExtractorRecipe> STREAM_CODEC =
@@ -95,6 +104,7 @@ public record ExtractorRecipe(Ingredient inputItem, int ingredientCount, int req
                 ByteBufCodecs.INT, ExtractorRecipe::ingredientCount,
                 ByteBufCodecs.INT, ExtractorRecipe::requiredTier,
                 ItemStack.STREAM_CODEC, ExtractorRecipe::output,
+                ByteBufCodecs.BOOL, ExtractorRecipe::consumesInput,
                 ExtractorRecipe::new);
 
         @Override

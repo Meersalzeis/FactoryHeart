@@ -1,0 +1,43 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_activated_blazear_rod": {
+      "conditions": {
+        "items": [
+          {
+            "items": "factoryheart:activated_blazear_rod"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_energy_drink": {
+      "conditions": {
+        "items": [
+          {
+            "items": "factoryheart:energy_drink"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "factoryheart:volatile_blazear_rod"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_activated_blazear_rod",
+      "has_energy_drink"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "factoryheart:volatile_blazear_rod"
+    ]
+  }
+}

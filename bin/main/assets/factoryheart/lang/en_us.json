@@ -25,7 +25,7 @@
   "block.factoryheart.factory_heart":"Factory Heart",
 
   "item.factoryheart.abzero_matter":"Abzero Matter",
-  "item.factoryheart.activated_blaze_rod":"Activated Blaze Rod",
+  "item.factoryheart.activated_blazear_rod":"Activated Blazear Rod",
   "item.factoryheart.blazear_fuel_rod":"Blazear Fuel Rod",
   "item.factoryheart.blazear_pellet":"Blazear Pellet",
   "item.factoryheart.contained_deepcool_crystal":"Contained Deepcool Crystal",
@@ -40,10 +40,14 @@
   "item.factoryheart.metal_disc":"Metal Disc",
   "item.factoryheart.metal_sheet":"Metal Sheet",
   "item.factoryheart.soda_powder":"Soda Powder",
-  "item.factoryheart.volatile_blaze_rod":"Volatile Blaze Rod",
+  "item.factoryheart.volatile_blazear_rod":"Volatile Blazear Rod",
   "item.factoryheart.containment_casing":"Containment Casing",
   "item.factoryheart.containment_field_projector":"Containment Field Projector",
   "item.factoryheart.containment_spool":"Containment Spool",
+
+  "item.factoryheart.inferno_shard":"Inferno Shard",
+  "item.factoryheart.abzero_shard":"Abzero Shard",
+  "item.factoryheart.abzero_crystal":"Abzero Crystal",
 
   "item.factoryheart.smart_shard":"Smart Shard",
   "item.factoryheart.smart_shard_untested":"Untested Smart Shard",
@@ -57,6 +61,17 @@
   "item.factoryheart.hard_part":"Hard Part",
   "item.factoryheart.hard_part_untested":"Untested Hard Part",
   "item.factoryheart.hard_part_faulty":"Faulty Hard Part",
+
+  "item.factoryheart.plunger":"Plunger",
+
+  "item.factoryheart.combustion_core":"Combustion Core",
+  "item.factoryheart.raw_blaze_candy":"Raw Blaze Candy",
+  "item.factoryheart.unwrapped_blaze_candy":"Unwrapped Blaze Candy",
+  "item.factoryheart.blaze_candy":"Blaze Candy",
+
+  "item.factoryheart.slimy_rotten_flesh":"Slimy Rotten Flesh",
+  "item.factoryheart.leathery_rotten_flesh":"Leathery Rotten Flesh",
+
 
   "factoryheart.tier": "Running on Tier"
 }

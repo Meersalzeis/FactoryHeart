@@ -1,0 +1,12 @@
+
+{
+  "type": "factoryheart:blazing",
+  "ingredient": {
+    "item": "minecraft:bamboo_block"
+  },
+  "requiredTier": 3,
+  "result": {
+    "id": "minecraft:charcoal",
+    "count": 1
+  }
+}

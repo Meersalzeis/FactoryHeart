@@ -1,0 +1,14 @@
+{
+  "type": "factoryheart:testing",
+  "ingredient": {
+    "item": "minecraft:rotten_flesh"
+  },
+  "success": {
+    "id": "factoryheart:leathery_rotten_flesh"
+  },
+  "failed": {
+    "id": "factoryheart:slimy_rotten_flesh"
+  },
+  "successChance": 0.65,
+  "requiredTier": 2
+}

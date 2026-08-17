@@ -18,6 +18,7 @@ import com.meersalzeis.factoryheart.block.crafting.TesterBlock;
 import com.meersalzeis.factoryheart.block.crafting.WrapperBlock;
 import com.meersalzeis.factoryheart.block.hearting.FactoryHeartBlock;
 import com.meersalzeis.factoryheart.block.hearting.FactoryMawBlock;
+import com.meersalzeis.factoryheart.block.hearting.FactoryVeinBlock;
 import com.meersalzeis.factoryheart.item.ModItems;
 
 public class ModBlocks {
@@ -28,11 +29,11 @@ public class ModBlocks {
     );
 
     public static final DeferredBlock<Block> WRAPPER = registerBlock("wrapper",
-        () -> new WrapperBlock(BlockBehaviour.Properties.of().strength(3f).noOcclusion())
+        () -> new WrapperBlock(BlockBehaviour.Properties.of().strength(3f))
     );
 
     public static final DeferredBlock<Block> EXTRACTOR = registerBlock("extractor",
-        () -> new ExtractorBlock(BlockBehaviour.Properties.of().strength(3f))
+        () -> new ExtractorBlock(BlockBehaviour.Properties.of().strength(3f).noOcclusion())
     );
 
     public static final DeferredBlock<Block> TESTER = registerBlock("tester",
@@ -40,7 +41,7 @@ public class ModBlocks {
     );
 
     public static final DeferredBlock<Block> FACTORY_VEIN = registerBlock("factory_vein",
-        () -> new Block(BlockBehaviour.Properties.of().strength(3f))
+        () -> new FactoryVeinBlock(BlockBehaviour.Properties.of().strength(3f))
     );
 
     public static final DeferredBlock<Block> FACTORY_SKIN = registerBlock("factory_skin",

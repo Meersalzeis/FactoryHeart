@@ -20,57 +20,70 @@ public class ModCreativeModeTabs {
             CREATIVE_MODE_TABS.register("factoryheart_all_tab", () -> CreativeModeTab.builder()
                     .title(Component.translatable("itemGroup.factoryheart.factoryheart_all_tab"))
                     .icon(() -> new ItemStack(ModBlocks.FACTORY_MAW))
-                    .displayItems((pParameters, pOutput) -> {
+                    .displayItems((pParameters, output) -> {
 
-                        pOutput.accept(ModBlocks.BLAZER);
-                        pOutput.accept(ModBlocks.WRAPPER);
-                        pOutput.accept(ModBlocks.EXTRACTOR);
-                        pOutput.accept(ModBlocks.TESTER);
+                        output.accept(ModBlocks.BLAZER);
+                        output.accept(ModBlocks.WRAPPER);
+                        output.accept(ModBlocks.EXTRACTOR);
+                        output.accept(ModBlocks.TESTER);
+                        output.accept(ModBlocks.CONDENSER);
                         
-                        pOutput.accept(ModBlocks.FACTORY_MAW);
-                        pOutput.accept(ModBlocks.FACTORY_VEIN);
-                        pOutput.accept(ModBlocks.FACTORY_SKIN);
-                        pOutput.accept(ModBlocks.FACTORY_HEART);
+                        output.accept(ModBlocks.FACTORY_MAW);
+                        output.accept(ModBlocks.FACTORY_HEART);
 
-                        pOutput.accept(ModItems.ABZERO_MATTER);
-                        pOutput.accept(ModItems.ACTIVATED_BLAZE_ROD);
-                        pOutput.accept(ModItems.BLAZEAR_FUEL_ROD);
-                        pOutput.accept(ModItems.BLAZEAR_PELLET);
-                        pOutput.accept(ModItems.CONTAINED_DEEPCOOL_CRYSTAL);
-                        pOutput.accept(ModItems.COPPER_WIRE);
-                        pOutput.accept(ModItems.DEEPCOOL_CRYSTAL);
-                        pOutput.accept(ModItems.EMPTY_CAN);
-                        pOutput.accept(ModItems.ENERGY_DRINK);
-                        pOutput.accept(ModItems.ENERGY_POWDER);
-                        pOutput.accept(ModItems.FACTORY_PASTE);
-                        pOutput.accept(ModItems.FACTORY_TOOTH);
-                        pOutput.accept(ModItems.INFERNO_MATTER);
-                        pOutput.accept(ModItems.METAL_DISC);
-                        pOutput.accept(ModItems.METAL_SHEET);
-                        pOutput.accept(ModItems.SODA_POWDER);
+                        output.accept(ModBlocks.FACTORY_VEIN);
+                        output.accept(ModBlocks.FACTORY_SKIN);
 
-                        pOutput.accept(ModItems.VOLATILE_BLAZE_ROD);
+                        output.accept(ModItems.ABZERO_MATTER);
+                        output.accept(ModItems.ACTIVATED_BLAZEAR_ROD);
+                        output.accept(ModItems.BLAZEAR_FUEL_ROD);
+                        output.accept(ModItems.BLAZEAR_PELLET);
+                        output.accept(ModItems.CONTAINED_DEEPCOOL_CRYSTAL);
+                        output.accept(ModItems.DEEPCOOL_CRYSTAL);
+                        output.accept(ModItems.EMPTY_CAN);
+                        output.accept(ModItems.ENERGY_DRINK);
+                        output.accept(ModItems.ENERGY_POWDER);
+                        output.accept(ModItems.FACTORY_PASTE);
+                        output.accept(ModItems.FACTORY_TOOTH);
+                        output.accept(ModItems.INFERNO_MATTER);
+                        output.accept(ModItems.METAL_DISC);
+                        output.accept(ModItems.METAL_SHEET);
+                        output.accept(ModItems.SODA_POWDER);
 
-                        pOutput.accept(ModItems.CONTAINMENT_SPOOL);
-                        pOutput.accept(ModItems.CONTAINMENT_FIELD_PROJECTOR);
-                        pOutput.accept(ModItems.CONTAINMENT_CASING);
+                        output.accept(ModItems.VOLATILE_BLAZEAR_ROD);
 
-                        pOutput.accept(ModItems.SMART_SHARD);
-                        pOutput.accept(ModItems.SMART_PART );
-                        pOutput.accept(ModItems.SMART_HEART);
-                        pOutput.accept(ModItems.HARD_PART);
+                        output.accept(ModItems.CONTAINMENT_SPOOL);
+                        output.accept(ModItems.CONTAINMENT_FIELD_PROJECTOR);
+                        output.accept(ModItems.CONTAINMENT_CASING);
 
-                        pOutput.accept(ModItems.SMART_SHARD_U);
-                        pOutput.accept(ModItems.SMART_PART_U );
-                        pOutput.accept(ModItems.SMART_HEART_U);
-                        pOutput.accept(ModItems.HARD_PART_U);
+                        output.accept(ModItems.PLUNGER);
 
-                        pOutput.accept(ModItems.SMART_SHARD_F);
-                        pOutput.accept(ModItems.SMART_PART_F );
-                        pOutput.accept(ModItems.SMART_HEART_F);
-                        pOutput.accept(ModItems.HARD_PART_F);
+                        output.accept(ModItems.COMBUSTION_CORE);
+                        output.accept(ModItems.RAW_BLAZE_CANDY);
+                        output.accept(ModItems.UNWRAPPED_BLAZE_CANDY);
+                        output.accept(ModItems.BLAZE_CANDY);
 
-                        pOutput.accept(ModBlocks.CONDENSER);
+                        output.accept(ModItems.ABZERO_CRYSTAL);
+                        output.accept(ModItems.ABZERO_SHARD);
+                        output.accept(ModItems.INFERNO_SHARD);
+
+                        output.accept(ModItems.SMART_SHARD);
+                        output.accept(ModItems.SMART_PART );
+                        output.accept(ModItems.SMART_HEART);
+                        output.accept(ModItems.HARD_PART);
+
+                        output.accept(ModItems.SMART_SHARD_U);
+                        output.accept(ModItems.SMART_PART_U );
+                        output.accept(ModItems.SMART_HEART_U);
+                        output.accept(ModItems.HARD_PART_U);
+
+                        output.accept(ModItems.SMART_SHARD_F);
+                        output.accept(ModItems.SMART_PART_F );
+                        output.accept(ModItems.SMART_HEART_F);
+                        output.accept(ModItems.HARD_PART_F);
+
+                        output.accept(ModItems.SLIMY_ROTTEN);
+                        output.accept(ModItems.LEATHERY_ROTTEN);
 
                     }).build());
 

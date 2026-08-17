@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "b": {
+      "item": "minecraft:blaze_powder"
+    },
+    "e": {
+      "item": "factoryheart:energy_powder"
+    },
+    "f": {
+      "item": "factoryheart:factory_paste"
+    },
+    "g": {
+      "item": "minecraft:glowstone_dust"
+    }
+  },
+  "pattern": [
+    "efe",
+    "gbg",
+    "efe"
+  ],
+  "result": {
+    "count": 6,
+    "id": "factoryheart:blazear_pellet"
+  }
+}

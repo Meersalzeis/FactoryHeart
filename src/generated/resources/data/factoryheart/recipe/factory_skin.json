@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "m": {
+      "tag": "c:ingots"
+    },
+    "n": {
+      "tag": "c:nuggets"
+    },
+    "p": {
+      "item": "factoryheart:factory_paste"
+    }
+  },
+  "pattern": [
+    "nmn",
+    "mpm",
+    "nmn"
+  ],
+  "result": {
+    "count": 4,
+    "id": "factoryheart:factory_skin"
+  }
+}

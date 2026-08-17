@@ -1,0 +1,37 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "factoryheart:containment_casing"
+    },
+    {
+      "item": "factoryheart:abzero_shard"
+    },
+    {
+      "item": "factoryheart:abzero_shard"
+    },
+    {
+      "item": "factoryheart:abzero_shard"
+    },
+    {
+      "item": "factoryheart:abzero_shard"
+    },
+    {
+      "item": "factoryheart:abzero_shard"
+    },
+    {
+      "item": "factoryheart:abzero_shard"
+    },
+    {
+      "item": "factoryheart:abzero_shard"
+    },
+    {
+      "item": "factoryheart:abzero_shard"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "factoryheart:abzero_matter"
+  }
+}

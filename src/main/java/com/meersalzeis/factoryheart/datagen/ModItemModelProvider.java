@@ -27,11 +27,11 @@ public class ModItemModelProvider extends ItemModelProvider {
     protected void registerModels() {
 
         basicItem(ModItems.ABZERO_MATTER.get());
-        basicItem(ModItems.ACTIVATED_BLAZE_ROD.get());
+        basicItem(ModItems.ACTIVATED_BLAZEAR_ROD.get());
         basicItem(ModItems.BLAZEAR_FUEL_ROD.get());
         basicItem(ModItems.BLAZEAR_PELLET.get());
         basicItem(ModItems.CONTAINED_DEEPCOOL_CRYSTAL.get());
-        basicItem(ModItems.COPPER_WIRE.get());
+        //basicItem(ModItems.COPPER_WIRE.get());
         basicItem(ModItems.DEEPCOOL_CRYSTAL.get());
         basicItem(ModItems.EMPTY_CAN.get());
         basicItem(ModItems.ENERGY_DRINK.get());
@@ -43,16 +43,29 @@ public class ModItemModelProvider extends ItemModelProvider {
         basicItem(ModItems.METAL_SHEET.get());
         basicItem(ModItems.SODA_POWDER.get());
 
+        basicItem(ModItems.PLUNGER.get());
+
+        basicItem(ModItems.ABZERO_CRYSTAL.get());
+        basicItem(ModItems.ABZERO_SHARD.get());
+        basicItem(ModItems.INFERNO_SHARD.get());
+
         basicItem(ModItems.CONTAINMENT_SPOOL.get());
         basicItem(ModItems.CONTAINMENT_FIELD_PROJECTOR.get());
         basicItem(ModItems.CONTAINMENT_CASING.get());
+
+        basicItem(ModItems.COMBUSTION_CORE.get());
+        basicItem(ModItems.RAW_BLAZE_CANDY.get());
+        basicItem(ModItems.UNWRAPPED_BLAZE_CANDY.get());
+        basicItem(ModItems.BLAZE_CANDY.get());
 
         customItemTriple(ModItems.SMART_SHARD.getRegisteredName(), modLoc("item/smart_shard"));
         customItemTriple(ModItems.SMART_PART.getRegisteredName(), modLoc("item/smart_part"));
         customItemTriple(ModItems.SMART_HEART.getRegisteredName(), modLoc("item/smart_heart"));
         customItemTriple(ModItems.HARD_PART.getRegisteredName(), modLoc("item/hard_part"));
+        generateLayeredItem(ModItems.SLIMY_ROTTEN.getRegisteredName(), mcLoc("item/rotten_flesh"), modLoc("item/overlay_faulty"));
+        generateLayeredItem(ModItems.LEATHERY_ROTTEN.getRegisteredName(), mcLoc("item/rotten_flesh"), modLoc("item/overlay_correct"));
         
-        copiedTextureItem(ModItems.VOLATILE_BLAZE_ROD.get(), ModItems.ACTIVATED_BLAZE_ROD.get());
+        copiedTextureItem(ModItems.VOLATILE_BLAZEAR_ROD.get(), ModItems.ACTIVATED_BLAZEAR_ROD.get());
 
         customBlockItem(ModBlocks.FACTORY_MAW);
     }

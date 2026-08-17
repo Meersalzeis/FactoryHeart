@@ -15,7 +15,6 @@ import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.Level;
 
-import com.meersalzeis.factoryheart.FHModClient;
 import com.mojang.serialization.Codec;
 import net.minecraft.network.codec.ByteBufCodecs;
 
@@ -45,6 +44,10 @@ public record CondenserRecipe(DyeColor hue, int requiredTier, int requiredTicks,
         NonNullList<Ingredient> list = NonNullList.create();
         list.add(Ingredient.of(DyeItem.byColor(hue))); 
         return list;
+    }
+
+    public DyeColor getHue() {
+        return hue;
     }
 
     @Override

@@ -1,5 +1,6 @@
 package com.meersalzeis.factoryheart.block.crafting;
 
+import com.meersalzeis.factoryheart.FHModClient;
 import com.meersalzeis.factoryheart.blockentity.ModBlockEntities;
 import com.meersalzeis.factoryheart.blockentity.crafting.BlazerBlockEntity;
 import com.meersalzeis.factoryheart.hearts.HeartBeating;
@@ -48,11 +49,27 @@ public class BlazerBlock extends BaseEntityBlock {
     public static final MapCodec<BlazerBlock> CODEC = simpleCodec(BlazerBlock::new);
     public static final DirectionProperty FACING = BlockStateProperties.FACING;
 
-    public static final VoxelShape SHAPE = Shapes.or(
+    public static final VoxelShape UP_SHAPE = Shapes.or(
         Block.box(0.0, 0.0, 0.0, 3.0, 16.0, 16.0),
         Block.box(13.0, 0.0, 0.0, 16.0, 16.0, 16.0),
         Block.box(3.0, 0.0, 13.0, 13.0, 16.0, 16.0),
         Block.box(3.0, 0.0, 0.0, 13.0, 16.0, 3.0)
+    );
+
+    public static final VoxelShape WEST_SHAPE = Shapes.or(
+        Block.box(0.0, 0.0, 0.0, 16.0, 3.0, 16.0),
+        Block.box(0.0, 13.0, 0.0, 16.0, 16.0, 16.0),
+
+        Block.box(0.0, 3.0, 13.0, 16.0, 13.0, 16.0),
+        Block.box(0.0, 3.0, 0.0, 16.0, 13.0, 3.0)
+    );
+
+    public static final VoxelShape NORTH_SHAPE = Shapes.or(
+        Block.box(0.0, 0.0, 0.0, 16.0, 3.0, 16.0),
+        Block.box(0.0, 13.0, 0.0, 16.0, 16.0, 16.0),
+
+        Block.box(13.0, 3.0, 0.0, 16.0, 13.0, 16.0),
+        Block.box(0.0, 3.0, 0.0, 3.0, 13.0, 16.0)
     );
 
     public BlazerBlock(Properties properties) {
@@ -78,7 +95,16 @@ public class BlazerBlock extends BaseEntityBlock {
 
     @Override
     protected VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
-        return SHAPE;
+        switch (state.getValue(FACING)) {
+            case Direction.NORTH:
+            case Direction.SOUTH:
+                return NORTH_SHAPE;
+            case Direction.WEST:
+            case Direction.EAST:
+                return WEST_SHAPE;
+            default:
+                return UP_SHAPE;
+        }
     }
 
     @Override
@@ -131,17 +157,19 @@ public class BlazerBlock extends BaseEntityBlock {
             level.playLocalSound(xPos, yPos, zPos, SoundEvents.AMETHYST_BLOCK_CHIME, SoundSource.BLOCKS, 1.0f, 1.0f, false);
         }
 
-        Direction direction = Direction.UP; //state.getValue(FACING);
+        Direction direction = state.getValue(FACING);
         Direction.Axis axis = direction.getAxis();
 
         double defaultOffset = random.nextDouble() * 0.6 - 0.3;
-        double xOffsets = axis == Direction.Axis.X ? (double)direction.getStepX() * 0.52 : defaultOffset;
-        double yOffset = random.nextDouble() * 6.0 / 8.0;
-        double zOffset = axis == Direction.Axis.Z ? (double)direction.getStepZ() * 0.52 : defaultOffset;
+        double xOffsets = axis == Direction.Axis.X ? (double)direction.getStepX() * 0.5 : defaultOffset;
+        double yOffset = axis == Direction.Axis.Y ? (double)direction.getStepY() * 0.5 : defaultOffset;
+        double zOffset = axis == Direction.Axis.Z ? (double)direction.getStepZ() * 0.5 : defaultOffset;
 
-        level.addParticle(ParticleTypes.SMOKE, xPos + xOffsets, yPos + yOffset, zPos + zOffset, 0.0, 0.0, 0.0);
+        level.addParticle(ParticleTypes.FLAME, xPos + xOffsets, yPos + yOffset, zPos + zOffset, 0.0, 0.0, 0.0);
 
+        FHModClient.debugMessageToAll("Got all particel data together");
         if(level.getBlockEntity(pos) instanceof BlazerBlockEntity factoryBalzerBlockEntity && !factoryBalzerBlockEntity.itemHandler.getStackInSlot(1).isEmpty()) {
+            FHModClient.debugMessageToAll("Display that data");
             level.addParticle(new ItemParticleOption(ParticleTypes.ITEM, factoryBalzerBlockEntity.itemHandler.getStackInSlot(1)),
                     xPos + xOffsets, yPos + yOffset, zPos + zOffset, 0.0, 0.0, 0.0);
         }

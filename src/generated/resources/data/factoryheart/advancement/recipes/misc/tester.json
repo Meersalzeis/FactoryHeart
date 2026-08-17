@@ -1,0 +1,54 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_daylight_detector": {
+      "conditions": {
+        "items": [
+          {
+            "items": "minecraft:daylight_detector"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_factory_skin": {
+      "conditions": {
+        "items": [
+          {
+            "items": "factoryheart:factory_skin"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_observer": {
+      "conditions": {
+        "items": [
+          {
+            "items": "minecraft:observer"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "factoryheart:tester"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_observer",
+      "has_daylight_detector",
+      "has_factory_skin"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "factoryheart:tester"
+    ]
+  }
+}

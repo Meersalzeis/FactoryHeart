@@ -3,7 +3,7 @@
   "type": "factoryheart:condensing",
   "hue":"red",
   "requiredTier": 4,
-  "requiredTicks": 20,
+  "requiredTicks": 20000,
   "requiredFuelPerTick": 4,
   "result": {
     "id": "minecraft:redstone",

@@ -1,0 +1,43 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_containment_casing": {
+      "conditions": {
+        "items": [
+          {
+            "items": "factoryheart:containment_casing"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_inferno_shard": {
+      "conditions": {
+        "items": [
+          {
+            "items": "factoryheart:inferno_shard"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "factoryheart:inferno_matter"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_containment_casing",
+      "has_inferno_shard"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "factoryheart:inferno_matter"
+    ]
+  }
+}

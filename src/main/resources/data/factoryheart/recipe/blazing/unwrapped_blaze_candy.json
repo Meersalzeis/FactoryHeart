@@ -1,0 +1,12 @@
+
+{
+  "type": "factoryheart:blazing",
+  "ingredient": {
+    "item": "factoryheart:raw_blaze_candy"
+  },
+  "requiredTier": 3,
+  "result": {
+    "id": "factoryheart:unwrapped_blaze_candy",
+    "count": 1
+  }
+}

@@ -15,8 +15,14 @@ public class TierDisplay {
     private static final ResourceLocation TIER_4_TEXTURE =
         ResourceLocation.fromNamespaceAndPath(FHModMain.MOD_ID,"textures/gui/tier_4.png");
 
-    public static Component getTooltip(int tier) {
+    public static Component getHasTooltip(int tier) {
+        // Component.translatable("factoryheart.gui.hasTier") + tier?
         return Component.literal("Can craft up to tier " + tier);
+    }
+
+    public static Component getNeedsTooltip(int tier) {
+        // Component.translatable("factoryheart.gui.needsTier") + tier ?
+        return Component.literal("Needs tier " + tier + " or higher to craft");
     }
     
     public static void renderTierDisplay(GuiGraphics guiGraphics, int tier, int x, int y) {
@@ -38,13 +44,17 @@ public class TierDisplay {
         }
     }
 
-    public static void renderTierTooltip(GuiGraphics guiGraphics, int pMouseX, int pMouseY, int x, int y, Font font, int tier) {
+    public static void renderTierTooltip(GuiGraphics guiGraphics, double pMouseX, double pMouseY, int x, int y, Font font, int tier, boolean has) {
         if(isMouseAboveArea(pMouseX, pMouseY, x, y, 132, 24, 18, 34)) {
-            guiGraphics.renderTooltip(font, getTooltip(tier), pMouseX, pMouseY);
+            guiGraphics.renderTooltip(
+                font,
+                has ? getHasTooltip(tier) : getNeedsTooltip(tier),
+                (int)Math.round(pMouseX), (int)Math.round(pMouseY)
+            );
         }
     }
 
-    public static boolean isMouseAboveArea(int pMouseX, int pMouseY, int x, int y, int offsetX, int offsetY, int width, int height) {
+    public static boolean isMouseAboveArea(double pMouseX, double pMouseY, int x, int y, int offsetX, int offsetY, int width, int height) {
         return MouseUtil.isMouseOver(pMouseX, pMouseY, x + offsetX, y + offsetY, width, height);
     }
 }

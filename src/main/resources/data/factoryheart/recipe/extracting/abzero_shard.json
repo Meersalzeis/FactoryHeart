@@ -1,0 +1,12 @@
+{
+  "type": "factoryheart:extracting",
+  "ingredient": {
+    "item": "factoryheart:abzero_crystal"
+  },
+  "ingredientCount":4,
+  "requiredTier": 3,
+  "result": {
+    "id": "factoryheart:abzero_shard",
+    "count": 1
+  }
+}

@@ -1,0 +1,54 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_factory_skin": {
+      "conditions": {
+        "items": [
+          {
+            "items": "factoryheart:factory_skin"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_hard_part": {
+      "conditions": {
+        "items": [
+          {
+            "items": "factoryheart:hard_part"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_smart_heart": {
+      "conditions": {
+        "items": [
+          {
+            "items": "factoryheart:smart_heart"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "factoryheart:condenser"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_hard_part",
+      "has_smart_heart",
+      "has_factory_skin"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "factoryheart:condenser"
+    ]
+  }
+}

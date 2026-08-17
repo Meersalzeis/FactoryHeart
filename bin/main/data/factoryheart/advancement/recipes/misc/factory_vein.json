@@ -1,21 +1,11 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_factory_paste": {
+    "has_factory_skin": {
       "conditions": {
         "items": [
           {
-            "items": "factoryheart:factory_paste"
-          }
-        ]
-      },
-      "trigger": "minecraft:inventory_changed"
-    },
-    "has_iron_nugget": {
-      "conditions": {
-        "items": [
-          {
-            "items": "minecraft:iron_nugget"
+            "items": "factoryheart:factory_skin"
           }
         ]
       },
@@ -31,8 +21,7 @@
   "requirements": [
     [
       "has_the_recipe",
-      "has_iron_nugget",
-      "has_factory_paste"
+      "has_factory_skin"
     ]
   ],
   "rewards": {

@@ -24,6 +24,6 @@ public class ModTags {
             return ItemTags.create(ResourceLocation.fromNamespaceAndPath(FHModMain.MOD_ID, name));
         }
 
-        //public static final TagKey<Item> TRANSFORMABLE_ITEMS = createTag("transformable_items");
+        public static final TagKey<Item> HEART_ITEMS = createTag("heart_items");
     }
 }

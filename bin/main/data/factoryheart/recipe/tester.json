@@ -5,17 +5,20 @@
     "d": {
       "item": "minecraft:dispenser"
     },
-    "f": {
-      "item": "factoryheart:factory_paste"
+    "l": {
+      "item": "minecraft:daylight_detector"
     },
-    "p": {
-      "item": "minecraft:piston"
+    "o": {
+      "item": "minecraft:observer"
+    },
+    "s": {
+      "item": "factoryheart:factory_skin"
     }
   },
   "pattern": [
-    "fpf",
-    "d d",
-    "fpf"
+    "sds",
+    "o o",
+    "sls"
   ],
   "result": {
     "count": 1,

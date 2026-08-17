@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "c": {
+      "item": "factoryheart:containment_field_projector"
+    },
+    "n": {
+      "item": "minecraft:iron_nugget"
+    },
+    "p": {
+      "item": "minecraft:glass_pane"
+    }
+  },
+  "pattern": [
+    "ncn",
+    "p p",
+    "ncn"
+  ],
+  "result": {
+    "count": 1,
+    "id": "factoryheart:containment_casing"
+  }
+}

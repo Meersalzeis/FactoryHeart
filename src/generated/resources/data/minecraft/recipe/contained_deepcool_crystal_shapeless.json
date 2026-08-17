@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "factoryheart:containment_casing"
+    },
+    {
+      "item": "factoryheart:deepcool_crystal"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "factoryheart:contained_deepcool_crystal"
+  }
+}

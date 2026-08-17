@@ -24,7 +24,7 @@ import org.jetbrains.annotations.Nullable;
 public class TesterRecipeCategory implements IRecipeCategory<TesterRecipe> {
     public static final ResourceLocation UID = ResourceLocation.fromNamespaceAndPath(FHModMain.MOD_ID, "testing");
     public static final ResourceLocation TEXTURE = ResourceLocation.fromNamespaceAndPath(FHModMain.MOD_ID,
-            "textures/gui/tester/tester_gui.png");
+            "textures/gui/tester/smol_tester_gui.png");
 
     public static final RecipeType<TesterRecipe> TESTER_RECIPE_TYPE =
             new RecipeType<>(UID, TesterRecipe.class);
@@ -33,7 +33,7 @@ public class TesterRecipeCategory implements IRecipeCategory<TesterRecipe> {
     private final IDrawable icon;
 
     public TesterRecipeCategory(IGuiHelper helper) {
-        this.background = helper.createDrawable(TEXTURE, 0, 0, 176, 85);
+        this.background = helper.createDrawable(TEXTURE, 0, 0, 118, 69);
         this.icon = helper.createDrawableIngredient(VanillaTypes.ITEM_STACK, new ItemStack(ModBlocks.TESTER.get()));
     }
 
@@ -70,7 +70,7 @@ public class TesterRecipeCategory implements IRecipeCategory<TesterRecipe> {
         graphics.drawString(
             mc.font,
             chance,
-            54, 20,
+            14, 12,
             0x000000,
             false
         );
@@ -78,8 +78,8 @@ public class TesterRecipeCategory implements IRecipeCategory<TesterRecipe> {
 
     @Override
     public void setRecipe(IRecipeLayoutBuilder builder, TesterRecipe recipe, IFocusGroup focuses) {
-        builder.addSlot(RecipeIngredientRole.INPUT, 54, 34).addIngredients(recipe.getIngredients().get(0));
-        builder.addSlot(RecipeIngredientRole.OUTPUT, 104, 20).addItemStack(recipe.assembleSuccess());
-        builder.addSlot(RecipeIngredientRole.OUTPUT, 104, 49).addItemStack(recipe.assembleFailed());
+        builder.addSlot(RecipeIngredientRole.INPUT, 14, 26).addIngredients(recipe.getIngredients().get(0));
+        builder.addSlot(RecipeIngredientRole.OUTPUT, 64, 12).addItemStack(recipe.assembleSuccess());
+        builder.addSlot(RecipeIngredientRole.OUTPUT, 64, 41).addItemStack(recipe.assembleFailed());
     }
 }

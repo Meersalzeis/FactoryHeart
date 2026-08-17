@@ -1,18 +1,28 @@
 package com.meersalzeis.factoryheart.datagen;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Collections;
+
 import com.meersalzeis.factoryheart.FHModMain;
 import com.meersalzeis.factoryheart.block.ModBlocks;
 import com.meersalzeis.factoryheart.block.hearting.FactoryHeartBlock;
 import com.meersalzeis.factoryheart.block.hearting.FactoryMawBlock;
+import com.meersalzeis.factoryheart.block.hearting.FactoryVeinBlock;
 
 import net.minecraft.core.Direction;
 import net.minecraft.data.PackOutput;
+import net.minecraft.data.models.BlockModelGenerators;
+import net.minecraft.data.models.ItemModelGenerators;
+import net.minecraft.data.models.blockstates.MultiPartGenerator;
+import net.minecraft.data.models.blockstates.VariantProperties;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.neoforged.neoforge.client.model.generators.BlockStateProvider;
 import net.neoforged.neoforge.client.model.generators.ConfiguredModel;
 import net.neoforged.neoforge.client.model.generators.ModelFile;
+import net.neoforged.neoforge.client.model.generators.MultiPartBlockStateBuilder;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
 import net.neoforged.neoforge.registries.DeferredBlock;
 
@@ -23,12 +33,8 @@ public class ModBlockStateProvider extends BlockStateProvider {
 
     @Override
     protected void registerStatesAndModels() {
-        blockWithItem(ModBlocks.FACTORY_VEIN);
         blockWithItem(ModBlocks.FACTORY_SKIN);
 
-        //blockWithItem(ModBlocks.WRAPPER);
-        //blockWithItem(ModBlocks.EXTRACTOR);
-        blockWithItem(ModBlocks.TESTER);
 
         // ModelFile factoryMawModel = models().cube(
         //     "factory_maw",
@@ -43,11 +49,21 @@ public class ModBlockStateProvider extends BlockStateProvider {
 
         // directionalBlockCustomSides(factoryMawModel);
 
+        vein();
+
+        simpleBlockItem(
+                ModBlocks.FACTORY_VEIN.get(),
+                new ModelFile.UncheckedModelFile(
+                        modLoc("block/vein_core")
+                )
+        );
+
         addFactoryHeart();
         addWrapperBlock();
 
         generateFromBlockbenchModel("blazer", ModBlocks.BLAZER.get(), modLoc("block/blazer"));
         generateFromBlockbenchModel("extractor", ModBlocks.EXTRACTOR.get(), modLoc("block/extractor"));
+        generateFromBlockbenchModel("tester", ModBlocks.TESTER.get(), modLoc("block/tester"));
         generateFromBlockbenchModel("condenser", ModBlocks.CONDENSER.get(), modLoc("block/condenser"));
         generateFromBlockbenchModel("factory_maw", ModBlocks.FACTORY_MAW.get(), modLoc("block/factory_maw"));
     }
@@ -175,5 +191,47 @@ public class ModBlockStateProvider extends BlockStateProvider {
 
         simpleBlock(ModBlocks.WRAPPER.get(), model);
         simpleBlockItem(ModBlocks.WRAPPER.get(), model);
+    }
+
+    private void vein() {
+        String name = "factory_vein";
+        Block block = ModBlocks.FACTORY_VEIN.get();
+
+        ModelFile core = models().getExistingFile(modLoc("block/vein_core"));
+        ModelFile arm = models().getExistingFile(modLoc("block/vein_arm"));
+
+        getVariantBuilder(block)
+            .forAllStates(state -> {
+                List<ConfiguredModel> models = new ArrayList<>();
+                
+                Collections.addAll(models,ConfiguredModel.builder().modelFile(core).build());
+
+                if (state.getValue(FactoryVeinBlock.NORTH)) {
+                    Collections.addAll(models,ConfiguredModel.builder().modelFile(arm).rotationY(0).build());
+                }
+                if (state.getValue(FactoryVeinBlock.EAST)) {
+                    Collections.addAll(models,ConfiguredModel.builder().modelFile(arm).rotationY(90).build());
+                }
+                if (state.getValue(FactoryVeinBlock.SOUTH)) {
+                    Collections.addAll(models,ConfiguredModel.builder().modelFile(arm).rotationY(180).build());
+                }
+                if (state.getValue(FactoryVeinBlock.WEST)) {
+                    Collections.addAll(models,ConfiguredModel.builder().modelFile(arm).rotationY(270).build());
+                }
+                if (state.getValue(FactoryVeinBlock.DOWN)) {
+                    Collections.addAll(models,ConfiguredModel.builder().modelFile(arm).rotationX(90).build());
+                }
+                if (state.getValue(FactoryVeinBlock.UP)) {
+                    Collections.addAll(models,ConfiguredModel.builder().modelFile(arm).rotationX(270).build());
+                }
+
+                return models.toArray(new ConfiguredModel[0]);
+        });
+
+        // Item Model for Block in Inventories
+        itemModels().withExistingParent(
+            name,
+            modLoc("block/vein_core")
+        );
     }
 }

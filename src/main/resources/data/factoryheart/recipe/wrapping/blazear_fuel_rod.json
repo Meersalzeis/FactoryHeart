@@ -1,0 +1,15 @@
+{
+  "type": "factoryheart:wrapping",
+  "centerpiece": {
+    "item": "factoryheart:volatile_blazear_rod"
+  },
+  "wrappings": {
+    "item": "minecraft:iron_ingot"
+  },
+  "centerpieceCount": 3,
+  "wrappingsCount": 1,
+  "result": {
+    "id": "factoryheart:blazear_fuel_rod",
+    "count": 1
+  }
+}

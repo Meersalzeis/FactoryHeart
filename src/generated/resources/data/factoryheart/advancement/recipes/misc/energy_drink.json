@@ -1,0 +1,43 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_empty_can": {
+      "conditions": {
+        "items": [
+          {
+            "items": "factoryheart:empty_can"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_soda_pwoder": {
+      "conditions": {
+        "items": [
+          {
+            "items": "factoryheart:soda_powder"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "factoryheart:energy_drink"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_empty_can",
+      "has_soda_pwoder"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "factoryheart:energy_drink"
+    ]
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:blasting",
+  "category": "misc",
+  "cookingtime": 100,
+  "experience": 0.1,
+  "group": "Recipes",
+  "ingredient": {
+    "item": "factoryheart:leathery_rotten_flesh"
+  },
+  "result": {
+    "count": 1,
+    "id": "minecraft:leather"
+  }
+}

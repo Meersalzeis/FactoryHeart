@@ -9,12 +9,14 @@ import com.meersalzeis.factoryheart.block.crafting.CondenserBlock;
 import com.meersalzeis.factoryheart.blockentity.FactoryHeartBlockEntity;
 import com.meersalzeis.factoryheart.blockentity.ModBECapabilities;
 import com.meersalzeis.factoryheart.blockentity.ModBlockEntities;
+import com.meersalzeis.factoryheart.blockentityrender.BlazerRenderer;
+import com.meersalzeis.factoryheart.blockentityrender.ExtractorRenderer;
+import com.meersalzeis.factoryheart.compat.JEI.recipeDisplays.CondenserRecipeScreen;
 import com.meersalzeis.factoryheart.item.ModCreativeModeTabs;
 import com.meersalzeis.factoryheart.item.ModItems;
 import com.meersalzeis.factoryheart.recipe.ModRecipes;
 import com.meersalzeis.factoryheart.sound.ModSounds;
 import com.meersalzeis.factoryheart.gui.ModMenuTypes;
-import com.meersalzeis.factoryheart.gui.recipeDisplays.CondenserScreen;
 import com.meersalzeis.factoryheart.gui.screens.ExtractorScreen;
 import com.meersalzeis.factoryheart.gui.screens.TesterScreen;
 import com.meersalzeis.factoryheart.gui.screens.BlazerScreen;
@@ -101,8 +103,8 @@ public class FHModMain {
 
         @SubscribeEvent
         public static void registerBER(EntityRenderersEvent.RegisterRenderers event) {
-            // event.registerBlockEntityRenderer(ModBlockEntities.PEDESTAL_BE.get(), PedestalBlockEntityRenderer::new);
-            // event.registerBlockEntityRenderer(ModBlockEntities.TANK_BE.get(), TankBlockEntityRenderer::new);
+            event.registerBlockEntityRenderer(ModBlockEntities.BLAZER_BE.get(), BlazerRenderer::new);
+            event.registerBlockEntityRenderer(ModBlockEntities.EXTRACTOR_BE.get(), ExtractorRenderer::new);
         }
 
         @SubscribeEvent
@@ -111,7 +113,7 @@ public class FHModMain {
             event.register(ModMenuTypes.WRAPPER_MENU.get(), WrapperScreen::new);
             event.register(ModMenuTypes.EXTRACTOR_MENU.get(), ExtractorScreen::new);
             event.register(ModMenuTypes.TESTER_MENU.get(), TesterScreen::new);
-            event.register(ModMenuTypes.CONDENSER_MENU.get(), CondenserScreen::new);
+            event.register(ModMenuTypes.CONDENSER_MENU.get(), CondenserRecipeScreen::new);
 
             // event.register(ModMenuTypes.COAL_GENERATOR_MENU.get(), CoalGeneratorScreen::new);
             // event.register(ModMenuTypes.TANK_MENU.get(), TankScreen::new);

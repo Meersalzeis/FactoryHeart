@@ -1,0 +1,12 @@
+{
+  "type": "factoryheart:extracting",
+  "ingredient": {
+    "item": "factoryheart:slimy_rotten_flesh"
+  },
+  "ingredientCount":4,
+  "requiredTier": 2,
+  "result": {
+    "id": "minecraft:slime_ball",
+    "count": 3
+  }
+}

@@ -1,0 +1,37 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "factoryheart:containment_casing"
+    },
+    {
+      "item": "factoryheart:inferno_shard"
+    },
+    {
+      "item": "factoryheart:inferno_shard"
+    },
+    {
+      "item": "factoryheart:inferno_shard"
+    },
+    {
+      "item": "factoryheart:inferno_shard"
+    },
+    {
+      "item": "factoryheart:inferno_shard"
+    },
+    {
+      "item": "factoryheart:inferno_shard"
+    },
+    {
+      "item": "factoryheart:inferno_shard"
+    },
+    {
+      "item": "factoryheart:inferno_shard"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "factoryheart:inferno_matter"
+  }
+}

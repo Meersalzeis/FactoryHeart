@@ -1,0 +1,12 @@
+
+{
+  "type": "factoryheart:condensing",
+  "hue":"black",
+  "requiredTier": 2,
+  "requiredTicks": 80000,
+  "requiredFuelPerTick": 1,
+  "result": {
+    "id": "minecraft:obsidian",
+    "count": 1
+  }
+}

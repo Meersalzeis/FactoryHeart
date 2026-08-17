@@ -1,0 +1,30 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "b": {
+      "item": "minecraft:iron_bars"
+    },
+    "d": {
+      "item": "minecraft:dispenser"
+    },
+    "h": {
+      "item": "factoryheart:smart_heart"
+    },
+    "p": {
+      "item": "factoryheart:hard_part"
+    },
+    "s": {
+      "item": "factoryheart:factory_skin"
+    }
+  },
+  "pattern": [
+    "sps",
+    "dhb",
+    "sps"
+  ],
+  "result": {
+    "count": 1,
+    "id": "factoryheart:condenser"
+  }
+}

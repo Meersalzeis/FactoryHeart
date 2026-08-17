@@ -1,0 +1,13 @@
+{
+  "type": "factoryheart:extracting",
+  "consumesInput": false,
+  "ingredient": {
+    "item": "minecraft:conduit"
+  },
+  "ingredientCount":1,
+  "requiredTier": 4,
+  "result": {
+    "id": "minecraft:prismarine_crystals",
+    "count": 1
+  }
+}

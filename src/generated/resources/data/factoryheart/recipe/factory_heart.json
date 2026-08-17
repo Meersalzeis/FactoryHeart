@@ -3,19 +3,19 @@
   "category": "misc",
   "key": {
     "h": {
-      "item": "minecraft:heart_of_the_sea"
-    },
-    "i": {
-      "item": "minecraft:iron_nugget"
+      "tag": "factoryheart:heart_items"
     },
     "p": {
       "item": "factoryheart:factory_paste"
+    },
+    "s": {
+      "item": "factoryheart:factory_skin"
     }
   },
   "pattern": [
-    "ipi",
+    "sps",
     "php",
-    "ipi"
+    "sps"
   ],
   "result": {
     "count": 1,

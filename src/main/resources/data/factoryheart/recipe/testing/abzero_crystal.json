@@ -1,0 +1,14 @@
+{
+  "type": "factoryheart:testing",
+  "ingredient": {
+    "item": "factoryheart:deepcool_crystal"
+  },
+  "success": {
+    "id": "factoryheart:abzero_crystal"
+  },
+  "failed": {
+    "id": "minecraft:blue_ice"
+  },
+  "successChance": 0.09,
+  "requiredTier": 3
+}

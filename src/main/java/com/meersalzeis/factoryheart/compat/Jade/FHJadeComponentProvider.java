@@ -74,7 +74,6 @@ public enum FHJadeComponentProvider implements IBlockComponentProvider {
   }
 
   ArrayList<IElement> createCraftingStationTooltips(@SuppressWarnings("rawtypes") FHCraftStationEntity bEntity, ItemStack input, ItemStack output) {
-    bEntity.syncProgress = true;
     int progress = bEntity.getProgress();
     int maxProgress = bEntity.getMaxProgress();
 
@@ -153,7 +152,6 @@ public enum FHJadeComponentProvider implements IBlockComponentProvider {
 
     appendTierTooltip(tooltip, bEntity);
 
-    bEntity.syncProgress = true;
     int progress = bEntity.getProgress();
     int maxProgress = bEntity.getMaxProgress();
 
