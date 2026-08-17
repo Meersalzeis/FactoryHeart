@@ -3,7 +3,7 @@ package com.meersalzeis.factoryheart.gui.screens;
 import com.meersalzeis.factoryheart.FHModMain;
 import com.meersalzeis.factoryheart.gui.menus.ExtractorMenu;
 import com.meersalzeis.factoryheart.gui.renderer.FHScreens;
-import com.meersalzeis.factoryheart.gui.renderer.TierDisplay;
+import com.meersalzeis.factoryheart.gui.renderer.DisplayHelper;
 
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
@@ -29,17 +29,21 @@ public class ExtractorScreen extends AbstractContainerScreen<ExtractorMenu> {
     }
 
     @Override
-    protected void renderBg(GuiGraphics pGuiGraphics, float pPartialTick, int pMouseX, int pMouseY) {
+    protected void renderBg(GuiGraphics guiGraphics, float pPartialTick, int mouseX, int mouseY) {
         int x = (width - imageWidth) / 2;
         int y = (height - imageHeight) / 2;
 
         FHScreens.setRenderSystem(GUI_TEXTURE);
-        pGuiGraphics.blit(GUI_TEXTURE, x, y, 0, 0, imageWidth, imageHeight);
-        renderProgressArrow(pGuiGraphics, x, y);
+        guiGraphics.blit(GUI_TEXTURE, x, y, 0, 0, imageWidth, imageHeight);
+        renderProgressArrow(guiGraphics, x, y);
 
         int tier = menu.getTier();
-        TierDisplay.renderTierDisplay(pGuiGraphics, tier, x, y);
-        TierDisplay.renderTierTooltip(pGuiGraphics, pMouseX, pMouseY, x, y, this.font, tier, true);
+        DisplayHelper.renderTierDisplay(guiGraphics, tier, x, y);
+        DisplayHelper.renderTierTooltip(guiGraphics, mouseX, mouseY, x, y, tier, true);
+
+        if (menu.doesConsumeInput()) return;
+        DisplayHelper.renderNoInputConsumedTooltip(guiGraphics, mouseX, mouseY, x+45, y+16);
+        DisplayHelper.renderNoInputConsumedDisplay(guiGraphics, x+45, y+16);
     }
 
     private void renderProgressArrow(GuiGraphics guiGraphics, int x, int y) {

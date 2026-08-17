@@ -12,10 +12,9 @@ import mezz.jei.api.recipe.category.IRecipeCategory;
 
 import com.meersalzeis.factoryheart.FHModMain;
 import com.meersalzeis.factoryheart.block.ModBlocks;
-import com.meersalzeis.factoryheart.gui.renderer.TierDisplay;
+import com.meersalzeis.factoryheart.gui.renderer.DisplayHelper;
 import com.meersalzeis.factoryheart.recipe.ExtractorRecipe;
 
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
@@ -77,9 +76,11 @@ public class ExtractorRecipeCategory implements IRecipeCategory<ExtractorRecipe>
         int y = -16;
         
         int tier = recipe.requiredTier();
-        var minecraft = Minecraft.getInstance();
 
-        TierDisplay.renderTierDisplay(guiGraphics, tier, x, y);
-        TierDisplay.renderTierTooltip(guiGraphics, mouseX, mouseY, x, y, minecraft.font, tier, false);
+        DisplayHelper.renderTierDisplay(guiGraphics, tier, x, y);
+        DisplayHelper.renderTierTooltip(guiGraphics, mouseX, mouseY, x, y, tier, false);
+        if (recipe.doesConsumeInput()) return;
+        DisplayHelper.renderNoInputConsumedTooltip(guiGraphics, mouseX, mouseY, 0, 0);
+        DisplayHelper.renderNoInputConsumedDisplay(guiGraphics, 0, 0);
     }
 }

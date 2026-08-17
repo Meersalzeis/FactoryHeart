@@ -4,13 +4,14 @@ package com.meersalzeis.factoryheart.gui.menus;
 import com.meersalzeis.factoryheart.block.ModBlocks;
 import com.meersalzeis.factoryheart.blockentity.crafting.ExtractorBlockEntity;
 import com.meersalzeis.factoryheart.gui.ModMenuTypes;
+
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.inventory.*;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.neoforged.neoforge.items.SlotItemHandler;
 
-public class ExtractorMenu  extends FHCraftingMenu<ExtractorBlockEntity> {
+public class ExtractorMenu extends FHCraftingMenu<ExtractorBlockEntity> {
 
     private final ContainerData data;
 
@@ -37,6 +38,11 @@ public class ExtractorMenu  extends FHCraftingMenu<ExtractorBlockEntity> {
 
     public boolean isCrafting() {
         return data.get(0) > 0;
+    }
+
+    public boolean doesConsumeInput() {
+        var recipeOptional = blockEntity.getCurrentRecipe();
+        return (recipeOptional.isEmpty()) ? false : recipeOptional.get().value().doesConsumeInput();
     }
 
     public int getScaledArrowProgress() {

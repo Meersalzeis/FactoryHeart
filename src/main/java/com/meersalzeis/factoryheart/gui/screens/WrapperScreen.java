@@ -3,7 +3,7 @@ package com.meersalzeis.factoryheart.gui.screens;
 import com.meersalzeis.factoryheart.FHModMain;
 import com.meersalzeis.factoryheart.gui.menus.WrapperMenu;
 import com.meersalzeis.factoryheart.gui.renderer.FHScreens;
-import com.meersalzeis.factoryheart.gui.renderer.TierDisplay;
+import com.meersalzeis.factoryheart.gui.renderer.DisplayHelper;
 
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
@@ -38,8 +38,8 @@ public class WrapperScreen extends AbstractContainerScreen<WrapperMenu> {
         renderProgressArrow(pGuiGraphics, x, y);
 
         int tier = menu.getTier();
-        TierDisplay.renderTierDisplay(pGuiGraphics, tier, x, y);
-        TierDisplay.renderTierTooltip(pGuiGraphics, pMouseX, pMouseY, x, y, this.font, tier, true);
+        DisplayHelper.renderTierDisplay(pGuiGraphics, tier, x, y);
+        DisplayHelper.renderTierTooltip(pGuiGraphics, pMouseX, pMouseY, x, y, tier, true);
     }
 
     private void renderProgressArrow(GuiGraphics guiGraphics, int x, int y) {

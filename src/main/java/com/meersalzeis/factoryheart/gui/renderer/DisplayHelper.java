@@ -3,17 +3,21 @@ package com.meersalzeis.factoryheart.gui.renderer;
 import com.meersalzeis.factoryheart.FHModMain;
 import com.meersalzeis.factoryheart.util.MouseUtil;
 
-import net.minecraft.client.gui.Font;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 
-public class TierDisplay {
+public class DisplayHelper {
 
     private static final ResourceLocation TIER_SCALE_TEXTURE =
         ResourceLocation.fromNamespaceAndPath(FHModMain.MOD_ID,"textures/gui/tier_scale.png");
     private static final ResourceLocation TIER_4_TEXTURE =
         ResourceLocation.fromNamespaceAndPath(FHModMain.MOD_ID,"textures/gui/tier_4.png");
+    private static final ResourceLocation INFINITY_TEXTURE =
+        ResourceLocation.fromNamespaceAndPath(FHModMain.MOD_ID,"textures/gui/infinity.png");
+
+    private static final Minecraft minecraft = Minecraft.getInstance();
 
     public static Component getHasTooltip(int tier) {
         // Component.translatable("factoryheart.gui.hasTier") + tier?
@@ -44,14 +48,28 @@ public class TierDisplay {
         }
     }
 
-    public static void renderTierTooltip(GuiGraphics guiGraphics, double pMouseX, double pMouseY, int x, int y, Font font, int tier, boolean has) {
+    public static void renderTierTooltip(GuiGraphics guiGraphics, double pMouseX, double pMouseY, int x, int y, int tier, boolean has) {
         if(isMouseAboveArea(pMouseX, pMouseY, x, y, 132, 24, 18, 34)) {
             guiGraphics.renderTooltip(
-                font,
+                minecraft.font,
                 has ? getHasTooltip(tier) : getNeedsTooltip(tier),
                 (int)Math.round(pMouseX), (int)Math.round(pMouseY)
             );
         }
+    }
+
+    public static void renderNoInputConsumedTooltip(GuiGraphics guiGraphics, double pMouseX, double pMouseY, int x, int y) {
+        if(isMouseAboveArea(pMouseX, pMouseY, x, y, 9, 6, 16, 8)) {
+            guiGraphics.renderTooltip(
+                minecraft.font,
+                Component.literal("This recipe does not consume the input"),
+                (int)Math.round(pMouseX), (int)Math.round(pMouseY)
+            );
+        }
+    }
+
+    public static void renderNoInputConsumedDisplay(GuiGraphics guiGraphics, int x, int y) {
+        guiGraphics.blit(INFINITY_TEXTURE, x+9,  y+6, 0, 0, 16, 8, 16, 8);
     }
 
     public static boolean isMouseAboveArea(double pMouseX, double pMouseY, int x, int y, int offsetX, int offsetY, int width, int height) {

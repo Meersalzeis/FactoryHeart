@@ -1,6 +1,5 @@
 package com.meersalzeis.factoryheart.blockentity.crafting;
 
-import com.meersalzeis.factoryheart.FHModClient;
 import com.meersalzeis.factoryheart.block.crafting.CondenserBlock;
 import com.meersalzeis.factoryheart.block.crafting.ExtractorBlock;
 import com.meersalzeis.factoryheart.blockentity.FHCraftStationEntity;
@@ -97,13 +96,11 @@ public class ExtractorBlockEntity extends FHCraftStationEntity<ExtractorBlockEnt
     public void tick(Level level, BlockPos pos, BlockState bState) {
         if(canCraft(level, pos)) {
             increaseCraftingProgress();
-            // useEnergyForCrafting();
             level.setBlockAndUpdate(pos, bState.setValue(ExtractorBlock.LIT, true));
             setChanged(level, pos, bState);
 
             if (hasCraftingFinished()) {
                 craftItem();
-                // extractFluidForCrafting();
                 resetProgress();
             }
 
@@ -127,7 +124,6 @@ public class ExtractorBlockEntity extends FHCraftStationEntity<ExtractorBlockEnt
                 itemHandler.getStackInSlot(OUTPUT_SLOT).getCount() + output.getCount())
         );
 
-        FHModClient.debugMessageToAll("Does consuem input? " + recipe.doesConsumeInput());
         if (!recipe.doesConsumeInput()) return;
 
         itemHandler.extractItem(INPUT_SLOT, inputConsumption, false);

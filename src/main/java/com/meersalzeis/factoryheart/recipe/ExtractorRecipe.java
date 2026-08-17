@@ -13,7 +13,6 @@ import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.Level;
 
-import com.meersalzeis.factoryheart.FHModClient;
 import com.mojang.serialization.Codec;
 import net.minecraft.network.codec.ByteBufCodecs;
 
@@ -95,7 +94,7 @@ public record ExtractorRecipe(Ingredient inputItem, int ingredientCount, int req
             Codec.INT.fieldOf("ingredientCount").forGetter(ExtractorRecipe::ingredientCount),
             Codec.INT.fieldOf("requiredTier").forGetter(ExtractorRecipe::requiredTier),
             ItemStack.CODEC.fieldOf("result").forGetter(ExtractorRecipe::output),
-            Codec.BOOL.optionalFieldOf("consumes_input", true).forGetter(ExtractorRecipe::consumesInput)
+            Codec.BOOL.optionalFieldOf("consumesInput", true).forGetter(ExtractorRecipe::consumesInput)
         ).apply(inst, ExtractorRecipe::new));
 
         public static final StreamCodec<RegistryFriendlyByteBuf, ExtractorRecipe> STREAM_CODEC =
