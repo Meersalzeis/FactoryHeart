@@ -2,7 +2,7 @@
 {
   "type": "factoryheart:blazing",
   "ingredient": {
-    "item": "minecraft:redstone"
+    "item": "minecraft:glowstone_dust"
   },
   "requiredTier": 1,
   "result": {

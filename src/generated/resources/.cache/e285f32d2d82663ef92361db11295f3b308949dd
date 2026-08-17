@@ -1,11 +1,12 @@
-// 1.21.1	2026-08-11T15:44:26.707062504	Item Models: factoryheart
+// 1.21.1	2026-08-17T14:15:14.800711637	Item Models: factoryheart
 9acb205655ae55162937c4b24bac61c5543dc4d2 assets/factoryheart/models/item/abzero_crystal.json
 e2de9b4a2d62ed970a2e0d2fada037a7215b3425 assets/factoryheart/models/item/abzero_matter.json
 cb9fd3a99beac6bd69232bc8d84a967e778dc179 assets/factoryheart/models/item/abzero_shard.json
-60d1be37ecee85388beba11d11744b0bdb01d58d assets/factoryheart/models/item/activated_blazear_rod.json
+0d9eb0952c15f7a1d695ddc680304cf87304be2f assets/factoryheart/models/item/activated_blazear_rod.json
 f868c4e9e0f06ce80024ffc51e53cf81d6a76439 assets/factoryheart/models/item/blaze_candy.json
 d43e3208d3a8b77337638c35725f9327f1fa0fef assets/factoryheart/models/item/blazear_fuel_rod.json
 6616465764618632732e41a98f7e500e6eb0a9f5 assets/factoryheart/models/item/blazear_pellet.json
+28aaffd339463fc842d27a58d2d88f63a256e153 assets/factoryheart/models/item/blazear_rod.json
 6eececba1ac1620bcf57f821e4ce859ad256669f assets/factoryheart/models/item/combustion_core.json
 d03bedcbe7521c88673f59e19cf9ea1e3010b9da assets/factoryheart/models/item/contained_deepcool_crystal.json
 8754d6325282c291919bd5e568d9a26fa66c2824 assets/factoryheart/models/item/containment_casing.json
@@ -40,4 +41,3 @@ ad9380f53393ae970f3b7a720bf87153ec174eb2 assets/factoryheart/models/item/smart_s
 1fcb54a44972a1722ae64df12ba618fd5913e0a4 assets/factoryheart/models/item/smart_shard_untested.json
 406294f35691466446f98bd31027eb6d470d9d2f assets/factoryheart/models/item/soda_powder.json
 4dc1b2dba8044ddc69e4a8b9013bacd6e932ca15 assets/factoryheart/models/item/unwrapped_blaze_candy.json
-a178a705927870adde52afbab7d474f1e0f193c7 assets/factoryheart/models/item/volatile_blazear_rod.json

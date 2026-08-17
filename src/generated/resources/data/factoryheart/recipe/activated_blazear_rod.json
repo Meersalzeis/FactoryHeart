@@ -1,21 +1,13 @@
 {
-  "type": "minecraft:crafting_shaped",
+  "type": "minecraft:crafting_shapeless",
   "category": "misc",
-  "key": {
-    "b": {
-      "item": "factoryheart:blazear_pellet"
+  "ingredients": [
+    {
+      "item": "factoryheart:blazear_rod"
     },
-    "e": {
-      "item": "factoryheart:energy_powder"
-    },
-    "p": {
-      "item": "factoryheart:factory_paste"
+    {
+      "item": "factoryheart:energy_drink"
     }
-  },
-  "pattern": [
-    "ebe",
-    "pbp",
-    "ebe"
   ],
   "result": {
     "count": 1,

@@ -255,14 +255,7 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
         //     .unlockedBy("has_volatile_blazear_rod", has(ModItems.VOLATILE_BLAZEAR_ROD))
         //     .save(pRecipeOutput);
 
-        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ModItems.VOLATILE_BLAZEAR_ROD)
-            .requires(ModItems.ACTIVATED_BLAZEAR_ROD)
-            .requires(ModItems.ENERGY_DRINK)
-            .unlockedBy("has_activated_blazear_rod", has(ModItems.ACTIVATED_BLAZEAR_ROD))
-            .unlockedBy("has_energy_drink", has(ModItems.ENERGY_DRINK))
-            .save(pRecipeOutput);
-
-        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItems.ACTIVATED_BLAZEAR_ROD)
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItems.BLAZEAR_ROD)
             .pattern("ebe")
             .pattern("pbp")
             .pattern("ebe")
@@ -271,7 +264,14 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
             .define('p', ModItems.FACTORY_PASTE)
             .unlockedBy("has_blaze_rod", has(Items.BLAZE_ROD))
             .save(pRecipeOutput);
-        
+
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ModItems.ACTIVATED_BLAZEAR_ROD)
+            .requires(ModItems.BLAZEAR_ROD)
+            .requires(ModItems.ENERGY_DRINK)
+            .unlockedBy("has_activated_blazear_rod", has(ModItems.BLAZEAR_ROD))
+            .unlockedBy("has_energy_drink", has(ModItems.ENERGY_DRINK))
+            .save(pRecipeOutput);
+
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItems.CONTAINMENT_CASING)
             .pattern("ncn")
             .pattern("p p")

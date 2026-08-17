@@ -1,11 +1,21 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_blaze_rod": {
+    "has_activated_blazear_rod": {
       "conditions": {
         "items": [
           {
-            "items": "minecraft:blaze_rod"
+            "items": "factoryheart:blazear_rod"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_energy_drink": {
+      "conditions": {
+        "items": [
+          {
+            "items": "factoryheart:energy_drink"
           }
         ]
       },
@@ -21,7 +31,8 @@
   "requirements": [
     [
       "has_the_recipe",
-      "has_blaze_rod"
+      "has_activated_blazear_rod",
+      "has_energy_drink"
     ]
   ],
   "rewards": {

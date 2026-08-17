@@ -2,9 +2,9 @@
 {
   "type": "factoryheart:blazing",
   "ingredient": {
-    "item": "minecraft:glowstone_dust"
+    "item": "factoryheart:energy_powder"
   },
-  "requiredTier": 1,
+  "requiredTier": 2,
   "result": {
     "id": "minecraft:redstone",
     "count": 1

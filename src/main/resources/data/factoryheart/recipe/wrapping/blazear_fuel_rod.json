@@ -1,7 +1,7 @@
 {
   "type": "factoryheart:wrapping",
   "centerpiece": {
-    "item": "factoryheart:volatile_blazear_rod"
+    "item": "factoryheart:activated_blazear_rod"
   },
   "wrappings": {
     "item": "minecraft:iron_ingot"

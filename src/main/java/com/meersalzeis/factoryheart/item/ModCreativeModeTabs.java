@@ -34,7 +34,7 @@ public class ModCreativeModeTabs {
                         output.accept(ModBlocks.FACTORY_VEIN);
                         output.accept(ModBlocks.FACTORY_SKIN);
 
-                        output.accept(ModItems.ABZERO_MATTER);
+                        output.accept(ModItems.BLAZEAR_ROD);
                         output.accept(ModItems.ACTIVATED_BLAZEAR_ROD);
                         output.accept(ModItems.BLAZEAR_FUEL_ROD);
                         output.accept(ModItems.BLAZEAR_PELLET);
@@ -45,12 +45,10 @@ public class ModCreativeModeTabs {
                         output.accept(ModItems.ENERGY_POWDER);
                         output.accept(ModItems.FACTORY_PASTE);
                         output.accept(ModItems.FACTORY_TOOTH);
-                        output.accept(ModItems.INFERNO_MATTER);
+                        
                         output.accept(ModItems.METAL_DISC);
                         output.accept(ModItems.METAL_SHEET);
                         output.accept(ModItems.SODA_POWDER);
-
-                        output.accept(ModItems.VOLATILE_BLAZEAR_ROD);
 
                         output.accept(ModItems.CONTAINMENT_SPOOL);
                         output.accept(ModItems.CONTAINMENT_FIELD_PROJECTOR);
@@ -65,7 +63,9 @@ public class ModCreativeModeTabs {
 
                         output.accept(ModItems.ABZERO_CRYSTAL);
                         output.accept(ModItems.ABZERO_SHARD);
+                        output.accept(ModItems.ABZERO_MATTER);
                         output.accept(ModItems.INFERNO_SHARD);
+                        output.accept(ModItems.INFERNO_MATTER);
 
                         output.accept(ModItems.SMART_SHARD);
                         output.accept(ModItems.SMART_PART );

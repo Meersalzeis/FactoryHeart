@@ -27,7 +27,7 @@ public class ModItemModelProvider extends ItemModelProvider {
     protected void registerModels() {
 
         basicItem(ModItems.ABZERO_MATTER.get());
-        basicItem(ModItems.ACTIVATED_BLAZEAR_ROD.get());
+        basicItem(ModItems.BLAZEAR_ROD.get());
         basicItem(ModItems.BLAZEAR_FUEL_ROD.get());
         basicItem(ModItems.BLAZEAR_PELLET.get());
         basicItem(ModItems.CONTAINED_DEEPCOOL_CRYSTAL.get());
@@ -65,7 +65,7 @@ public class ModItemModelProvider extends ItemModelProvider {
         generateLayeredItem(ModItems.SLIMY_ROTTEN.getRegisteredName(), mcLoc("item/rotten_flesh"), modLoc("item/overlay_faulty"));
         generateLayeredItem(ModItems.LEATHERY_ROTTEN.getRegisteredName(), mcLoc("item/rotten_flesh"), modLoc("item/overlay_correct"));
         
-        copiedTextureItem(ModItems.VOLATILE_BLAZEAR_ROD.get(), ModItems.ACTIVATED_BLAZEAR_ROD.get());
+        copiedTextureItem(ModItems.ACTIVATED_BLAZEAR_ROD.get(), ModItems.BLAZEAR_ROD.get());
 
         customBlockItem(ModBlocks.FACTORY_MAW);
     }

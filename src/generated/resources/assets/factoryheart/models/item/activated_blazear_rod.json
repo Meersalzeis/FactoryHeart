@@ -1,6 +1,3 @@
 {
-  "parent": "minecraft:item/generated",
-  "textures": {
-    "layer0": "factoryheart:item/activated_blazear_rod"
-  }
+  "parent": "factoryheart:item/blazear_rod"
 }
