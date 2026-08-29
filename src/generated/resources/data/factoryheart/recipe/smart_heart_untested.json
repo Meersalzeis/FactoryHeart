@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "p": {
+      "item": "factoryheart:smart_part"
+    }
+  },
+  "pattern": [
+    "p p",
+    "ppp",
+    " p "
+  ],
+  "result": {
+    "count": 1,
+    "id": "factoryheart:smart_heart_untested"
+  }
+}

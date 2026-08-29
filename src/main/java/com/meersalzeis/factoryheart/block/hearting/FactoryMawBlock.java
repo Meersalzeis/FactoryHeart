@@ -81,19 +81,6 @@ public class FactoryMawBlock extends DirectionalBlock {
         return RenderShape.MODEL;
     }
 
-    // @Override
-    // public void animateTick(BlockState pState, Level pLevel, BlockPos pPos, RandomSource pRandom) {
-    //     // THIS METHOD IS !CLIENT ONLY!
-    //     double xPos = pPos.getX() + 0.5f;
-    //     double yPos = pPos.getY() + 1.25f;
-    //     double zPos = pPos.getZ() + 0.5f;
-    //     double offset = pRandom.nextDouble() * 0.6 - 0.3;
-
-    //     pLevel.addParticle(ParticleTypes.SMOKE, xPos + offset, yPos, zPos + offset, 0.0, 0.0, 0.0);
-    //     pLevel.addParticle(new BlockParticleOption(ParticleTypes.BLOCK, ModBlocks.FACTORY_MAW.get().defaultBlockState()),
-    //             xPos + offset, yPos, zPos + offset, 0.0, 0.0, 0.0);
-    // }
-
     @Override
     protected void entityInside(BlockState state, Level level, BlockPos pos, Entity entity) {
         super.entityInside(state, level, pos, entity);
@@ -106,11 +93,7 @@ public class FactoryMawBlock extends DirectionalBlock {
     @Override
     public void onPlace(BlockState state, Level level, BlockPos pos, BlockState oldState, boolean movedByPiston) {
         if (level.isClientSide()) return;
-
-        if (oldState.is(state.getBlock())) {
-            return;
-        }
-
+        if (oldState.is(state.getBlock())) {return;}
         HeartBeating.TryAddBlock(level, pos, false);
     }
 

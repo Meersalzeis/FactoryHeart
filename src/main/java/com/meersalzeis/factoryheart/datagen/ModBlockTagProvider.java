@@ -38,12 +38,15 @@ public class ModBlockTagProvider extends BlockTagsProvider {
         this.tag(ModTags.Blocks.HEART_NETWORK_BLOCKS)
             .add(ModBlocks.FACTORY_VEIN.get())
             .add(ModBlocks.FACTORY_SKIN.get())
+            
             .add(ModBlocks.FACTORY_MAW.get())
             .add(ModBlocks.FACTORY_HEART.get())
+
             .add(ModBlocks.BLAZER.get())
             .add(ModBlocks.WRAPPER.get())
             .add(ModBlocks.EXTRACTOR.get())
             .add(ModBlocks.TESTER.get())
+
             .add(ModBlocks.CONDENSER.get());
     }
 }

@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_faulty_smart_heart": {
+      "conditions": {
+        "items": [
+          {
+            "items": "factoryheart:smart_heart_faulty"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "factoryheart:smart_part"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_faulty_smart_heart"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "factoryheart:smart_part"
+    ]
+  }
+}

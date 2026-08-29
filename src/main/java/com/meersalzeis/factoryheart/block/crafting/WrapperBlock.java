@@ -1,6 +1,8 @@
 package com.meersalzeis.factoryheart.block.crafting;
 
+import com.meersalzeis.factoryheart.FHModClient;
 import com.meersalzeis.factoryheart.blockentity.ModBlockEntities;
+import com.meersalzeis.factoryheart.blockentity.crafting.CondenserBlockEntity;
 import com.meersalzeis.factoryheart.blockentity.crafting.ExtractorBlockEntity;
 import com.meersalzeis.factoryheart.blockentity.crafting.WrapperBlockEntity;
 import com.meersalzeis.factoryheart.hearts.HeartBeating;
@@ -139,12 +141,15 @@ public class WrapperBlock extends BaseEntityBlock {
     @Override
     public void onPlace(BlockState state, Level level, BlockPos pos, BlockState oldState, boolean movedByPiston) {
         if (level.isClientSide()) return;
-
-        if (oldState.is(state.getBlock())) {
-            return;
-        }
+        if (oldState.is(state.getBlock())) { return; }
 
         HeartBeating.TryAddBlock(level, pos, false);
+
+        // Get tier of netw.
+        BlockEntity blockEntity = level.getBlockEntity(pos);
+        if (blockEntity instanceof WrapperBlockEntity blockEnt) {
+            blockEnt.getTierAfterPlacement(level, pos);
+        }
     }
 
     private void checkDeregister(BlockState state, Level level, BlockPos pos, BlockState newState) {

@@ -11,6 +11,7 @@ import com.meersalzeis.factoryheart.blockentity.ModBECapabilities;
 import com.meersalzeis.factoryheart.blockentity.ModBlockEntities;
 import com.meersalzeis.factoryheart.blockentityrender.BlazerRenderer;
 import com.meersalzeis.factoryheart.blockentityrender.ExtractorRenderer;
+import com.meersalzeis.factoryheart.blockentityrender.TesterRenderer;
 import com.meersalzeis.factoryheart.compat.JEI.recipeDisplays.CondenserRecipeScreen;
 import com.meersalzeis.factoryheart.item.ModCreativeModeTabs;
 import com.meersalzeis.factoryheart.item.ModItems;
@@ -105,6 +106,7 @@ public class FHModMain {
         public static void registerBER(EntityRenderersEvent.RegisterRenderers event) {
             event.registerBlockEntityRenderer(ModBlockEntities.BLAZER_BE.get(), BlazerRenderer::new);
             event.registerBlockEntityRenderer(ModBlockEntities.EXTRACTOR_BE.get(), ExtractorRenderer::new);
+            event.registerBlockEntityRenderer(ModBlockEntities.TESTER_BE.get(), TesterRenderer::new);
         }
 
         @SubscribeEvent

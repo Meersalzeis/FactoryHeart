@@ -1,6 +1,5 @@
 package com.meersalzeis.factoryheart.block.hearting;
 
-import com.meersalzeis.factoryheart.FHModClient;
 import com.meersalzeis.factoryheart.blockentity.FactoryHeartBlockEntity;
 import com.meersalzeis.factoryheart.blockentity.ModBlockEntities;
 import com.meersalzeis.factoryheart.hearts.HeartBeating;
@@ -73,7 +72,7 @@ public class FactoryHeartBlock extends BaseEntityBlock {
     @Nullable
     @Override
     public BlockState getStateForPlacement(BlockPlaceContext pContext) {
-        return defaultBlockState().setValue(FACING, pContext.getNearestLookingDirection().getOpposite());
+        return defaultBlockState().setValue(FACING, pContext.getHorizontalDirection().getOpposite());
     }
 
 

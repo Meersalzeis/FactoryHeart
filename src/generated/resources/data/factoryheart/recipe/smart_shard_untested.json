@@ -1,0 +1,36 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "R": {
+      "item": "minecraft:repeater"
+    },
+    "c": {
+      "item": "minecraft:comparator"
+    },
+    "l": {
+      "item": "minecraft:lever"
+    },
+    "o": {
+      "item": "minecraft:observer"
+    },
+    "p": {
+      "item": "minecraft:piston"
+    },
+    "r": {
+      "item": "minecraft:redstone_torch"
+    },
+    "t": {
+      "item": "minecraft:redstone_torch"
+    }
+  },
+  "pattern": [
+    "t t",
+    "orc",
+    "Rpl"
+  ],
+  "result": {
+    "count": 1,
+    "id": "factoryheart:smart_shard_untested"
+  }
+}

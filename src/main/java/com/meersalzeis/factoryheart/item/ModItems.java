@@ -93,7 +93,7 @@ public class ModItems {
     );
     public static final DeferredItem<Item> BLAZE_CANDY = ITEMS.registerItem(
         "blaze_candy",
-        properties -> new FuelItem(properties, 180000),
+        properties -> new EnchantEffectItem(properties, 180000),
         new Item.Properties()
     );
 

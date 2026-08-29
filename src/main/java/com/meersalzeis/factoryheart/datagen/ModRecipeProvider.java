@@ -333,6 +333,45 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
             .unlockedBy("has_netherite_scrap", has(Items.NETHERITE_SCRAP))
             .unlockedBy("has_tester", has(ModBlocks.TESTER))
             .save(pRecipeOutput);
+        
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItems.SMART_HEART_U)
+            .pattern("p p")
+            .pattern("ppp")
+            .pattern(" p ")
+            .define('p', ModItems.SMART_PART)
+            .unlockedBy("has_smart_part", has(ModItems.SMART_PART))
+            .save(pRecipeOutput);
+        
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItems.SMART_PART_U)
+            .pattern("ss")
+            .pattern("ss")
+            .define('s', ModItems.SMART_SHARD)
+            .unlockedBy("has_smart_shard", has(ModItems.SMART_SHARD))
+            .save(pRecipeOutput);
+        
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItems.SMART_SHARD_U)
+            .pattern("t t")
+            .pattern("orc")
+            .pattern("Rpl")
+            .define('t', Items.REDSTONE_TORCH)
+            .define('o', Blocks.OBSERVER)
+            .define('r', Items.REDSTONE_TORCH)
+            .define('c', Blocks.COMPARATOR)
+            .define('R', Items.REPEATER)
+            .define('p', Blocks.PISTON)
+            .define('l', Items.LEVER)
+            .unlockedBy("has_redstone", has(Items.REDSTONE))
+            .save(pRecipeOutput);
+
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ModItems.SMART_SHARD, 2)
+            .requires(ModItems.SMART_PART_F)
+            .unlockedBy("has_faulty_smart_part", has(ModItems.SMART_PART_F))
+            .save(pRecipeOutput);
+        
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ModItems.SMART_PART,3)
+            .requires(ModItems.SMART_HEART_F)
+            .unlockedBy("has_faulty_smart_heart", has(ModItems.SMART_HEART_F))
+            .save(pRecipeOutput);
 
         oreSmelting(pRecipeOutput, List.of(ModItems.HARD_PART_F), RecipeCategory.MISC, Items.NETHERITE_SCRAP, 0.25f, 200, getName());
         oreBlasting(pRecipeOutput, List.of(ModItems.HARD_PART_F), RecipeCategory.MISC, Items.NETHERITE_SCRAP, 0.25f, 100, getName());

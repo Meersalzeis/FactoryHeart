@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_smart_shard": {
+      "conditions": {
+        "items": [
+          {
+            "items": "factoryheart:smart_shard"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "factoryheart:smart_part_untested"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_smart_shard"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "factoryheart:smart_part_untested"
+    ]
+  }
+}

@@ -210,6 +210,12 @@ public class CondenserBlock extends BaseEntityBlock {
         }
 
         HeartBeating.TryAddBlock(level, pos, false);
+
+        // Get tier of netw.
+        BlockEntity blockEntity = level.getBlockEntity(pos);
+        if (blockEntity instanceof CondenserBlockEntity blockEnt) {
+            blockEnt.getTierAfterPlacement(level, pos);
+        }
     }
 
     private void checkDeregister(BlockState state, Level level, BlockPos pos, BlockState newState) {

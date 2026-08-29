@@ -71,7 +71,7 @@ public class ExtractorRenderer implements BlockEntityRenderer<ExtractorBlockEnti
         
 
         itemRenderer.renderStatic(
-            plungerStack, ItemDisplayContext.FIXED, BlockERenderUtil.getLightLevel(blockEntity.getLevel(),
+            plungerStack, ItemDisplayContext.FIXED, BlockEntRenderUtil.getLightLevel(blockEntity.getLevel(),
             blockEntity.getBlockPos()), OverlayTexture.NO_OVERLAY, poseStack,
             bufferSource, blockEntity.getLevel(), 1
         );
@@ -91,7 +91,7 @@ public class ExtractorRenderer implements BlockEntityRenderer<ExtractorBlockEnti
         
 
         itemRenderer.renderStatic(
-            inputStack, ItemDisplayContext.FIXED, BlockERenderUtil.getLightLevel(blockEntity.getLevel(),
+            inputStack, ItemDisplayContext.FIXED, BlockEntRenderUtil.getLightLevel(blockEntity.getLevel(),
             blockEntity.getBlockPos()), OverlayTexture.NO_OVERLAY, poseStack,
             bufferSource, blockEntity.getLevel(), 1
         );

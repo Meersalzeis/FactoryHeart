@@ -1,0 +1,12 @@
+{
+  "type": "factoryheart:extracting",
+  "ingredient": {
+    "item": "factoryheart:smart_shard_faulty"
+  },
+  "ingredientCount":1,
+  "requiredTier": 3,
+  "result": {
+    "id": "minecraft:redstone",
+    "count": 12
+  }
+}

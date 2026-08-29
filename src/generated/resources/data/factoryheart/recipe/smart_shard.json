@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "factoryheart:smart_part_faulty"
+    }
+  ],
+  "result": {
+    "count": 2,
+    "id": "factoryheart:smart_shard"
+  }
+}

@@ -25,5 +25,15 @@ public class ModTags {
         }
 
         public static final TagKey<Item> HEART_ITEMS = createTag("heart_items");
+
+        public static final TagKey<Item> T1_FUEL_ITEMS = createTag("t1_fuel_items");
+        public static final TagKey<Item> T2_FUEL_ITEMS = createTag("t2_fuel_items");
+        public static final TagKey<Item> T3_FUEL_ITEMS = createTag("t3_fuel_items");
+        public static final TagKey<Item> T4_FUEL_ITEMS = createTag("t4_fuel_items");
+
+        public static final TagKey<Item> T1_COOL_ITEMS = createTag("t1_cool_items");
+        public static final TagKey<Item> T2_COOL_ITEMS = createTag("t2_cool_items");
+        public static final TagKey<Item> T3_COOL_ITEMS = createTag("t3_cool_items");
+        public static final TagKey<Item> T4_COOL_ITEMS = createTag("t4_cool_items");
     }
 }

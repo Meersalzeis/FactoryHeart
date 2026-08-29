@@ -1,0 +1,12 @@
+
+{
+  "type": "factoryheart:blazing",
+  "ingredient": {
+    "item": "minecraft:charcoal"
+  },
+  "requiredTier": 3,
+  "result": {
+    "id": "minecraft:coal",
+    "count": 1
+  }
+}

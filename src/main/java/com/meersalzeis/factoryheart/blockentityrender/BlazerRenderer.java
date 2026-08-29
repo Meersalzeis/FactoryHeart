@@ -15,7 +15,7 @@ import net.minecraft.world.item.Items;
 
 public class BlazerRenderer implements BlockEntityRenderer<BlazerBlockEntity> {
 
-    private static final ItemRenderer itemRenderer = BlockERenderUtil.itemRenderer;
+    private static final ItemRenderer itemRenderer = BlockEntRenderUtil.itemRenderer;
     private static ItemStack stack = new ItemStack(Items.BLAZE_ROD);
 
     public BlazerRenderer(BlockEntityRendererProvider.Context context) {}
@@ -62,7 +62,7 @@ public class BlazerRenderer implements BlockEntityRenderer<BlazerBlockEntity> {
         poseStack.scale(0.5f, 0.5f, 0.5f);
 
         itemRenderer.renderStatic(
-            stack, ItemDisplayContext.FIXED, BlockERenderUtil.getLightLevel(blockEntity.getLevel(),
+            stack, ItemDisplayContext.FIXED, BlockEntRenderUtil.getLightLevel(blockEntity.getLevel(),
             blockEntity.getBlockPos()), OverlayTexture.NO_OVERLAY, poseStack,
             bufferSource, blockEntity.getLevel(), 1
         );

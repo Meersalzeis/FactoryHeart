@@ -1,30 +1,15 @@
 package com.meersalzeis.factoryheart.hearts;
 
 import java.util.HashSet;
-import java.util.List;
 import java.util.concurrent.atomic.AtomicReference;
-import java.util.stream.Collectors;
-import java.util.ArrayList;
 
-import com.meersalzeis.factoryheart.Config;
 import com.meersalzeis.factoryheart.FHModClient;
-import com.meersalzeis.factoryheart.FHModMain;
 import com.meersalzeis.factoryheart.block.ModBlocks;
-import com.meersalzeis.factoryheart.block.hearting.FactoryHeartBlock;
 import com.meersalzeis.factoryheart.blockentity.FactoryHeartBlockEntity;
 import com.meersalzeis.factoryheart.util.ModTags;
-import com.mojang.logging.LogUtils;
-import org.slf4j.Logger;
 
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.entity.item.ItemEntity;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.state.BlockState;
 
 public class HeartNetwork {
 
@@ -44,9 +29,7 @@ public class HeartNetwork {
     public static FactoryHeartBlockEntity getHeartEntity(Level level, BlockPos pos) {
         var netw = HeartBeating.tryGetNetwork(level, pos);
         if (netw == null || netw.heart == null) return null;
-        
         var res = level.getBlockEntity(netw.heart);
-        
         if (res instanceof FactoryHeartBlockEntity correctRes) return correctRes;
         else return null;
     }

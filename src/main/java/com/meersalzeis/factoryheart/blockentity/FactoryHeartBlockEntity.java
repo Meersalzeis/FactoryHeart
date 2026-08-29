@@ -6,7 +6,6 @@ import java.util.List;
 import javax.annotation.Nullable;
 
 import com.meersalzeis.factoryheart.Config;
-import com.meersalzeis.factoryheart.FHModClient;
 import com.meersalzeis.factoryheart.block.ModBlocks;
 import com.meersalzeis.factoryheart.block.hearting.FactoryHeartBlock;
 import com.meersalzeis.factoryheart.hearts.HeartBeating;

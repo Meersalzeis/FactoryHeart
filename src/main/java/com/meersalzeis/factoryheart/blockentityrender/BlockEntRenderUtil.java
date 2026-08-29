@@ -7,7 +7,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LightLayer;
 
-public class BlockERenderUtil {
+public class BlockEntRenderUtil {
     
     public static final ItemRenderer itemRenderer = Minecraft.getInstance().getItemRenderer();
 

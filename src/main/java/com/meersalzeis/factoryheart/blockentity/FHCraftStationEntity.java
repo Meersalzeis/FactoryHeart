@@ -10,12 +10,15 @@ import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.world.Containers;
 import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.inventory.ContainerData;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 
 import org.jetbrains.annotations.Nullable;
+
+import com.meersalzeis.factoryheart.hearts.HeartBeating;
 
 public abstract class FHCraftStationEntity<T extends BlockEntity> extends BlockEntity {
 
@@ -56,6 +59,11 @@ public abstract class FHCraftStationEntity<T extends BlockEntity> extends BlockE
     @Override
     public void onLoad() {
         InitViableInputs();
+        initiateSync();
+    }
+
+    public void getTierAfterPlacement(Level level, BlockPos pos) {
+        currentTier = HeartBeating.getTierOfNetw(level, pos);
     }
 
     protected abstract void InitViableInputs();

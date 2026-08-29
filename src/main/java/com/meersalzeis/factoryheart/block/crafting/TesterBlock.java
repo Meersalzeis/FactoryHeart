@@ -1,20 +1,15 @@
 package com.meersalzeis.factoryheart.block.crafting;
 
 import com.meersalzeis.factoryheart.blockentity.ModBlockEntities;
-
+import com.meersalzeis.factoryheart.blockentity.crafting.CondenserBlockEntity;
 import com.meersalzeis.factoryheart.blockentity.crafting.TesterBlockEntity;
 import com.meersalzeis.factoryheart.hearts.HeartBeating;
 import com.mojang.serialization.MapCodec;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.core.particles.ItemParticleOption;
-import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.sounds.SoundEvents;
-import net.minecraft.sounds.SoundSource;
-import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.SimpleMenuProvider;
@@ -36,13 +31,11 @@ import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.properties.DirectionProperty;
 import net.minecraft.world.phys.BlockHitResult;
-import net.minecraft.world.phys.shapes.CollisionContext;
-import net.minecraft.world.phys.shapes.Shapes;
-import net.minecraft.world.phys.shapes.VoxelShape;
 
 import org.jetbrains.annotations.Nullable;
 
 public class TesterBlock extends BaseEntityBlock {
+    
     
     public static final BooleanProperty LIT = BlockStateProperties.LIT;
     public static final MapCodec<TesterBlock> CODEC = simpleCodec(TesterBlock::new);
@@ -65,7 +58,7 @@ public class TesterBlock extends BaseEntityBlock {
     @Override
     public BlockState getStateForPlacement(BlockPlaceContext pContext) {
         return defaultBlockState()
-        .setValue(FACING, pContext.getNearestLookingDirection().getOpposite())
+        .setValue(FACING, pContext.getHorizontalDirection().getOpposite())
         .setValue(LIT, false);
     }
 
@@ -172,6 +165,12 @@ public class TesterBlock extends BaseEntityBlock {
         }
 
         HeartBeating.TryAddBlock(level, pos, false);
+
+        // Get tier of netw.
+        BlockEntity blockEntity = level.getBlockEntity(pos);
+        if (blockEntity instanceof TesterBlockEntity blockEnt) {
+            blockEnt.getTierAfterPlacement(level, pos);
+        }
     }
 
     private void checkDeregister(BlockState state, Level level, BlockPos pos, BlockState newState) {

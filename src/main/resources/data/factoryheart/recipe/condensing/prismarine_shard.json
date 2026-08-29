@@ -6,7 +6,7 @@
   "requiredTicks": 40000,
   "requiredFuelPerTick": 2,
   "result": {
-    "id": "minecraft:prismarine_shards",
+    "id": "minecraft:prismarine_shard",
     "count": 1
   }
 }

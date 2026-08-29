@@ -167,9 +167,7 @@ public class BlazerBlock extends BaseEntityBlock {
 
         level.addParticle(ParticleTypes.FLAME, xPos + xOffsets, yPos + yOffset, zPos + zOffset, 0.0, 0.0, 0.0);
 
-        FHModClient.debugMessageToAll("Got all particel data together");
         if(level.getBlockEntity(pos) instanceof BlazerBlockEntity factoryBalzerBlockEntity && !factoryBalzerBlockEntity.itemHandler.getStackInSlot(1).isEmpty()) {
-            FHModClient.debugMessageToAll("Display that data");
             level.addParticle(new ItemParticleOption(ParticleTypes.ITEM, factoryBalzerBlockEntity.itemHandler.getStackInSlot(1)),
                     xPos + xOffsets, yPos + yOffset, zPos + zOffset, 0.0, 0.0, 0.0);
         }
@@ -206,22 +204,20 @@ public class BlazerBlock extends BaseEntityBlock {
     @Override
     public void onPlace(BlockState state, Level level, BlockPos pos, BlockState oldState, boolean movedByPiston) {
         if (level.isClientSide()) return;
-
-        if (oldState.is(state.getBlock())) {
-            return;
-        }
+        if (oldState.is(state.getBlock())) { return; }
 
         HeartBeating.TryAddBlock(level, pos, false);
+
+        // Get tier of netw.
+        BlockEntity blockEntity = level.getBlockEntity(pos);
+        if (blockEntity instanceof BlazerBlockEntity blockEnt) {
+            blockEnt.getTierAfterPlacement(level, pos);
+        }
     }
 
     private void checkDeregister(BlockState state, Level level, BlockPos pos, BlockState newState) {
-
         if (level.isClientSide()) return;
-
-        if (state.is(newState.getBlock())) {
-            // Only state change, no "actual" removal
-            return;
-        }
+        if (state.is(newState.getBlock())) { return; }
 
         HeartBeating.DeregisterBlock(level, pos);
     }

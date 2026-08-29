@@ -1,10 +1,10 @@
 {
   "type": "factoryheart:wrapping",
   "centerpiece": {
-    "item": "minecraft:charcoal_block"
+    "item": "minecraft:coal_block"
   },
   "wrappings": {
-    "item": "minecraft:kelp_block"
+    "item": "minecraft:dried_kelp_block"
   },
   "centerpieceCount": 8,
   "wrappingsCount": 4,

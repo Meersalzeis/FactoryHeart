@@ -1,4 +1,4 @@
-// 1.21.1	2026-08-17T14:22:56.626089524	Recipes
+// 1.21.1	2026-08-29T12:26:18.501839832	Recipes
 79a6a88c48010fc6eeb69ea3ef0f6f0cf1aa40a3 data/factoryheart/advancement/recipes/misc/abzero_matter.json
 472d4c1fed678442f2f5a357a634d4d31a8ebed9 data/factoryheart/advancement/recipes/misc/activated_blazear_rod.json
 4b451d6874071e51b5ba2f99376582056fb2ff43 data/factoryheart/advancement/recipes/misc/blazear_pellet.json
@@ -23,6 +23,11 @@ f7213af2bf30502fc6d08634301d663e6caffcc6 data/factoryheart/advancement/recipes/m
 ea99bc7b6deb4353dca0ac015c3180e969b9a3ed data/factoryheart/advancement/recipes/misc/metal_sheet.json
 36bde3bc11810270b971f2864ae8b35f24586dff data/factoryheart/advancement/recipes/misc/plunger.json
 3fd3cfb56477d92671aa763036d3bbf1d02fc5b8 data/factoryheart/advancement/recipes/misc/raw_blaze_candy.json
+2066d08d540f47bb5741b5f188b9f2c87849799d data/factoryheart/advancement/recipes/misc/smart_heart_untested.json
+13fd1f961eb68364b0c3e82c30fa09b083c44ef8 data/factoryheart/advancement/recipes/misc/smart_part.json
+108f148e125bf9fb8814743d2b3d62e7ff89869c data/factoryheart/advancement/recipes/misc/smart_part_untested.json
+aebfcaf0224f5e55ff910b30af01b7c01ff5a6ca data/factoryheart/advancement/recipes/misc/smart_shard.json
+278d0b0c5d7ea21054ea1b30c82fbc172e71a1f5 data/factoryheart/advancement/recipes/misc/smart_shard_untested.json
 0a18fdc689bf0bff4bbdfe9bbed5911e177be2a6 data/factoryheart/advancement/recipes/misc/soda_powder.json
 68e8d7ba141dac7374fbd71cf8ca55fd217ea340 data/factoryheart/advancement/recipes/misc/tester.json
 c52b962e8f2fa9e42c09901cbe374b30efafe513 data/factoryheart/advancement/recipes/misc/wrapper.json
@@ -50,6 +55,11 @@ fb4c335ca3aafaf7f9c6b37ea846c18f0e39da08 data/factoryheart/recipe/metal_disc.jso
 04bef4f49e04f2492b1fc9c058dc05ae86231164 data/factoryheart/recipe/metal_sheet.json
 b6f48f10062d83007d927d7c8c08b92ffd7c0dce data/factoryheart/recipe/plunger.json
 708d7e39c9a88db3d5343794d5c06b25eb9a7964 data/factoryheart/recipe/raw_blaze_candy.json
+66bc96d95979b7575d118462250248a5e1074d1d data/factoryheart/recipe/smart_heart_untested.json
+62d204588228db02c3aeb8916e452e6ffd77e423 data/factoryheart/recipe/smart_part.json
+ac8429a042a9eeba5fbeff5c47cea0f49e14c425 data/factoryheart/recipe/smart_part_untested.json
+80cbad209165adb3dc09f344438c56aa002b1e12 data/factoryheart/recipe/smart_shard.json
+d930abd9b9fe12c2f9a3cc3b77d9a45c320a2f0f data/factoryheart/recipe/smart_shard_untested.json
 f7d28ac1d1fc251b90e457069fce57547dca70d2 data/factoryheart/recipe/soda_powder.json
 6c59c9fc95dd80a7dcf6d7cf94d92cbe5d392170 data/factoryheart/recipe/tester.json
 5bf0e20808a79eb1ead9dcc09e07d4f127ad4b37 data/factoryheart/recipe/wrapper.json

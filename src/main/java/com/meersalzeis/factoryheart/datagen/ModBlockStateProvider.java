@@ -1,9 +1,5 @@
 package com.meersalzeis.factoryheart.datagen;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Collections;
-
 import com.meersalzeis.factoryheart.FHModMain;
 import com.meersalzeis.factoryheart.block.ModBlocks;
 import com.meersalzeis.factoryheart.block.hearting.FactoryHeartBlock;
@@ -12,13 +8,10 @@ import com.meersalzeis.factoryheart.block.hearting.FactoryVeinBlock;
 
 import net.minecraft.core.Direction;
 import net.minecraft.data.PackOutput;
-import net.minecraft.data.models.BlockModelGenerators;
-import net.minecraft.data.models.ItemModelGenerators;
-import net.minecraft.data.models.blockstates.MultiPartGenerator;
-import net.minecraft.data.models.blockstates.VariantProperties;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.neoforged.neoforge.client.model.generators.BlockStateProvider;
 import net.neoforged.neoforge.client.model.generators.ConfiguredModel;
 import net.neoforged.neoforge.client.model.generators.ModelFile;
@@ -174,7 +167,6 @@ public class ModBlockStateProvider extends BlockStateProvider {
         });
 
         // Item Model for Block in Inventories
-        //blockItem(ModBlocks.FACTORY_HEART);
         itemModels().withExistingParent(
             name,
             modelLocation
@@ -194,44 +186,86 @@ public class ModBlockStateProvider extends BlockStateProvider {
     }
 
     private void vein() {
-        String name = "factory_vein";
-        Block block = ModBlocks.FACTORY_VEIN.get();
+        Block veinBlock = ModBlocks.FACTORY_VEIN.get();
+        ResourceLocation coreModLoc = modLoc("block/vein_core");
 
-        ModelFile core = models().getExistingFile(modLoc("block/vein_core"));
+        ModelFile core = models().getExistingFile(coreModLoc);
         ModelFile arm = models().getExistingFile(modLoc("block/vein_arm"));
+        MultiPartBlockStateBuilder builder = getMultipartBuilder(veinBlock);
 
-        getVariantBuilder(block)
-            .forAllStates(state -> {
-                List<ConfiguredModel> models = new ArrayList<>();
-                
-                Collections.addAll(models,ConfiguredModel.builder().modelFile(core).build());
+        // Always render the core
+        builder.part()
+                .modelFile(core)
+                .addModel();
 
-                if (state.getValue(FactoryVeinBlock.NORTH)) {
-                    Collections.addAll(models,ConfiguredModel.builder().modelFile(arm).rotationY(0).build());
-                }
-                if (state.getValue(FactoryVeinBlock.EAST)) {
-                    Collections.addAll(models,ConfiguredModel.builder().modelFile(arm).rotationY(90).build());
-                }
-                if (state.getValue(FactoryVeinBlock.SOUTH)) {
-                    Collections.addAll(models,ConfiguredModel.builder().modelFile(arm).rotationY(180).build());
-                }
-                if (state.getValue(FactoryVeinBlock.WEST)) {
-                    Collections.addAll(models,ConfiguredModel.builder().modelFile(arm).rotationY(270).build());
-                }
-                if (state.getValue(FactoryVeinBlock.DOWN)) {
-                    Collections.addAll(models,ConfiguredModel.builder().modelFile(arm).rotationX(90).build());
-                }
-                if (state.getValue(FactoryVeinBlock.UP)) {
-                    Collections.addAll(models,ConfiguredModel.builder().modelFile(arm).rotationX(270).build());
-                }
-
-                return models.toArray(new ConfiguredModel[0]);
-        });
+        addArm(builder, FactoryVeinBlock.NORTH, arm, 0, 0);
+        addArm(builder, FactoryVeinBlock.EAST,  arm, 0, 90);
+        addArm(builder, FactoryVeinBlock.SOUTH, arm, 0, 180);
+        addArm(builder, FactoryVeinBlock.WEST,  arm, 0, 270);
+        addArm(builder, FactoryVeinBlock.UP,    arm, 270, 0);
+        addArm(builder, FactoryVeinBlock.DOWN,  arm, 90, 0);
 
         // Item Model for Block in Inventories
         itemModels().withExistingParent(
-            name,
-            modLoc("block/vein_core")
+            "factory_vein",
+            coreModLoc
         );
     }
+
+    private void addArm(
+            MultiPartBlockStateBuilder builder,
+            BooleanProperty property,
+            ModelFile model,
+            int rotationX,
+            int rotationY
+    ) {
+        builder.part()
+                .modelFile(model)
+                .rotationX(rotationX)
+                .rotationY(rotationY)
+                .addModel()
+                .condition(property, true);
+    }
+
+    // private void vein() {
+    //     String name = "factory_vein";
+    //     Block block = ModBlocks.FACTORY_VEIN.get();
+
+    //     ModelFile core = models().getExistingFile(modLoc("block/vein_core"));
+    //     ModelFile arm = models().getExistingFile(modLoc("block/vein_arm"));
+
+    //     getVariantBuilder(block)
+    //         .forAllStates(state -> {
+    //             List<ConfiguredModel> models = new ArrayList<>();
+                
+    //             Collections.addAll(models,ConfiguredModel.builder().modelFile(core).build());
+
+    //             if (state.getValue(FactoryVeinBlock.NORTH)) {
+    //                 Collections.addAll(models,ConfiguredModel.builder().modelFile(arm).rotationY(0).build());
+    //             }
+    //             if (state.getValue(FactoryVeinBlock.EAST)) {
+    //                 Collections.addAll(models,ConfiguredModel.builder().modelFile(arm).rotationY(90).build());
+    //             }
+    //             if (state.getValue(FactoryVeinBlock.SOUTH)) {
+    //                 Collections.addAll(models,ConfiguredModel.builder().modelFile(arm).rotationY(180).build());
+    //             }
+    //             if (state.getValue(FactoryVeinBlock.WEST)) {
+    //                 Collections.addAll(models,ConfiguredModel.builder().modelFile(arm).rotationY(270).build());
+    //             }
+    //             if (state.getValue(FactoryVeinBlock.DOWN)) {
+    //                 Collections.addAll(models,ConfiguredModel.builder().modelFile(arm).rotationX(90).build());
+    //             }
+    //             if (state.getValue(FactoryVeinBlock.UP)) {
+    //                 Collections.addAll(models,ConfiguredModel.builder().modelFile(arm).rotationX(270).build());
+    //             }
+
+    //             return models.toArray(new ConfiguredModel[0]);
+    //     });
+
+    //     // Item Model for Block in Inventories
+    //     itemModels().withExistingParent(
+    //         name,
+    //         modLoc("block/vein_core")
+    //     );
+    // }
 }

@@ -56,7 +56,7 @@ public class ExtractorBlock extends BaseEntityBlock {
     @Override
     public BlockState getStateForPlacement(BlockPlaceContext pContext) {
         return defaultBlockState()
-        .setValue(FACING, pContext.getNearestLookingDirection().getOpposite())
+        .setValue(FACING, pContext.getHorizontalDirection().getOpposite())
         .setValue(LIT, false);
     }
 
@@ -148,6 +148,12 @@ public class ExtractorBlock extends BaseEntityBlock {
         }
 
         HeartBeating.TryAddBlock(level, pos, false);
+
+        // Get tier of netw.
+        BlockEntity blockEntity = level.getBlockEntity(pos);
+        if (blockEntity instanceof ExtractorBlockEntity blockEnt) {
+            blockEnt.getTierAfterPlacement(level, pos);
+        }
     }
 
     private void checkDeregister(BlockState state, Level level, BlockPos pos, BlockState newState) {
