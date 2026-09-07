@@ -7,6 +7,10 @@
   "sounds.factoryheart.heart_beat":"Factory Heart Wirr",
   "sounds.factoryheart.condenser_wirr":"Condenser Wirr",
   "sounds.factoryheart.extractor_wirr":"Extractor Wirr",
+  "sounds.factoryheart.blazer_crackling":"Blazer crackling",
+  "sounds.factoryheart.test_faulty":"Test faulty beep",
+  "sounds.factoryheart.test_success":"Test success beep",
+  "sounds.factoryheart.wrapper_winding":"Wrapper Winding",
   
   "block.factoryheart.blazer":"Blazer",
   "blockentity.factoryheart.blazer": "Blazer",

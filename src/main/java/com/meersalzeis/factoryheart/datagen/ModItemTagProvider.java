@@ -25,5 +25,31 @@ public class ModItemTagProvider extends ItemTagsProvider {
         tag(ModTags.Items.HEART_ITEMS)
             .add(ModItems.SMART_HEART.get())
             .add(Items.HEART_OF_THE_SEA);
+        
+
+        tag(ModTags.Items.T1_FUEL_ITEMS)
+            .add(Items.COAL)
+            .add(Items.CHARCOAL)
+            .add(Items.DRIED_KELP_BLOCK);
+        
+        tag(ModTags.Items.T2_FUEL_ITEMS)
+            .add(ModItems.BLAZEAR_FUEL_ROD.get());
+        
+        tag(ModTags.Items.T3_FUEL_ITEMS)
+            .add(ModItems.BLAZE_CANDY.get());
+
+        tag(ModTags.Items.T4_FUEL_ITEMS)
+            .add(ModItems.INFERNO_MATTER.get());
+        
+        // Nothing in ModTags.Items.T1_COOL_ITEMS - it's only there for datapacks
+        
+        tag(ModTags.Items.T2_COOL_ITEMS)
+            .add(Items.SNOWBALL);
+        
+        tag(ModTags.Items.T3_COOL_ITEMS)
+            .add(ModItems.CONTAINED_DEEPCOOL_CRYSTAL.get());
+
+        tag(ModTags.Items.T4_COOL_ITEMS)
+            .add(ModItems.ABZERO_MATTER.get());
     }
 }

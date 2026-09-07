@@ -12,6 +12,7 @@ import mezz.jei.api.recipe.category.IRecipeCategory;
 
 import com.meersalzeis.factoryheart.FHModMain;
 import com.meersalzeis.factoryheart.block.ModBlocks;
+import com.meersalzeis.factoryheart.gui.renderer.DisplayHelper;
 import com.meersalzeis.factoryheart.recipe.TesterRecipe;
 
 import net.minecraft.client.Minecraft;
@@ -64,8 +65,11 @@ public class TesterRecipeCategory implements IRecipeCategory<TesterRecipe> {
 
     @Override
     public void draw(TesterRecipe recipe, IRecipeSlotsView recipeSlotsView, GuiGraphics graphics, double mouseX, double mouseY) {
-        Minecraft mc = Minecraft.getInstance();
+        int tier = recipe.requiredTier();
+        DisplayHelper.renderTierDisplay(graphics, tier, -40, -8);
+        DisplayHelper.renderTierTooltip(graphics, mouseX, mouseY, -40, -8, tier, false);
 
+        Minecraft mc = Minecraft.getInstance();
         String chance = (recipe.getSuccessChance()*100) + "%";
         graphics.drawString(
             mc.font,

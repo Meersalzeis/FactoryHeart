@@ -25,8 +25,6 @@ public class CondenserMenu  extends AbstractContainerMenu {
     public CondenserMenu(int pContainerId, Inventory inv, BlockEntity entity, ContainerData data) {
         super(ModMenuTypes.CONDENSER_MENU.get(), pContainerId);
         blockEntity = ((CondenserBlockEntity) entity);
-        // this.level = inv.player.level();
-        // this.data = data;
 
         addDataSlots(data);
     }

@@ -5,6 +5,7 @@ import com.meersalzeis.factoryheart.blockentity.ModBlockEntities;
 import com.meersalzeis.factoryheart.blockentity.crafting.CondenserBlockEntity;
 import com.meersalzeis.factoryheart.blockentity.crafting.ExtractorBlockEntity;
 import com.meersalzeis.factoryheart.hearts.HeartBeating;
+import com.meersalzeis.factoryheart.sound.ModSounds;
 import com.mojang.serialization.MapCodec;
 
 import net.minecraft.core.BlockPos;
@@ -106,8 +107,8 @@ public class ExtractorBlock extends BaseEntityBlock {
         double xPos = (double)pos.getX() + 0.5;
         double yPos = pos.getY();
         double zPos = (double)pos.getZ() + 0.5;
-        if (random.nextDouble() < 0.15) {
-            level.playLocalSound(xPos, yPos, zPos, SoundEvents.AMETHYST_BLOCK_CHIME, SoundSource.BLOCKS, 1.0f, 1.0f, false);
+        if (random.nextDouble() < 0.1) {
+            level.playLocalSound(xPos, yPos, zPos, ModSounds.EXTRACTOR_WIRR.get(), SoundSource.BLOCKS, 0.13f, 1.0f, false);
         }
     }
 

@@ -1,38 +1,28 @@
 package com.meersalzeis.factoryheart.blockentity.crafting;
 
+import com.meersalzeis.factoryheart.FHModClient;
 import com.meersalzeis.factoryheart.FHModMain;
 import com.meersalzeis.factoryheart.block.crafting.TesterBlock;
 import com.meersalzeis.factoryheart.blockentity.FHCraftStationEntity;
-import com.meersalzeis.factoryheart.blockentity.FactoryHeartBlockEntity;
 import com.meersalzeis.factoryheart.blockentity.ModBlockEntities;
 import com.meersalzeis.factoryheart.blockentity.SingleSlotFilteredHandler;
 import com.meersalzeis.factoryheart.recipe.TesterRecipe;
 import com.meersalzeis.factoryheart.recipe.TesterRecipeInput;
-import com.meersalzeis.factoryheart.recipe.BlazerRecipe;
+import com.meersalzeis.factoryheart.sound.ModSounds;
 import com.meersalzeis.factoryheart.recipe.ModRecipes;
 import com.meersalzeis.factoryheart.gui.menus.TesterMenu;
-import com.meersalzeis.factoryheart.hearts.HeartNetwork;
 
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.Direction;
-import net.minecraft.core.HolderLookup;
-import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.protocol.Packet;
-import net.minecraft.network.protocol.game.ClientGamePacketListener;
-import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
-import net.minecraft.world.Containers;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.MenuProvider;
-import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
-import net.minecraft.world.inventory.ContainerData;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.item.crafting.RecipeManager;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.neoforge.items.IItemHandler;
 import net.neoforged.neoforge.items.ItemStackHandler;
@@ -113,7 +103,7 @@ public class TesterBlockEntity extends FHCraftStationEntity implements MenuProvi
 
             if (hasCraftingFinished()) {
                 //setChanged(level, pPos, pState);
-                craftItem();
+                craftItem(pos);
                 resetProgress();
             }
 
@@ -126,7 +116,7 @@ public class TesterBlockEntity extends FHCraftStationEntity implements MenuProvi
         }
     }
 
-    private void craftItem() {
+    private void craftItem(BlockPos pos) {
         TesterRecipe recipe = getCurrentRecipe().get().value();
         float successChance = recipe.getSuccessChance();
 
@@ -135,8 +125,12 @@ public class TesterBlockEntity extends FHCraftStationEntity implements MenuProvi
         itemHandler.extractItem(INPUT_SLOT, 1, false);
         if (didAssemblySucceed) {
             insertIntoSlot(SUCCESS_SLOT, recipe.assembleSuccess());
+            level.playSound(null, pos, ModSounds.TEST_SUCCESS.get(), SoundSource.BLOCKS, 0.333f, 1.0f);
+            FHModClient.debugMessageToAll("played success sound");
         } else {
             insertIntoSlot(FAILED_SLOT, recipe.assembleFailed());
+            level.playSound(null, pos, ModSounds.TEST_FAULTY.get(), SoundSource.BLOCKS, 0.333f, 1.0f);
+            FHModClient.debugMessageToAll("played fail sound");
         }
     }
 

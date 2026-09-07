@@ -4,6 +4,7 @@ import com.meersalzeis.factoryheart.FHModClient;
 import com.meersalzeis.factoryheart.blockentity.ModBlockEntities;
 import com.meersalzeis.factoryheart.blockentity.crafting.BlazerBlockEntity;
 import com.meersalzeis.factoryheart.hearts.HeartBeating;
+import com.meersalzeis.factoryheart.sound.ModSounds;
 import com.mojang.serialization.MapCodec;
 
 import net.minecraft.core.BlockPos;
@@ -150,26 +151,25 @@ public class BlazerBlock extends BaseEntityBlock {
             return;
         }
 
-        double xPos = (double)pos.getX() + 0.5;
-        double yPos = pos.getY();
-        double zPos = (double)pos.getZ() + 0.5;
+        double xPos = pos.getX() + 0.5;
+        double yPos = pos.getY() + 0.5;
+        double zPos = pos.getZ() + 0.5;
         if (random.nextDouble() < 0.15) {
-            level.playLocalSound(xPos, yPos, zPos, SoundEvents.AMETHYST_BLOCK_CHIME, SoundSource.BLOCKS, 1.0f, 1.0f, false);
+            level.playLocalSound(xPos, yPos, zPos, ModSounds.BLAZER_CRACKLING.get(), SoundSource.BLOCKS, 0.333f, 1.0f, false);
         }
 
-        Direction direction = state.getValue(FACING);
-        Direction.Axis axis = direction.getAxis();
+        //Direction direction = state.getValue(FACING);
+        //Direction.Axis axis = direction.getAxis();
 
-        double defaultOffset = random.nextDouble() * 0.6 - 0.3;
-        double xOffsets = axis == Direction.Axis.X ? (double)direction.getStepX() * 0.5 : defaultOffset;
-        double yOffset = axis == Direction.Axis.Y ? (double)direction.getStepY() * 0.5 : defaultOffset;
-        double zOffset = axis == Direction.Axis.Z ? (double)direction.getStepZ() * 0.5 : defaultOffset;
+        double xOffset = random.nextDouble() * 0.6 - 0.3;
+        double yOffset = random.nextDouble() * 0.6 - 0.3;
+        double zOffset = random.nextDouble() * 0.6 - 0.3;
 
-        level.addParticle(ParticleTypes.FLAME, xPos + xOffsets, yPos + yOffset, zPos + zOffset, 0.0, 0.0, 0.0);
+        level.addParticle(ParticleTypes.FLAME, xPos + xOffset, yPos + yOffset, zPos + zOffset, 0.0, 0.0, 0.0);
 
         if(level.getBlockEntity(pos) instanceof BlazerBlockEntity factoryBalzerBlockEntity && !factoryBalzerBlockEntity.itemHandler.getStackInSlot(1).isEmpty()) {
             level.addParticle(new ItemParticleOption(ParticleTypes.ITEM, factoryBalzerBlockEntity.itemHandler.getStackInSlot(1)),
-                    xPos + xOffsets, yPos + yOffset, zPos + zOffset, 0.0, 0.0, 0.0);
+                    xPos + xOffset, yPos + yOffset, zPos + zOffset, 0.0, 0.0, 0.0);
         }
     }
 

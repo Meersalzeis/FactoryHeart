@@ -1,6 +1,7 @@
 package com.meersalzeis.factoryheart.blockentity.crafting;
 
-import com.meersalzeis.factoryheart.FHModClient;
+import java.util.Optional;
+
 import com.meersalzeis.factoryheart.block.crafting.CondenserBlock;
 import com.meersalzeis.factoryheart.blockentity.FHCraftStationEntity;
 import com.meersalzeis.factoryheart.blockentity.ModBlockEntities;
@@ -18,8 +19,6 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.neoforge.items.ItemStackHandler;
-
-import java.util.Optional;
 
 public class CondenserBlockEntity extends FHCraftStationEntity<CondenserBlockEntity> {
 

@@ -13,6 +13,8 @@ import com.meersalzeis.factoryheart.compat.JEI.Categories.CondenserRecipeCategor
 import com.meersalzeis.factoryheart.compat.JEI.Categories.ExtractorRecipeCategory;
 import com.meersalzeis.factoryheart.compat.JEI.Categories.TesterRecipeCategory;
 import com.meersalzeis.factoryheart.compat.JEI.Categories.WrapperRecipeCategory;
+import com.meersalzeis.factoryheart.compat.JEI.Fuel.FuelInfoRecipe;
+import com.meersalzeis.factoryheart.compat.JEI.Fuel.FuelInfoRecipeCategory;
 import com.meersalzeis.factoryheart.compat.JEI.recipeDisplays.CondenserRecipeScreen;
 import com.meersalzeis.factoryheart.recipe.BlazerRecipe;
 import com.meersalzeis.factoryheart.recipe.CondenserRecipe;
@@ -42,11 +44,15 @@ public class JEIPluginRegistering implements IModPlugin {
 
     @Override
     public void registerCategories(IRecipeCategoryRegistration registration) {
-        registration.addRecipeCategories(new BlazerRecipeCategory(registration.getJeiHelpers().getGuiHelper()));
-        registration.addRecipeCategories(new WrapperRecipeCategory(registration.getJeiHelpers().getGuiHelper()));
-        registration.addRecipeCategories(new ExtractorRecipeCategory(registration.getJeiHelpers().getGuiHelper()));
-        registration.addRecipeCategories(new TesterRecipeCategory(registration.getJeiHelpers().getGuiHelper()));
-        registration.addRecipeCategories(new CondenserRecipeCategory(registration.getJeiHelpers().getGuiHelper()));
+        var guiHelper = registration.getJeiHelpers().getGuiHelper();
+
+        registration.addRecipeCategories(new BlazerRecipeCategory(guiHelper));
+        registration.addRecipeCategories(new WrapperRecipeCategory(guiHelper));
+        registration.addRecipeCategories(new ExtractorRecipeCategory(guiHelper));
+        registration.addRecipeCategories(new TesterRecipeCategory(guiHelper));
+        registration.addRecipeCategories(new CondenserRecipeCategory(guiHelper));
+        
+        registration.addRecipeCategories(new FuelInfoRecipeCategory(guiHelper));
     }
 
     @Override
@@ -67,6 +73,9 @@ public class JEIPluginRegistering implements IModPlugin {
 
         List<CondenserRecipe> condenserRecipes = recipeManager.getAllRecipesFor(ModRecipes.CONDENSER_TYPE.get()).stream().map(RecipeHolder::value).toList();
         registration.addRecipes(CondenserRecipeCategory.CONDENSER_RECIPE_TYPE, condenserRecipes);
+
+        List<FuelInfoRecipe> fuelInfoRecipes = FuelInfoRecipeCategory.getAllFuelInfoRecipes();
+        registration.addRecipes(FuelInfoRecipeCategory.FUELINFO_RECIPE_TYPE, fuelInfoRecipes );
     }
 
     @Override
@@ -96,6 +105,11 @@ public class JEIPluginRegistering implements IModPlugin {
             CondenserRecipeScreen.class,
              70, 30, 25, 20,
             CondenserRecipeCategory.CONDENSER_RECIPE_TYPE);
+
+        // registration.addRecipeClickArea(
+        //     FuelInfoRecipeScreen.class,
+        //      70, 30, 25, 20,
+        //     FuelInfoRecipeCategory.FUELINFO_RECIPE_TYPE);
     }
 
     @Override
@@ -104,6 +118,9 @@ public class JEIPluginRegistering implements IModPlugin {
         registration.addRecipeCatalyst(WrapperRecipeCategory.getRecipeCatalyst(), WrapperRecipeCategory.WRAPPER_RECIPE_TYPE);
         registration.addRecipeCatalyst(ExtractorRecipeCategory.getRecipeCatalyst(), ExtractorRecipeCategory.EXTRACTOR_RECIPE_TYPE);
         registration.addRecipeCatalyst(TesterRecipeCategory.getRecipeCatalyst(), TesterRecipeCategory.TESTER_RECIPE_TYPE);
+
         registration.addRecipeCatalyst(CondenserRecipeCategory.getRecipeCatalyst(), CondenserRecipeCategory.CONDENSER_RECIPE_TYPE);
+
+        registration.addRecipeCatalyst(FuelInfoRecipeCategory.getRecipeCatalyst(), FuelInfoRecipeCategory.FUELINFO_RECIPE_TYPE);
     }
 }

@@ -1,2 +1,9 @@
-// 1.21.1	2026-08-17T10:13:51.373164798	Tags for minecraft:item mod id factoryheart
+// 1.21.1	2026-09-04T15:55:53.566484495	Tags for minecraft:item mod id factoryheart
 ef5c2ff482dba622e41fbcb7b11e69bd8a682d54 data/factoryheart/tags/item/heart_items.json
+13b0e8e70929444c11739f13213cb249f547d7a7 data/factoryheart/tags/item/t1_fuel_items.json
+ea2b7aa418c563ab8f02c06883d3c45e0ec7435c data/factoryheart/tags/item/t2_cool_items.json
+ee25d7626cc826ff3ac377c241d3322fc8973c50 data/factoryheart/tags/item/t2_fuel_items.json
+b992d3f1851727774be26ba438115e22c31c7c8b data/factoryheart/tags/item/t3_cool_items.json
+cdac4d9629a0466fff888296e3f2a6338e40d843 data/factoryheart/tags/item/t3_fuel_items.json
+7923cef623eb0735d98b0a4257a1dbff6cbc19d4 data/factoryheart/tags/item/t4_cool_items.json
+2319dd814a9639731703fa1aa0423137f900302f data/factoryheart/tags/item/t4_fuel_items.json

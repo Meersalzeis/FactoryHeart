@@ -36,5 +36,10 @@ public class ModRecipeBookCategories {
                 ModRecipes.CONDENSER_TYPE.get(),
                 recipeHolder -> RecipeBookCategories.UNKNOWN
         );
+
+        event.registerRecipeCategoryFinder(
+                ModRecipes.FUELINFO_TYPE.get(),
+                recipeHolder -> RecipeBookCategories.UNKNOWN
+        );
     }
 }

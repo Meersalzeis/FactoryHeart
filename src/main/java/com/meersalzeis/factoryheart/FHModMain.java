@@ -116,9 +116,6 @@ public class FHModMain {
             event.register(ModMenuTypes.EXTRACTOR_MENU.get(), ExtractorScreen::new);
             event.register(ModMenuTypes.TESTER_MENU.get(), TesterScreen::new);
             event.register(ModMenuTypes.CONDENSER_MENU.get(), CondenserRecipeScreen::new);
-
-            // event.register(ModMenuTypes.COAL_GENERATOR_MENU.get(), CoalGeneratorScreen::new);
-            // event.register(ModMenuTypes.TANK_MENU.get(), TankScreen::new);
         }
     }
 }

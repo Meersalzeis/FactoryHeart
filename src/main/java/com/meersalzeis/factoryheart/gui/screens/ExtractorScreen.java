@@ -1,5 +1,6 @@
 package com.meersalzeis.factoryheart.gui.screens;
 
+import com.meersalzeis.factoryheart.FHModClient;
 import com.meersalzeis.factoryheart.FHModMain;
 import com.meersalzeis.factoryheart.gui.menus.ExtractorMenu;
 import com.meersalzeis.factoryheart.gui.renderer.FHScreens;
@@ -41,9 +42,10 @@ public class ExtractorScreen extends AbstractContainerScreen<ExtractorMenu> {
         DisplayHelper.renderTierDisplay(guiGraphics, tier, x, y);
         DisplayHelper.renderTierTooltip(guiGraphics, mouseX, mouseY, x, y, tier, true);
 
-        if (menu.doesConsumeInput()) return;
-        DisplayHelper.renderNoInputConsumedTooltip(guiGraphics, mouseX, mouseY, x+45, y+16);
-        DisplayHelper.renderNoInputConsumedDisplay(guiGraphics, x+45, y+16);
+        if (menu.isRecipeInfinite()) {
+            DisplayHelper.renderNoInputConsumedTooltip(guiGraphics, mouseX, mouseY, x+45, y+16);
+            DisplayHelper.renderNoInputConsumedDisplay(guiGraphics, x+45, y+16);
+        }
     }
 
     private void renderProgressArrow(GuiGraphics guiGraphics, int x, int y) {

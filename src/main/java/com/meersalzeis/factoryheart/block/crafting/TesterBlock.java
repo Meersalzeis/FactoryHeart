@@ -99,35 +99,6 @@ public class TesterBlock extends BaseEntityBlock {
         return RenderShape.MODEL;
     }
 
-    // @Override
-    // public void animateTick(BlockState state, Level level, BlockPos pos, RandomSource random) {
-    //     if (!state.getValue(LIT)) {
-    //         return;
-    //     }
-
-    //     double xPos = (double)pos.getX() + 0.5;
-    //     double yPos = pos.getY();
-    //     double zPos = (double)pos.getZ() + 0.5;
-    //     if (random.nextDouble() < 0.15) {
-    //         level.playLocalSound(xPos, yPos, zPos, SoundEvents.AMETHYST_BLOCK_CHIME, SoundSource.BLOCKS, 1.0f, 1.0f, false);
-    //     }
-
-    //     Direction direction = Direction.UP; //state.getValue(FACING);
-    //     Direction.Axis axis = direction.getAxis();
-
-    //     double defaultOffset = random.nextDouble() * 0.6 - 0.3;
-    //     double xOffsets = axis == Direction.Axis.X ? (double)direction.getStepX() * 0.52 : defaultOffset;
-    //     double yOffset = random.nextDouble() * 6.0 / 8.0;
-    //     double zOffset = axis == Direction.Axis.Z ? (double)direction.getStepZ() * 0.52 : defaultOffset;
-
-    //     level.addParticle(ParticleTypes.SMOKE, xPos + xOffsets, yPos + yOffset, zPos + zOffset, 0.0, 0.0, 0.0);
-
-    //     if(level.getBlockEntity(pos) instanceof TesterBlockEntity factoryBalzerBlockEntity && !factoryBalzerBlockEntity.itemHandler.getStackInSlot(1).isEmpty()) {
-    //         level.addParticle(new ItemParticleOption(ParticleTypes.ITEM, factoryBalzerBlockEntity.itemHandler.getStackInSlot(1)),
-    //                 xPos + xOffsets, yPos + yOffset, zPos + zOffset, 0.0, 0.0, 0.0);
-    //     }
-    // }
-
     @Override
     protected ItemInteractionResult useItemOn(ItemStack pStack, BlockState pState, Level pLevel, BlockPos pPos,
                                               Player pPlayer, InteractionHand pHand, BlockHitResult pHitResult) {

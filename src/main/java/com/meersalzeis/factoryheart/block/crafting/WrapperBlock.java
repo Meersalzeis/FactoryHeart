@@ -6,6 +6,7 @@ import com.meersalzeis.factoryheart.blockentity.crafting.CondenserBlockEntity;
 import com.meersalzeis.factoryheart.blockentity.crafting.ExtractorBlockEntity;
 import com.meersalzeis.factoryheart.blockentity.crafting.WrapperBlockEntity;
 import com.meersalzeis.factoryheart.hearts.HeartBeating;
+import com.meersalzeis.factoryheart.sound.ModSounds;
 import com.mojang.serialization.MapCodec;
 
 import net.minecraft.core.BlockPos;
@@ -107,8 +108,10 @@ public class WrapperBlock extends BaseEntityBlock {
         double xPos = (double)pos.getX() + 0.5;
         double yPos = pos.getY();
         double zPos = (double)pos.getZ() + 0.5;
-        if (random.nextDouble() < 0.15) {
-            level.playLocalSound(xPos, yPos, zPos, SoundEvents.AMETHYST_BLOCK_CHIME, SoundSource.BLOCKS, 1.0f, 1.0f, false);
+
+        long gameTime = level.getGameTime();
+        if (gameTime % 20 == 0 && random.nextDouble() < 0.2) {
+            level.playLocalSound(xPos, yPos, zPos, ModSounds.WRAPPER_WINDING.get(), SoundSource.BLOCKS, 0.333f, 1.0f, false);
         }
     }
 

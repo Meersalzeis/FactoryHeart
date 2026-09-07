@@ -1,11 +1,26 @@
 
-Heart beat sound effect:
-https://pixabay.com/sound-effects/film-special-effects-heartbeat-02-225103/
-under Pixabay's content license, 17.7.26
+Sounds:
+From Pixabay (under Pixabay's content license, 29.8.26):
 
-Wirr sound effects
+heart_beat: https://pixabay.com/sound-effects/film-special-effects-heartbeat-02-225103/
+from BRVHRTZ (https://pixabay.com/users/brvhrtz-33128829/)
+
+test_faulty: https://pixabay.com/sound-effects/film-special-effects-wrong-answer-beep-149895/
+from universfield (https://pixabay.com/users/universfield-28281460/)
+
+test_success: https://pixabay.com/sound-effects/technology-beep-beep-6151/
+from freesound-community (https://pixabay.com/users/freesound_community-46691455/)
+
+blazer crackling: https://pixabay.com/sound-effects/film-special-effects-fire-sound-effects-224089/
+from alice_soundz (https://pixabay.com/users/alice_soundz-44907632/)
+
+wrapper_winding: https://pixabay.com/sound-effects/film-special-effects-duct-tape-198773/
+from voice-bosch (https://pixabay.com/users/voicebosch-30143949/)
+
+sounds: condenser_wirr & extractor_wirr :
 https://kenney.nl/assets/sci-fi-sounds
 under Creative-Commons-CC0
+
 
 Player Inventory Handling in Menus:
 https://github.com/diesieben07/SevenCommons

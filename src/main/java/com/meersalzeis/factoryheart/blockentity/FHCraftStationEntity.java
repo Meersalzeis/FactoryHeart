@@ -22,13 +22,17 @@ import com.meersalzeis.factoryheart.hearts.HeartBeating;
 
 public abstract class FHCraftStationEntity<T extends BlockEntity> extends BlockEntity {
 
-    public final ContainerData data;
+    public ContainerData data;
     protected int progress = 0;
     protected int maxProgress = 100;
     protected int currentTier;
 
     public FHCraftStationEntity(BlockEntityType<T> bEntityType, BlockPos pPos, BlockState pBlockState) {
         super(bEntityType, pPos, pBlockState);
+        initData();
+    }
+
+    protected void initData() {
         this.data = new ContainerData() {
             @Override
             public int get(int pIndex) {

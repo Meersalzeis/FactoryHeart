@@ -8,13 +8,37 @@
   "condenser_wirr": {
     "subtitle": "sounds.factoryheart.condenser_wirr",
     "sounds": [
-      "factoryheart:heart_wirr"
+      "factoryheart:condenser_wirr"
     ]
   },
   "heart_beat": {
     "subtitle": "sounds.factoryheart.heart_beat",
     "sounds": [
       "factoryheart:heart_beat"
+    ]
+  },
+  "blazer_crackling": {
+    "subtitle": "sounds.factoryheart.blazer_crackling",
+    "sounds": [
+      "factoryheart:blazer_crackling"
+    ]
+  },
+  "test_faulty": {
+    "subtitle": "sounds.factoryheart.test_faulty",
+    "sounds": [
+      "factoryheart:test_faulty"
+    ]
+  },
+  "test_success": {
+    "subtitle": "sounds.factoryheart.test_success",
+    "sounds": [
+      "factoryheart:test_success"
+    ]
+  },
+  "wrapper_winding": {
+    "subtitle": "sounds.factoryheart.wrapper_winding",
+    "sounds": [
+      "factoryheart:wrapper_winding"
     ]
   }
 }

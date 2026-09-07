@@ -21,14 +21,35 @@ public class BlazerRenderer implements BlockEntityRenderer<BlazerBlockEntity> {
     public BlazerRenderer(BlockEntityRendererProvider.Context context) {}
 
     @Override
-    public void render(BlazerBlockEntity blockEntity, float partialTick, PoseStack poseStack,
-                       MultiBufferSource bufferSource, int packedLight, int packedOverlay) {
+    public void render(BlazerBlockEntity blockEntity, float partialTick, PoseStack poseStack, MultiBufferSource bufferSource, int packedLight, int packedOverlay) {
+
+        renderInput(poseStack, packedOverlay, blockEntity, bufferSource);
 
         float animProg = blockEntity.getRodAnimationProgress();
         renderBlazeRod(poseStack, blockEntity, animProg, bufferSource);
         renderBlazeRod(poseStack, blockEntity, (float)(animProg+Math.PI*0.5), bufferSource);
         renderBlazeRod(poseStack, blockEntity, (float)(animProg+Math.PI), bufferSource);
         renderBlazeRod(poseStack, blockEntity, (float)(animProg+Math.PI*1.5), bufferSource);
+    }
+
+    private static void renderInput(PoseStack poseStack, int rotation, BlazerBlockEntity blockEntity, MultiBufferSource bufferSource) {
+        ItemStack inputStack = blockEntity.itemHandler.getStackInSlot(BlazerBlockEntity.INPUT_SLOT);
+        
+        poseStack.pushPose();
+        poseStack.translate(0.5f, 0.5f, 0.5f);
+        poseStack.scale(0.5f, 0.5f, 0.5f);
+
+        // Turn input orthogonally to plunger, in cardinal directions
+        poseStack.mulPose(Axis.YP.rotationDegrees(rotation+90));
+        
+
+        itemRenderer.renderStatic(
+            inputStack, ItemDisplayContext.FIXED, BlockEntRenderUtil.getLightLevel(blockEntity.getLevel(),
+            blockEntity.getBlockPos()), OverlayTexture.NO_OVERLAY, poseStack,
+            bufferSource, blockEntity.getLevel(), 1
+        );
+        
+        poseStack.popPose();
     }
 
     private void renderBlazeRod(PoseStack poseStack, BlazerBlockEntity blockEntity, float animProg, MultiBufferSource bufferSource) {

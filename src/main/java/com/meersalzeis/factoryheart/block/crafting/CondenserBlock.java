@@ -143,7 +143,7 @@ public class CondenserBlock extends BaseEntityBlock {
         double xPos = (double)pos.getX() + 0.5;
         double yPos = pos.getY();
         double zPos = (double)pos.getZ() + 0.5;
-        if (random.nextDouble() < 0.15) {
+        if (random.nextDouble() < 0.2) {
             level.playLocalSound(xPos, yPos, zPos, ModSounds.CONDENSER_WIRR.get(), SoundSource.BLOCKS, 0.333f, 1.0f, false);
         }
         Direction direction = state.getValue(FACING);

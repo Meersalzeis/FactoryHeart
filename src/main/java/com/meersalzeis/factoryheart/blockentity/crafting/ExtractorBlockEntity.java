@@ -1,5 +1,6 @@
 package com.meersalzeis.factoryheart.blockentity.crafting;
 
+import com.meersalzeis.factoryheart.FHModClient;
 import com.meersalzeis.factoryheart.block.crafting.CondenserBlock;
 import com.meersalzeis.factoryheart.block.crafting.ExtractorBlock;
 import com.meersalzeis.factoryheart.blockentity.FHCraftStationEntity;
@@ -11,11 +12,14 @@ import com.meersalzeis.factoryheart.recipe.ModRecipes;
 import com.meersalzeis.factoryheart.gui.menus.ExtractorMenu;
 
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.HolderLookup;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.MenuProvider;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraft.world.inventory.ContainerData;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.item.crafting.RecipeManager;
@@ -37,6 +41,7 @@ public class ExtractorBlockEntity extends FHCraftStationEntity<ExtractorBlockEnt
         protected void onContentsChanged(int slot) {
             setChanged();
             if(!level.isClientSide()) {
+                // checkInfiniteRecipe();
                 level.sendBlockUpdated(getBlockPos(), getBlockState(), getBlockState(), 3);
             }
         }
@@ -50,6 +55,8 @@ public class ExtractorBlockEntity extends FHCraftStationEntity<ExtractorBlockEnt
 
     private static List<ItemStack> viableInputs = null;
 
+    private int infiniteRecipe = 0;
+
     public static final int INPUT_SLOT = 0;
     public static final int OUTPUT_SLOT = 1;
 
@@ -58,6 +65,40 @@ public class ExtractorBlockEntity extends FHCraftStationEntity<ExtractorBlockEnt
 
     public ExtractorBlockEntity(BlockPos pPos, BlockState pBlockState) {
         super(ModBlockEntities.EXTRACTOR_BE.get(), pPos, pBlockState);
+    }
+
+    protected void initData() {
+        this.data = new ContainerData() {
+            @Override
+            public int get(int pIndex) {
+                return switch (pIndex) {
+                    case 0 -> progress;
+                    case 1 -> maxProgress;
+                    case 2 -> currentTier;
+                    case 3 -> infiniteRecipe;
+                    default -> 0;
+                };
+            }
+
+            @Override
+            public void set(int pIndex, int pValue) {
+                switch (pIndex) {
+                    case 0: progress = pValue;
+                    case 1: maxProgress = pValue;
+                    case 2: currentTier = pValue;
+                    case 3: infiniteRecipe = pValue;
+                }
+            }
+
+            @Override
+            public int getCount() {
+                return 4;
+            }
+        };
+    }
+
+    public boolean isRecipeInfinite() {
+        return data.get(3) > 0;
     }
 
     @Override
@@ -137,15 +178,33 @@ public class ExtractorBlockEntity extends FHCraftStationEntity<ExtractorBlockEnt
     private boolean canCraft(Level level, BlockPos pos) {
         Optional<RecipeHolder<ExtractorRecipe>> recipe = getCurrentRecipe();
         if(recipe.isEmpty()) {
+            checkInfiniteRecipe(0);
             return false;
         }
         ItemStack output = recipe.get().value().getResultItem(null);
-        return 
+        boolean canCraft = 
             canInsertAmountIntoOutputSlot(output.getCount()) 
             && canInsertItemIntoOutputSlot(output) 
             && hasSufficientTierToCraft(level, pos, recipe)
             && isOutputSlotEmptyOrReceivable()
             && hasSufficientMaterialForRecipe(recipe);
+        
+        checkInfiniteRecipe(recipe);
+        return canCraft;
+    }
+
+    private void checkInfiniteRecipe(Optional<RecipeHolder<ExtractorRecipe>> recipe) {
+        FHModClient.debugMessageToAll("checked infinite recipe");
+        int thisRecipeInfinite = recipe.get().value().doesConsumeInput() ? 0 : 1;
+        checkInfiniteRecipe(thisRecipeInfinite);
+    }
+
+    // set infiniterecipe to 0 for not and 1 for is infinite, to display in client. Int because part of data.
+    private void checkInfiniteRecipe(int thisRecipeInfinite) {
+        if (data.get(3) != thisRecipeInfinite) {
+            data.set(3, thisRecipeInfinite);
+            initiateSync();
+        }
     }
 
     private boolean hasSufficientMaterialForRecipe(Optional<RecipeHolder<ExtractorRecipe>> recipe) {
@@ -161,7 +220,7 @@ public class ExtractorBlockEntity extends FHCraftStationEntity<ExtractorBlockEnt
         return this.level.getRecipeManager()
             .getRecipeFor(
                 ModRecipes.EXTRACTOR_TYPE.get(),
-                new ExtractorRecipeInput(inputSlot, inputSlot.getCount(), 4),
+                new ExtractorRecipeInput(inputSlot, inputSlot.getCount(), getTier()),
                 level);
     }
 
@@ -175,5 +234,17 @@ public class ExtractorBlockEntity extends FHCraftStationEntity<ExtractorBlockEnt
         int currentCount = itemHandler.getStackInSlot(OUTPUT_SLOT).getCount();
 
         return maxCount >= currentCount + count;
+    }
+
+    @Override
+    protected void saveAdditional(CompoundTag pTag, HolderLookup.Provider pRegistries) {
+        super.saveAdditional(pTag, pRegistries);
+        pTag.putInt("fhcraftingstation.infiniteRecipe", infiniteRecipe);
+    }
+
+    @Override
+    protected void loadAdditional(CompoundTag pTag, HolderLookup.Provider pRegistries) {
+        super.loadAdditional(pTag, pRegistries);
+        infiniteRecipe = pTag.getInt("fhcraftingstation.infiniteRecipe");
     }
 }

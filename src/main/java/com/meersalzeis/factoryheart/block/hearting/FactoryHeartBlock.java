@@ -90,22 +90,24 @@ public class FactoryHeartBlock extends BaseEntityBlock {
     }
 
     @Override
-    public void animateTick(BlockState state, Level pLevel, BlockPos pPos, RandomSource pRandom) {
-        double xPos = pPos.getX() + 0.5f;
-        double yPos = pPos.getY() + 1.0f;
-        double zPos = pPos.getZ() + 0.5f;
-        double offset = pRandom.nextDouble() * 0.8 - 0.6;
+    public void animateTick(BlockState state, Level level, BlockPos pos, RandomSource random) {
+        double xPos = pos.getX() + 0.5f;
+        double yPos = pos.getY() + 1.0f;
+        double zPos = pos.getZ() + 0.5f;
+        double offset = random.nextDouble() * 0.8 - 0.6;
 
         int tier = state.getValue(TIER);
         
         if (tier == 1 || tier == 3 || tier == 4) {
-            pLevel.addParticle(ParticleTypes.SMOKE, xPos + offset, yPos, zPos + offset, 0.0, 0.0, 0.0);
+            level.addParticle(ParticleTypes.SMOKE, xPos + offset, yPos, zPos + offset, 0.0, 0.0, 0.0);
+
         }
         if (tier == 2 || tier == 3) {
-            pLevel.addParticle(ParticleTypes.FLAME, xPos + offset, yPos, zPos + offset, 0.0, 0.0, 0.0);
+            level.addParticle(ParticleTypes.FLAME, xPos + offset, yPos, zPos + offset, 0.0, 0.0, 0.0);
+
         }
         if (tier == 4) {
-            pLevel.addParticle(ParticleTypes.SOUL_FIRE_FLAME, xPos + offset, yPos, zPos + offset, 0.0, 0.0, 0.0);
+            level.addParticle(ParticleTypes.SOUL_FIRE_FLAME, xPos + offset, yPos, zPos + offset, 0.0, 0.0, 0.0);
         }
     }
 

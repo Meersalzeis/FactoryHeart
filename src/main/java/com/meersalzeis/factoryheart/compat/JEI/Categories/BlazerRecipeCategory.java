@@ -74,7 +74,6 @@ public class BlazerRecipeCategory implements IRecipeCategory<BlazerRecipe> {
         int y = -16;
         
         int tier = recipe.requiredTier();
-
         DisplayHelper.renderTierDisplay(guiGraphics, tier, x, y);
         DisplayHelper.renderTierTooltip(guiGraphics, mouseX, mouseY, x, y, tier, false);
     }

@@ -1,6 +1,7 @@
 
 package com.meersalzeis.factoryheart.gui.menus;
 
+import com.meersalzeis.factoryheart.FHModClient;
 import com.meersalzeis.factoryheart.block.ModBlocks;
 import com.meersalzeis.factoryheart.blockentity.crafting.ExtractorBlockEntity;
 import com.meersalzeis.factoryheart.gui.ModMenuTypes;
@@ -28,10 +29,8 @@ public class ExtractorMenu extends FHCraftingMenu<ExtractorBlockEntity> {
         addPlayerInventory(inv);
         addPlayerHotbar(inv);
 
-        //this.addSlot(new SlotItemHandler(this.blockEntity.itemHandler, 0, 8, 62));
         this.addSlot(new SlotItemHandler(this.blockEntity.itemHandler, 0, 54, 34));
         this.addSlot(new SlotItemHandler(this.blockEntity.itemHandler, 1, 104, 34));
-        //this.addSlot(new SlotItemHandler(this.blockEntity.itemHandler, 3, 152, 62));
 
         addDataSlots(data);
     }
@@ -40,9 +39,8 @@ public class ExtractorMenu extends FHCraftingMenu<ExtractorBlockEntity> {
         return data.get(0) > 0;
     }
 
-    public boolean doesConsumeInput() {
-        var recipeOptional = blockEntity.getCurrentRecipe();
-        return (recipeOptional.isEmpty()) ? false : recipeOptional.get().value().doesConsumeInput();
+    public boolean isRecipeInfinite() {
+        return blockEntity.isRecipeInfinite();
     }
 
     public int getScaledArrowProgress() {

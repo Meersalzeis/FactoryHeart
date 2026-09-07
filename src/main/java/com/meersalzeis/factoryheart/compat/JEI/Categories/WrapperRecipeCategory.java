@@ -3,6 +3,7 @@ package com.meersalzeis.factoryheart.compat.JEI.Categories;
 import mezz.jei.api.constants.VanillaTypes;
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
 import mezz.jei.api.gui.drawable.IDrawable;
+import mezz.jei.api.gui.ingredient.IRecipeSlotsView;
 import mezz.jei.api.helpers.IGuiHelper;
 import mezz.jei.api.recipe.IFocusGroup;
 import mezz.jei.api.recipe.RecipeIngredientRole;
@@ -11,7 +12,11 @@ import mezz.jei.api.recipe.category.IRecipeCategory;
 
 import com.meersalzeis.factoryheart.FHModMain;
 import com.meersalzeis.factoryheart.block.ModBlocks;
+import com.meersalzeis.factoryheart.gui.renderer.DisplayHelper;
+import com.meersalzeis.factoryheart.recipe.TesterRecipe;
 import com.meersalzeis.factoryheart.recipe.WrapperRecipe;
+
+import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
@@ -56,6 +61,12 @@ public class WrapperRecipeCategory implements IRecipeCategory<WrapperRecipe> {
     // Means which blocks/things are used as crafting station
     public static ItemStack getRecipeCatalyst() {
         return new ItemStack(ModBlocks.WRAPPER);
+    }
+
+    @Override
+    public void draw(WrapperRecipe recipe, IRecipeSlotsView recipeSlotsView, GuiGraphics graphics, double mouseX, double mouseY) {
+        DisplayHelper.renderTierDisplay(graphics, 1, -19, -16);
+        DisplayHelper.renderTierTooltip(graphics, mouseX, mouseY, -19, -16, 1, false);
     }
 
     @Override

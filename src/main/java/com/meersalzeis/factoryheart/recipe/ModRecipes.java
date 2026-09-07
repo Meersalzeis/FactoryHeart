@@ -1,6 +1,8 @@
 package com.meersalzeis.factoryheart.recipe;
 
 import com.meersalzeis.factoryheart.FHModMain;
+import com.meersalzeis.factoryheart.compat.JEI.Fuel.FuelInfoRecipe;
+
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.RecipeType;
@@ -83,14 +85,12 @@ public class ModRecipes {
         });
     
 
-    public static final DeferredHolder<RecipeSerializer<?>, RecipeSerializer<CrystallizerRecipe>> CRYSTALLIZER_SERIALIZER =
-        SERIALIZERS.register("crystallizing", CrystallizerRecipe.Serializer::new);
 
-    public static final DeferredHolder<RecipeType<?>, RecipeType<CrystallizerRecipe>> CRYSTALLIZER_TYPE =
-        TYPES.register("crystallizing", () -> new RecipeType<CrystallizerRecipe>() {
+     public static final DeferredHolder<RecipeType<?>, RecipeType<FuelInfoRecipe>> FUELINFO_TYPE =
+        TYPES.register("fuelinfo", () -> new RecipeType<FuelInfoRecipe>() {
             @Override
             public String toString() {
-                return "crystallizing";
+                return "fuelinfo";
             }
-        });  
+        });
 }
