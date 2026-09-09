@@ -32,14 +32,6 @@ public class HeartBeating {
             netw.heart = pos;
             return;
         }
-
-        // String result = allNetworks.values().stream()
-        // .flatMap(List::stream)          // List<Y> -> Y
-        // .flatMap(curNetw -> curNetw.blockPositions.stream()) // Y -> Z
-        // .map(BlockPos::toShortString)     // Z -> String
-        // .collect(Collectors.joining(", "));
-
-        // FHModClient.debugMessageToAll(result);
     }
 
     /** Has to be called after removing the block!*/
@@ -215,7 +207,6 @@ public class HeartBeating {
         int randomIndex = FHModMain.rnd.nextInt(allHearts.size());
         BlockPos heartToRemove = null;
         Iterator<BlockPos> iterator = allHearts.iterator();
-        FHModClient.debugMessageToAll("rolled "+randomIndex+" out of "+allHearts.size());
         for (int i = 0; i <= randomIndex; i++) {
             heartToRemove = iterator.next();
         }

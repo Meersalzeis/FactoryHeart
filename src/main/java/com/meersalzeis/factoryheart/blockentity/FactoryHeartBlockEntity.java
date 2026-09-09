@@ -6,6 +6,7 @@ import java.util.List;
 import javax.annotation.Nullable;
 
 import com.meersalzeis.factoryheart.Config;
+import com.meersalzeis.factoryheart.FHModClient;
 import com.meersalzeis.factoryheart.block.ModBlocks;
 import com.meersalzeis.factoryheart.block.hearting.FactoryHeartBlock;
 import com.meersalzeis.factoryheart.hearts.HeartBeating;
@@ -132,6 +133,9 @@ public class FactoryHeartBlockEntity extends BlockEntity {
     }
 
     public int calculateCurrentTier() {
+
+        var tagItems = BuiltInRegistries.ITEM.getOrCreateTag(ModTags.Items.T1_COOL_ITEMS);
+
         if (fuel_left <= 0 ) return 0;
 
         int supplyTier = Math.max(1, Math.min(last_coolant_tier, last_fuel_tier));
@@ -173,23 +177,15 @@ public class FactoryHeartBlockEntity extends BlockEntity {
     // =============== Fuel Management =============== 
 
     public static void InitStaticVariables() {
-        // fuel_T1 = configStringListToItems(Config.TIER_1_FUEL_ITEMS.get());
-        // fuel_T2 = configStringListToItems(Config.TIER_2_FUEL_ITEMS.get());
-        // fuel_T3 = configStringListToItems(Config.TIER_3_FUEL_ITEMS.get());
-        // fuel_T4 = configStringListToItems(Config.TIER_4_FUEL_ITEMS.get());
-        // coolant_T1 = configStringListToItems(Config.TIER_1_COOLANT_ITEMS.get());
-        // coolant_T2 = configStringListToItems(Config.TIER_2_COOLANT_ITEMS.get());
-        // coolant_T3 = configStringListToItems(Config.TIER_3_COOLANT_ITEMS.get());
-        // coolant_T4 = configStringListToItems(Config.TIER_4_COOLANT_ITEMS.get());
         HolderSet.Named<Item> tagItems;
         tagItems = BuiltInRegistries.ITEM.getOrCreateTag(ModTags.Items.T1_COOL_ITEMS);
-        coolant_T1_exists = tagItems.stream().findAny().isEmpty();
+        coolant_T1_exists = ! tagItems.stream().findAny().isEmpty();
         tagItems = BuiltInRegistries.ITEM.getOrCreateTag(ModTags.Items.T2_COOL_ITEMS);
-        coolant_T2_exists = tagItems.stream().findAny().isEmpty();
+        coolant_T2_exists = ! tagItems.stream().findAny().isEmpty();
         tagItems = BuiltInRegistries.ITEM.getOrCreateTag(ModTags.Items.T3_COOL_ITEMS);
-        coolant_T3_exists = tagItems.stream().findAny().isEmpty();
+        coolant_T3_exists = ! tagItems.stream().findAny().isEmpty();
         tagItems = BuiltInRegistries.ITEM.getOrCreateTag(ModTags.Items.T4_COOL_ITEMS);
-        coolant_T4_exists = tagItems.stream().findAny().isEmpty();
+        coolant_T4_exists = ! tagItems.stream().findAny().isEmpty();
 
         resource_per_item = Config.RESOURCE_PER_ITEM.get();
         max_resource = Config.MAX_RESOURCE.get();

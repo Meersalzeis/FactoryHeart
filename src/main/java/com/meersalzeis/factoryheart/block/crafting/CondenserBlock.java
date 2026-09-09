@@ -182,7 +182,6 @@ public class CondenserBlock extends BaseEntityBlock {
             level.setBlock(pos, state.setValue(COLOR, newColor), Block.UPDATE_ALL);
 
             if (!player.getAbilities().instabuild) stack.shrink(1);
-            FHModClient.debugMessageToAll("Dyed Condenser to " + newColor.toString(), false);
         }
 
         return ItemInteractionResult.sidedSuccess(level.isClientSide);

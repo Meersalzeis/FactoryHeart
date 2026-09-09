@@ -126,11 +126,9 @@ public class TesterBlockEntity extends FHCraftStationEntity implements MenuProvi
         if (didAssemblySucceed) {
             insertIntoSlot(SUCCESS_SLOT, recipe.assembleSuccess());
             level.playSound(null, pos, ModSounds.TEST_SUCCESS.get(), SoundSource.BLOCKS, 0.333f, 1.0f);
-            FHModClient.debugMessageToAll("played success sound");
         } else {
             insertIntoSlot(FAILED_SLOT, recipe.assembleFailed());
             level.playSound(null, pos, ModSounds.TEST_FAULTY.get(), SoundSource.BLOCKS, 0.333f, 1.0f);
-            FHModClient.debugMessageToAll("played fail sound");
         }
     }
 

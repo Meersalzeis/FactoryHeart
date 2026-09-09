@@ -194,7 +194,6 @@ public class ExtractorBlockEntity extends FHCraftStationEntity<ExtractorBlockEnt
     }
 
     private void checkInfiniteRecipe(Optional<RecipeHolder<ExtractorRecipe>> recipe) {
-        FHModClient.debugMessageToAll("checked infinite recipe");
         int thisRecipeInfinite = recipe.get().value().doesConsumeInput() ? 0 : 1;
         checkInfiniteRecipe(thisRecipeInfinite);
     }
